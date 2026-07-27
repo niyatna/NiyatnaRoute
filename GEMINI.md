@@ -15,9 +15,13 @@
 ## 2. Hard Rules & Code Discipline
 
 1. **Never commit secrets or credentials.** Use `.env` or vault.
-2. **Never add logic to `src/lib/localDb.ts`.** Re-export barrel only.
-3. **Never write raw SQL in routes.** All persistence goes through `src/lib/db/` domain modules.
-4. **Never silently swallow errors in SSE streams.**
-5. **Always validate inputs with Zod schemas.**
-6. **Always verify typescript & cycles.** Run `npm run typecheck:core` and `npm run check:cycles`.
-7. **No File Pollution.** Tests belong in `tests/`, scripts in `scripts/`. Keep root clean.
+2. **Never run destructive Git commands.** `git reset --hard`, `git push --force`, `git clean -fd` are strictly forbidden without explicit approval.
+3. **Commit Local Only.** Do not push to remote repository without confirmation.
+4. **Honesty Protocol.** Report true progress without exaggerations or fake completion claims.
+5. **Simplicity First.** Keep diffs tight, minimal, and focused on the immediate task.
+6. **Never add logic to `src/lib/localDb.ts`.** Re-export barrel only.
+7. **Never write raw SQL in routes.** All persistence goes through `src/lib/db/` domain modules.
+8. **Never silently swallow errors in SSE streams.**
+9. **Always validate inputs with Zod schemas.**
+10. **Always verify typescript & cycles.** Run `npm run typecheck:core` and `npm run check:cycles`.
+11. **No File Pollution.** Tests belong in `tests/`, scripts in `scripts/`. Keep root clean.

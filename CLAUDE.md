@@ -21,7 +21,12 @@ This file provides authoritative guidance for AI assistants working in this repo
    - Unused or bloated features MUST be permanently deleted from disk.
    - NEVER leave dummy stubs, commented code, or unused import wrappers.
 4. **Port 9999 Enforcement**: Server, API routes, and MCP tools run on port `9999`.
-5. **Empirical Verification**: Always verify code changes with `npm run typecheck:core` and `npm run check:cycles`. Never guess file contents or pretend a task is complete.
+5. **No Destructive Git & Honesty Protocol**:
+   - NEVER run destructive git commands (such as `git reset --hard` or `git push --force` / `-f`) without explicit permission.
+   - ALWAYS report exact progress honestly. Do not claim tasks are complete until verified.
+   - Commit local ONLY; do not push to origin without approval.
+6. **Simplicity First**: Follow a minimal, direct approach. No speculative abstractions or unrequested boilerplate.
+7. **Empirical Verification**: Always verify code changes with `npm run typecheck:core` and `npm run check:cycles`. Never guess file contents.
 
 ---
 

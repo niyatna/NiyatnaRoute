@@ -21,7 +21,10 @@
 4. **Port 9999 Standard**: The server, API, and MCP tools must default to port `9999`.
 5. **Doc Accuracy Discipline**:
    Never state an API name, file path, or count without grepping for it first. Every claim in docs must be 100% verifiable against the codebase (`grep -rn`).
-
+6. **No Destructive Git & Honesty Protocol**:
+   Under no circumstances run destructive git commands (such as `git reset --hard` or `git push -f` / `--force`) without explicit confirmation.
+   Never lie or misrepresent progress. Do not mark task groups as completed until all changed files are implemented and verified. Commit local ONLY; do not push to origin without approval.
+7. **Simplicity First**: Focus strictly on the required changes. Avoid premature abstractions and bloated logic.
 ---
 
 ## 3. Retained Core Architecture (KEEP)
