@@ -12,7 +12,6 @@ import { applyRuntimeSettings } from "./lib/config/runtimeSettings";
 import { setSystemPromptConfig } from "@niyatnaroute/open-sse/services/systemPrompt.ts";
 import { hydrateThinkingBudgetConfig } from "@niyatnaroute/open-sse/services/thinkingBudget.ts";
 import { startRuntimeConfigHotReload } from "./lib/config/hotReload";
-import { startSpendBatchWriter } from "./lib/spend/batchWriter";
 import { registerDefaultGuardrails } from "./lib/guardrails";
 import { ensurePersistentManagementPasswordHash } from "./lib/auth/managementPassword";
 import { skillExecutor } from "./lib/skills/executor";
@@ -96,10 +95,8 @@ async function startServer() {
     }
 
     // Initialize cloud sync
-    startSpendBatchWriter();
     registerDefaultGuardrails();
     registerBuiltinSkills(skillExecutor);
-    startupLog.info("Spend batch writer started");
     startupLog.info("Guardrail registry initialized");
     startupLog.info("Builtin skill handlers registered");
 

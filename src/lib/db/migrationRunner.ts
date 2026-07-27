@@ -375,7 +375,7 @@ function isSchemaAlreadyApplied(
     case "027":
       return hasColumn(db, "skills", "mode");
     case "028":
-      return hasTable(db, "batches") && hasTable(db, "files");
+      return false;
     case "029":
       return hasColumn(db, "provider_connections", "max_concurrent");
     case "040":
@@ -702,8 +702,8 @@ function reconcileRenumberedMigrations(
     // After the compat rewrite, verify the old version slot is now free.
     // A residual row (from a failed prior run, manual intervention, or edge-case
     // UPDATE conflict) at the old version would shadow a NEW migration file
-    // placed at that version number — e.g. 028_create_files_and_batches.sql
-    // would be skipped because getAppliedVersions() still sees version "028".
+    // placed at that version number — e.g. a migration file
+    // would be skipped because getAppliedVersions() still sees the old version.
     const residualRow = db
       .prepare("SELECT version, name FROM _niyatnaroute_migrations WHERE version = ?")
       .get(compatibility.fromVersion) as { version: string; name: string } | undefined;

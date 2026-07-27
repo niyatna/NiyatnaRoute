@@ -20,12 +20,8 @@ import {
   loadCostTotal,
   saveBudget,
   saveBudgetResetLog,
+  saveCostEntry,
 } from "../lib/db/domainState";
-import {
-  discardSpendBatchEntries,
-  resetSpendBatchWriterForTests,
-  spendBatchWriter,
-} from "@/lib/spend/batchWriter";
 
 export type BudgetResetInterval = "daily" | "weekly" | "monthly";
 
@@ -238,10 +234,7 @@ function getActiveBudgetLimit(budget: NormalizedBudgetConfig): number {
 
 function getBudgetWindowTotal(apiKeyId: string, periodStartAt: number): number {
   try {
-    return (
-      loadCostTotal(apiKeyId, periodStartAt) +
-      spendBatchWriter.getPendingCostTotal(apiKeyId, periodStartAt)
-    );
+    return loadCostTotal(apiKeyId, periodStartAt);
   } catch {
     return 0;
   }
@@ -253,10 +246,7 @@ function getBudgetWindowRangeTotal(
   periodEndAt: number
 ): number {
   try {
-    return (
-      sumEntries(toCostEntries(loadCostEntriesInRange(apiKeyId, periodStartAt, periodEndAt))) +
-      spendBatchWriter.getPendingCostTotal(apiKeyId, periodStartAt, periodEndAt)
-    );
+    return sumEntries(toCostEntries(loadCostEntriesInRange(apiKeyId, periodStartAt, periodEndAt)));
   } catch {
     return 0;
   }
@@ -381,7 +371,6 @@ export function getBudget(apiKeyId: string): NormalizedBudgetConfig | null {
  */
 export function deleteBudget(apiKeyId: string) {
   budgets.delete(apiKeyId);
-  discardSpendBatchEntries(apiKeyId);
   try {
     dbDeleteBudget(apiKeyId);
     deleteCostEntries(apiKeyId);
@@ -398,7 +387,7 @@ export function deleteBudget(apiKeyId: string) {
  */
 export function recordCost(apiKeyId: string, cost: number): void {
   try {
-    spendBatchWriter.increment(apiKeyId, cost, Date.now());
+    saveCostEntry(apiKeyId, cost, Date.now());
   } catch {
     // Non-critical.
   }
@@ -527,10 +516,7 @@ export function getDailyTotal(apiKeyId: string): number {
   todayStart.setHours(0, 0, 0, 0);
 
   try {
-    return (
-      sumEntries(toCostEntries(loadCostEntries(apiKeyId, todayStart.getTime()))) +
-      spendBatchWriter.getPendingCostTotal(apiKeyId, todayStart.getTime())
-    );
+    return sumEntries(toCostEntries(loadCostEntries(apiKeyId, todayStart.getTime())));
   } catch {
     return 0;
   }
@@ -552,22 +538,12 @@ export function getCostSummary(apiKeyId: string): BudgetSummary {
   const window = budget ? getBudgetWindow(budget.resetInterval, budget.resetTime) : null;
 
   try {
-    const dailyEntries = [
-      ...toCostEntries(loadCostEntries(apiKeyId, todayStart.getTime())),
-      ...spendBatchWriter.getBufferedEntries(apiKeyId, todayStart.getTime()),
-    ];
-    const monthlyEntries = [
-      ...toCostEntries(loadCostEntries(apiKeyId, monthStart.getTime())),
-      ...spendBatchWriter.getBufferedEntries(apiKeyId, monthStart.getTime()),
-    ];
+    const dailyEntries = toCostEntries(loadCostEntries(apiKeyId, todayStart.getTime()));
+    const monthlyEntries = toCostEntries(loadCostEntries(apiKeyId, monthStart.getTime()));
     const periodEntries =
       window !== null
-        ? [
-            ...toCostEntries(loadCostEntries(apiKeyId, window.periodStartAt)),
-            ...spendBatchWriter.getBufferedEntries(apiKeyId, window.periodStartAt),
-          ]
+        ? toCostEntries(loadCostEntries(apiKeyId, window.periodStartAt))
         : [];
-
     const dailyTotal = sumEntries(dailyEntries);
     const monthlyTotal = sumEntries(monthlyEntries);
     const periodTotal = sumEntries(periodEntries);
@@ -622,7 +598,6 @@ export function getCostSummary(apiKeyId: string): BudgetSummary {
  */
 export function resetCostData() {
   budgets.clear();
-  resetSpendBatchWriterForTests();
   try {
     deleteAllCostData();
   } catch {

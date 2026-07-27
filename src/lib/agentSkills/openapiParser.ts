@@ -90,8 +90,6 @@ const PATH_AREA_MAP: Array<[string, SkillArea]> = [
   ["/api/webhooks", "webhooks"],
   // MCP
   ["/api/mcp", "mcp"],
-  // A2A
-  ["/a2a", "agents-a2a"],
   // Version manager
   ["/api/services", "version-manager"],
   ["/api/version", "version-manager"],

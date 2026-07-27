@@ -273,7 +273,6 @@ export async function registerNodejs(): Promise<void> {
     { getSettings },
     { applyRuntimeSettings },
     { startRuntimeConfigHotReload },
-    { startSpendBatchWriter },
     { registerDefaultGuardrails },
     { ensurePersistentManagementPasswordHash },
   ] = await Promise.all([
@@ -285,7 +284,6 @@ export async function registerNodejs(): Promise<void> {
     import("@/lib/db/settings"),
     import("@/lib/config/runtimeSettings"),
     import("@/lib/config/hotReload"),
-    import("@/lib/spend/batchWriter"),
     import("@/lib/guardrails"),
     import("@/lib/auth/managementPassword"),
   ]);
@@ -295,9 +293,7 @@ export async function registerNodejs(): Promise<void> {
 
   initGracefulShutdown();
   initApiBridgeServer();
-  startSpendBatchWriter();
   registerDefaultGuardrails();
-  console.log("[STARTUP] Spend batch writer started");
   console.log("[STARTUP] Guardrail registry initialized");
   if (!isBackgroundServicesDisabled()) {
     startBackgroundRefresh();

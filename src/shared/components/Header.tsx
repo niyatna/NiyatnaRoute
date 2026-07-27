@@ -30,7 +30,6 @@ import {
   type SidebarItemDefinition,
   type HideableSidebarItemId,
 } from "@/shared/constants/sidebarVisibility";
-import { useIsElectron } from "@/shared/hooks/useElectron";
 
 const isE2EMode = process.env.NEXT_PUBLIC_NIYATNAROUTE_E2E_MODE === "1";
 
@@ -72,12 +71,10 @@ const HEADER_DESCRIPTIONS: Partial<Record<HideableSidebarItemId | "niyatna-skill
   changelog: "changelogDescription",
   // Protocols
   mcp: "mcpDescription",
-  a2a: "a2aDescription",
   "api-endpoints": "apiEndpointsDescription",
   // Agents & AI sub-pages
   "batch-files": "batchFilesDescription",
   // Analytics sub-pages
-  "analytics-evals": "analyticsEvalsDescription",
   "analytics-search": "analyticsSearchDescription",
   "analytics-utilization": "analyticsUtilizationDescription",
   "analytics-combo-health": "analyticsComboHealthDescription",

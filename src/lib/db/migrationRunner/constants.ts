@@ -72,7 +72,6 @@ export const RENAMED_MIGRATION_COMPATIBILITY = [
 ] as const;
 
 export const LEGACY_VERSION_SLOT_MIGRATIONS = [
-  { version: "028", name: "evals_tables" },
   { version: "029", name: "webhooks_templates" },
   { version: "030", name: "mcp_scopes_api_keys" },
   { version: "031", name: "api_keys_expires" },

@@ -17,7 +17,6 @@ import { useNotificationStore } from "@/store/notificationStore";
 import { extractApiErrorMessage } from "@/shared/http/apiErrorMessage";
 import { copyToClipboard } from "@/shared/utils/clipboard";
 import { getProviderDisplayLabel } from "@/shared/utils/providerDisplayLabel";
-import { useIsElectron, useOpenExternal } from "@/shared/hooks/useElectron";
 import { HomeProviderTopologySection } from "./HomeProviderTopologySection";
 import { shouldShowProviderTopologyOnHome } from "./homeAppearance";
 
@@ -106,8 +105,8 @@ function mergeUpdateStep(steps: UpdateStep[], nextStep: UpdateStep) {
 
 export default function HomePageClient({ machineId }: HomePageClientProps) {
   const router = useRouter();
-  const isElectron = useIsElectron();
-  const { openExternal } = useOpenExternal();
+  const isElectron = false;
+  const openExternal = (url: string) => window.open(url, "_blank");
   const t = useTranslations("home");
   const tp = useTranslations("providers");
   const [providerConnections, setProviderConnections] = useState([]);

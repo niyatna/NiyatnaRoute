@@ -97,19 +97,12 @@ async function waitForDrain(): Promise<void> {
  */
 async function cleanup(): Promise<void> {
   try {
-    const [{ closeAuditDb }, { closeDbInstance }, { flushSpendBatchWriter }, { closeLogRotation }] =
+    const [{ closeAuditDb }, { closeDbInstance }, { closeLogRotation }] =
       await Promise.all([
         import("@niyatnaroute/open-sse/mcp-server/audit.ts"),
         import("@/lib/db/core"),
-        import("@/lib/spend/batchWriter"),
         import("@/lib/logRotation"),
       ]);
-    const flushResult = await flushSpendBatchWriter();
-    if (flushResult.flushedEntries > 0) {
-      console.log(
-        `[Shutdown] Spend batch writer flushed ${flushResult.flushedEntries} pending entry(ies).`
-      );
-    }
     if (closeAuditDb()) {
       console.log("[Shutdown] MCP audit database checkpointed and closed.");
     }
