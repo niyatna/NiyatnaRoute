@@ -41,9 +41,6 @@ export const AUTO_TEMPLATE_VARIANTS: Record<string, AutoVariant | undefined> = {
   "auto/claude-opus": "smart",
   "auto/claude-sonnet": "coding",
   "auto/best-free": "cheap",
-  // Chaos mode — parallel dispatch to top-N stable models
-  "auto/best-chaos": "chaos",
-  "auto/chaos": "chaos",
 };
 
 /**

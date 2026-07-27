@@ -59,10 +59,10 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement by opening a
-private security advisory at
-<https://github.com/diegosouzapw/OmniRoute/security/advisories/new>
-or by emailing the maintainer at diegosouza.pw@outlook.com.
+reported by contacting the project team at support@niyatnaroute.online. All
+complaints will be reviewed and investigated and will result in a response that
+is deemed necessary and appropriate to the circumstances. The project team is
+obligated to maintain confidentiality with regard to the reporter of an incident.
 For security-sensitive incidents, see [`SECURITY.md`](SECURITY.md).
 All complaints will be reviewed and investigated promptly and fairly.
 

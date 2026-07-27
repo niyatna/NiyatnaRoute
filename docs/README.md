@@ -1,12 +1,12 @@
 ---
-title: "OmniRoute Documentation"
+title: "NiyatnaRoute Documentation"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# OmniRoute Documentation
+# NiyatnaRoute Documentation
 
-Navigable index of the OmniRoute documentation set. Topics are grouped by intent so you can find what you need quickly.
+Navigable index of the NiyatnaRoute documentation set. Topics are grouped by intent so you can find what you need quickly.
 
 > Looking for the project overview, install steps, or release notes? See the root [README.md](../README.md), [CHANGELOG.md](../CHANGELOG.md), and [CONTRIBUTING.md](../CONTRIBUTING.md).
 
@@ -14,33 +14,32 @@ Navigable index of the OmniRoute documentation set. Topics are grouped by intent
 
 ## For Non-Tech Users
 
-Simple guides for using OmniRoute — no technical background needed.
+Simple guides for using NiyatnaRoute — no technical background needed.
 
 ### getting-started/
 
-- [QUICK-START.md](getting-started/QUICK-START.md) — install and run OmniRoute in 3 minutes.
-- [AUTO-COMBO-GUIDE.md](getting-started/AUTO-COMBO-GUIDE.md) — let OmniRoute pick the best AI for you.
+- [QUICK-START.md](getting-started/QUICK-START.md) — install and run NiyatnaRoute in 3 minutes.
+- [AUTO-COMBO-GUIDE.md](getting-started/AUTO-COMBO-GUIDE.md) — let NiyatnaRoute pick the best AI for you.
 - [PROVIDERS-GUIDE.md](getting-started/PROVIDERS-GUIDE.md) — how to connect AI providers.
 - [FREE-TIERS-GUIDE.md](getting-started/FREE-TIERS-GUIDE.md) — get free AI with no credit card.
 - [TROUBLESHOOTING.md](getting-started/TROUBLESHOOTING.md) — fix common issues.
 
 ### guides/
 
-- [SETUP_GUIDE.md](guides/SETUP_GUIDE.md) — first-time setup of OmniRoute.
+- [SETUP_GUIDE.md](guides/SETUP_GUIDE.md) — first-time setup of NiyatnaRoute.
 - [USER_GUIDE.md](guides/USER_GUIDE.md) — daily usage of the dashboard and API.
 - [FEATURES.md](guides/FEATURES.md) — dashboard feature gallery.
-- [TIERS.md](guides/TIERS.md) — OmniRoute tiers explained (user guide).
+- [TIERS.md](guides/TIERS.md) — NiyatnaRoute tiers explained (user guide).
 - [USAGE_QUOTA_GUIDE.md](guides/USAGE_QUOTA_GUIDE.md) — usage, quota & spend tracking.
 - [COST_TRACKING.md](guides/COST_TRACKING.md) — cost and spend tracking.
 - [FREE_PROVIDER_RANKINGS.md](guides/FREE_PROVIDER_RANKINGS.md) — free provider rankings (Arena ELO).
-- [DOCKER_GUIDE.md](guides/DOCKER_GUIDE.md) — running OmniRoute under Docker.
-- [ELECTRON_GUIDE.md](guides/ELECTRON_GUIDE.md) — desktop (Electron) builds.
+- [DOCKER_GUIDE.md](guides/DOCKER_GUIDE.md) — running NiyatnaRoute under Docker.
 - [TERMUX_GUIDE.md](guides/TERMUX_GUIDE.md) — running on Android via Termux.
 - [PWA_GUIDE.md](guides/PWA_GUIDE.md) — installing the dashboard as a PWA.
-- [REMOTE-MODE.md](guides/REMOTE-MODE.md) — exposing OmniRoute remotely + scoped tokens.
+- [REMOTE-MODE.md](guides/REMOTE-MODE.md) — exposing NiyatnaRoute remotely + scoped tokens.
 - [CLI-INTEGRATIONS.md](guides/CLI-INTEGRATIONS.md) — master table of `setup-*` CLI integrations.
-- [CLAUDE-CODE-CONFIGURATION.md](guides/CLAUDE-CODE-CONFIGURATION.md) — Claude Code CLI with OmniRoute.
-- [CODEX-CLI-CONFIGURATION.md](guides/CODEX-CLI-CONFIGURATION.md) — Codex CLI with OmniRoute.
+- [CLAUDE-CODE-CONFIGURATION.md](guides/CLAUDE-CODE-CONFIGURATION.md) — Claude Code CLI with NiyatnaRoute.
+- [CODEX-CLI-CONFIGURATION.md](guides/CODEX-CLI-CONFIGURATION.md) — Codex CLI with NiyatnaRoute.
 - [KIRO_SETUP.md](guides/KIRO_SETUP.md) — Kiro setup.
 - [I18N.md](guides/I18N.md) — translation and locale workflow.
 - [TROUBLESHOOTING.md](guides/TROUBLESHOOTING.md) — detailed troubleshooting reference.
@@ -83,28 +82,16 @@ Lookup material — API surface, environment variables, CLI flags, provider cata
 Pluggable subsystems exposed to clients, agents, and operators.
 
 - [MCP-SERVER.md](frameworks/MCP-SERVER.md) — Model Context Protocol server.
-- [A2A-SERVER.md](frameworks/A2A-SERVER.md) — Agent-to-Agent (A2A) JSON-RPC server.
 - [ACP.md](frameworks/ACP.md) — Agent Client Protocol.
-- [AGENT_PROTOCOLS_GUIDE.md](frameworks/AGENT_PROTOCOLS_GUIDE.md) — A2A / ACP / Cloud agent overview.
-- [AGENTBRIDGE.md](frameworks/AGENTBRIDGE.md) — IDE agent bridge.
 - [AGENT-SKILLS.md](frameworks/AGENT-SKILLS.md) — agent skills catalog.
 - [CLOUD_AGENT.md](frameworks/CLOUD_AGENT.md) — cloud agent runtime and providers.
 - [SKILLS.md](frameworks/SKILLS.md) — Skills framework (sandboxed extension).
-- [MEMORY.md](frameworks/MEMORY.md) — persistent memory (FTS5 + Qdrant).
 - [WEBHOOKS.md](frameworks/WEBHOOKS.md) — webhook events and dispatch.
-- [EVALS.md](frameworks/EVALS.md) — eval suites.
-- [GAMIFICATION.md](frameworks/GAMIFICATION.md) — gamification & leaderboard system.
 - [EMBEDDED-SERVICES.md](frameworks/EMBEDDED-SERVICES.md) — embedded sidecar services (9Router, CLIProxyAPI).
-- [NOTION_CONTEXT.md](frameworks/NOTION_CONTEXT.md) — Notion context source.
-- [OBSIDIAN_CONTEXT.md](frameworks/OBSIDIAN_CONTEXT.md) — Obsidian context source.
 - [OPENCODE.md](frameworks/OPENCODE.md) — OpenCode integration.
 - [OPEN_SSE_ARCHITECTURE.md](frameworks/OPEN_SSE_ARCHITECTURE.md) — open-sse streaming engine internals.
 - [PLAYGROUND_STUDIO.md](frameworks/PLAYGROUND_STUDIO.md) — Playground Studio UI.
 - [SEARCH_TOOLS_STUDIO.md](frameworks/SEARCH_TOOLS_STUDIO.md) — Search Tools Studio UI.
-- [TRAFFIC_INSPECTOR.md](frameworks/TRAFFIC_INSPECTOR.md) — traffic inspector (MITM).
-- [PLUGINS.md](frameworks/PLUGINS.md) — CLI plugin system overview.
-- [PLUGIN_SDK.md](frameworks/PLUGIN_SDK.md) — plugin SDK reference.
-- [PLUGIN_MARKETPLACE.md](frameworks/PLUGIN_MARKETPLACE.md) — plugin marketplace.
 
 ## routing/
 
@@ -126,7 +113,6 @@ Guardrails, compliance, stealth, and the mandatory patterns for handling public 
 - [ROUTE_GUARD_TIERS.md](security/ROUTE_GUARD_TIERS.md) — route-guard classification tiers.
 - [CLI_TOKEN.md](security/CLI_TOKEN.md) — CLI machine-ID token (HMAC + legacy SHA-256) auth.
 - [EGRESS_POLICY.md](security/EGRESS_POLICY.md) — egress IP family (IPv4/IPv6) policy.
-- [MITM-TPROXY-DECRYPT.md](security/MITM-TPROXY-DECRYPT.md) — transparent MITM decrypt.
 - [SUPPLY_CHAIN.md](security/SUPPLY_CHAIN.md) — supply-chain gates (SLSA, SBOM, Trivy, osv-scanner, Scorecard).
 - [SOCKET_DEV_FINDINGS.md](security/SOCKET_DEV_FINDINGS.md) — supply-chain finding attestations.
 
@@ -152,7 +138,7 @@ Provider-specific integration guides.
 
 ## comparison/
 
-- [OMNIROUTE_VS_ALTERNATIVES.md](comparison/OMNIROUTE_VS_ALTERNATIVES.md) — how OmniRoute compares to alternatives.
+- [NIYATNAROUTE_VS_ALTERNATIVES.md](comparison/NIYATNAROUTE_VS_ALTERNATIVES.md) — how NiyatnaRoute compares to alternatives.
 
 ## ops/
 

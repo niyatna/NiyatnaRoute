@@ -15,7 +15,7 @@ import path from "node:path";
 //   - the per-minute cap must still be enforced correctly via the fast-path
 
 const TEST_DATA_DIR = fs.mkdtempSync(
-  path.join(os.tmpdir(), "omniroute-relay-check-rate-limit-")
+  path.join(os.tmpdir(), "niyatnaroute-relay-check-rate-limit-")
 );
 process.env.DATA_DIR = TEST_DATA_DIR;
 

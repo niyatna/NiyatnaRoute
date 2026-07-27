@@ -19,12 +19,6 @@ import {
   type ExecutorLog,
   type ProviderCredentials,
 } from "./base.ts";
-import {
-  applyClaudeWebBrowserTemplate,
-  sendClaudeWebBrowser,
-  type ClaudeWebTransportRequest,
-  type ClaudeWebTransportResult,
-} from "./claude-web/browserTransport.ts";
 import type { ClaudeWebRequestPayload } from "./claude-web/payload.ts";
 import {
   commitClaudeWebTurn,
@@ -196,7 +190,7 @@ function forceBrowserTransport(): boolean {
 }
 
 function browserFallbackEnabled(): boolean {
-  return forceBrowserTransport() || isEnabledFlag(process.env.OMNIROUTE_BROWSER_POOL);
+  return forceBrowserTransport() || isEnabledFlag(process.env.NIYATNAROUTE_BROWSER_POOL);
 }
 
 function makeCompletionUrl(turn: PreparedClaudeWebTurn, organizationId: string): string {
@@ -322,8 +316,7 @@ export class ClaudeWebExecutor extends BaseExecutor {
 
   constructor(deps: ClaudeWebExecutorDeps = {}) {
     super("claude-web", { baseUrl: CLAUDE_WEB_API_BASE });
-    this.sendDirect = deps.sendDirect ?? sendClaudeWebDirect;
-    this.sendBrowser = deps.sendBrowser ?? sendClaudeWebBrowser;
+    this.sendBrowser = deps.sendBrowser ?? deps.sendDirect ?? sendClaudeWebDirect;
   }
 
   async testConnection(

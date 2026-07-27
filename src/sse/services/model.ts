@@ -13,8 +13,8 @@ import {
   parseModel,
   getModelInfoCore,
   splitSyncedEffortSuffix,
-} from "@omniroute/open-sse/services/model.ts";
-import { REGISTRY } from "@omniroute/open-sse/config/providerRegistry.ts";
+} from "@niyatnaroute/open-sse/services/model.ts";
+import { REGISTRY } from "@niyatnaroute/open-sse/config/providerRegistry.ts";
 
 export { parseModel };
 

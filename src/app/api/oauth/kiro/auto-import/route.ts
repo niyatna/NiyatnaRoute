@@ -12,12 +12,12 @@ import {
 import { syncToCloud } from "@/lib/cloudSync";
 import { getConsistentMachineId } from "@/shared/utils/machineId";
 import { KiroService } from "@/lib/oauth/services/kiro";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@niyatnaroute/open-sse/utils/proxyFetch.ts";
 import {
   emailFromExternalIdpToken,
   isExternalIdpAuthMethod,
   normalizeScope,
-} from "@omniroute/open-sse/services/kiroExternalIdp.ts";
+} from "@niyatnaroute/open-sse/services/kiroExternalIdp.ts";
 
 /**
  * GET /api/oauth/kiro/auto-import
@@ -447,7 +447,7 @@ export function findKiroConnectionByProfileArn(
   return null;
 }
 
-// ── Save to OmniRoute DB ──────────────────────────────────────────────────────
+// ── Save to NiyatnaRoute DB ──────────────────────────────────────────────────────
 
 type SaveAndRespondResult = Awaited<ReturnType<typeof tryKiroCliSqlite>> & {
   // Fields added by tryAwsSsoCache for IDC tokens (#2059)

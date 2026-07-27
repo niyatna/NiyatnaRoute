@@ -84,7 +84,6 @@ import {
 import { selectQuotaShareTarget } from "./combo/quotaShareStrategy.ts";
 import { makeConnectionConcurrencyResolver, lookupPositiveCap } from "./combo/concurrencyCaps.ts";
 import { acquireQuotaShareConcurrencySlot } from "./combo/quotaShareConcurrency.ts";
-import { orderTargetsByEvalScores } from "./evalRouting.ts";
 import {
   applyPromptCacheAffinity,
   expandPromptCacheAffinityTargets,
@@ -148,7 +147,6 @@ import {
   waitForCooldownAwareRetry,
 } from "../../src/sse/services/cooldownAwareRetry.ts";
 import { handleFusionChat, type FusionTuning } from "./fusion.ts";
-import { dispatchChaosFromCombo, type ChaosTuning } from "./autoCombo/chaosEngine.ts";
 import { handlePipelineChat, type PipelineStep } from "./pipeline.ts";
 import {
   TRANSIENT_FOR_SEMAPHORE,
@@ -909,17 +907,6 @@ export async function handleComboChat({
     });
   }
 
-  // Chaos mode (parallel multi-model dispatch): detection + dispatch live in
-  // chaosEngine.ts (dispatchChaosFromCombo), returning null when not chaos-enabled.
-  const chaosDispatch = dispatchChaosFromCombo({
-    cfg,
-    comboModels: combo.models || [],
-    comboName: combo.name,
-    body,
-    handleSingleModel: handleSingleModelWithTimeout,
-    log,
-  });
-  if (chaosDispatch) return chaosDispatch;
 
   // Pipeline strategy: sequential chain
   // input, only the final step's response is returned. Handled in a separate module
@@ -1328,9 +1315,6 @@ export async function handleComboChat({
         normalizeStickinessMessages(body as { messages?: unknown; input?: unknown })
       );
   orderedTargets = _sticky.targets;
-  if (!cacheStrategyAffinityApplied) {
-    orderedTargets = orderTargetsByEvalScores(orderedTargets, config.evalRouting, log);
-  }
   orderedTargets = filterTargetsByRequestCompatibility(orderedTargets, body, log);
   orderedTargets = applyContextRequirements(orderedTargets, config.contextRequirements, log);
 
@@ -1890,8 +1874,8 @@ export async function handleComboChat({
           // Success — validate response quality before returning
           if (result.ok) {
             const selectedConnectionId =
-              result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-              result.headers?.get("x-omniroute-selected-connection-id") ||
+              result.headers?.get("X-NiyatnaRoute-Selected-Connection-Id") ||
+              result.headers?.get("x-niyatnaroute-selected-connection-id") ||
               undefined;
             const effectiveConnectionId = selectedConnectionId || target.connectionId || "";
 
@@ -2302,8 +2286,8 @@ export async function handleComboChat({
           // to the exponential-backoff / synthetic-default paths).
           const lockoutHintVerified = lockoutHintMs > 0;
           const selectedConnectionId =
-            result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-            result.headers?.get("x-omniroute-selected-connection-id") ||
+            result.headers?.get("X-NiyatnaRoute-Selected-Connection-Id") ||
+            result.headers?.get("x-niyatnaroute-selected-connection-id") ||
             undefined;
           const targetWithConnection = selectedConnectionId
             ? { ...target, connectionId: selectedConnectionId }
@@ -2893,7 +2877,7 @@ async function handleRoundRobinCombo({
     clampComboDepth(config.maxComboDepth)
   );
   const tagFilteredTargets = await applyRequestTagRouting(orderedTargets, body, log);
-  const evalRankedTargets = orderTargetsByEvalScores(tagFilteredTargets, config.evalRouting, log);
+  const evalRankedTargets = tagFilteredTargets;
   const knownContextOverflow = getKnownContextOverflow(evalRankedTargets, body);
   if (knownContextOverflow) {
     return errorResponseWithComboDiagnostics(
@@ -3239,8 +3223,8 @@ async function handleRoundRobinCombo({
             // so release the sticky pin here rather than on the next turn.
             {
               const rrSelectedConnectionId =
-                result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-                result.headers?.get("x-omniroute-selected-connection-id") ||
+                result.headers?.get("X-NiyatnaRoute-Selected-Connection-Id") ||
+                result.headers?.get("x-niyatnaroute-selected-connection-id") ||
                 undefined;
               releaseStickyPinOnFailure(
                 _rrSessionSticky.messageHash,
@@ -3277,8 +3261,8 @@ async function handleRoundRobinCombo({
           recordedAttempts++;
 
           const selectedConnectionId =
-            result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-            result.headers?.get("x-omniroute-selected-connection-id") ||
+            result.headers?.get("X-NiyatnaRoute-Selected-Connection-Id") ||
+            result.headers?.get("x-niyatnaroute-selected-connection-id") ||
             undefined;
           const effectiveConnectionId = selectedConnectionId || target.connectionId || "";
 
@@ -3442,8 +3426,8 @@ async function handleRoundRobinCombo({
         );
         const { cooldownMs } = fallbackResult;
         const selectedConnectionId =
-          result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-          result.headers?.get("x-omniroute-selected-connection-id") ||
+          result.headers?.get("X-NiyatnaRoute-Selected-Connection-Id") ||
+          result.headers?.get("x-niyatnaroute-selected-connection-id") ||
           undefined;
         const targetWithConnection = selectedConnectionId
           ? { ...target, connectionId: selectedConnectionId }

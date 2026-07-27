@@ -2,7 +2,7 @@
 
 ## Overview
 
-Redis is an **optional, soft dependency** in OmniRoute — the application degrades gracefully (in-memory
+Redis is an **optional, soft dependency** in NiyatnaRoute — the application degrades gracefully (in-memory
 fallbacks) when Redis is unavailable. In production, tuning Redis reduces latency for three distinct
 workloads:
 
@@ -67,7 +67,7 @@ const redis = new Redis(REDIS_URL, {
 maxmemory 80%                        # leave room for OS page cache
 maxmemory-policy allkeys-lru         # evict stale auth cache entries under pressure
 
-# Persistence (optional — OmniRoute is crash‑safe without it)
+# Persistence (optional — NiyatnaRoute is crash‑safe without it)
 save 300 1                           # snapshot at least every 5 min if ≥1 key changed
 appendonly no                        # AOF not needed; data is regeneratable
 appendfsync no                       # no fsync overhead (RDB is sufficient)

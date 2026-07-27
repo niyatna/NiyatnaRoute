@@ -111,26 +111,7 @@ export {
   resetApiKeyState,
 } from "./db/apiKeys";
 
-export {
-  // Evals
-  saveEvalRun,
-  listEvalRuns,
-  getEvalScorecard,
-  listCustomEvalSuites,
-  getCustomEvalSuite,
-  saveCustomEvalSuite,
-  deleteCustomEvalSuite,
-  serializeEvalTargetKey,
-} from "./db/evals";
-
-export type {
-  EvalCaseRecord,
-  EvalSuiteRecord,
-  EvalTargetType,
-  EvalTargetDescriptor,
-  EvalRunSummary,
-  PersistedEvalRun,
-} from "./db/evals";
+// (Evals module removed)
 
 export {
   // Settings
@@ -225,93 +206,7 @@ export {
 
 export type { ExportAllRows } from "./db/backup";
 
-export {
-  // Skills DB operations (#3500 slice 5)
-  updateSkill,
-} from "./db/skills";
-
-export type { SkillPatch } from "./db/skills";
-
-export {
-  // Read Cache (cached wrappers for hot-read paths)
-  getCachedSettings,
-  getCachedPricing,
-  getCachedProviderConnections,
-  getCachedRawProviderConnections,
-  getCachedProviderConnectionById,
-  getCachedProviderNodes,
-  getCachedLKGP,
-  setCachedLKGP,
-  invalidateDbCache,
-  getCombosCacheVersion,
-} from "./db/readCache";
-
-export {
-  // Registered Keys Provisioning (#464)
-  issueRegisteredKey,
-  getRegisteredKey,
-  listRegisteredKeys,
-  revokeRegisteredKey,
-  validateRegisteredKey,
-  incrementRegisteredKeyUsage,
-  checkQuota,
-  setProviderKeyLimit,
-  setAccountKeyLimit,
-  getProviderKeyLimit,
-  getAccountKeyLimit,
-} from "./db/registeredKeys";
-
-export type {
-  RegisteredKey,
-  RegisteredKeyWithSecret,
-  ProviderKeyLimit,
-  AccountKeyLimit,
-  QuotaCheckResult,
-  IssueKeyParams,
-} from "./db/registeredKeys";
-
-export {
-  // Model-Combo Mappings (#563)
-  getModelComboMappings,
-  getModelComboMappingById,
-  createModelComboMapping,
-  updateModelComboMapping,
-  deleteModelComboMapping,
-  resolveComboForModel,
-} from "./db/modelComboMappings";
-
-export {
-  // Files
-  createFile,
-  getFile,
-  getFileContent,
-  listFiles,
-  countFiles,
-  formatFileResponse,
-  deleteFile,
-} from "./db/files";
-
-export {
-  // Batches
-  createBatch,
-  getBatch,
-  updateBatch,
-  listBatches,
-  countBatches,
-  getPendingBatches,
-  getTerminalBatches,
-  ensureBatchItemCheckpoints,
-  countBatchItemCheckpoints,
-  listBatchItemCheckpoints,
-  markBatchItemProcessing,
-  markBatchItemResult,
-  markBatchItemError,
-  deleteBatch,
-  deleteCompletedBatches,
-} from "./db/batches";
-
-export type { FileRecord } from "./db/files";
-export type { BatchItemCheckpoint, BatchRecord } from "./db/batches";
+// (Skills, Files, Batches modules removed)
 
 export type { ModelComboMapping } from "./db/modelComboMappings";
 export * from "./db/reasoningRoutingRules";
@@ -332,357 +227,9 @@ export type { Webhook, WebhookKind } from "./db/webhooks";
 
 export { insertDelivery, getDeliveries } from "./db/webhookDeliveries";
 
-export {
-  upsertDiscoveryResult,
-  getDiscoveryResults,
-  getDiscoveryResultById,
-  markVerified,
-  deleteDiscoveryResult,
-} from "./db/discoveryResults";
+// (Plugin module removed)
 
-export type {
-  DiscoveryResult,
-  DiscoveryMethod,
-  DiscoveryAuthType,
-  DiscoveryRiskLevel,
-  DiscoveryStatus,
-} from "./db/discoveryResults";
-export type { WebhookDelivery } from "./db/webhookDeliveries";
 
-export {
-  saveQuotaSnapshot,
-  getQuotaSnapshots,
-  getAggregatedSnapshots,
-  cleanupOldSnapshots,
-} from "./db/quotaSnapshots";
-
-export * from "./db/sessionAccountAffinity";
-export * from "./db/quotaResetEvents";
-
-export type { QuotaSnapshotRow, ProviderUtilizationPoint } from "@/shared/types/utilization";
-
-export {
-  getVersionManagerStatus,
-  getVersionManagerTool,
-  upsertVersionManagerTool,
-  updateVersionManagerTool,
-  deleteVersionManagerTool,
-  updateToolHealth,
-  updateToolVersion,
-  setToolStatus,
-  getServiceRow,
-  updateServiceField,
-} from "./db/versionManager";
-
-export {
-  listSyncTokens,
-  getSyncTokenById,
-  getSyncTokenByHash,
-  createSyncTokenRecord,
-  revokeSyncToken,
-  touchSyncTokenLastUsed,
-} from "./db/syncTokens";
-
-export {
-  getUpstreamProxyConfigs,
-  getUpstreamProxyConfig,
-  upsertUpstreamProxyConfig,
-  updateUpstreamProxyConfig,
-  deleteUpstreamProxyConfig,
-  getProvidersByMode,
-  getFallbackChainForProvider,
-  validateProxyUrl,
-} from "./db/upstreamProxy";
-
-export {
-  getProviderLimitsCache,
-  getAllProviderLimitsCache,
-  setProviderLimitsCache,
-  setProviderLimitsCacheBatch,
-  deleteProviderLimitsCache,
-} from "./db/providerLimits";
-
-export type { ProviderLimitsCacheEntry } from "./db/providerLimits";
-
-export {
-  getPersistedCreditBalance,
-  getAllPersistedCreditBalances,
-  persistCreditBalance,
-} from "./db/creditBalance";
-
-export {
-  insertCompressionAnalyticsRow,
-  getCompressionAnalyticsSummary,
-} from "./db/compressionAnalytics";
-
-export type {
-  CompressionAnalyticsRow,
-  CompressionAnalyticsSummary,
-} from "./db/compressionAnalytics";
-
-export {
-  // Reasoning Replay Cache (#1628)
-  setReasoningCache,
-  getReasoningCache,
-  deleteReasoningCache,
-  clearAllReasoningCache,
-} from "./db/reasoningCache";
-
-export type { ReasoningCacheEntry, ReasoningCacheStats } from "./db/reasoningCache";
-
-export {
-  // 1proxy Integration (#1788)
-  listOneproxyProxies,
-  getOneproxyStats,
-  upsertOneproxyProxy,
-  getOneproxyProxyById,
-  deleteOneproxyProxy,
-  clearAllOneproxyProxies,
-  getOneproxyProxyForRotation,
-  markOneproxyProxyFailed,
-} from "./db/oneproxy";
-
-export type { OneproxyProxyRecord, OneproxyStats } from "./db/oneproxy";
-
-export {
-  getSessionAccountAffinity,
-  upsertSessionAccountAffinity,
-  touchSessionAccountAffinity,
-  deleteSessionAccountAffinity,
-  evictSessionAccountAffinityForConnection,
-  cleanupStaleSessionAccountAffinities,
-  startSessionAccountAffinityCleanup,
-  stopSessionAccountAffinityCleanupForTests,
-} from "./db/sessionAccountAffinity";
-
-export {
-  // Gamification & Leaderboard
-  updateScore,
-  getRank,
-  getTopN,
-  addXp,
-  getXp,
-  updateLevel,
-  unlockBadge,
-  hasBadge,
-  getBadges,
-  getBadgeDefinitions,
-  transferTokens,
-  getBalance,
-  getHistory,
-  createInviteToken,
-  getInviteByCode,
-  redeemInvite,
-  revokeInvite,
-  connectServer,
-  disconnectServer,
-  listServers,
-  getConnectedServerByKeyHash,
-} from "./db/gamification";
-
-export type {
-  LeaderboardRow,
-  UserLevelRow,
-  BadgeDefinition,
-  UserBadge,
-  XpAuditLogEntry,
-  TokenLedgerEntry,
-  InviteToken,
-  CommunityServer,
-} from "./db/gamification";
-
-export * from "./db/featureFlags";
-
-export {
-  upsertHandoff,
-  getHandoff,
-  deleteHandoff,
-  cleanupExpiredHandoffs,
-  hasActiveHandoff,
-  recordSessionModelUsage,
-  getLastSessionModel,
-} from "./db/contextHandoffs";
-
-export type { HandoffPayload } from "./db/contextHandoffs";
-
-export {
-  getAllMiddlewareHooks,
-  getEnabledMiddlewareHooks,
-  getComboMiddlewareHooks,
-  getMiddlewareHook,
-  createMiddlewareHook,
-  updateMiddlewareHook,
-  deleteMiddlewareHook,
-  recordHookExecution,
-  insertHookLog,
-  getHookLogs,
-  cleanupHookLogs,
-} from "./db/middleware";
-
-export {
-  getAllKeyGroups,
-  getKeyGroup,
-  getKeyGroupWithPermissions,
-  createKeyGroup,
-  updateKeyGroup,
-  deleteKeyGroup,
-  getGroupPermissions,
-  addGroupPermission,
-  removeGroupPermission,
-  clearGroupPermissions,
-  getGroupMembers,
-  getKeyGroupsForApiKey,
-  addKeyToGroup,
-  removeKeyFromGroup,
-  checkKeyModelAccess,
-} from "./db/apiKeyGroups";
-
-export {
-  createRelayToken,
-  getRelayTokens,
-  getRelayToken,
-  getRelayTokenByHash,
-  updateRelayToken,
-  deleteRelayToken,
-  toggleRelayToken,
-  checkRateLimit,
-  recordRelayUsage,
-  getRelayUsage,
-  getRelayLogs,
-} from "./db/relayProxies";
-
-export type {
-  RelayToken,
-  RelayTokenRow,
-  RelayLogRow,
-  CreateRelayTokenInput,
-  RelayTokenWithSecret,
-} from "./db/relayProxies";
-
-export {
-  upsertFreeProxy,
-  listFreeProxies,
-  countFreeProxies,
-  listFreeProxiesBySource,
-  getFreeProxyById,
-  markFreeProxyInPool,
-  promoteFreeProxyToPool,
-  deleteFreeProxy,
-  clearFreeProxiesBySource,
-  pruneStaleFreeProxies,
-  getFreeProxyStats,
-  recordFreeProxySync,
-  recordFreeProxySyncErrors,
-  clearFreeProxySyncErrors,
-  getFreeProxySyncErrors,
-} from "./db/freeProxies";
-
-export type { FreeProxyRecord, FreeProxyStats, FreeProxySyncErrors } from "./db/freeProxies";
-
-export {
-  listPlaygroundPresets,
-  getPlaygroundPreset,
-  createPlaygroundPreset,
-  updatePlaygroundPreset,
-  deletePlaygroundPreset,
-} from "./db/playgroundPresets";
-
-export type { PlaygroundPresetListItem } from "./db/playgroundPresets";
-// Plan 21 — Memory Engine Redesign
-export {
-  getMemoryVecMeta,
-  setMemoryVecMeta,
-  markMemoryNeedsReindex,
-  markAllMemoriesNeedReindex,
-  getMemoryReindexQueue,
-  countMemoryReindexPending,
-  type MemoryVecMeta,
-} from "./db/memoryVec";
-// T-A-F2: AgentBridge state/mappings/bypass + Inspector custom hosts/sessions
-export * from "./db/agentBridgeState";
-export * from "./db/agentBridgeMappings";
-export * from "./db/agentBridgeBypass";
-export * from "./db/inspectorCustomHosts";
-export * from "./db/inspectorSessions";
-export * from "./db/omp";
-// Quota Sharing — Group B (planos 16+22)
-export {
-  listPools,
-  getPool,
-  getPoolsByGroup,
-  createPool,
-  updatePool,
-  deletePool,
-  upsertAllocations,
-  listAllocationsForApiKey,
-} from "./db/quotaPools";
-// Quota per-(key, model) caps — Group B Fase 3 #7
-export { getModelCap, listModelCaps, setModelCap, deleteModelCap } from "./db/quotaModelCaps";
-
-export {
-  // Quota Groups (B2)
-  createGroup,
-  getGroup,
-  getGroupName,
-  listGroups,
-  renameGroup,
-  deleteGroup,
-} from "./db/quotaGroups";
-
-export type { QuotaGroup } from "./db/quotaGroups";
-export {
-  getBucket,
-  incrementBucket,
-  getPair,
-  sumPoolDimension,
-  gcOlderThan as gcQuotaConsumption,
-} from "./db/quotaConsumption";
-export {
-  getPlan as getProviderPlan,
-  listPlans as listProviderPlans,
-  upsertPlan as upsertProviderPlan,
-  deletePlan as deleteProviderPlan,
-} from "./db/providerPlans";
-
-export {
-  // Per-API-Key Token Limits (migration 073)
-  upsertTokenLimit,
-  listTokenLimits,
-  getTokenLimitsForRequest,
-  deleteTokenLimit,
-  getWindowUsage,
-  incrementWindowTokens,
-  resetWindowIfElapsed,
-  logTokenLimitReset,
-} from "./db/tokenLimits";
-
-export type {
-  TokenLimit,
-  TokenLimitScopeType,
-  UpsertTokenLimitInput,
-  TokenWindowState,
-} from "./db/tokenLimits";
-
-export {
-  insertPlugin,
-  getPluginById,
-  getPluginByName,
-  listPlugins,
-  updatePluginStatus,
-  updatePluginConfig,
-  deletePlugin,
-  pluginExists,
-} from "./db/plugins";
-
-export type { PluginRow, PluginCreateInput } from "./db/plugins";
-
-export {
-  getApiKeyContextSource,
-  setApiKeyContextSource,
-  deleteApiKeyContextSource,
-  listApiKeyContextSources,
-} from "./db/apiKeyContextSources";
-export type { ApiKeyContextSource } from "./db/apiKeyContextSources";
 
 export { sumUsageTokensThisMonth } from "./db/usageSummary";
 
@@ -802,6 +349,68 @@ export { exportProxyLogsSince } from "./db/proxyLogs";
 // ---------------------------------------------------------------------------
 export { markConnectionRateLimitedUntil, clearConnectionRateLimit } from "./db/providers";
 // Provider param filters — denylist/allowlist config per provider/model (#6625)
-export * from "./db/paramFilters";
-export * from "./db/interceptionRules"; // Per-model web-search/web-fetch interception rules (#3384)
 export * from "./db/relayProbeStats"; // Relay probe latency/health stats (#6909)
+export * from "./db/readCache";
+export * from "./db/providerLimits";
+export * from "./db/quotaConsumption";
+export * from "./db/quotaPools";
+export * from "./db/providerPlans";
+export * from "./db/tokenLimits";
+export * from "./db/quotaSnapshots";
+export * from "./db/quotaResetEvents";
+export * from "./db/accessTokens";
+export * from "./db/apiKeyColumnFallbacks";
+export * from "./db/apiKeyGroups";
+export * from "./db/apiKeyUsageLimitFields";
+export * from "./db/caseMapping";
+export * from "./db/cleanup";
+export * from "./db/cliToolState";
+export * from "./db/comboForecast";
+export * from "./db/commandCodeAuth";
+export * from "./db/compressionAnalytics";
+export * from "./db/compressionDetailNormalizers";
+export * from "./db/contextHandoffs";
+export * from "./db/creditBalance";
+export * from "./db/detailedLogs";
+export * from "./db/domainState";
+export * from "./db/encryption";
+export * from "./db/featureFlags";
+export * from "./db/healthCheck";
+export * from "./db/jsonMigration";
+export * from "./db/middleware";
+export * from "./db/modelCapabilityOverrides";
+export * from "./db/omp";
+export * from "./db/optimizationSettings";
+export * from "./db/paramFilters";
+export * from "./db/playgroundPresets";
+export * from "./db/prompts";
+export * from "./db/providerNodeSelect";
+export * from "./db/providerStats";
+export * from "./db/proxyLatency";
+export * from "./db/proxySubscriptions";
+export * from "./db/quotaGroups";
+export * from "./db/quotaModelCaps";
+export * from "./db/reasoningCache";
+export * from "./db/recovery";
+export * from "./db/registeredKeys";
+export * from "./db/relayProxies";
+export * from "./db/schemaColumns";
+export * from "./db/secrets";
+export * from "./db/serviceModels";
+export * from "./db/sessionAccountAffinity";
+export * from "./db/stateReset";
+export * from "./db/stats";
+export * from "./db/syncTokens";
+export * from "./db/tierConfig";
+export * from "./db/upstreamProxy";
+export * from "./db/vacuumScheduler";
+export * from "./db/versionManager";
+export * from "./db/webSessionDedup";
+
+
+
+
+
+
+
+

@@ -16,28 +16,28 @@ import {
   lockModel,
   recordModelLockoutFailure,
   isDailyQuotaExhausted,
-} from "@omniroute/open-sse/services/accountFallback.ts";
+} from "@niyatnaroute/open-sse/services/accountFallback.ts";
 import { getModelInfo, getComboForModel } from "../services/model";
-import { resolveBareModelToConnectionDefault } from "@omniroute/open-sse/services/model.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { getImageModelEntry } from "@omniroute/open-sse/config/imageRegistry.ts";
-import { acceptHeaderForcesStream } from "@omniroute/open-sse/utils/aiSdkCompat.ts";
-import { applyNoThinkingAlias } from "@omniroute/open-sse/utils/noThinkingAlias.ts";
-import { handleComboChat, shouldSkipConnDisable } from "@omniroute/open-sse/services/combo.ts";
-import { mergeAbortSignals } from "@omniroute/open-sse/executors/base.ts";
-import { resolveRequestAutoControls } from "@omniroute/open-sse/services/autoCombo/requestControls.ts";
-import { resolveComboConfig } from "@omniroute/open-sse/services/comboConfig.ts";
-import { injectHandoffIntoBody } from "@omniroute/open-sse/services/contextHandoff.ts";
+import { resolveBareModelToConnectionDefault } from "@niyatnaroute/open-sse/services/model.ts";
+import { errorResponse } from "@niyatnaroute/open-sse/utils/error.ts";
+import { getImageModelEntry } from "@niyatnaroute/open-sse/config/imageRegistry.ts";
+import { acceptHeaderForcesStream } from "@niyatnaroute/open-sse/utils/aiSdkCompat.ts";
+import { applyNoThinkingAlias } from "@niyatnaroute/open-sse/utils/noThinkingAlias.ts";
+import { handleComboChat, shouldSkipConnDisable } from "@niyatnaroute/open-sse/services/combo.ts";
+import { mergeAbortSignals } from "@niyatnaroute/open-sse/executors/base.ts";
+import { resolveRequestAutoControls } from "@niyatnaroute/open-sse/services/autoCombo/requestControls.ts";
+import { resolveComboConfig } from "@niyatnaroute/open-sse/services/comboConfig.ts";
+import { injectHandoffIntoBody } from "@niyatnaroute/open-sse/services/contextHandoff.ts";
 import {
   HTTP_STATUS,
   ANTIGRAVITY_PRE_RESPONSE_TIMEOUT_CODE,
-} from "@omniroute/open-sse/config/constants.ts";
-import { getTargetFormat, detectFormatFromUrl } from "@omniroute/open-sse/services/provider.ts";
+} from "@niyatnaroute/open-sse/config/constants.ts";
+import { getTargetFormat, detectFormatFromUrl } from "@niyatnaroute/open-sse/services/provider.ts";
 import {
   getModelsByProviderId,
   getModelTargetFormat,
   PROVIDER_ID_TO_ALIAS,
-} from "@omniroute/open-sse/config/providerModels.ts";
+} from "@niyatnaroute/open-sse/config/providerModels.ts";
 import * as log from "../utils/logger";
 import { checkAndRefreshToken } from "../services/tokenRefresh";
 import { createHookContext, runHooks, initPreRequestRegistry } from "@/lib/middleware/registry";
@@ -78,7 +78,7 @@ import {
   PROVIDER_BREAKER_FAILURE_STATUSES,
   shouldTripProviderBreakerForResult,
 } from "./chatPredicates";
-import { connectionHasExtraKeys } from "@omniroute/open-sse/services/apiKeyRotator.ts";
+import { connectionHasExtraKeys } from "@niyatnaroute/open-sse/services/apiKeyRotator.ts";
 import {
   extractReasoningIntent,
   type ExtractedReasoningIntent,
@@ -107,11 +107,11 @@ import { handleInternalUsageCommand } from "@/lib/usage/internalUsageCommand";
 import {
   applyTaskAwareRouting,
   getTaskRoutingConfig,
-} from "@omniroute/open-sse/services/taskAwareRouter.ts";
+} from "@niyatnaroute/open-sse/services/taskAwareRouter.ts";
 import {
   hasNativeWebSearchTool,
   resolveWebSearchRouteOverride,
-} from "@omniroute/open-sse/services/webSearchRouting.ts";
+} from "@niyatnaroute/open-sse/services/webSearchRouting.ts";
 import {
   generateSessionId as generateStableSessionId,
   touchSession,
@@ -119,24 +119,24 @@ import {
   checkSessionLimit,
   registerKeySession,
   isSessionRegisteredForKey,
-} from "@omniroute/open-sse/services/sessionManager.ts";
-import { startQuotaMonitor } from "@omniroute/open-sse/services/quotaMonitor.ts";
+} from "@niyatnaroute/open-sse/services/sessionManager.ts";
+import { startQuotaMonitor } from "@niyatnaroute/open-sse/services/quotaMonitor.ts";
 import {
   isFallbackDecision,
   shouldUseFallback,
-} from "@omniroute/open-sse/services/emergencyFallback.ts";
+} from "@niyatnaroute/open-sse/services/emergencyFallback.ts";
 import {
   registerCodexConnection,
   registerCodexQuotaFetcher,
-} from "@omniroute/open-sse/services/codexQuotaFetcher.ts";
-import { registerBailianCodingPlanQuotaFetcher } from "@omniroute/open-sse/services/bailianQuotaFetcher.ts";
-import { registerCrofUsageFetcher } from "@omniroute/open-sse/services/crofUsageFetcher.ts";
-import { registerDeepseekQuotaFetcher } from "@omniroute/open-sse/services/deepseekQuotaFetcher.ts";
-import { registerOpenrouterQuotaFetcher } from "@omniroute/open-sse/services/openrouterQuotaFetcher.ts";
-import { registerOpencodeQuotaFetcher } from "@omniroute/open-sse/services/opencodeQuotaFetcher.ts";
-import { registerGrokWebQuotaFetcher } from "@omniroute/open-sse/services/grokQuotaFetcher.ts";
-import { registerGenericQuotaFetchers } from "@omniroute/open-sse/services/genericQuotaFetcher.ts";
-import "@omniroute/open-sse/services/quotaTrackersBatch.ts";
+} from "@niyatnaroute/open-sse/services/codexQuotaFetcher.ts";
+import { registerBailianCodingPlanQuotaFetcher } from "@niyatnaroute/open-sse/services/bailianQuotaFetcher.ts";
+import { registerCrofUsageFetcher } from "@niyatnaroute/open-sse/services/crofUsageFetcher.ts";
+import { registerDeepseekQuotaFetcher } from "@niyatnaroute/open-sse/services/deepseekQuotaFetcher.ts";
+import { registerOpenrouterQuotaFetcher } from "@niyatnaroute/open-sse/services/openrouterQuotaFetcher.ts";
+import { registerOpencodeQuotaFetcher } from "@niyatnaroute/open-sse/services/opencodeQuotaFetcher.ts";
+import { registerGrokWebQuotaFetcher } from "@niyatnaroute/open-sse/services/grokQuotaFetcher.ts";
+import { registerGenericQuotaFetchers } from "@niyatnaroute/open-sse/services/genericQuotaFetcher.ts";
+import "@niyatnaroute/open-sse/services/quotaTrackersBatch.ts";
 import {
   disableCooldownAwareRetry,
   getCooldownAwareRetryDecision,
@@ -274,7 +274,7 @@ export async function handleChat(
   const sourceFormat = detectFormatFromUrl(body, request.url);
 
   // Early guard: an invalid `messages` field is rejected here with a clear
-  // OmniRoute-level 400 before any routing or upstream call (#5110, #6402).
+  // NiyatnaRoute-level 400 before any routing or upstream call (#5110, #6402).
   // Without this guard, schema-invalid bodies fell through to model resolution
   // and surfaced as a misleading 404 `model_not_found` from chatHelpers.ts (#6402).
   // Cases covered:
@@ -455,7 +455,7 @@ export async function handleChat(
   const externalSessionId = extractExternalSessionId(request.headers);
   const sessionId = externalSessionId || generateStableSessionId(body);
   const sessionAffinityKey = extractSessionAffinityKey(body, request.headers) || sessionId;
-  const requestedConnectionId = request.headers.get("x-omniroute-connection")?.trim() || null;
+  const requestedConnectionId = request.headers.get("x-niyatnaroute-connection")?.trim() || null;
   if (sessionId) {
     touchSession(sessionId);
   }
@@ -1384,7 +1384,7 @@ async function handleSingleModelChat(
         comboStrategy === "context-relay" &&
         comboName &&
         runtimeOptions.sessionId &&
-        body?._omnirouteSkipContextRelay !== true
+        body?._niyatnarouteSkipContextRelay !== true
       ) {
         const handoff = getHandoff(runtimeOptions.sessionId, comboName);
         if (handoff && handoff.fromAccount !== credentials.connectionId) {
@@ -1422,7 +1422,7 @@ async function handleSingleModelChat(
           ...(workspaceId ? { workspaceId } : {}),
         });
       }
-      if (runtimeOptions.sessionId && body?._omnirouteInternalRequest !== "context-handoff") {
+      if (runtimeOptions.sessionId && body?._niyatnarouteInternalRequest !== "context-handoff") {
         touchSession(runtimeOptions.sessionId, credentials.connectionId);
         startQuotaMonitor(
           runtimeOptions.sessionId,

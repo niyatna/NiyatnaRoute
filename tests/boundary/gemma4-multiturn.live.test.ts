@@ -8,12 +8,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-const BASE = process.env.OMNIROUTE_TEST_BASE || "http://localhost:20128/v1";
-const AUTH = process.env.OMNIROUTE_TEST_BEARER
-    ? `Bearer ${process.env.OMNIROUTE_TEST_BEARER}`
+const BASE = process.env.NIYATNAROUTE_TEST_BASE || "http://localhost:20128/v1";
+const AUTH = process.env.NIYATNAROUTE_TEST_BEARER
+    ? `Bearer ${process.env.NIYATNAROUTE_TEST_BEARER}`
     : "";
 const COOKIE =
-  process.env.OMNIROUTE_TEST_COOKIE || "";
+  process.env.NIYATNAROUTE_TEST_COOKIE || "";
 
 const MODEL = "gemini/gemma-4-26b-a4b-it";
 

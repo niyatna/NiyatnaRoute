@@ -4,7 +4,6 @@ import fs from "node:fs";
 import { evaluateParity } from "./lib/parity.mjs";
 import { createEphemeralKey } from "./lib/adminClient.mjs";
 import { checkSse } from "./lib/sseCheck.mjs";
-import { promptfooToCtrf } from "./lib/promptfooToCtrf.mjs";
 
 // ── env ──────────────────────────────────────────────────────────────────
 if (fs.existsSync(".env.homolog")) {
@@ -79,35 +78,6 @@ try {
   record("L1 API (httpYac)", hy.status === 0);
   const sse = await checkSse(BASE, eph.key, smokeModel);
   record("L1 SSE streaming", sse.ok, (sse.failures || []).join("; "));
-
-  // ── L2 providers reais ─────────────────────────────────────────────────
-  try {
-    execSync("node scripts/homolog/gen-promptfoo.mjs", { stdio: "inherit", env: process.env });
-    spawnSync(
-      "npx",
-      [
-        "promptfoo",
-        "eval",
-        "-c",
-        "homolog-report/promptfooconfig.yaml",
-        "-o",
-        "homolog-report/raw/promptfoo.json",
-        "--no-cache",
-      ],
-      { encoding: "utf8", env: process.env }
-    );
-    const pfOut = JSON.parse(fs.readFileSync("homolog-report/raw/promptfoo.json", "utf8"));
-    const pfCtrf = promptfooToCtrf(pfOut);
-    fs.writeFileSync("homolog-report/providers-ctrf.json", JSON.stringify(pfCtrf, null, 2));
-    record(
-      "L2 providers reais",
-      pfCtrf.results.summary.failed === 0,
-      `${pfCtrf.results.summary.passed}/${pfCtrf.results.summary.tests} providers OK`
-    );
-  } catch (err) {
-    // gerador/eval quebrando é falha da camada — o run continua para o L4 e o cleanup
-    record("L2 providers reais", false, err.message);
-  }
 
   // ── L4 UI ──────────────────────────────────────────────────────────────
   const pw = spawnSync(

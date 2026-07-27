@@ -17,18 +17,18 @@
  * now; the WS bridge previously had *zero* compression coverage, so this closes the primary gap.
  */
 
-import { logger } from "@omniroute/open-sse/utils/logger.ts";
-import { estimateTokens } from "@omniroute/open-sse/services/contextManager.ts";
-import { adaptBodyForCompression } from "@omniroute/open-sse/services/compression/bodyAdapter.ts";
+import { logger } from "@niyatnaroute/open-sse/utils/logger.ts";
+import { estimateTokens } from "@niyatnaroute/open-sse/services/contextManager.ts";
+import { adaptBodyForCompression } from "@niyatnaroute/open-sse/services/compression/bodyAdapter.ts";
 import type {
   CompressionConfig,
   CompressionResult,
-} from "@omniroute/open-sse/services/compression/types.ts";
-import { resolveCompressionSettings } from "@omniroute/open-sse/handlers/chatCore/compressionSettings.ts";
+} from "@niyatnaroute/open-sse/services/compression/types.ts";
+import { resolveCompressionSettings } from "@niyatnaroute/open-sse/handlers/chatCore/compressionSettings.ts";
 import {
   writeCompressionAnalytics,
   writeCompressionSkip,
-} from "@omniroute/open-sse/handlers/chatCore/compressionAnalyticsWrite.ts";
+} from "@niyatnaroute/open-sse/handlers/chatCore/compressionAnalyticsWrite.ts";
 
 const log = logger("RESPONSES_WS_COMPRESSION");
 
@@ -60,7 +60,7 @@ export async function applyResponsesWsCompression(
     }
 
     const { selectCompressionStrategy, applyCompressionAsync } = await import(
-      "@omniroute/open-sse/services/compression/strategySelector.ts"
+      "@niyatnaroute/open-sse/services/compression/strategySelector.ts"
     );
 
     const estimatedTokens = estimateTokens(adapter.body.messages);

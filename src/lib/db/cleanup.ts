@@ -193,63 +193,7 @@ export async function cleanupMcpAudit(): Promise<CleanupResult> {
   return result;
 }
 
-/**
- * Clean up old a2a_events based on retention settings.
- */
-export async function cleanupA2aEvents(): Promise<CleanupResult> {
-  const db = getDbInstance();
-  const retention = getRetentionSettings();
 
-  const retentionDays = retention.a2aEvents;
-  const cutoffDate = new Date();
-  cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
-  const cutoffISO = cutoffDate.toISOString();
-
-  const result: CleanupResult = { deleted: 0, errors: 0 };
-
-  try {
-    const stmt = db.prepare("DELETE FROM a2a_task_events WHERE timestamp < ?");
-    const runResult = stmt.run(cutoffISO);
-    result.deleted = runResult.changes;
-
-    console.log(`[Cleanup] Deleted ${result.deleted} a2a_events older than ${retentionDays} days`);
-  } catch (err: unknown) {
-    console.error("[Cleanup] Error cleaning a2a_events:", err);
-    result.errors++;
-  }
-
-  return result;
-}
-
-/**
- * Clean up old memory_entries based on retention settings.
- */
-export async function cleanupMemoryEntries(): Promise<CleanupResult> {
-  const db = getDbInstance();
-  const retention = getRetentionSettings();
-
-  const retentionDays = retention.memoryEntries;
-  const cutoffDate = new Date();
-  cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
-  const cutoffISO = cutoffDate.toISOString();
-
-  const result: CleanupResult = { deleted: 0, errors: 0 };
-
-  try {
-    const stmt = db.prepare("DELETE FROM memories WHERE created_at < ?");
-    const runResult = stmt.run(cutoffISO);
-    result.deleted = runResult.changes;
-
-    console.log(
-      `[Cleanup] Deleted ${result.deleted} memory_entries older than ${retentionDays} days`
-    );
-  } catch (err: unknown) {
-    console.error("[Cleanup] Error cleaning memory_entries:", err);
-    result.errors++;
-  }
-
-  return result;
-}
 
 /**
  * Clean up old domain_cost_history based on retention settings. (#6848)
@@ -311,35 +255,7 @@ export async function cleanupCompressionCacheStats(): Promise<CleanupResult> {
   return result;
 }
 
-/**
- * Clean up old xp_audit_log based on retention settings.
- */
-export async function cleanupXpAuditLog(): Promise<CleanupResult> {
-  const db = getDbInstance();
-  const retention = getRetentionSettings();
 
-  const retentionDays = retention.xpAuditLog;
-  const cutoffDate = new Date();
-  cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
-  const cutoffISO = cutoffDate.toISOString();
-
-  const result: CleanupResult = { deleted: 0, errors: 0 };
-
-  try {
-    const stmt = db.prepare("DELETE FROM xp_audit_log WHERE created_at < ?");
-    const runResult = stmt.run(cutoffISO);
-    result.deleted = runResult.changes;
-
-    console.log(
-      `[Cleanup] Deleted ${result.deleted} xp_audit_log older than ${retentionDays} days`
-    );
-  } catch (err: unknown) {
-    console.error("[Cleanup] Error cleaning xp_audit_log:", err);
-    result.errors++;
-  }
-
-  return result;
-}
 
 /**
  * Clean up old compression_run_telemetry based on retention settings. (#6848)
@@ -394,11 +310,8 @@ export async function runAutoCleanup(): Promise<{
     usageHistory: await cleanupUsageHistory(),
     compressionAnalytics: await cleanupCompressionAnalytics(),
     mcpAudit: await cleanupMcpAudit(),
-    a2aEvents: await cleanupA2aEvents(),
-    memoryEntries: await cleanupMemoryEntries(),
     domainCostHistory: await cleanupDomainCostHistory(),
     compressionCacheStats: await cleanupCompressionCacheStats(),
-    xpAuditLog: await cleanupXpAuditLog(),
     compressionRunTelemetry: await cleanupCompressionRunTelemetry(),
     proxyLogs: await cleanupProxyLogs(),
   };

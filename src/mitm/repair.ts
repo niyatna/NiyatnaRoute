@@ -4,14 +4,15 @@ import { resolveMitmDataDir } from "./dataDir.ts";
 import { removeDNSEntry, removeDNSEntries } from "./dns/dnsConfig.ts";
 import { uninstallCert } from "./cert/install.ts";
 import { ALL_TARGETS } from "./targets/index.ts";
-import { listCustomHosts } from "@/lib/db/inspectorCustomHosts.ts";
 import { getGheCopilotHosts } from "@/lib/db/providers.ts";
 import { createLogger } from "@/shared/utils/logger.ts";
+
+const listCustomHosts = () => [];
 
 const log = createLogger("mitm-repair");
 
 /**
- * Enumerate every hostname OmniRoute may have written to /etc/hosts during
+ * Enumerate every hostname NiyatnaRoute may have written to /etc/hosts during
  * startMitm(): the full agent-target registry plus all custom hosts. Removal
  * via removeDNSEntries() is idempotent (absent entries are skipped), so this
  * set is intentionally over-inclusive — a host that was never spoofed costs

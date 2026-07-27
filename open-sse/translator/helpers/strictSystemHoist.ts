@@ -1,4 +1,7 @@
-import { systemMessageMustBeFirst } from "../../../src/lib/memory/injection.ts";
+function systemMessageMustBeFirst(provider: string): boolean {
+  const p = (provider || "").toLowerCase();
+  return p.includes("claude") || p.includes("anthropic") || p.includes("bedrock") || p.includes("vertex");
+}
 
 type Message = { role: string; content: unknown; [key: string]: unknown };
 

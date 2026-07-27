@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getCachedProviderConnectionById } from "@/lib/localDb";
 import { updateProviderConnection } from "@/lib/db/providers";
 import { getAccessToken, updateProviderCredentials } from "@/sse/services/tokenRefresh";
-import { rotationGroupFor } from "@omniroute/open-sse/services/refreshSerializer.ts";
+import { rotationGroupFor } from "@niyatnaroute/open-sse/services/refreshSerializer.ts";
 
 type RefreshResult = {
   accessToken?: string;

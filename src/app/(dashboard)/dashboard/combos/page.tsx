@@ -41,8 +41,6 @@ import {
 } from "@/lib/combos/builderDraft";
 import { normalizeComboConfigMode } from "@/shared/constants/comboConfigMode";
 import AutoComboCatalog from "./AutoComboCatalog";
-import KimiComboPresetCard from "./KimiComboPresetCard";
-import { KIMI_CODING_PRESET, hasKimiCodingPreset } from "./kimiComboPreset";
 import BuilderIntelligentStep from "./BuilderIntelligentStep";
 import IntelligentComboPanel from "./IntelligentComboPanel";
 import {
@@ -363,7 +361,7 @@ const STRATEGY_RECOMMENDATIONS_FALLBACK = {
   },
 };
 
-const COMBO_USAGE_GUIDE_STORAGE_KEY = "omniroute:combos:hide-usage-guide";
+const COMBO_USAGE_GUIDE_STORAGE_KEY = "niyatnaroute:combos:hide-usage-guide";
 const COMBO_FORM_STAGE_META = [
   {
     id: "basics",
@@ -690,7 +688,6 @@ export default function CombosPage() {
   const [providerNodes, setProviderNodes] = useState([]);
   const [showUsageGuide, setShowUsageGuide] = useState(true);
   const [recentlyCreatedCombo, setRecentlyCreatedCombo] = useState("");
-  const [creatingKimiPreset, setCreatingKimiPreset] = useState(false);
   const [comboDragIndex, setComboDragIndex] = useState(null);
   const [comboDragOverIndex, setComboDragOverIndex] = useState(null);
   const [savingComboOrder, setSavingComboOrder] = useState(false);
@@ -861,17 +858,7 @@ export default function CombosPage() {
     await handleCreate(data);
   };
 
-  // Kimi Coding preset (2026-07 partnership) — one-click create, mirrors
-  // handleDuplicate's directness (no separate confirmation modal). See
-  // KimiComboPresetCard.tsx for why this bypasses the combo builder wizard.
-  const handleCreateKimiPreset = async () => {
-    setCreatingKimiPreset(true);
-    try {
-      await handleCreate(KIMI_CODING_PRESET);
-    } finally {
-      setCreatingKimiPreset(false);
-    }
-  };
+
 
   const handleTestCombo = async (combo) => {
     setTestingCombo(combo.name);
@@ -1055,11 +1042,7 @@ export default function CombosPage() {
 
       <AutoComboCatalog />
 
-      <KimiComboPresetCard
-        alreadyCreated={hasKimiCodingPreset(combos)}
-        creating={creatingKimiPreset}
-        onCreate={handleCreateKimiPreset}
-      />
+
 
       {showUsageGuide && (
         <ComboUsageGuide
@@ -3996,7 +3979,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           help={getI18nOrFallback(
                             t,
                             "contextRelayHandoffThresholdHelp",
-                            "When quota usage reaches this threshold, OmniRoute generates a structured handoff summary before the account is exhausted."
+                            "When quota usage reaches this threshold, NiyatnaRoute generates a structured handoff summary before the account is exhausted."
                           )}
                           showHelp={!isExpertMode}
                         />

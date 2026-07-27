@@ -3,7 +3,7 @@
  *
  * Strict HTTP clients (notably Codex CLI's `reqwest`, which has a ~5s idle-read
  * timeout) drop the connection if no bytes arrive shortly after the request.
- * OmniRoute, however, holds the streaming response until `ensureStreamReadiness`
+ * NiyatnaRoute, however, holds the streaming response until `ensureStreamReadiness`
  * observes the upstream's first useful byte — which can exceed 5s for reasoning
  * models that "think" before emitting any token (#2544). `curl` has no such
  * idle timeout, so it was never affected, which is why the bug looked
@@ -27,29 +27,29 @@
  */
 
 const ENCODER = new TextEncoder();
-const KEEPALIVE_FRAME = ENCODER.encode(": omniroute-keepalive\n\n");
+const KEEPALIVE_FRAME = ENCODER.encode(": niyatnaroute-keepalive\n\n");
 // OpenAI-compatible keepalive: a syntactically valid empty streaming chunk.
 // Some OpenAI-compatible clients parse every non-empty SSE line as JSON and
 // reject legal SSE comments before their first provider chunk arrives.
 export const OPENAI_KEEPALIVE_FRAME = ENCODER.encode(
-  'data: {"id":"omniroute-keepalive","object":"chat.completion.chunk","created":0,"model":"omniroute","choices":[{"index":0,"delta":{},"finish_reason":null}]}\n\n'
+  'data: {"id":"niyatnaroute-keepalive","object":"chat.completion.chunk","created":0,"model":"niyatnaroute","choices":[{"index":0,"delta":{},"finish_reason":null}]}\n\n'
 );
 // #7360 follow-up: the FIRST frame of the slow path carries visible content
 // instead of an empty delta, framed as a reasoning/thinking chunk (the same
-// shape OmniRoute already emits for real upstream reasoning — see
+// shape NiyatnaRoute already emits for real upstream reasoning — see
 // open-sse/translator/response/claude-to-openai.ts's createChunk) so
 // reasoning-aware clients render it instead of silently ignoring it. This is
-// what lets OmniRoute safely wait out a longer Gemini rate-limit cooldown
+// what lets NiyatnaRoute safely wait out a longer Gemini rate-limit cooldown
 // (see comboCooldownWait/waitForCooldown budgetMs) without the client's own
 // first-event/idle-read timeout firing — the client sees a real byte
 // immediately, it just says we're still working on it.
-const STARTUP_THINKING_TEXT = "OmniRoute: got request, sending to provider";
+const STARTUP_THINKING_TEXT = "NiyatnaRoute: got request, sending to provider";
 export const OPENAI_STARTUP_THINKING_FRAME = ENCODER.encode(
   `data: ${JSON.stringify({
-    id: "omniroute-keepalive",
+    id: "niyatnaroute-keepalive",
     object: "chat.completion.chunk",
     created: 0,
-    model: "omniroute",
+    model: "niyatnaroute",
     choices: [
       { index: 0, delta: { reasoning_content: STARTUP_THINKING_TEXT }, finish_reason: null },
     ],
@@ -69,7 +69,7 @@ export const ANTHROPIC_PING_FRAME = ENCODER.encode('event: ping\ndata: {"type":"
 // real upstream response — once it arrives — starts its own independent
 // response.created lifecycle from scratch; this placeholder item never
 // carries a response_id and isn't meant to be continued.
-const RESPONSES_STARTUP_ITEM_ID = "rs_omniroute_keepalive";
+const RESPONSES_STARTUP_ITEM_ID = "rs_niyatnaroute_keepalive";
 export const RESPONSES_STARTUP_THINKING_FRAME = ENCODER.encode(
   [
     {
@@ -161,7 +161,7 @@ export type EarlyStreamKeepaliveOptions = {
   signal?: AbortSignal | null;
   /**
    * Frame emitted on each keepalive tick. Defaults to an SSE comment
-   * (`: omniroute-keepalive`). Anthropic-format routes (/v1/messages) must pass
+   * (`: niyatnaroute-keepalive`). Anthropic-format routes (/v1/messages) must pass
    * `ANTHROPIC_PING_FRAME` instead, because Anthropic clients ignore SSE comments
    * for their stream watchdog and only a real `event: ping` keeps them from aborting.
    */

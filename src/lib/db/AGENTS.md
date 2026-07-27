@@ -8,8 +8,8 @@ Live count: `ls src/lib/db/*.ts | wc -l` (currently 95). Migrations: `ls src/lib
 
 ## Core Infrastructure
 
-- **`core.ts`** — `getDbInstance()` returns singleton `better-sqlite3` with WAL journaling. Exports `rowToCamel()` (snake_case → camelCase), `encryptConnectionFields()` for provider credentials at rest. `SCHEMA_SQL` defines **17 base tables** (verify: `grep -c "CREATE TABLE" src/lib/db/core.ts` minus 1 for `_omniroute_migrations`).
-- **`migrationRunner.ts`** — Applies versioned SQL files from `db/migrations/` inside transactions. Tracks applied migrations in `_omniroute_migrations`. Each migration is idempotent.
+- **`core.ts`** — `getDbInstance()` returns singleton `better-sqlite3` with WAL journaling. Exports `rowToCamel()` (snake_case → camelCase), `encryptConnectionFields()` for provider credentials at rest. `SCHEMA_SQL` defines **17 base tables** (verify: `grep -c "CREATE TABLE" src/lib/db/core.ts` minus 1 for `_niyatnaroute_migrations`).
+- **`migrationRunner.ts`** — Applies versioned SQL files from `db/migrations/` inside transactions. Tracks applied migrations in `_niyatnaroute_migrations`. Each migration is idempotent.
 - **`db/migrations/`** — 110 SQL files (`001_initial_schema.sql` → `110_*.sql`). Each runs in a transaction, never fails partially.
 - **`localDb.ts`** — Re-export layer only. Never add logic here.
 
@@ -28,16 +28,9 @@ Live count: `ls src/lib/db/*.ts | wc -l` (currently 95). Migrations: `ls src/lib
 | `creditBalance.ts`     | `credit_balance`          | Per-provider credit tracking                        |
 | `compression.ts`       | compression settings      | Prompt compression pipeline config                  |
 | `compressionCombos.ts` | `compression_combos`      | Per-combo compression pipeline assignments          |
-| `evals.ts`             | eval tables               | Eval framework persistence                          |
 | `webhooks.ts`          | `webhooks`                | Event-driven webhook subscriptions and logs         |
 | `reasoningCache.ts`    | reasoning cache           | Hybrid in-memory + SQLite reasoning replay          |
 | `skills.ts`            | `skills`                  | Skill registration and metadata                     |
-| `plugins.ts`           | `plugins`                 | Plugin marketplace state                            |
-| `gamification.ts`      | gamification tables       | Levels, badges, leaderboard                         |
-| `notion.ts`            | notion tables             | Notion integration state                            |
-| `obsidian.ts`          | obsidian tables           | Obsidian vault integration state                    |
-| `files.ts`             | file storage              | Uploaded file management                            |
-| `batches.ts`           | batch processing          | Batch job tracking                                  |
 | `featureFlags.ts`      | feature flags             | Runtime feature flag overrides                      |
 | `backup.ts`            | backup ops                | Serialize/deserialize entire DB state               |
 | `cleanup.ts`           | cleanup ops               | Stale data purging                                  |

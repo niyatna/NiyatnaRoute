@@ -143,7 +143,7 @@ describe("useDisplayBaseUrl", () => {
   });
 
   it("prefers a public browser origin over a loopback build-time value", async () => {
-    vi.stubEnv("NEXT_PUBLIC_BASE_URL", "http://localhost:20128");
+    vi.stubEnv("NEXT_PUBLIC_BASE_URL", "http://localhost:9999");
     vi.stubGlobal("location", { origin: "https://api.example.com" });
 
     const { useDisplayBaseUrl } = await import("../useDisplayBaseUrl");

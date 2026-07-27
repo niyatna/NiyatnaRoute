@@ -5,8 +5,8 @@ import {
   getAntigravityIdeNodeHeaders,
   getAntigravityLoadCodeAssistMetadata,
   getAntigravityOAuthUserAgent,
-} from "@omniroute/open-sse/services/antigravityHeaders.ts";
-import { extractCodeAssistOnboardTierId } from "@omniroute/open-sse/services/codeAssistSubscription.ts";
+} from "@niyatnaroute/open-sse/services/antigravityHeaders.ts";
+import { extractCodeAssistOnboardTierId } from "@niyatnaroute/open-sse/services/codeAssistSubscription.ts";
 
 const POSTEXCHANGE_TIMEOUT_MS = 8_000;
 

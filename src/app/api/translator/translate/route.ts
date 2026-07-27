@@ -4,9 +4,9 @@ import {
   getTargetFormat,
   buildProviderUrl,
   buildProviderHeaders,
-} from "@omniroute/open-sse/services/provider.ts";
-import { translateRequest } from "@omniroute/open-sse/translator/index.ts";
-import { FORMATS } from "@omniroute/open-sse/translator/formats.ts";
+} from "@niyatnaroute/open-sse/services/provider.ts";
+import { translateRequest } from "@niyatnaroute/open-sse/translator/index.ts";
+import { FORMATS } from "@niyatnaroute/open-sse/translator/formats.ts";
 import { getProviderConnections } from "@/lib/localDb";
 import { translatorTranslateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";

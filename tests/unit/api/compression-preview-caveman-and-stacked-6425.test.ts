@@ -27,7 +27,7 @@ import { makeManagementSessionRequest } from "../../helpers/managementSession.ts
 // ─── temp DB isolation ────────────────────────────────────────────────────────
 
 const TEST_DATA_DIR = fs.mkdtempSync(
-  path.join(os.tmpdir(), "omniroute-compression-preview-6425-")
+  path.join(os.tmpdir(), "niyatnaroute-compression-preview-6425-")
 );
 const originalDataDir = process.env.DATA_DIR;
 const originalJwtSecret = process.env.JWT_SECRET;

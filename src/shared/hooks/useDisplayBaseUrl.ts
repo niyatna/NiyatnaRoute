@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export const DEFAULT_DISPLAY_BASE_URL = "http://localhost:20128";
+export const DEFAULT_DISPLAY_BASE_URL = "http://localhost:9999";
 
 function normalizeUrl(value?: string): string | null {
   const trimmed = value?.trim();
@@ -130,7 +130,7 @@ export function resolveDisplayBaseUrl(envValue?: string, browserOrigin?: string)
  * DISPLAY ONLY — do NOT use this hook for OAuth `redirect_uri`.
  * OAuth callers must read `process.env.NEXT_PUBLIC_BASE_URL` directly to avoid
  * host-header attack surface. For server-side resolution, use
- * `src/shared/utils/resolveOmniRouteBaseUrl.ts` instead.
+ * `src/shared/utils/resolveNiyatnaRouteBaseUrl.ts` instead.
  */
 export function useDisplayBaseUrl(): string {
   const envValue = normalizeUrl(process.env.NEXT_PUBLIC_BASE_URL);

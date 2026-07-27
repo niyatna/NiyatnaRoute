@@ -56,13 +56,6 @@ test("findUnexpectedArtifactPaths flags app pack files outside the allowlist", (
   assert.deepEqual(unexpectedPaths, ["dist/scripts/build/prepublish.mjs", "docs/extra.md"]);
 });
 
-test("webdav-handler.mjs is allowed in staging dist/ (server-ws.mjs dependency, missed in 3.8.22 build)", () => {
-  const unexpectedPaths = findUnexpectedArtifactPaths(["webdav-handler.mjs"], {
-    exactPaths: APP_STAGING_ALLOWED_EXACT_PATHS,
-    prefixPaths: APP_STAGING_ALLOWED_PATH_PREFIXES,
-  });
-  assert.deepEqual(unexpectedPaths, []);
-});
 
 test("tls-options.mjs is allowed in staging dist/ (server-ws.mjs dependency, missed in 3.8.41 build — #5452)", () => {
   const unexpectedPaths = findUnexpectedArtifactPaths(["tls-options.mjs"], {
@@ -80,7 +73,7 @@ test("dist/tls-options.mjs is a required tarball path (regression guard for #545
   );
 });
 
-test("setupPolyfill.ts is allowed in the tarball (bin/omniroute.mjs imports it at startup)", () => {
+test("setupPolyfill.ts is allowed in the tarball (bin/niyatnaroute.mjs imports it at startup)", () => {
   const unexpectedPaths = findUnexpectedArtifactPaths(["open-sse/utils/setupPolyfill.ts"], {
     exactPaths: PACK_ARTIFACT_ALLOWED_EXACT_PATHS,
     prefixPaths: PACK_ARTIFACT_ALLOWED_PATH_PREFIXES,
@@ -93,7 +86,7 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
   const missingPaths = findMissingArtifactPaths(
     [
       "dist/server.js",
-      "bin/omniroute.mjs",
+      "bin/niyatnaroute.mjs",
       "package.json",
       "scripts/build/postinstall.mjs",
       "scripts/build/postinstallSupport.mjs",
@@ -103,7 +96,7 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
 
   // findMissingArtifactPaths returns the missing required paths sorted
   // alphabetically (bin/ < dist/ < scripts/ < src/), minus the paths present
-  // above (dist/server.js, bin/omniroute.mjs, package.json, the postinstall scripts).
+  // above (dist/server.js, bin/niyatnaroute.mjs, package.json, the postinstall scripts).
   assert.deepEqual(missingPaths, [
     "bin/aliasResolver.mjs",
     "bin/aliasResolverHook.mjs",
@@ -122,7 +115,6 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
     "dist/responses-ws-proxy.mjs",
     "dist/server-ws.mjs",
     "dist/tls-options.mjs",
-    "dist/webdav-handler.mjs",
     "scripts/build/colocateOptionals.mjs",
     "scripts/build/fixTlsClientNodeBinary.mjs",
     "scripts/build/native-binary-compat.mjs",

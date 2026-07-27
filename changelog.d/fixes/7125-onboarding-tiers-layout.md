@@ -1,1 +1,1 @@
-- **fix(dashboard):** align onboarding tier descriptions and localize the tier step header and flow copy ([#7125](https://github.com/diegosouzapw/OmniRoute/pull/7125)) — thanks @Wibias
+- **fix(dashboard):** align onboarding tier descriptions and localize the tier step header and flow copy ([#7125](https://github.com/niyatnaroute/NiyatnaRoute/pull/7125)) — thanks @Wibias

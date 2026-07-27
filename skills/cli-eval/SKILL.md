@@ -11,8 +11,8 @@ Create and run evaluation suites, watch live benchmark progress, view scorecards
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g niyatnaroute   # or: npx niyatnaroute
+niyatnaroute --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute eval
+niyatnaroute eval
 ```
 
 ### `eval suites`
@@ -30,7 +30,7 @@ omniroute eval
 **Example:**
 
 ```bash
-omniroute eval suites
+niyatnaroute eval suites
 ```
 
 ### `eval list`
@@ -38,7 +38,7 @@ omniroute eval suites
 **Example:**
 
 ```bash
-omniroute eval list
+niyatnaroute eval list
 ```
 
 ### `eval get <suiteId>`
@@ -46,7 +46,7 @@ omniroute eval list
 **Example:**
 
 ```bash
-omniroute eval get <suiteId>
+niyatnaroute eval get <suiteId>
 ```
 
 ### `eval create`
@@ -58,7 +58,7 @@ omniroute eval get <suiteId>
 **Example:**
 
 ```bash
-omniroute eval create
+niyatnaroute eval create
 ```
 
 ### `eval run <suiteId>`
@@ -74,7 +74,7 @@ omniroute eval create
 **Example:**
 
 ```bash
-omniroute eval run <suiteId>
+niyatnaroute eval run <suiteId>
 ```
 
 ### `eval list`
@@ -89,7 +89,7 @@ omniroute eval run <suiteId>
 **Example:**
 
 ```bash
-omniroute eval list
+niyatnaroute eval list
 ```
 
 ### `eval get <runId>`
@@ -97,7 +97,7 @@ omniroute eval list
 **Example:**
 
 ```bash
-omniroute eval get <runId>
+niyatnaroute eval get <runId>
 ```
 
 ### `eval results <runId>`
@@ -109,7 +109,7 @@ omniroute eval get <runId>
 **Example:**
 
 ```bash
-omniroute eval results <runId>
+niyatnaroute eval results <runId>
 ```
 
 ### `eval cancel <runId>`
@@ -121,7 +121,7 @@ omniroute eval results <runId>
 **Example:**
 
 ```bash
-omniroute eval cancel <runId>
+niyatnaroute eval cancel <runId>
 ```
 
 ### `eval scorecard <runId>`
@@ -129,7 +129,7 @@ omniroute eval cancel <runId>
 **Example:**
 
 ```bash
-omniroute eval scorecard <runId>
+niyatnaroute eval scorecard <runId>
 ```
 
 ### `simulate [prompt]`
@@ -146,33 +146,33 @@ omniroute eval scorecard <runId>
 **Example:**
 
 ```bash
-omniroute simulate [prompt]
+niyatnaroute simulate [prompt]
 ```
 
 <!-- skill:custom-start -->
-<!-- Migrated from skills/omniroute-cli-eval/SKILL.md (preserved curated content) -->
+<!-- Migrated from skills/niyatnaroute-cli-eval/SKILL.md (preserved curated content) -->
 
-# OmniRoute — CLI Evals
+# NiyatnaRoute — CLI Evals
 
-Requires the `omniroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli/SKILL.md) for install + global flags.
+Requires the `niyatnaroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/niyatnaroute/NiyatnaRoute/main/skills/niyatnaroute-cli/SKILL.md) for install + global flags.
 
 ## What are evals?
 
-Evals are automated test suites that score LLM outputs against expected answers or rubrics. OmniRoute stores suites and run results in its local database.
+Evals are automated test suites that score LLM outputs against expected answers or rubrics. NiyatnaRoute stores suites and run results in its local database.
 
 ## Eval suites
 
 ```bash
-omniroute eval suites list                       # List all eval suites
-omniroute eval suites list --json                # JSON output
+niyatnaroute eval suites list                       # List all eval suites
+niyatnaroute eval suites list --json                # JSON output
 
-omniroute eval suites get <suiteId>              # Full suite definition
+niyatnaroute eval suites get <suiteId>              # Full suite definition
 ```
 
 ### Create a suite
 
 ```bash
-omniroute eval suites create \
+niyatnaroute eval suites create \
   --name "code-quality" \
   --rubric "exact-match" \
   --samples-file ./samples.jsonl                 # JSONL: {input, expected_output}
@@ -190,10 +190,10 @@ Rubric options: `exact-match`, `contains`, `llm-judge`, `regex`.
 ## Run an eval
 
 ```bash
-omniroute eval suites run <suiteId> \
+niyatnaroute eval suites run <suiteId> \
   --model claude-sonnet-4-6                      # Run suite against a specific model
 
-omniroute eval suites run <suiteId> \
+niyatnaroute eval suites run <suiteId> \
   --model gpt-4o \
   --watch                                        # Live TUI progress (EvalWatch)
 ```
@@ -201,26 +201,26 @@ omniroute eval suites run <suiteId> \
 The run is asynchronous. Use `--watch` for a live terminal dashboard or poll manually:
 
 ```bash
-RUN_ID=$(omniroute eval suites run <suiteId> --model claude-sonnet-4-6 --output json | jq -r '.id')
-omniroute eval get $RUN_ID
+RUN_ID=$(niyatnaroute eval suites run <suiteId> --model claude-sonnet-4-6 --output json | jq -r '.id')
+niyatnaroute eval get $RUN_ID
 ```
 
 ## Manage runs
 
 ```bash
-omniroute eval list                              # List all eval runs
-omniroute eval list --json
+niyatnaroute eval list                              # List all eval runs
+niyatnaroute eval list --json
 
-omniroute eval get <runId>                       # Run details (status, model, score)
-omniroute eval results <runId>                   # Per-sample results
-omniroute eval scorecard <runId>                 # Full scorecard with pass/fail per sample
-omniroute eval cancel <runId>                    # Cancel a running eval
+niyatnaroute eval get <runId>                       # Run details (status, model, score)
+niyatnaroute eval results <runId>                   # Per-sample results
+niyatnaroute eval scorecard <runId>                 # Full scorecard with pass/fail per sample
+niyatnaroute eval cancel <runId>                    # Cancel a running eval
 ```
 
 ## Scorecard output
 
 ```bash
-omniroute eval scorecard <runId> --output json
+niyatnaroute eval scorecard <runId> --output json
 ```
 
 Response fields per sample:
@@ -242,7 +242,7 @@ Run the same suite against multiple models and compare:
 
 ```bash
 for MODEL in claude-sonnet-4-6 gpt-4o gemini-2.0-flash; do
-  omniroute eval suites run $SUITE_ID --model $MODEL --output json | jq '{model: .model, score: .score}'
+  niyatnaroute eval suites run $SUITE_ID --model $MODEL --output json | jq '{model: .model, score: .score}'
 done
 ```
 
@@ -250,14 +250,14 @@ done
 
 ```bash
 # Run and fail CI if score drops below threshold
-SCORE=$(omniroute eval suites run $SUITE_ID --model claude-sonnet-4-6 --output json | jq -r '.score')
+SCORE=$(niyatnaroute eval suites run $SUITE_ID --model claude-sonnet-4-6 --output json | jq -r '.score')
 python3 -c "import sys; score=float('$SCORE'); sys.exit(0 if score >= 0.90 else 1)"
 ```
 
 ## Errors
 
 - `suites create` fails with `invalid rubric` → use one of: `exact-match`, `contains`, `llm-judge`, `regex`
-- `suites run` returns `model not found` → verify model ID with `omniroute models --search <name>`
-- `eval get` shows `status: failed` → check `omniroute logs --search eval` for error details
-- `scorecard` returns empty results → the run may still be `running`; poll `omniroute eval get <runId>` until `status` is `completed`
+- `suites run` returns `model not found` → verify model ID with `niyatnaroute models --search <name>`
+- `eval get` shows `status: failed` → check `niyatnaroute logs --search eval` for error details
+- `scorecard` returns empty results → the run may still be `running`; poll `niyatnaroute eval get <runId>` until `status` is `completed`
 <!-- skill:custom-end -->

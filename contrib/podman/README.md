@@ -1,6 +1,6 @@
 # Podman Deployment
 
-Run OmniRoute with Podman via **Quadlet** (systemd integration) or **podman compose**.
+Run NiyatnaRoute with Podman via **Quadlet** (systemd integration) or **podman compose**.
 
 ---
 
@@ -9,31 +9,31 @@ Run OmniRoute with Podman via **Quadlet** (systemd integration) or **podman comp
 ### 1. Build the image
 
 ```bash
-cd /path/to/omniroute
-podman build --target runner-base -t omniroute:base .
+cd /path/to/niyatnaroute
+podman build --target runner-base -t niyatnaroute:base .
 # For web-cookie providers (gemini-web, claude-web, claude-turnstile):
-podman build --target runner-web -t omniroute:web .
+podman build --target runner-web -t niyatnaroute:web .
 # For CLI tool support:
-podman build --target runner-cli -t omniroute:cli .
+podman build --target runner-cli -t niyatnaroute:cli .
 ```
 
 ### 2. Copy Quadlet files to the systemd directory
 
 ```bash
-mkdir -p ~/.config/containers/systemd/omniroute
-cp contrib/podman/*.container ~/.config/containers/systemd/omniroute/
-cp contrib/podman/*.network ~/.config/containers/systemd/omniroute/
-cp contrib/podman/*.volume ~/.config/containers/systemd/omniroute/
+mkdir -p ~/.config/containers/systemd/niyatnaroute
+cp contrib/podman/*.container ~/.config/containers/systemd/niyatnaroute/
+cp contrib/podman/*.network ~/.config/containers/systemd/niyatnaroute/
+cp contrib/podman/*.volume ~/.config/containers/systemd/niyatnaroute/
 ```
 
 ### 3. Mount the project .env for secrets
 
-Edit `~/.config/containers/systemd/omniroute/omniroute.container` and
+Edit `~/.config/containers/systemd/niyatnaroute/niyatnaroute.container` and
 uncomment/replace the `EnvironmentFile` line with the absolute path to
 your project `.env`:
 
 ```
-EnvironmentFile=/home/USER/code/docker/OmniRoute/.env
+EnvironmentFile=/home/USER/code/docker/NiyatnaRoute/.env
 ```
 
 Make sure `CONTAINER_HOST=podman` is set in that `.env`.
@@ -44,28 +44,28 @@ Alternatively, edit the env vars directly in the `.container` file.
 
 ```bash
 systemctl --user daemon-reload
-systemctl --user start omniroute-redis
-systemctl --user start omniroute
+systemctl --user start niyatnaroute-redis
+systemctl --user start niyatnaroute
 ```
 
 ### 5. Verify
 
 ```bash
-systemctl --user status omniroute
+systemctl --user status niyatnaroute
 curl http://localhost:20128/v1/models
 ```
 
 To follow logs:
 
 ```bash
-journalctl --user -u omniroute -f
+journalctl --user -u niyatnaroute -f
 ```
 
 ### 6. Enable on boot
 
 ```bash
-systemctl --user enable omniroute-redis
-systemctl --user enable omniroute
+systemctl --user enable niyatnaroute-redis
+systemctl --user enable niyatnaroute
 ```
 
 ---

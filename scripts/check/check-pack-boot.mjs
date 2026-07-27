@@ -60,7 +60,7 @@ async function main() {
     process.exit(2);
   }
   const expectedVersion = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-pack-boot-"));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "niyatnaroute-pack-boot-"));
   let child = null;
   let exitCode = 1;
   try {
@@ -81,7 +81,7 @@ async function main() {
     const port = pickPort();
     const dataDir = path.join(tmp, "data");
     fs.mkdirSync(dataDir, { recursive: true });
-    const binPath = path.join(prefix, "bin", "omniroute");
+    const binPath = path.join(prefix, "bin", "niyatnaroute");
     log(`booting installed CLI on :${port} (DATA_DIR isolated)…`);
     child = spawn(binPath, ["serve", "--port", String(port)], {
       env: {
@@ -91,7 +91,7 @@ async function main() {
         JWT_SECRET: "pack-boot-smoke-secret-with-sufficient-length-000",
         API_KEY_SECRET: "pack-boot-smoke-api-key-secret-long",
         DISABLE_SQLITE_AUTO_BACKUP: "true",
-        OMNIROUTE_SKIP_SYSTEM_TRUST: "1",
+        NIYATNAROUTE_SKIP_SYSTEM_TRUST: "1",
       },
       stdio: ["ignore", "pipe", "pipe"],
       detached: true,

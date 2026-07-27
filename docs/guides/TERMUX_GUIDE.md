@@ -6,7 +6,7 @@ lastUpdated: 2026-06-28
 
 # Termux Headless Setup
 
-OmniRoute can run as a headless server on Android through Termux. The Electron desktop app is not supported in Termux, but the web dashboard and OpenAI-compatible API work from the local browser or from other devices on the same network.
+NiyatnaRoute can run as a headless server on Android through Termux. The web dashboard and OpenAI-compatible API work from the local browser or from other devices on the same network.
 
 ## Prerequisites
 
@@ -18,37 +18,37 @@ pkg upgrade
 pkg install nodejs python build-essential git
 ```
 
-> **Node.js version:** OmniRoute requires Node `>=22.22.2 <23 || >=24.0.0 <27` (matches `engines` in `package.json` / `SUPPORTED_NODE_RANGE`). Termux's `nodejs-lts` typically ships Node 20 LTS, which is **no longer supported** — install `pkg install nodejs` (current) instead and verify `node --version` reports a 22.x/24.x+ line.
+> **Node.js version:** NiyatnaRoute requires Node `>=22.22.2 <23 || >=24.0.0 <27` (matches `engines` in `package.json` / `SUPPORTED_NODE_RANGE`). Termux's `nodejs-lts` typically ships Node 20 LTS, which is **no longer supported** — install `pkg install nodejs` (current) instead and verify `node --version` reports a 22.x/24.x+ line.
 
-If native package compilation fails, rerun the `pkg install` command above and then retry the OmniRoute install.
+If native package compilation fails, rerun the `pkg install` command above and then retry the NiyatnaRoute install.
 
 ## Install
 
 Run the latest published package directly:
 
 ```bash
-npx -y omniroute@latest
+npx -y niyatnaroute@latest
 ```
 
 You can also install it globally:
 
 ```bash
-npm install -g omniroute
-omniroute
+npm install -g niyatnaroute
+niyatnaroute
 ```
 
 ## Run
 
-Start OmniRoute in headless server mode:
+Start NiyatnaRoute in headless server mode:
 
 ```bash
-omniroute
+niyatnaroute
 ```
 
 or:
 
 ```bash
-npx omniroute
+npx niyatnaroute
 ```
 
 The dashboard listens on:
@@ -64,25 +64,25 @@ Open that URL in the Android browser. If you run clients inside Termux, use the 
 For a simple background process:
 
 ```bash
-nohup omniroute > omniroute.log 2>&1 &
+nohup niyatnaroute > niyatnaroute.log 2>&1 &
 ```
 
 To stop it:
 
 ```bash
-pkill -f omniroute
+pkill -f niyatnaroute
 ```
 
 For automatic startup after device boot, install the Termux:Boot add-on and create a boot script:
 
 ```bash
 mkdir -p ~/.termux/boot
-cat > ~/.termux/boot/omniroute.sh <<'EOF'
+cat > ~/.termux/boot/niyatnaroute.sh <<'EOF'
 #!/data/data/com.termux/files/usr/bin/sh
 cd "$HOME"
-nohup omniroute > "$HOME/omniroute.log" 2>&1 &
+nohup niyatnaroute > "$HOME/niyatnaroute.log" 2>&1 &
 EOF
-chmod +x ~/.termux/boot/omniroute.sh
+chmod +x ~/.termux/boot/niyatnaroute.sh
 ```
 
 Android battery optimization can stop long-running background processes. Disable battery optimization for Termux if the server is expected to stay online.
@@ -107,21 +107,20 @@ For example:
 http://192.168.1.50:20128
 ```
 
-Keep the phone and client on the same trusted network. If you expose OmniRoute outside the phone, enable API keys and dashboard authentication.
+Keep the phone and client on the same trusted network. If you expose NiyatnaRoute outside the phone, enable API keys and dashboard authentication.
 
 ## Data Directory
 
-By default OmniRoute stores data under the Termux home directory, following the same server-side data path behavior used on Linux. To place the database somewhere explicit:
+By default NiyatnaRoute stores data under the Termux home directory, following the same server-side data path behavior used on Linux. To place the database somewhere explicit:
 
 ```bash
-export DATA_DIR="$HOME/.omniroute"
-omniroute
+export DATA_DIR="$HOME/.niyatnaroute"
+niyatnaroute
 ```
 
 ## Limitations
 
-- Electron does not run in Termux.
-- There is no system tray or desktop integration.
+- There is no desktop integration.
 - This setup is server-only: use the browser dashboard.
 - Native dependencies may need local compilation.
 - Low-memory Android devices may need fewer concurrent requests.
@@ -140,7 +139,7 @@ pkg install nodejs python build-essential
 Then rerun:
 
 ```bash
-npx -y omniroute@latest
+npx -y niyatnaroute@latest
 ```
 
 ### Port Already In Use
@@ -154,7 +153,7 @@ ss -ltnp | grep 20128
 Stop the old process:
 
 ```bash
-pkill -f omniroute
+pkill -f niyatnaroute
 ```
 
 ### Dashboard Not Reachable From Another Device

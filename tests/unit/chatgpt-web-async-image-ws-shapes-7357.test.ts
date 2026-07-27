@@ -107,8 +107,8 @@ class FakeWebSocket extends EventEmitter {
 test("#7357: async image_gen pointer delivered via update_content.messages[] should resolve to markdown (currently lost → 502)", async () => {
   __resetChatGptWebCachesForTesting();
   const previousWebSocket = (globalThis as Record<string, unknown>).WebSocket;
-  const previousTimeout = process.env.OMNIROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS;
-  process.env.OMNIROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS = "300"; // keep the probe fast
+  const previousTimeout = process.env.NIYATNAROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS;
+  process.env.NIYATNAROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS = "300"; // keep the probe fast
   (globalThis as Record<string, unknown>).WebSocket = FakeWebSocket;
 
   __setTlsFetchOverrideForTesting(async (url, opts = {}) => {
@@ -201,7 +201,7 @@ test("#7357: async image_gen pointer delivered via update_content.messages[] sho
 
     // Expected/correct behavior: the celsius WebSocket delivered a complete,
     // well-formed tool-role image_asset_pointer message via chatgpt.com's
-    // update_content.messages[] (plural) shape. OmniRoute should extract it,
+    // update_content.messages[] (plural) shape. NiyatnaRoute should extract it,
     // resolve it, and append image markdown — just like the already-covered
     // update_content.message (singular) case in tests/unit/chatgpt-web.test.ts.
     assert.match(
@@ -221,7 +221,7 @@ test("#7357: async image_gen pointer delivered via update_content.messages[] sho
     __setTlsFetchOverrideForTesting(null);
     if (previousWebSocket === undefined) delete (globalThis as Record<string, unknown>).WebSocket;
     else (globalThis as Record<string, unknown>).WebSocket = previousWebSocket;
-    if (previousTimeout === undefined) delete process.env.OMNIROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS;
-    else process.env.OMNIROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS = previousTimeout;
+    if (previousTimeout === undefined) delete process.env.NIYATNAROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS;
+    else process.env.NIYATNAROUTE_CGPT_WEB_IMAGE_TIMEOUT_MS = previousTimeout;
   }
 });

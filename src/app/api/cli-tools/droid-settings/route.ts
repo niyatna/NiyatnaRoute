@@ -17,7 +17,7 @@ import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { readJsoncConfig } from "../_lib/jsoncConfig";
 import {
   buildDroidCustomModels,
-  isOmniRouteCustomModel,
+  isNiyatnaRouteCustomModel,
   normalizeDroidModelList,
 } from "@/shared/services/droidCustomModels";
 
@@ -30,12 +30,12 @@ const getDroidDir = () => path.dirname(getDroidSettingsPath());
 // "installed but not configured" instead of a 500 misread as "not installed".
 const readSettings = async () => readJsoncConfig(getDroidSettingsPath());
 
-// Check if settings has OmniRoute customModels.
-// Multi-model entries are stored as `custom:OmniRoute-0`, `custom:OmniRoute-1`, …
+// Check if settings has NiyatnaRoute customModels.
+// Multi-model entries are stored as `custom:NiyatnaRoute-0`, `custom:NiyatnaRoute-1`, …
 // (Ported from upstream PR decolua/9router#618.)
-const hasOmniRouteConfig = (settings: any) => {
+const hasNiyatnaRouteConfig = (settings: any) => {
   if (!settings || !settings.customModels) return false;
-  return settings.customModels.some(isOmniRouteCustomModel);
+  return settings.customModels.some(isNiyatnaRouteCustomModel);
 };
 
 // GET - Check droid CLI and read current settings
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings,
-      hasOmniRoute: hasOmniRouteConfig(settings),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(settings),
       settingsPath: getDroidSettingsPath(),
     });
   } catch (error) {
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Update OmniRoute customModels (merge with existing settings)
+// POST - Update NiyatnaRoute customModels (merge with existing settings)
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -157,13 +157,13 @@ export async function POST(request: Request) {
       settings.customModels = [];
     }
 
-    // Remove every existing OmniRoute config (multi-model: index 0..N)
-    settings.customModels = settings.customModels.filter((m) => !isOmniRouteCustomModel(m));
+    // Remove every existing NiyatnaRoute config (multi-model: index 0..N)
+    settings.customModels = settings.customModels.filter((m) => !isNiyatnaRouteCustomModel(m));
 
     // Normalize baseUrl to ensure /v1 suffix
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
 
-    // Build and prepend OmniRoute entries (one per requested model)
+    // Build and prepend NiyatnaRoute entries (one per requested model)
     const newEntries = buildDroidCustomModels(modelList, {
       baseUrl: normalizedBaseUrl,
       apiKey: apiKey || "your_api_key",
@@ -192,7 +192,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE - Remove OmniRoute customModels only (keep other settings)
+// DELETE - Remove NiyatnaRoute customModels only (keep other settings)
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -223,9 +223,9 @@ export async function DELETE(request: Request) {
       throw error;
     }
 
-    // Remove OmniRoute customModels (every index, multi-model)
+    // Remove NiyatnaRoute customModels (every index, multi-model)
     if (settings.customModels) {
-      settings.customModels = settings.customModels.filter((m) => !isOmniRouteCustomModel(m));
+      settings.customModels = settings.customModels.filter((m) => !isNiyatnaRouteCustomModel(m));
 
       // Remove customModels array if empty
       if (settings.customModels.length === 0) {
@@ -245,7 +245,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "OmniRoute settings removed successfully",
+      message: "NiyatnaRoute settings removed successfully",
     });
   } catch (error) {
     console.log("Error resetting droid settings:", error);

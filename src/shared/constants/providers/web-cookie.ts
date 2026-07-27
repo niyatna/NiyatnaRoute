@@ -210,7 +210,7 @@ export const WEB_COOKIE_PROVIDERS = {
     freeNote:
       "Free model comparison platform (formerly LMArena) at arena.ai — Direct-chat catalog of chat models (GPT, Claude, Gemini, Llama, …). No subscription required.",
     authHint:
-      "Paste the full Cookie header from arena.ai (DevTools → Network → request → Cookie). Include arena-auth-prod-v1.0/.1… and cf_clearance/__cf_bm when present. OmniRoute uses Chrome TLS impersonation; if Arena still 403s, set providerSpecificData.recaptchaV3Token from a live browser session.",
+      "Paste the full Cookie header from arena.ai (DevTools → Network → request → Cookie). Include arena-auth-prod-v1.0/.1… and cf_clearance/__cf_bm when present. NiyatnaRoute uses Chrome TLS impersonation; if Arena still 403s, set providerSpecificData.recaptchaV3Token from a live browser session.",
     riskNoticeVariant: "webCookie",
   },
   "yuanbao-web": {
@@ -296,7 +296,7 @@ export const WEB_COOKIE_PROVIDERS = {
     // so the "Open {host}" credential guide in WebSessionCredentialGuide.tsx /
     // AddApiKeyModal.tsx is unaffected: origin, not path, decides localStorage
     // access). Was `https://www.kimi.com` (no aff attribution).
-    website: "https://www.kimi.com/code?aff=omniroute",
+    website: "https://www.kimi.com/code?aff=niyatnaroute",
     authHint:
       "Paste access_token from www.kimi.com DevTools → Application → Local Storage. A legacy kimi-auth cookie is also accepted.",
     subscriptionRisk: true,

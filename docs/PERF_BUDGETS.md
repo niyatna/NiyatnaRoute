@@ -1,4 +1,4 @@
-# Performance Budgets — OmniRoute (2026-06-18)
+# Performance Budgets — NiyatnaRoute (2026-06-18)
 
 **Status**: Authoritative. SLO targets that the 71-pillar audit (L13)
 references for the `Perf > 2.00` gate.

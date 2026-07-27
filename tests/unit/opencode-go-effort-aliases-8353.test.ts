@@ -1,7 +1,7 @@
 /**
  * Issue #8353 — Missing OpenCode Go reasoning variants.
  *
- * OpenCode's local Go registry exposes effort-tier aliases that OmniRoute did
+ * OpenCode's local Go registry exposes effort-tier aliases that NiyatnaRoute did
  * not register or resolve. These tests cover:
  *  1. Catalog exposure on opencode-go (and absence on opencode-zen)
  *  2. parseEffortLevel → base + effort for every listed alias

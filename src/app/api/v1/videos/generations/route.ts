@@ -1,13 +1,13 @@
-import { handleVideoGeneration } from "@omniroute/open-sse/handlers/videoGeneration.ts";
-import { resolveVideoCredentialProvider } from "@omniroute/open-sse/handlers/videoGeneration/googleFlow.ts";
+import { handleVideoGeneration } from "@niyatnaroute/open-sse/handlers/videoGeneration.ts";
+import { resolveVideoCredentialProvider } from "@niyatnaroute/open-sse/handlers/videoGeneration/googleFlow.ts";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
 import {
   getProviderCredentialsWithQuotaPreflight,
   clearRecoveredProviderState,
 } from "@/sse/services/auth";
-import { parseVideoModel, getVideoProvider } from "@omniroute/open-sse/config/videoRegistry.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { parseVideoModel, getVideoProvider } from "@niyatnaroute/open-sse/config/videoRegistry.ts";
+import { errorResponse } from "@niyatnaroute/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatnaroute/open-sse/config/constants.ts";
 import * as log from "@/sse/utils/logger";
 import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import {

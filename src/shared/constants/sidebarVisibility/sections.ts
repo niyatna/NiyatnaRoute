@@ -41,27 +41,11 @@ const OMNI_PROXY_ITEMS: readonly SidebarItemDefinition[] = [
     icon: "dns",
   },
   {
-    id: "embedded-services",
-    href: "/dashboard/providers/services",
-    i18nKey: "embeddedServices",
-    subtitleKey: "embeddedServicesSubtitle",
-    icon: "deployed_code",
-  },
-  {
     id: "combos",
     href: "/dashboard/combos",
     i18nKey: "combos",
     subtitleKey: "combosSubtitle",
     icon: "layers",
-  },
-  {
-    id: "combos-live",
-    href: "/dashboard/combos/live",
-    i18nKey: "combosLive",
-    labelFallback: "Combo Studio",
-    subtitleKey: "combosLiveSubtitle",
-    subtitleFallback: "Live routing cascade",
-    icon: "account_tree",
   },
   {
     id: "quota",
@@ -70,13 +54,6 @@ const OMNI_PROXY_ITEMS: readonly SidebarItemDefinition[] = [
     subtitleKey: "providerQuotaSubtitle",
     icon: "tune",
   },
-  {
-    id: "costs-quota-share",
-    href: "/dashboard/costs/quota-share",
-    i18nKey: "costsQuotaShare",
-    subtitleKey: "costsQuotaShareSubtitle",
-    icon: "pie_chart",
-  },
 ];
 
 export const COMPRESSION_CONTEXT_GROUP: SidebarItemGroup = {
@@ -84,7 +61,6 @@ export const COMPRESSION_CONTEXT_GROUP: SidebarItemGroup = {
   id: "compression-context",
   titleKey: "compressionContextGroup",
   titleFallback: "Compression Context",
-  // Order: Settings (the unified panel) → Combos → per-engine pages → Studio (analytics).
   items: [
     {
       id: "context-settings",
@@ -125,87 +101,6 @@ export const COMPRESSION_CONTEXT_GROUP: SidebarItemGroup = {
       subtitleFallback: "Tabular compaction",
       icon: "table_rows",
     },
-    {
-      id: "context-session-dedup",
-      href: "/dashboard/context/session-dedup",
-      i18nKey: "contextSessionDedup",
-      labelFallback: "Session Dedup",
-      subtitleKey: "contextSessionDedupSubtitle",
-      subtitleFallback: "Cross-turn dedup",
-      icon: "content_copy",
-    },
-    {
-      id: "context-ccr",
-      href: "/dashboard/context/ccr",
-      i18nKey: "contextCcr",
-      labelFallback: "CCR",
-      subtitleKey: "contextCcrSubtitle",
-      subtitleFallback: "Retrieve markers",
-      icon: "archive",
-    },
-    {
-      id: "context-llmlingua",
-      href: "/dashboard/context/llmlingua",
-      i18nKey: "contextLlmlingua",
-      labelFallback: "LLMLingua",
-      subtitleKey: "contextLlmlinguaSubtitle",
-      subtitleFallback: "Semantic pruning",
-      icon: "psychology",
-    },
-    {
-      id: "context-lite",
-      href: "/dashboard/context/lite",
-      i18nKey: "contextLite",
-      labelFallback: "Lite",
-      subtitleKey: "contextLiteSubtitle",
-      subtitleFallback: "Fast whitespace cleanup",
-      icon: "compress",
-    },
-    {
-      id: "context-aggressive",
-      href: "/dashboard/context/aggressive",
-      i18nKey: "contextAggressive",
-      labelFallback: "Aggressive",
-      subtitleKey: "contextAggressiveSubtitle",
-      subtitleFallback: "Summary + aging",
-      icon: "speed",
-    },
-    {
-      id: "context-ultra",
-      href: "/dashboard/context/ultra",
-      i18nKey: "contextUltra",
-      labelFallback: "Ultra",
-      subtitleKey: "contextUltraSubtitle",
-      subtitleFallback: "Heuristic pruning",
-      icon: "bolt",
-    },
-    {
-      id: "context-omniglyph",
-      href: "/dashboard/context/omniglyph",
-      i18nKey: "contextOmniglyph",
-      labelFallback: "OmniGlyph",
-      subtitleKey: "contextOmniglyphSubtitle",
-      subtitleFallback: "Context-as-image",
-      icon: "grain",
-    },
-    {
-      id: "compression-studio",
-      href: "/dashboard/compression/studio",
-      i18nKey: "compressionStudio",
-      labelFallback: "Compression Studio",
-      subtitleKey: "compressionStudioSubtitle",
-      subtitleFallback: "Live engine cascade",
-      icon: "monitoring",
-    },
-    {
-      id: "compression-exclusions",
-      href: "/dashboard/compression/exclusions",
-      i18nKey: "compressionExclusions",
-      labelFallback: "Exclusions",
-      subtitleKey: "compressionExclusionsSubtitle",
-      subtitleFallback: "Per-model/endpoint bypass",
-      icon: "block",
-    },
   ],
 };
 
@@ -228,41 +123,6 @@ const TOOLS_GROUP: SidebarItemGroup = {
       i18nKey: "cliAgents",
       subtitleKey: "cliAgentsSubtitle",
       icon: "smart_toy",
-    },
-    {
-      id: "acp-agents",
-      href: "/dashboard/acp-agents",
-      i18nKey: "acpAgents",
-      subtitleKey: "acpAgentsSubtitle",
-      icon: "device_hub",
-    },
-    {
-      id: "cloud-agents",
-      href: "/dashboard/cloud-agents",
-      i18nKey: "cloudAgents",
-      subtitleKey: "cloudAgentsSubtitle",
-      icon: "cloud",
-    },
-    {
-      id: "agent-bridge",
-      href: "/dashboard/tools/agent-bridge",
-      i18nKey: "agentBridge",
-      subtitleKey: "agentBridgeSubtitle",
-      icon: "link",
-    },
-    {
-      id: "traffic-inspector",
-      href: "/dashboard/tools/traffic-inspector",
-      i18nKey: "trafficInspector",
-      subtitleKey: "trafficInspectorSubtitle",
-      icon: "network_check",
-    },
-    {
-      id: "discovery",
-      href: "/dashboard/discovery",
-      i18nKey: "discovery",
-      subtitleKey: "discoverySubtitle",
-      icon: "travel_explore",
     },
   ],
 };
@@ -340,13 +200,6 @@ const ANALYTICS_ITEMS: readonly SidebarItemDefinition[] = [
     i18nKey: "analyticsSearch",
     subtitleKey: "analyticsSearchSubtitle",
     icon: "manage_search",
-  },
-  {
-    id: "analytics-evals",
-    href: "/dashboard/analytics/evals",
-    i18nKey: "analyticsEvals",
-    subtitleKey: "analyticsEvalsSubtitle",
-    icon: "labs",
   },
   {
     id: "provider-stats",
@@ -449,13 +302,6 @@ const COSTS_ITEMS: readonly SidebarItemDefinition[] = [
     subtitleKey: "costsFreeTiersSubtitle",
     icon: "request_quote",
   },
-  {
-    id: "free-provider-rankings",
-    href: "/dashboard/free-provider-rankings",
-    i18nKey: "freeProviderRankings",
-    subtitleKey: "freeProviderRankingsSubtitle",
-    icon: "leaderboard",
-  },
 ];
 
 const AUDIT_GROUP: SidebarItemGroup = {
@@ -470,20 +316,6 @@ const AUDIT_GROUP: SidebarItemGroup = {
       i18nKey: "auditLog",
       subtitleKey: "auditLogSubtitle",
       icon: "policy",
-    },
-    {
-      id: "audit-mcp",
-      href: "/dashboard/audit/mcp",
-      i18nKey: "auditMcp",
-      subtitleKey: "auditMcpSubtitle",
-      icon: "security",
-    },
-    {
-      id: "audit-a2a",
-      href: "/dashboard/audit/a2a",
-      i18nKey: "auditA2a",
-      subtitleKey: "auditA2aSubtitle",
-      icon: "device_hub",
     },
   ],
 };
@@ -511,125 +343,6 @@ const DEVTOOLS_ITEMS: readonly SidebarItemDefinition[] = [
     icon: "manage_search",
   },
 ];
-
-const MCP_ITEM: SidebarItemDefinition = {
-  id: "mcp",
-  href: "/dashboard/mcp",
-  i18nKey: "mcp",
-  subtitleKey: "mcpSubtitle",
-  icon: "hub",
-};
-
-const AGENTIC_FEATURES_ITEMS: readonly SidebarSectionChild[] = [
-  {
-    id: "memory",
-    href: "/dashboard/memory",
-    i18nKey: "memory",
-    subtitleKey: "memorySubtitle",
-    icon: "psychology",
-  },
-  {
-    id: "agent-skills",
-    href: "/dashboard/agent-skills",
-    i18nKey: "agentSkills",
-    subtitleKey: "agentSkillsSubtitle",
-    icon: "share",
-  },
-  {
-    id: "chaos-config",
-    href: "/dashboard/chaos",
-    i18nKey: "chaosConfig",
-    labelFallback: "Chaos Mode",
-    subtitleKey: "chaosConfigSubtitle",
-    subtitleFallback: "Multi-model parallel execution",
-    icon: "blender",
-  },
-  {
-    id: "skills",
-    href: "/dashboard/omni-skills",
-    i18nKey: "omniSkills",
-    subtitleKey: "omniSkillsSubtitle",
-    icon: "auto_fix_high",
-  },
-  MCP_ITEM,
-  {
-    id: "a2a",
-    href: "/dashboard/a2a",
-    i18nKey: "a2a",
-    subtitleKey: "a2aSubtitle",
-    icon: "device_hub",
-  },
-  {
-    id: "plugins",
-    href: "/dashboard/plugins",
-    i18nKey: "plugins",
-    subtitleKey: "pluginsSubtitle",
-    icon: "extension",
-  },
-];
-
-const GAMIFICATION_GROUP: SidebarItemGroup = {
-  type: "group",
-  id: "gamification",
-  titleKey: "gamificationGroup",
-  titleFallback: "Gamification",
-  items: [
-    {
-      id: "leaderboard",
-      href: "/dashboard/leaderboard",
-      i18nKey: "leaderboard",
-      subtitleKey: "leaderboardSubtitle",
-      icon: "emoji_events",
-    },
-    {
-      id: "profile",
-      href: "/dashboard/profile",
-      i18nKey: "profile",
-      subtitleKey: "profileSubtitle",
-      icon: "person",
-    },
-    {
-      id: "tokens",
-      href: "/dashboard/tokens",
-      i18nKey: "tokens",
-      subtitleKey: "tokensSubtitle",
-      icon: "toll",
-    },
-  ],
-};
-
-const OTHER_FEATURES_ITEMS: readonly SidebarItemDefinition[] = [
-  {
-    id: "media",
-    href: "/dashboard/cache/media",
-    i18nKey: "media",
-    subtitleKey: "mediaSubtitle",
-    icon: "perm_media",
-  },
-];
-
-const BATCH_GROUP: SidebarItemGroup = {
-  type: "group",
-  id: "batch",
-  titleKey: "batchGroup",
-  titleFallback: "Batch",
-  items: [
-    {
-      id: "batch",
-      href: "/dashboard/batch",
-      i18nKey: "batch",
-      subtitleKey: "batchSubtitle",
-      icon: "view_list",
-    },
-    {
-      id: "batch-files",
-      href: "/dashboard/batch/files",
-      i18nKey: "batchFiles",
-      subtitleKey: "batchFilesSubtitle",
-      icon: "folder",
-    },
-  ],
-};
 
 const CONFIGURATION_ITEMS: readonly SidebarItemDefinition[] = [
   {
@@ -723,7 +436,7 @@ const HELP_ITEMS: readonly SidebarItemDefinition[] = [
   },
   {
     id: "issues",
-    href: "https://github.com/diegosouzapw/OmniRoute/issues",
+    href: "https://github.com/niyatnaroute/NiyatnaRoute/issues",
     i18nKey: "issues",
     subtitleKey: "issuesSubtitle",
     icon: "bug_report",
@@ -750,8 +463,8 @@ export const SIDEBAR_SECTIONS: readonly SidebarSectionDefinition[] = [
   },
   {
     id: "omni-proxy",
-    titleKey: "omniProxySection",
-    titleFallback: "OmniProxy",
+    titleKey: "niyatnaProxySection",
+    titleFallback: "Niyatna Proxy",
     children: [
       ...OMNI_PROXY_ITEMS,
       COMPRESSION_CONTEXT_GROUP,
@@ -786,18 +499,6 @@ export const SIDEBAR_SECTIONS: readonly SidebarSectionDefinition[] = [
     visibility: "debug",
   },
   {
-    id: "agentic-features",
-    titleKey: "agenticFeaturesSection",
-    titleFallback: "Agentic Features",
-    children: AGENTIC_FEATURES_ITEMS,
-  },
-  {
-    id: "other-features",
-    titleKey: "otherFeaturesSection",
-    titleFallback: "Other Features",
-    children: [GAMIFICATION_GROUP, ...OTHER_FEATURES_ITEMS, BATCH_GROUP],
-  },
-  {
     id: "configuration",
     titleKey: "configurationSection",
     titleFallback: "Configuration",
@@ -810,3 +511,4 @@ export const SIDEBAR_SECTIONS: readonly SidebarSectionDefinition[] = [
     children: HELP_ITEMS,
   },
 ] as const;
+

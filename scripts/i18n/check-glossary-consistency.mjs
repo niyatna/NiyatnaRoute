@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * OmniRoute — zh-CN terminology glossary consistency gate.
+ * NiyatnaRoute — zh-CN terminology glossary consistency gate.
  *
  * Complements the existing parity (check-ui-keys-coverage.mjs) and ICU
  * (validate_translation.py) checks with a native-quality layer:

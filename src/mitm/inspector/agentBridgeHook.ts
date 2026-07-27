@@ -8,13 +8,13 @@
 
 import { randomUUID } from "node:crypto";
 import type { IncomingMessage } from "node:http";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatnaroute/open-sse/utils/error";
 import { maskSecret } from "../maskSecrets.ts";
 import { sanitizeHeaders } from "../sanitizeHeaders.ts";
 import type { AgentId } from "../types.ts";
 import { globalTrafficBuffer } from "./buffer.ts";
 import type { InterceptedRequest } from "./types.ts";
-import { isCustomHost } from "@/lib/db/inspectorCustomHosts";
+const isCustomHost = (_host: string) => false;
 
 export interface RecordRequestStartOpts {
   req: IncomingMessage;

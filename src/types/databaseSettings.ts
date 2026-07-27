@@ -44,13 +44,10 @@ export interface DatabaseSettings {
     quotaSnapshots: number;
     compressionAnalytics: number;
     mcpAudit: number;
-    a2aEvents: number;
     callLogs: number;
     usageHistory: number;
-    memoryEntries: number;
     domainCostHistory: number;
     compressionCacheStats: number;
-    xpAuditLog: number;
     compressionRunTelemetry: number;
     autoCleanupEnabled: boolean;
   };
@@ -109,13 +106,10 @@ export const DEFAULT_DATABASE_SETTINGS: Omit<DatabaseSettings, "location" | "sta
     quotaSnapshots: 7,
     compressionAnalytics: 30,
     mcpAudit: 30,
-    a2aEvents: 30,
     callLogs: 30,
     usageHistory: 30,
-    memoryEntries: 30,
     domainCostHistory: 30,
     compressionCacheStats: 30,
-    xpAuditLog: 30,
     compressionRunTelemetry: 30,
     autoCleanupEnabled: true,
   },

@@ -9,14 +9,6 @@
  */
 
 import { MCP_TOOLS } from "../schemas/tools.ts";
-import { memoryTools } from "../tools/memoryTools.ts";
-import { skillTools } from "../tools/skillTools.ts";
-import { agentSkillTools } from "../tools/agentSkillTools.ts";
-import { poolTools } from "../tools/poolTools.ts";
-import { gamificationTools } from "../tools/gamificationTools.ts";
-import { pluginTools } from "../tools/pluginTools.ts";
-import { notionTools } from "../tools/notionTools.ts";
-import { obsidianTools } from "../tools/obsidianTools.ts";
 import { compressionTools } from "../tools/compressionTools.ts";
 
 import type { ToolCatalogEntry } from "./search.ts";
@@ -68,16 +60,6 @@ function collectAny(collection: unknown): ToolCatalogEntry[] {
 export function getAllToolDefinitions(): ToolCatalogEntry[] {
   const collections: unknown[] = [
     MCP_TOOLS,
-    memoryTools,
-    skillTools,
-    agentSkillTools,
-    poolTools,
-    gamificationTools,
-    pluginTools,
-    notionTools,
-    obsidianTools,
-    // Keep the concrete handler collection in the catalog as a parity guard. Canonical CCR
-    // definitions now live in MCP_TOOLS too; deduplication below keeps each name visible once.
     compressionTools,
   ];
 

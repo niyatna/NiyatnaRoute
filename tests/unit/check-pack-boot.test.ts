@@ -16,7 +16,7 @@ const SCRIPT_PATH = path.join(
 );
 
 test("pickTarball extracts the filename from npm pack --json output", () => {
-  assert.equal(pickTarball('[{"filename":"omniroute-3.8.49.tgz","size":1}]'), "omniroute-3.8.49.tgz");
+  assert.equal(pickTarball('[{"filename":"niyatnaroute-3.8.49.tgz","size":1}]'), "niyatnaroute-3.8.49.tgz");
 });
 
 test("pickTarball normalizes scoped slashes to the on-disk dash form", () => {

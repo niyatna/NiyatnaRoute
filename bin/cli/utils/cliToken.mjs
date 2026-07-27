@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 
-const SALT = "omniroute-cli-auth-v1";
-export const CLI_TOKEN_HEADER = "x-omniroute-cli-token";
+const SALT = "niyatnaroute-cli-auth-v1";
+export const CLI_TOKEN_HEADER = "x-niyatnaroute-cli-token";
 
 let _cached = null;
 

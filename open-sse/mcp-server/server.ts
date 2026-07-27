@@ -32,9 +32,6 @@ import {
   syncPricingInput,
   cacheStatsInput,
   cacheFlushInput,
-  oneproxyFetchInput,
-  oneproxyRotateInput,
-  oneproxyStatsInput,
 } from "./schemas/tools.ts";
 import { startMcpHeartbeat } from "./runtimeHeartbeat.ts";
 import { countUniqueMcpTools } from "./toolCount.ts";
@@ -60,23 +57,9 @@ import {
   handleSyncPricing,
   handleCacheStats,
   handleCacheFlush,
-  handleOneproxyFetch,
-  handleOneproxyRotate,
-  handleOneproxyStats,
 } from "./tools/advancedTools.ts";
 import { handlePickFastestModel } from "./tools/pickFastestModel.ts";
-import { memoryTools } from "./tools/memoryTools.ts";
-import { skillTools } from "./tools/skillTools.ts";
-import { agentSkillTools } from "./tools/agentSkillTools.ts";
-import { githubSkillTools } from "./tools/githubSkillTools.ts";
-import { skillRegistry } from "../../src/lib/skills/registry.ts";
-import { skillExecutor } from "../../src/lib/skills/executor.ts";
-import { pluginTools } from "./tools/pluginTools.ts";
 import { compressionTools } from "./tools/compressionTools.ts";
-import { poolTools } from "./tools/poolTools.ts";
-import { gamificationTools } from "./tools/gamificationTools.ts";
-import { notionTools } from "./tools/notionTools.ts";
-import { obsidianTools } from "./tools/obsidianTools.ts";
 import { compressMcpRegistryMetadata } from "./descriptionCompressor.ts";
 import { reduceToolManifest, readMcpToolProfileFromEnv } from "./toolCardinality.ts";
 import { smartFilterText } from "../services/compression/engines/mcpAccessibility/index.ts";
@@ -87,29 +70,20 @@ import {
 } from "../services/compression/engines/mcpAccessibility/constants.ts";
 import { getDbInstance } from "../../src/lib/db/core.ts";
 import { normalizeQuotaResponse } from "../../src/shared/contracts/quota.ts";
-import { resolveOmniRouteBaseUrl } from "../../src/shared/utils/resolveOmniRouteBaseUrl.ts";
+import { resolveNiyatnaRouteBaseUrl } from "../../src/shared/utils/resolveNiyatnaRouteBaseUrl.ts";
 import { getMcpModelsCatalog } from "./catalog.ts";
 export { getMcpModelsCatalog } from "./catalog.ts";
 
-const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
-const MCP_ENFORCE_SCOPES = process.env.OMNIROUTE_MCP_ENFORCE_SCOPES === "true";
+const NIYATNAROUTE_BASE_URL = resolveNiyatnaRouteBaseUrl();
+const MCP_ENFORCE_SCOPES = process.env.NIYATNAROUTE_MCP_ENFORCE_SCOPES === "true";
 const MCP_ALLOWED_SCOPES = new Set(
-  (process.env.OMNIROUTE_MCP_SCOPES || "")
+  (process.env.NIYATNAROUTE_MCP_SCOPES || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
 );
 const TOTAL_MCP_TOOL_COUNT = countUniqueMcpTools({
   MCP_TOOLS,
-  memoryTools,
-  skillTools,
-  agentSkillTools,
-  githubSkillTools,
-  poolTools,
-  gamificationTools,
-  pluginTools,
-  notionTools,
-  obsidianTools,
   compressionTools,
 });
 
@@ -186,13 +160,13 @@ function normalizeComboModels(
   });
 }
 
-function getOmniRouteApiKey(): string {
-  return process.env.OMNIROUTE_API_KEY || "";
+function getNiyatnaRouteApiKey(): string {
+  return process.env.NIYATNAROUTE_API_KEY || "";
 }
 
-export async function omniRouteFetch(path: string, options: RequestInit = {}): Promise<unknown> {
-  const url = `${OMNIROUTE_BASE_URL}${path}`;
-  const apiKey = getOmniRouteApiKey();
+export async function niyatnaRouteFetch(path: string, options: RequestInit = {}): Promise<unknown> {
+  const url = `${NIYATNAROUTE_BASE_URL}${path}`;
+  const apiKey = getNiyatnaRouteApiKey();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     // Static env key is only a fallback; the per-caller MCP identity forwarded via
@@ -207,7 +181,7 @@ export async function omniRouteFetch(path: string, options: RequestInit = {}): P
 
   if (!response.ok) {
     const errorText = await response.text().catch(() => "Unknown error");
-    throw new Error(`OmniRoute API error [${response.status}]: ${errorText}`);
+    throw new Error(`NiyatnaRoute API error [${response.status}]: ${errorText}`);
   }
 
   return response.json();
@@ -266,9 +240,9 @@ async function handleGetHealth() {
   const start = Date.now();
   try {
     const [healthRaw, resilienceRaw, rateLimitsRaw] = await Promise.allSettled([
-      omniRouteFetch("/api/monitoring/health"),
-      omniRouteFetch("/api/resilience"),
-      omniRouteFetch("/api/rate-limits"),
+      niyatnaRouteFetch("/api/monitoring/health"),
+      niyatnaRouteFetch("/api/resilience"),
+      niyatnaRouteFetch("/api/rate-limits"),
     ]);
 
     const health = healthRaw.status === "fulfilled" ? toRecord(healthRaw.value) : {};
@@ -304,11 +278,11 @@ async function handleGetHealth() {
         : undefined,
     };
 
-    await logToolCall("omniroute_get_health", {}, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_get_health", {}, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_get_health", {}, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_get_health", {}, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -316,7 +290,7 @@ async function handleGetHealth() {
 async function handleListCombos(args: { includeMetrics?: boolean }) {
   const start = Date.now();
   try {
-    const combosRaw = await omniRouteFetch("/api/combos");
+    const combosRaw = await niyatnaRouteFetch("/api/combos");
     const combosRecord = toRecord(combosRaw);
     const combos = Array.isArray(combosRecord.combos)
       ? combosRecord.combos
@@ -325,7 +299,7 @@ async function handleListCombos(args: { includeMetrics?: boolean }) {
         : [];
     let metrics: JsonRecord = {};
     if (args.includeMetrics) {
-      metrics = toRecord(await omniRouteFetch("/api/combos/metrics").catch(() => ({})));
+      metrics = toRecord(await niyatnaRouteFetch("/api/combos/metrics").catch(() => ({})));
     }
 
     const result = {
@@ -346,11 +320,11 @@ async function handleListCombos(args: { includeMetrics?: boolean }) {
       }),
     };
 
-    await logToolCall("omniroute_list_combos", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_list_combos", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_list_combos", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_list_combos", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -358,14 +332,14 @@ async function handleListCombos(args: { includeMetrics?: boolean }) {
 async function handleGetComboMetrics(args: { comboId: string }) {
   const start = Date.now();
   try {
-    const result = await omniRouteFetch(
+    const result = await niyatnaRouteFetch(
       `/api/combos/metrics?comboId=${encodeURIComponent(args.comboId)}`
     );
-    await logToolCall("omniroute_get_combo_metrics", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_get_combo_metrics", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_get_combo_metrics", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_get_combo_metrics", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -373,15 +347,15 @@ async function handleGetComboMetrics(args: { comboId: string }) {
 async function handleSwitchCombo(args: { comboId: string; active: boolean }) {
   const start = Date.now();
   try {
-    const result = await omniRouteFetch(`/api/combos/${encodeURIComponent(args.comboId)}`, {
+    const result = await niyatnaRouteFetch(`/api/combos/${encodeURIComponent(args.comboId)}`, {
       method: "PUT",
       body: JSON.stringify({ isActive: args.active }),
     });
-    await logToolCall("omniroute_switch_combo", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_switch_combo", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_switch_combo", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_switch_combo", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -393,16 +367,16 @@ async function handleCheckQuota(args: { provider?: string; connectionId?: string
     if (args.connectionId) path += `?connectionId=${encodeURIComponent(args.connectionId)}`;
     else if (args.provider) path += `?provider=${encodeURIComponent(args.provider)}`;
 
-    const result = normalizeQuotaResponse(await omniRouteFetch(path), {
+    const result = normalizeQuotaResponse(await niyatnaRouteFetch(path), {
       provider: args.provider || null,
       connectionId: args.connectionId || null,
     });
 
-    await logToolCall("omniroute_check_quota", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_check_quota", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_check_quota", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_check_quota", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -426,7 +400,7 @@ async function handleRouteRequest(args: {
       body["x-combo"] = args.combo;
     }
 
-    const raw = (await omniRouteFetch("/v1/chat/completions", {
+    const raw = (await niyatnaRouteFetch("/v1/chat/completions", {
       method: "POST",
       body: JSON.stringify(body),
     })) as JsonRecord;
@@ -458,7 +432,7 @@ async function handleRouteRequest(args: {
     };
 
     await logToolCall(
-      "omniroute_route_request",
+      "niyatnaroute_route_request",
       { model: args.model, messageCount: args.messages.length },
       result.routing,
       Date.now() - start,
@@ -468,7 +442,7 @@ async function handleRouteRequest(args: {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     await logToolCall(
-      "omniroute_route_request",
+      "niyatnaroute_route_request",
       { model: args.model },
       null,
       Date.now() - start,
@@ -491,7 +465,7 @@ async function handleCostReport(args: { period?: string }) {
     };
     const range = rangeMap[period] || "30d";
     const raw = toRecord(
-      await omniRouteFetch(`/api/usage/analytics?range=${encodeURIComponent(range)}`)
+      await niyatnaRouteFetch(`/api/usage/analytics?range=${encodeURIComponent(range)}`)
     );
     const tokenCount = toRecord(raw.tokenCount);
     const budget = toRecord(raw.budget);
@@ -512,11 +486,11 @@ async function handleCostReport(args: { period?: string }) {
       },
     };
 
-    await logToolCall("omniroute_cost_report", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_cost_report", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_cost_report", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_cost_report", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -527,7 +501,7 @@ async function handleListModelsCatalog(args: { provider?: string; capability?: s
     const result = await getMcpModelsCatalog(args);
 
     await logToolCall(
-      "omniroute_list_models_catalog",
+      "niyatnaroute_list_models_catalog",
       args,
       { modelCount: result.models.length },
       Date.now() - start,
@@ -536,7 +510,7 @@ async function handleListModelsCatalog(args: { provider?: string; capability?: s
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_list_models_catalog", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_list_models_catalog", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -565,16 +539,16 @@ async function handleWebSearch(args: {
     };
     if (args.provider) body.provider = args.provider;
 
-    const result = await omniRouteFetch("/v1/search", {
+    const result = await niyatnaRouteFetch("/v1/search", {
       method: "POST",
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(60000),
     });
-    await logToolCall("omniroute_web_search", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_web_search", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_web_search", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_web_search", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
@@ -598,23 +572,23 @@ async function handleWebFetch(args: {
     if (args.depth !== undefined) body.depth = args.depth;
     if (args.wait_for_selector) body.wait_for_selector = args.wait_for_selector;
 
-    const result = await omniRouteFetch("/v1/web/fetch", {
+    const result = await niyatnaRouteFetch("/v1/web/fetch", {
       method: "POST",
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(60000),
     });
-    await logToolCall("omniroute_web_fetch", args, result, Date.now() - start, true);
+    await logToolCall("niyatnaroute_web_fetch", args, result, Date.now() - start, true);
     return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    await logToolCall("omniroute_web_fetch", args, null, Date.now() - start, false, msg);
+    await logToolCall("niyatnaroute_web_fetch", args, null, Date.now() - start, false, msg);
     return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
   }
 }
 
 export function createMcpServer(): McpServer {
   const server = new McpServer({
-    name: "omniroute",
+    name: "niyatnaroute",
     version: process.env.npm_package_version || "1.8.1",
   });
   const mcpDescriptionCompressionEnabled = readMcpDescriptionCompressionEnabled();
@@ -673,462 +647,288 @@ export function createMcpServer(): McpServer {
 
   const RESERVED_MCP_NAMES = new Set([
     ...MCP_TOOLS.map((t) => t.name),
-    ...Object.keys(memoryTools),
-    ...Object.keys(skillTools),
     ...Object.keys(compressionTools),
-    ...Object.keys(poolTools),
-    ...pluginTools.map((t) => t.name),
-    ...gamificationTools.map((t) => t.name),
-    ...obsidianTools.map((t) => t.name),
-    ...notionTools.map((t) => t.name),
   ]);
 
   server.registerTool(
-    "omniroute_get_health",
+    "niyatnaroute_get_health",
     {
       description:
-        "Returns OmniRoute health status including uptime, memory, circuit breakers, rate limits, and cache stats",
+        "Returns NiyatnaRoute health status including uptime, memory, circuit breakers, rate limits, and cache stats",
       inputSchema: getHealthInput,
     },
-    withScopeEnforcement("omniroute_get_health", async (args) => {
+    withScopeEnforcement("niyatnaroute_get_health", async (args) => {
       getHealthInput.parse(args ?? {});
       return handleGetHealth();
     })
   );
 
   server.registerTool(
-    "omniroute_list_combos",
+    "niyatnaroute_list_combos",
     {
       description:
         "Lists all configured combos (model chains) with strategies and optional metrics",
       inputSchema: listCombosInput,
     },
-    withScopeEnforcement("omniroute_list_combos", (args) =>
+    withScopeEnforcement("niyatnaroute_list_combos", (args) =>
       handleListCombos(listCombosInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_get_combo_metrics",
+    "niyatnaroute_get_combo_metrics",
     {
       description: "Returns detailed performance metrics for a specific combo",
       inputSchema: getComboMetricsInput,
     },
-    withScopeEnforcement("omniroute_get_combo_metrics", (args) =>
+    withScopeEnforcement("niyatnaroute_get_combo_metrics", (args) =>
       handleGetComboMetrics(getComboMetricsInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_switch_combo",
+    "niyatnaroute_switch_combo",
     {
       description: "Activates or deactivates a combo for routing",
       inputSchema: switchComboInput,
     },
-    withScopeEnforcement("omniroute_switch_combo", (args) =>
+    withScopeEnforcement("niyatnaroute_switch_combo", (args) =>
       handleSwitchCombo(switchComboInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_check_quota",
+    "niyatnaroute_check_quota",
     {
       description: "Checks remaining API quota for one or all providers",
       inputSchema: checkQuotaInput,
     },
-    withScopeEnforcement("omniroute_check_quota", (args) =>
+    withScopeEnforcement("niyatnaroute_check_quota", (args) =>
       handleCheckQuota(checkQuotaInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_route_request",
+    "niyatnaroute_route_request",
     {
-      description: "Sends a chat completion request through OmniRoute intelligent routing",
+      description: "Sends a chat completion request through NiyatnaRoute intelligent routing",
       inputSchema: routeRequestInput,
     },
-    withScopeEnforcement("omniroute_route_request", (args) =>
+    withScopeEnforcement("niyatnaroute_route_request", (args) =>
       handleRouteRequest(routeRequestInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_cost_report",
+    "niyatnaroute_cost_report",
     {
       description: "Generates a cost report for the specified period",
       inputSchema: costReportInput,
     },
-    withScopeEnforcement("omniroute_cost_report", (args) =>
+    withScopeEnforcement("niyatnaroute_cost_report", (args) =>
       handleCostReport(costReportInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_list_models_catalog",
+    "niyatnaroute_list_models_catalog",
     {
       description: "Lists all available AI models across providers with capabilities and pricing",
       inputSchema: listModelsCatalogInput,
     },
-    withScopeEnforcement("omniroute_list_models_catalog", (args) =>
+    withScopeEnforcement("niyatnaroute_list_models_catalog", (args) =>
       handleListModelsCatalog(listModelsCatalogInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_simulate_route",
+    "niyatnaroute_simulate_route",
     {
       description: "Simulates the routing path a request would take without executing it (dry-run)",
       inputSchema: simulateRouteInput,
     },
-    withScopeEnforcement("omniroute_simulate_route", (args) =>
+    withScopeEnforcement("niyatnaroute_simulate_route", (args) =>
       handleSimulateRoute(simulateRouteInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_set_budget_guard",
+    "niyatnaroute_set_budget_guard",
     {
       description:
         "Sets a session budget limit with configurable action when exceeded (degrade/block/alert)",
       inputSchema: setBudgetGuardInput,
     },
-    withScopeEnforcement("omniroute_set_budget_guard", (args) =>
+    withScopeEnforcement("niyatnaroute_set_budget_guard", (args) =>
       handleSetBudgetGuard(setBudgetGuardInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_set_routing_strategy",
+    "niyatnaroute_set_routing_strategy",
     {
       description:
         "Updates combo routing strategy at runtime (priority/weighted/round-robin/auto/etc.)",
       inputSchema: setRoutingStrategyInput,
     },
-    withScopeEnforcement("omniroute_set_routing_strategy", (args) =>
+    withScopeEnforcement("niyatnaroute_set_routing_strategy", (args) =>
       handleSetRoutingStrategy(setRoutingStrategyInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_set_resilience_profile",
+    "niyatnaroute_set_resilience_profile",
     {
       description:
         "Applies a resilience profile controlling circuit breakers, retries, timeouts, and fallback depth",
       inputSchema: setResilienceProfileInput,
     },
-    withScopeEnforcement("omniroute_set_resilience_profile", (args) =>
+    withScopeEnforcement("niyatnaroute_set_resilience_profile", (args) =>
       handleSetResilienceProfile(setResilienceProfileInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_test_combo",
+    "niyatnaroute_test_combo",
     {
       description:
         "Tests each provider in a combo with a real prompt, reporting latency, cost, and success per provider",
       inputSchema: testComboInput,
     },
-    withScopeEnforcement("omniroute_test_combo", (args) =>
+    withScopeEnforcement("niyatnaroute_test_combo", (args) =>
       handleTestCombo(testComboInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_get_provider_metrics",
+    "niyatnaroute_get_provider_metrics",
     {
       description:
         "Returns detailed metrics for a specific provider including latency percentiles and circuit breaker state",
       inputSchema: getProviderMetricsInput,
     },
-    withScopeEnforcement("omniroute_get_provider_metrics", (args) =>
+    withScopeEnforcement("niyatnaroute_get_provider_metrics", (args) =>
       handleGetProviderMetrics(getProviderMetricsInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_best_combo_for_task",
+    "niyatnaroute_best_combo_for_task",
     {
       description:
         "Recommends the best combo for a task type based on provider fitness and constraints",
       inputSchema: bestComboForTaskInput,
     },
-    withScopeEnforcement("omniroute_best_combo_for_task", (args) =>
+    withScopeEnforcement("niyatnaroute_best_combo_for_task", (args) =>
       handleBestComboForTask(bestComboForTaskInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_explain_route",
+    "niyatnaroute_explain_route",
     {
       description:
         "Explains why a request was routed to a specific provider, showing scoring factors and fallbacks",
       inputSchema: explainRouteInput,
     },
-    withScopeEnforcement("omniroute_explain_route", (args) =>
+    withScopeEnforcement("niyatnaroute_explain_route", (args) =>
       handleExplainRoute(explainRouteInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_pick_fastest_model",
+    "niyatnaroute_pick_fastest_model",
     {
       description: "Picks the fastest reliable provider-model pair from live telemetry.",
       inputSchema: pickFastestModelInput,
     },
-    withScopeEnforcement("omniroute_pick_fastest_model", (args) =>
+    withScopeEnforcement("niyatnaroute_pick_fastest_model", (args) =>
       handlePickFastestModel(pickFastestModelInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_get_session_snapshot",
+    "niyatnaroute_get_session_snapshot",
     {
       description:
         "Returns a full snapshot of the current working session: cost, tokens, top models, errors, budget status",
       inputSchema: getSessionSnapshotInput,
     },
-    withScopeEnforcement("omniroute_get_session_snapshot", async (args) => {
+    withScopeEnforcement("niyatnaroute_get_session_snapshot", async (args) => {
       getSessionSnapshotInput.parse(args ?? {});
       return handleGetSessionSnapshot();
     })
   );
 
   server.registerTool(
-    "omniroute_db_health_check",
+    "niyatnaroute_db_health_check",
     {
       description:
-        "Diagnoses or repairs OmniRoute database drift, including broken combo references and orphan quota/domain rows",
+        "Diagnoses or repairs NiyatnaRoute database drift, including broken combo references and orphan quota/domain rows",
       inputSchema: dbHealthCheckInput,
     },
-    withScopeEnforcement("omniroute_db_health_check", (args) =>
+    withScopeEnforcement("niyatnaroute_db_health_check", (args) =>
       handleDbHealthCheck(dbHealthCheckInput.parse(args ?? {}))
     )
   );
 
   server.registerTool(
-    "omniroute_sync_pricing",
+    "niyatnaroute_sync_pricing",
     {
       description:
-        "Syncs pricing data from external sources (LiteLLM) into OmniRoute without overwriting user-set prices",
+        "Syncs pricing data from external sources (LiteLLM) into NiyatnaRoute without overwriting user-set prices",
       inputSchema: syncPricingInput,
     },
-    withScopeEnforcement("omniroute_sync_pricing", (args) =>
+    withScopeEnforcement("niyatnaroute_sync_pricing", (args) =>
       handleSyncPricing(syncPricingInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_web_search",
+    "niyatnaroute_web_search",
     {
       description:
-        "Performs a web search using OmniRoute's search gateway. Supports multiple providers (Serper, Brave, Perplexity, Exa, Tavily) with automatic failover. Returns search results with titles, URLs, snippets, and position data.",
+        "Performs a web search using NiyatnaRoute's search gateway. Supports multiple providers (Serper, Brave, Perplexity, Exa, Tavily) with automatic failover. Returns search results with titles, URLs, snippets, and position data.",
       inputSchema: webSearchInput,
     },
-    withScopeEnforcement("omniroute_web_search", (args) =>
+    withScopeEnforcement("niyatnaroute_web_search", (args) =>
       handleWebSearch(webSearchInput.parse(args))
     )
   );
 
   server.registerTool(
-    "omniroute_web_fetch",
+    "niyatnaroute_web_fetch",
     {
       description:
-        "Fetches and extracts content from a URL using OmniRoute's web fetch gateway. Supports multiple providers (Firecrawl, Jina Reader, Tavily) with automatic failover. Returns the page content as markdown, HTML, links, or screenshot, along with metadata.",
+        "Fetches and extracts content from a URL using NiyatnaRoute's web fetch gateway. Supports multiple providers (Firecrawl, Jina Reader, Tavily) with automatic failover. Returns the page content as markdown, HTML, links, or screenshot, along with metadata.",
       inputSchema: webFetchInput,
     },
-    withScopeEnforcement("omniroute_web_fetch", (args) => handleWebFetch(webFetchInput.parse(args)))
+    withScopeEnforcement("niyatnaroute_web_fetch", (args) => handleWebFetch(webFetchInput.parse(args)))
   );
 
   server.registerTool(
-    "omniroute_cache_stats",
+    "niyatnaroute_cache_stats",
     {
       description:
         "Returns cache statistics including semantic cache hit rate, prompt cache metrics by provider, and idempotency layer stats.",
       inputSchema: cacheStatsInput,
     },
-    withScopeEnforcement("omniroute_cache_stats", () => handleCacheStats())
+    withScopeEnforcement("niyatnaroute_cache_stats", () => handleCacheStats())
   );
 
   server.registerTool(
-    "omniroute_cache_flush",
+    "niyatnaroute_cache_flush",
     {
       description:
         "Flush cache entries. Provide signature to invalidate a single entry, model to invalidate all entries for a model, or omit both to clear all.",
       inputSchema: cacheFlushInput,
     },
-    withScopeEnforcement("omniroute_cache_flush", (args) =>
+    withScopeEnforcement("niyatnaroute_cache_flush", (args) =>
       handleCacheFlush(cacheFlushInput.parse(args))
     )
   );
 
-  server.registerTool(
-    "omniroute_oneproxy_fetch",
-    {
-      description:
-        "Fetch free proxies from the 1proxy marketplace with optional filters for protocol, country, and quality. Returns validated proxies with quality scores.",
-      inputSchema: oneproxyFetchInput,
-    },
-    withScopeEnforcement("omniroute_oneproxy_fetch", (args) =>
-      handleOneproxyFetch(oneproxyFetchInput.parse(args))
-    )
-  );
-
-  server.registerTool(
-    "omniroute_oneproxy_rotate",
-    {
-      description:
-        "Get the next available free proxy from the 1proxy pool using the specified rotation strategy.",
-      inputSchema: oneproxyRotateInput,
-    },
-    withScopeEnforcement("omniroute_oneproxy_rotate", (args) =>
-      handleOneproxyRotate(oneproxyRotateInput.parse(args))
-    )
-  );
-
-  server.registerTool(
-    "omniroute_oneproxy_stats",
-    {
-      description:
-        "Returns 1proxy sync status and statistics: total proxies, average quality, sync history, and distribution by protocol and country.",
-      inputSchema: oneproxyStatsInput,
-    },
-    withScopeEnforcement("omniroute_oneproxy_stats", (args) =>
-      handleOneproxyStats(oneproxyStatsInput.parse(args))
-    )
-  );
-
   registerToolSearchTool(server, withScopeEnforcement);
-
-  // ── Memory Tools ──────────────────────────────
-  Object.values(memoryTools).forEach((toolDef: any) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore - handler type lost through dynamic Object.values() access
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Skill Tools ──────────────────────────────
-  Object.values(skillTools).forEach((toolDef: any) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore - handler type lost through dynamic Object.values() access
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Agent Skill Tools ─────────────────────────
-  Object.values(agentSkillTools).forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(toolDef.name, async (args, extra) => {
-        try {
-          const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-          // @ts-expect-error - handler type lost through dynamic Object.values() access
-          const result = await toolDef.handler(parsedArgs, extra);
-          return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-        } catch (err) {
-          const msg = err instanceof Error ? err.message : String(err);
-          return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-        }
-      })
-    );
-  });
-
-  // ── GitHub Skill Tools ──────────────────────────
-  Object.values(githubSkillTools).forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-expect-error - handler type lost through dynamic Object.values() access
-            const result = await toolDef.handler(parsedArgs);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Plugin Tools ──────────────────────────────
-  pluginTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
 
   // ── Compression Tools ─────────────────────────
   Object.values(compressionTools).forEach((toolDef: any) => {
@@ -1157,171 +957,7 @@ export function createMcpServer(): McpServer {
     );
   });
 
-  // ── Web-Session Pool Tools (#3368 observability) ─
-  // Typed structurally (not `any`) — the shape is pinned by
-  // tests/unit/mcp-tool-collections-shape.test.ts, so the loop can stay strict.
-  Object.values(poolTools).forEach(
-    (toolDef: {
-      name: string;
-      description: string;
-      scopes: readonly string[];
-      inputSchema: { parse: (input: unknown) => unknown };
-      handler: (parsedArgs: unknown, extra?: unknown) => Promise<unknown>;
-    }) => {
-      server.registerTool(
-        toolDef.name,
-        {
-          description: toolDef.description,
-          // @ts-ignore: dynamic zod access
-          inputSchema: toolDef.inputSchema,
-        },
-        withScopeEnforcement(
-          toolDef.name,
-          async (args, extra) => {
-            try {
-              const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-              const result = await toolDef.handler(parsedArgs, extra);
-              return {
-                content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
-              };
-            } catch (err) {
-              const msg = err instanceof Error ? err.message : String(err);
-              return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-            }
-          },
-          toolDef.scopes
-        )
-      );
-    }
-  );
 
-  // ── Gamification Tools ────────────────────────
-  gamificationTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Notion Context Source Tools ───────────────
-  notionTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Obsidian Context Source Tools ─────────────
-  obsidianTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Dynamic Skill Tools (from skills table) ──
-  const skillToMcpToolName = (skill: { name: string }) =>
-    `skill_${skill.name.replace(/[^a-z0-9_-]/gi, "_")}`;
-  try {
-    const enabledSkills = skillRegistry.list().filter((s) => s.enabled);
-    for (const skill of enabledSkills) {
-      const toolName = skillToMcpToolName(skill);
-      if (RESERVED_MCP_NAMES.has(toolName)) continue;
-
-      server.registerTool(
-        toolName,
-        {
-          description: skill.description,
-          inputSchema: z.object({}).passthrough(),
-        },
-        withScopeEnforcement(
-          toolName,
-          async (args, extra) => {
-            const scopeContext = resolveCallerScopeContext(extra, Array.from(MCP_ALLOWED_SCOPES));
-            const apiKeyId = scopeContext.callerId || "mcp";
-            try {
-              const execution = await skillExecutor.execute(
-                skill.name,
-                (args ?? {}) as Record<string, unknown>,
-                { apiKeyId }
-              );
-              return {
-                content: [
-                  { type: "text" as const, text: JSON.stringify(execution.output, null, 2) },
-                ],
-              };
-            } catch (err) {
-              const msg = err instanceof Error ? err.message : String(err);
-              return {
-                content: [{ type: "text" as const, text: `Error: ${msg}` }],
-                isError: true,
-              };
-            }
-          },
-          ["execute:skills"]
-        )
-      );
-    }
-  } catch {
-    // Skills not loaded yet — skip dynamic registration until next reconnect
-  }
 
   return server;
 }
@@ -1330,7 +966,7 @@ export function createMcpServer(): McpServer {
 
 /**
  * Start the MCP server with stdio transport.
- * Called when `omniroute --mcp` is used.
+ * Called when `niyatnaroute --mcp` is used.
  */
 export async function startMcpStdio(): Promise<void> {
   const server = createMcpServer();
@@ -1349,10 +985,10 @@ export async function startMcpStdio(): Promise<void> {
   process.once("SIGINT", stopHeartbeatOnce);
   process.once("SIGTERM", stopHeartbeatOnce);
 
-  console.error("[MCP] OmniRoute MCP Server starting (stdio transport)...");
+  console.error("[MCP] NiyatnaRoute MCP Server starting (stdio transport)...");
   try {
     await server.connect(transport);
-    console.error("[MCP] OmniRoute MCP Server connected and ready.");
+    console.error("[MCP] NiyatnaRoute MCP Server connected and ready.");
   } finally {
     if (closeAuditDb()) {
       console.error("[MCP] Audit database checkpointed and closed.");

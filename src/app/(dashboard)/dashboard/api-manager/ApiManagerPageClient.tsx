@@ -23,9 +23,7 @@ import { readActiveOnlyPreference, writeActiveOnlyPreference } from "./apiManage
 import { buildApiKeyCreateScopes, mergeApiKeyPermissionScopes } from "./apiManagerScopes";
 import { SELF_ACCOUNT_QUOTA_SCOPE, SELF_USAGE_SCOPE } from "@/shared/constants/selfServiceScopes";
 import { extractApiErrorMessage } from "@/shared/http/apiErrorMessage";
-import { hasProviderQuotaBypassScope } from "@/shared/constants/apiKeyPolicyScopes";
 import { UsageLimitSettings } from "./components/UsageLimitSettings";
-import { ChaosModeAccessToggle } from "./components/ChaosModeAccessToggle";
 import { BypassProviderQuotaToggle } from "./components/BypassProviderQuotaToggle";
 import ReasoningRoutingRules from "@/shared/components/ReasoningRoutingRules";
 
@@ -111,8 +109,8 @@ interface ApiKey {
   name: string;
   key: string;
   allowedModels: string[] | null;
-  blockedModels?: string[] | null;
-  allowedCombos: string[] | null;
+  blockedModels?: string[];
+  proxyId?: string | null;
   allowedConnections: string[] | null;
   noLog?: boolean;
   autoResolve?: boolean;
@@ -128,7 +126,6 @@ interface ApiKey {
   streamDefaultMode?: StreamDefaultMode;
   disableNonPublicModels?: boolean;
   allowUsageCommand?: boolean;
-  chaosModeEnabled?: boolean;
   usageLimitEnabled?: boolean;
   dailyUsageLimitUsd?: number | null;
   weeklyUsageLimitUsd?: number | null;
@@ -795,8 +792,7 @@ export default function ApiManagerPageClient() {
     usageLimitEnabled: boolean,
     dailyUsageLimitUsd: number | null,
     weeklyUsageLimitUsd: number | null,
-    blockedModels: string[],
-    chaosModeEnabled: boolean
+    blockedModels: string[]
   ) => {
     if (!editingKey || !editingKey.id) return;
 
@@ -867,7 +863,6 @@ export default function ApiManagerPageClient() {
           usageLimitEnabled,
           dailyUsageLimitUsd,
           weeklyUsageLimitUsd,
-          chaosModeEnabled,
         }),
       });
 
@@ -1651,8 +1646,7 @@ const PermissionsModal = memo(function PermissionsModal({
     usageLimitEnabled: boolean,
     dailyUsageLimitUsd: number | null,
     weeklyUsageLimitUsd: number | null,
-    blockedModels: string[],
-    chaosModeEnabled: boolean
+    blockedModels: string[]
   ) => void;
 }) {
   const t = useTranslations("apiManager");
@@ -1738,7 +1732,6 @@ const PermissionsModal = memo(function PermissionsModal({
   const [usageCommandEnabled, setUsageCommandEnabled] = useState(
     apiKey?.allowUsageCommand === true
   );
-  const [chaosModeEnabled, setChaosModeEnabled] = useState(apiKey?.chaosModeEnabled === true);
   const [usageLimitEnabled, setUsageLimitEnabled] = useState(apiKey?.usageLimitEnabled === true);
   const [dailyUsageLimitUsd, setDailyUsageLimitUsd] = useState(
     typeof apiKey?.dailyUsageLimitUsd === "number" && apiKey.dailyUsageLimitUsd > 0
@@ -1943,8 +1936,7 @@ const PermissionsModal = memo(function PermissionsModal({
       usageLimitEnabled,
       parseUsdLimitInput(dailyUsageLimitUsd),
       parseUsdLimitInput(weeklyUsageLimitUsd),
-      blockedModels,
-      chaosModeEnabled
+      blockedModels
     );
   }, [
     onSave,
@@ -1983,7 +1975,6 @@ const PermissionsModal = memo(function PermissionsModal({
     parseUsdLimitInput,
     blockedClaudeCodeFamilies,
     initialBlockedModels,
-    chaosModeEnabled,
     apiKey?.scopes,
     t,
   ]);
@@ -2570,12 +2561,6 @@ const PermissionsModal = memo(function PermissionsModal({
             onWeeklyLimitUsdChange={setWeeklyUsageLimitUsd}
           />
         </div>
-
-        {/* Chaos Mode Access Toggle */}
-        <ChaosModeAccessToggle
-          enabled={chaosModeEnabled}
-          onToggle={() => setChaosModeEnabled((prev) => !prev)}
-        />
 
         {/* Advanced Provider Quota Policy Override */}
         <BypassProviderQuotaToggle

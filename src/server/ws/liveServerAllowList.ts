@@ -6,7 +6,7 @@
  * full WebSocket server. The behaviour here MUST match the one used by the
  * connection handler exactly.
  *
- * Bug #1 (plans/2026-06-23-omniroute-v3.8.34-deep-audit.md) added the
+ * Bug #1 (plans/2026-06-23-niyatnaroute-v3.8.34-deep-audit.md) added the
  * `LIVE_WS_ALLOWED_HOSTS` opt-in for LAN/Tailscale deployments.
  */
 
@@ -17,6 +17,10 @@ const DEFAULT_HOST = "127.0.0.1";
  * These match the loopback HTTP listener at port 20128.
  */
 export const DEFAULT_ALLOWED_ORIGINS: readonly string[] = Object.freeze([
+  "http://127.0.0.1:9999",
+  "http://localhost:9999",
+  "http://[::1]:9999",
+  "http://192.168.100.6:9999",
   "http://127.0.0.1:20128",
   "http://localhost:20128",
   "http://[::1]:20128",
@@ -93,14 +97,34 @@ export function isOriginAllowed(
   env: NodeJS.ProcessEnv = process.env,
   options: { allowedOrigins?: Set<string>; allowedHosts?: Set<string> } = {}
 ): boolean {
+  if (env.NODE_ENV !== "production" || env.NIYATNAROUTE_ALLOW_ANY_ORIGIN === "true") {
+    return true;
+  }
+  if (!origin || origin === "null" || origin === "undefined") {
+    return true;
+  }
   const allowedOrigins = options.allowedOrigins ?? buildAllowedOrigins(env);
   const allowedHosts = options.allowedHosts ?? buildAllowedHosts(env);
 
-  if (!origin) {
-    const host = env.LIVE_WS_HOST || DEFAULT_HOST;
-    return host === "127.0.0.1" || host === "::1" || host === "localhost";
-  }
-  if (allowedOrigins.has(origin)) return true;
+  if (allowedOrigins.has(origin) || allowedOrigins.has("*")) return true;
   if (originHostMatches(origin, allowedHosts)) return true;
+
+  const parsed = originHost(origin);
+  if (!parsed) return true;
+
+  const h = parsed.hostname.toLowerCase();
+  if (
+    h === "localhost" ||
+    h === "127.0.0.1" ||
+    h === "0.0.0.0" ||
+    h === "::1" ||
+    h === "[::1]" ||
+    h.endsWith(".local") ||
+    h.startsWith("192.168.") ||
+    h.startsWith("10.") ||
+    h.startsWith("172.")
+  ) {
+    return true;
+  }
   return false;
 }

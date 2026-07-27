@@ -1,15 +1,15 @@
-import { getEmbeddingProvider } from "@omniroute/open-sse/config/embeddingRegistry.ts";
-import { getRerankProvider } from "@omniroute/open-sse/config/rerankRegistry.ts";
-import { getImageProvider } from "@omniroute/open-sse/config/imageRegistry.ts";
-import { getVideoProvider } from "@omniroute/open-sse/config/videoRegistry.ts";
+import { getEmbeddingProvider } from "@niyatnaroute/open-sse/config/embeddingRegistry.ts";
+import { getRerankProvider } from "@niyatnaroute/open-sse/config/rerankRegistry.ts";
+import { getImageProvider } from "@niyatnaroute/open-sse/config/imageRegistry.ts";
+import { getVideoProvider } from "@niyatnaroute/open-sse/config/videoRegistry.ts";
 import {
   getSpeechProvider,
   getTranscriptionProvider,
-} from "@omniroute/open-sse/config/audioRegistry.ts";
-import { ANTIGRAVITY_PUBLIC_MODELS } from "@omniroute/open-sse/config/antigravityModelAliases.ts";
-import { getStaticQoderModels } from "@omniroute/open-sse/services/qoderCli.ts";
-import { getSearchProvider } from "@omniroute/open-sse/config/searchRegistry.ts";
-import { BAILIAN_CODING_PLAN_MODELS } from "@omniroute/open-sse/config/providers/registry/bailian-coding-plan/index.ts";
+} from "@niyatnaroute/open-sse/config/audioRegistry.ts";
+import { ANTIGRAVITY_PUBLIC_MODELS } from "@niyatnaroute/open-sse/config/antigravityModelAliases.ts";
+import { getStaticQoderModels } from "@niyatnaroute/open-sse/services/qoderCli.ts";
+import { getSearchProvider } from "@niyatnaroute/open-sse/config/searchRegistry.ts";
+import { BAILIAN_CODING_PLAN_MODELS } from "@niyatnaroute/open-sse/config/providers/registry/bailian-coding-plan/index.ts";
 
 import { getModelsByProviderId } from "@/shared/constants/models";
 

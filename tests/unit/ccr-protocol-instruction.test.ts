@@ -37,9 +37,9 @@ This is line ten and still counting to make the block big enough.`;
 
 const SMALL_TEXT = "Short content that should NOT be compressed.";
 
-const RETRIEVE_TOOL_OPENAI = { type: "function", function: { name: "omniroute_ccr_retrieve" } };
-const RETRIEVE_TOOL_FLAT = { name: "omniroute_ccr_retrieve" };
-const RETRIEVE_TOOL_CLAUDE = { name: "omniroute_ccr_retrieve", input_schema: {} };
+const RETRIEVE_TOOL_OPENAI = { type: "function", function: { name: "niyatnaroute_ccr_retrieve" } };
+const RETRIEVE_TOOL_FLAT = { name: "niyatnaroute_ccr_retrieve" };
+const RETRIEVE_TOOL_CLAUDE = { name: "niyatnaroute_ccr_retrieve", input_schema: {} };
 
 type Msg = { role: string; content: string };
 
@@ -145,7 +145,7 @@ describe("ccr protocol instruction (#8033)", () => {
     const messages = result.body["messages"] as Array<{ role: string; content: unknown }>;
     const instruction = messages[0].content as string;
 
-    assert.ok(instruction.includes("omniroute_ccr_retrieve"), "must mention the tool name");
+    assert.ok(instruction.includes("niyatnaroute_ccr_retrieve"), "must mention the tool name");
     assert.ok(
       instruction.includes("[CCR retrieve hash=<24hex> chars=N]"),
       "must show the marker shape"

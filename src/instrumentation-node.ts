@@ -23,7 +23,7 @@ function toHex(bytes: Uint8Array): string {
 }
 
 /**
- * Rename a Node process title so OmniRoute is identifiable in `ps`/`htop`
+ * Rename a Node process title so NiyatnaRoute is identifiable in `ps`/`htop`
  * instead of the generic Next.js standalone server name.
  *
  * Only rewrites titles that start with "next-server", preserving any
@@ -34,7 +34,7 @@ function toHex(bytes: Uint8Array): string {
 export function renameProcessTitle(currentTitle: string): string {
   if (!currentTitle) return currentTitle;
   if (!currentTitle.startsWith("next-server")) return currentTitle;
-  return `omniroute${currentTitle.slice("next-server".length)}`;
+  return `niyatnaroute${currentTitle.slice("next-server".length)}`;
 }
 
 /**
@@ -112,7 +112,7 @@ export async function ensureDbReadyForBoot(
 }
 
 function isBackgroundServicesDisabled(): boolean {
-  const raw = process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES;
+  const raw = process.env.NIYATNAROUTE_DISABLE_BACKGROUND_SERVICES;
   if (!raw) return false;
   return new Set(["1", "true", "yes", "on"]).has(raw.trim().toLowerCase());
 }
@@ -215,12 +215,12 @@ export async function warmModelCatalogCache(): Promise<void> {
 export async function registerNodejs(): Promise<void> {
   markServerStarting();
 
-  // Rename the process title so OmniRoute is identifiable in ps/htop instead
+  // Rename the process title so NiyatnaRoute is identifiable in ps/htop instead
   // of the generic "next-server" standalone server name.
   process.title = renameProcessTitle(process.title);
 
   // Initialize proxy fetch patch FIRST (before any HTTP requests)
-  await import("@omniroute/open-sse/index.ts");
+  await import("@niyatnaroute/open-sse/index.ts");
   console.log("[STARTUP] Global fetch proxy patch initialized");
 
   // Guarantee the SQLite singleton — including a sql.js WASM pre-init when
@@ -250,7 +250,7 @@ export async function registerNodejs(): Promise<void> {
   // that cause every connection to be skipped by getProviderCredentials(), making
   // all subsequent requests time out at Bottleneck's maxWaitMs (120 s default).
   // Terminal states (banned / expired / credits_exhausted) are intentionally kept.
-  // See: https://github.com/diegosouzapw/OmniRoute/issues/3625 (Part A)
+  // See: https://github.com/niyatnaroute/NiyatnaRoute/issues/3625 (Part A)
   try {
     const { clearStaleCrashCooldowns } = await import("@/lib/db/providers");
     const { cleared } = clearStaleCrashCooldowns();
@@ -276,8 +276,6 @@ export async function registerNodejs(): Promise<void> {
     { startSpendBatchWriter },
     { registerDefaultGuardrails },
     { ensurePersistentManagementPasswordHash },
-    { skillExecutor },
-    { registerBuiltinSkills },
   ] = await Promise.all([
     import("@/lib/gracefulShutdown"),
     import("@/lib/apiBridgeServer"),
@@ -290,24 +288,17 @@ export async function registerNodejs(): Promise<void> {
     import("@/lib/spend/batchWriter"),
     import("@/lib/guardrails"),
     import("@/lib/auth/managementPassword"),
-    import("@/lib/skills/executor"),
-    import("@/lib/skills/builtins"),
   ]);
 
   // Proxy health scheduler (auto-removes dead proxies on interval)
   await import("@/lib/proxyHealth/scheduler");
 
-  // Free-proxy auto-sync scheduler (re-fetches free-proxy sources on interval, #7079)
-  await import("@/lib/freeProxyProviders/scheduler");
-
   initGracefulShutdown();
   initApiBridgeServer();
   startSpendBatchWriter();
   registerDefaultGuardrails();
-  registerBuiltinSkills(skillExecutor);
   console.log("[STARTUP] Spend batch writer started");
   console.log("[STARTUP] Guardrail registry initialized");
-  console.log("[STARTUP] Builtin skill handlers registered");
   if (!isBackgroundServicesDisabled()) {
     startBackgroundRefresh();
     console.log("[STARTUP] Quota cache background refresh started");
@@ -320,9 +311,7 @@ export async function registerNodejs(): Promise<void> {
     console.log(
       `[STARTUP] Cloud/model sync background bootstrap ${cloudSyncInitialized ? "initialized" : "skipped"}`
     );
-    const { initBatchProcessor } = await import("@omniroute/open-sse/services/batchProcessor");
-    initBatchProcessor();
-    console.log("[STARTUP] Batch processor started");
+
   }
 
   try {
@@ -354,7 +343,7 @@ export async function registerNodejs(): Promise<void> {
     // Restore Global System Prompt into in-memory config (#2468/#2470)
     if (settings.systemPrompt) {
       const { setSystemPromptConfig } =
-        await import("@omniroute/open-sse/services/systemPrompt.ts");
+        await import("@niyatnaroute/open-sse/services/systemPrompt.ts");
       setSystemPromptConfig(settings.systemPrompt);
       console.log("[STARTUP] Global System Prompt restored from settings");
     }
@@ -365,7 +354,7 @@ export async function registerNodejs(): Promise<void> {
     // the passthrough default on every restart. Previously this was only wired into
     // the unused `server-init.ts`, so it never ran in production.
     const { hydrateThinkingBudgetConfig } =
-      await import("@omniroute/open-sse/services/thinkingBudget.ts");
+      await import("@niyatnaroute/open-sse/services/thinkingBudget.ts");
     if (hydrateThinkingBudgetConfig(settings)) {
       console.log("[STARTUP] Thinking-Budget config restored from settings");
     }
@@ -402,7 +391,7 @@ export async function registerNodejs(): Promise<void> {
   // connections (cookies that expired overnight) get re-probed and recovered on
   // startup — instead of staying red until the first real request lazily imports
   // the on-demand credentialGate. Idempotent; self-disables via
-  // OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK and its cadence is tunable via
+  // NIYATNAROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK and its cadence is tunable via
   // CREDENTIAL_HEALTH_CHECK_INTERVAL. NOTE: this MUST live here (the real Next.js
   // instrumentation startup), NOT in the unused src/server-init.ts.
   try {
@@ -471,7 +460,7 @@ export async function registerNodejs(): Promise<void> {
           console.warn("[STARTUP] Embed WS proxy failed to start (non-fatal):", msg);
         }),
 
-      import("@omniroute/open-sse/services/autoRefreshDaemon")
+      import("@niyatnaroute/open-sse/services/autoRefreshDaemon")
         .then((m) => m.autoRefreshDaemon.start())
         .catch((err: unknown) => {
           const msg = err instanceof Error ? err.message : String(err);
@@ -527,19 +516,11 @@ export async function registerNodejs(): Promise<void> {
           console.warn("[STARTUP] context-window reconcile failed to start (non-fatal):", msg);
         }),
 
-      // TV6 typed memory decay: optional periodic sweep of decayed episodic memories.
-      // Doubly opt-in (no-op unless MEMORY_TYPED_DECAY_ENABLED=true AND
-      // MEMORY_TYPED_DECAY_SWEEP_INTERVAL>0). Never deletes by default. Never fatal.
-      import("@/lib/memory/typedDecay")
-        .then((m) => m.startMemoryDecaySweep())
-        .catch((err: unknown) => {
-          const msg = err instanceof Error ? err.message : String(err);
-          console.warn("[STARTUP] memory decay sweep failed to start (non-fatal):", msg);
-        }),
+
 
       // Real-time dashboard WebSocket daemon (port 20132): powers Combo Studio Live,
       // the Home live-pulse, and Live Compression. Side-effect import triggers the
-      // flag-gated auto-start (OMNIROUTE_ENABLE_LIVE_WS, default ON).
+      // flag-gated auto-start (NIYATNAROUTE_ENABLE_LIVE_WS, default ON).
       import("@/server/ws/liveServer")
         .then(() => {
           console.log("[STARTUP] Live dashboard WebSocket daemon bootstrap invoked");

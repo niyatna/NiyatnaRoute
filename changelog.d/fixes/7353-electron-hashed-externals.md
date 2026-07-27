@@ -1,1 +1,1 @@
-- **fix(electron):** Normalize hashed Turbopack external imports in packaged desktop builds, preventing instrumentation startup failures ([#7353](https://github.com/diegosouzapw/OmniRoute/pull/7353)) — thanks @tianrking
+- **fix(electron):** Normalize hashed Turbopack external imports in packaged desktop builds, preventing instrumentation startup failures ([#7353](https://github.com/niyatnaroute/NiyatnaRoute/pull/7353)) — thanks @tianrking

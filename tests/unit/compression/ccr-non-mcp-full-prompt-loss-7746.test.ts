@@ -3,8 +3,8 @@
 // The CCR ("Content-Compression-Retrieve") engine can replace an ENTIRE
 // single-message user prompt with nothing but a bare
 // `[CCR retrieve hash=... chars=N]` marker. The MCP tool that could expand
-// that marker (`omniroute_ccr_retrieve`) is only ever exposed through
-// OmniRoute's own MCP server — never injected into the `tools` array of a
+// that marker (`niyatnaroute_ccr_retrieve`) is only ever exposed through
+// NiyatnaRoute's own MCP server — never injected into the `tools` array of a
 // plain /v1/chat/completions OpenAI-compatible request. So for non-MCP
 // clients (OpenCode, Claude Code in "openai-compatible" mode, or any generic
 // proxy client), once a large first-turn prompt is compressed, the original

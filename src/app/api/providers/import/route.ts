@@ -22,10 +22,10 @@ import {
   sanitizeProviderSpecificDataForResponse,
 } from "@/lib/providers/requestDefaults";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatnaroute/open-sse/utils/error";
 import { validateProviderApiKey } from "@/lib/providers/validation";
 import { getProxyForLevel, resolveProxyForProvider } from "@/lib/localDb";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@niyatnaroute/open-sse/utils/proxyFetch.ts";
 
 type ImportEntry = {
   provider: string;

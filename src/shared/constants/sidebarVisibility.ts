@@ -28,8 +28,6 @@ export const SIDEBAR_ICON_ACCENTS: Partial<Record<SidebarItemId, string>> = {
   "api-endpoints": "#14B8A6",
   webhooks: "#EC4899",
   proxy: "#A3E635",
-  "mitm-proxy": "#FB7185",
-  "1proxy": "#22D3EE",
   analytics: "#06B6D4",
   "analytics-combo-health": "#34D399",
   "analytics-utilization": "#FBBF24",
@@ -37,7 +35,6 @@ export const SIDEBAR_ICON_ACCENTS: Partial<Record<SidebarItemId, string>> = {
   cache: "#84CC16",
   "analytics-compression": "#F97316",
   "analytics-search": "#38BDF8",
-  "analytics-evals": "#A78BFA",
   logs: "#CBD5E1",
   "logs-proxy": "#A3E635",
   "logs-console": "#FACC15",
@@ -49,21 +46,10 @@ export const SIDEBAR_ICON_ACCENTS: Partial<Record<SidebarItemId, string>> = {
   "costs-quota-share": "#06B6D4",
   audit: "#F43F5E",
   "audit-mcp": "#818CF8",
-  "audit-a2a": "#A855F7",
   translator: "#3B82F6",
   playground: "#EAB308",
   "search-tools": "#0891B2",
-  memory: "#10B981",
-  skills: "#F43F5E",
-  "agent-skills": "#D946EF",
   mcp: "#8B5CF6",
-  a2a: "#06B6D4",
-  leaderboard: "#FACC15",
-  profile: "#60A5FA",
-  tokens: "#A3E635",
-  media: "#D946EF",
-  batch: "#14B8A6",
-  "batch-files": "#38BDF8",
   "settings-general": "#64748B",
   "settings-appearance": "#D946EF",
   "settings-ai": "#A78BFA",
@@ -139,7 +125,7 @@ export const HIDDEN_SIDEBAR_ITEMS_SETTING_KEY = "hiddenSidebarItems";
 export const SIDEBAR_SECTION_ORDER_KEY = "sidebarSectionOrder";
 export const SIDEBAR_ITEM_ORDER_KEY = "sidebarItemOrder";
 export const SIDEBAR_PRESET_KEY = "sidebarActivePreset";
-export const SIDEBAR_SETTINGS_UPDATED_EVENT = "omniroute:settings-updated";
+export const SIDEBAR_SETTINGS_UPDATED_EVENT = "niyatnaroute:settings-updated";
 
 const MINIMAL_SHOWN: ReadonlySet<HideableSidebarItemId> = new Set([
   "home",
@@ -180,10 +166,7 @@ const DEVELOPER_SHOWN: ReadonlySet<HideableSidebarItemId> = new Set([
   "runtime",
   "translator",
   "playground",
-  "memory",
-  "skills",
   "mcp",
-  "a2a",
   "settings-general",
   "settings-routing",
   "settings-resilience",
@@ -214,7 +197,6 @@ const ADMIN_SHOWN: ReadonlySet<HideableSidebarItemId> = new Set([
   "runtime",
   "audit",
   "audit-mcp",
-  "audit-a2a",
   "settings-general",
   "settings-routing",
   "settings-resilience",

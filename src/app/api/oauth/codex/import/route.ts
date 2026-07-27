@@ -3,8 +3,8 @@ import { z } from "zod";
 import { normalizeCodexImportRecord, flattenCodexImportPayload } from "@/lib/oauth/services/codexImport";
 import { createProviderConnection } from "@/models";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
-import { refreshCodexToken, isUnrecoverableRefreshError } from "@omniroute/open-sse/services/tokenRefresh.ts";
+import { sanitizeErrorMessage } from "@niyatnaroute/open-sse/utils/error.ts";
+import { refreshCodexToken, isUnrecoverableRefreshError } from "@niyatnaroute/open-sse/services/tokenRefresh.ts";
 
 /**
  * Message returned when the imported record's refresh_token is already dead

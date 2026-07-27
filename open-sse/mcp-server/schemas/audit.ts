@@ -1,14 +1,5 @@
-/**
- * MCP/A2A Audit Types — Interfaces for audit log entries.
- *
- * These types define the format of audit log entries stored in the
- * `mcp_tool_audit` and `a2a_task_events` tables.
- *
- * Security: Input data is never stored in clear text. Only SHA-256 hashes
- * of input and truncated output summaries are persisted.
- */
-
 // ============ MCP Audit Entry ============
+
 
 export interface McpAuditEntry {
   /** ISO 8601 timestamp */
@@ -29,31 +20,6 @@ export interface McpAuditEntry {
   errorCode?: string;
   /** Error message summary (truncated, no sensitive data) */
   errorMessage?: string;
-}
-
-// ============ A2A Task Event ============
-
-export interface A2aTaskEvent {
-  /** ISO 8601 timestamp */
-  timestamp: string;
-  /** Task ID this event belongs to */
-  taskId: string;
-  /** Type of event */
-  eventType:
-    | "task_created"
-    | "task_working"
-    | "task_completed"
-    | "task_failed"
-    | "task_cancelled"
-    | "task_expired"
-    | "provider_selected"
-    | "fallback_triggered"
-    | "budget_check"
-    | "quota_check"
-    | "streaming_started"
-    | "streaming_ended";
-  /** Event-specific data (JSON-serialized) */
-  data?: Record<string, unknown>;
 }
 
 // ============ Routing Decision Log ============
@@ -81,8 +47,8 @@ export interface RoutingDecisionLog {
   latencyMs: number;
   /** Actual cost in USD */
   cost: number;
-  /** Source: 'api' | 'mcp' | 'a2a' */
-  source: "api" | "mcp" | "a2a";
+  /** Source: 'api' | 'mcp' */
+  source: "api" | "mcp";
 }
 
 export interface RoutingFactor {

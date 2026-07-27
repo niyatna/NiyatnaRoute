@@ -5,7 +5,7 @@ import {
   updateProviderConnection,
 } from "@/lib/db/providers";
 import { getCachedProviderConnectionById } from "@/lib/localDb";
-import { clearProviderFailure, clearModelLock } from "@omniroute/open-sse/services/accountFallback";
+import { clearProviderFailure, clearModelLock } from "@niyatnaroute/open-sse/services/accountFallback";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -258,8 +258,8 @@ export async function buildProviderHealthAutopilotReport(
   const [{ getAllCircuitBreakerStatuses }, { getAllModelLockouts }, quotaMonitor] =
     await Promise.all([
       import("@/shared/utils/circuitBreaker"),
-      import("@omniroute/open-sse/services/accountFallback"),
-      import("@omniroute/open-sse/services/quotaMonitor.ts").catch(() => null),
+      import("@niyatnaroute/open-sse/services/accountFallback"),
+      import("@niyatnaroute/open-sse/services/quotaMonitor.ts").catch(() => null),
     ]);
 
   const connections = (await getProviderConnections(

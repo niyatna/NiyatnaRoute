@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * assembleStandalone.mjs - Shared standalone bundle assembler for OmniRoute.
+ * assembleStandalone.mjs - Shared standalone bundle assembler for NiyatnaRoute.
  *
  * Task 0.1 Inventory: Copy/sync operations across the three build scripts
  * -----------------------------------------------------------------------
@@ -34,7 +34,7 @@
  * --- npm-UNIQUE ---
  * MITM tsc compile -> app/src/mitm/                           -               Y           -    UNIQUE (prepublish)
  * MCP server esbuild -> dist/open-sse/mcp-server/server.js    -               Y           -    UNIQUE (prepublish)
- * CLI esbuild -> bin/omniroute.mjs                            -               Y           -    UNIQUE (prepublish)
+ * CLI esbuild -> bin/niyatnaroute.mjs                            -               Y           -    UNIQUE (prepublish)
  * sidecar/doc copies (.env.example, docs/, sync-env, etc.)    -               Y           -    UNIQUE (prepublish)
  * prune + validate (pack-artifact-policy)                      -               Y           -    UNIQUE (prepublish)
  * data/ dir creation                                           -               Y           -    UNIQUE (prepublish)
@@ -157,11 +157,6 @@ const EXTRA_MODULE_ENTRIES = [
     dest: ["responses-ws-proxy.mjs"],
   },
   {
-    label: "webdav-handler (server-ws.mjs dependency)",
-    src: ["scripts", "dev", "webdav-handler.mjs"],
-    dest: ["webdav-handler.mjs"],
-  },
-  {
     // #5242: opt-in HTTPS/TLS resolver (server-ws.mjs dependency).
     label: "tls-options (server-ws.mjs dependency)",
     src: ["scripts", "dev", "tls-options.mjs"],
@@ -194,7 +189,7 @@ const EXTRA_MODULE_ENTRIES = [
     // resolved at module-link time. Next.js's standalone output-file tracer (nft)
     // sometimes emits a hollow dist/node_modules/undici/ (package.json only), which
     // SHADOWS the fully-populated sibling node_modules/undici and crashes
-    // `omniroute --mcp` at startup. See #7701.
+    // `niyatnaroute --mcp` at startup. See #7701.
     label: "undici (MCP server static import — #7701)",
     src: ["node_modules", "undici"],
     dest: ["node_modules", "undici"],

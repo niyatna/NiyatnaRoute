@@ -1,4 +1,4 @@
-# Incident Response Runbook — OmniRoute (2026-06-18)
+# Incident Response Runbook — NiyatnaRoute (2026-06-18)
 
 **Status**: Authoritative. The 71-pillar audit (L61) references this doc
 for the `Obs > 2.00` gate.
@@ -21,7 +21,7 @@ those through this runbook.
 |---|---|---|---|---|
 | **SEV-1** | User-visible outage; > 50 % of requests failing or > 2x SLO breach for 5 min. | Cluster down; auth layer broken; 5xx flood. | On-call P0 (immediate) | 4 h |
 | **SEV-2** | Significant degradation; 1.5–2x SLO breach for 15 min, or single-tenant impact. | Single provider down; p95 > 1.5x budget; rate-limit runaway. | On-call P1 (15 min) | 24 h |
-| **SEV-3** | Latent bug or near-miss; no current user impact but error budget at risk. | Memory leak trending up; circuit breaker tripping on one provider. | Slack `#omniroute-ops` (next standup) | 7 d |
+| **SEV-3** | Latent bug or near-miss; no current user impact but error budget at risk. | Memory leak trending up; circuit breaker tripping on one provider. | Slack `#niyatnaroute-ops` (next standup) | 7 d |
 | **SEV-4** | Cosmetic / informational. | Log line noise; non-binding UI glitch. | Next weekly review | Next refactor cycle |
 
 **Burn-rate escalation** (per `docs/PERF_BUDGETS.md` § 1): 6x for 5 min
@@ -34,10 +34,10 @@ is SEV-1; 2x for 1 h is SEV-2; sustained < 1x for 7 d demotes to SEV-3.
 | Source | Signal | Routing |
 |---|---|---|
 | Prometheus (`/metrics`) | Counter deltas (5xx, latency) | Alertmanager → PagerDuty |
-| Grafana SLO dashboards | SLO burn-rate panels | Slack `#omniroute-ops` |
+| Grafana SLO dashboards | SLO burn-rate panels | Slack `#niyatnaroute-ops` |
 | Uptime probe (`/api/health/ping`) | 3 consecutive failures from 3 regions | Alertmanager → PagerDuty |
 | Dependabot | New CVE in dependency | GitHub issue + Slack `#security` |
-| User report (support@) | Manual triage | Slack `#omniroute-triage` |
+| User report (support@) | Manual triage | Slack `#niyatnaroute-triage` |
 | Error budget burn alert | `slo_burn_rate > threshold` | Alertmanager |
 
 Prometheus and Alertmanager are configured in the deploy repo (see
@@ -107,7 +107,7 @@ not** skip steps; each is timed.
 ### 4.3 Auth layer broken (5xx on /v1/responses for all keys)
 
 1. Check the authz-inventory endpoint:
-   `curl https://api.omniroute.dev/api/settings/authz-inventory | jq`.
+   `curl https://api.niyatnaroute.dev/api/settings/authz-inventory | jq`.
    It returns a route-tier inventory (`tiers`, `bypassEnabled`,
    `bypassPrefixes`, `spawnCapablePrefixes`, `cors` — see
    `src/app/api/settings/authz-inventory/route.ts`); there is no
@@ -134,7 +134,7 @@ not** skip steps; each is timed.
 
 **Stop.** This is the `SECURITY.md` path, not this runbook. Page the
 security on-call (`@security-team`); do not post details to
-`#omniroute-ops`.
+`#niyatnaroute-ops`.
 
 ---
 
@@ -165,7 +165,7 @@ numbering convention, e.g. ADR-041 there).
 | Comms lead | @comms | — | As needed |
 
 **Handoff**: every Monday 09:00 PDT, the outgoing on-call posts a
-written handoff to the incoming in `#omniroute-ops-handoff` covering:
+written handoff to the incoming in `#niyatnaroute-ops-handoff` covering:
 open SEV-3/4 items, scheduled maintenance windows, and any
 in-flight mitigations.
 

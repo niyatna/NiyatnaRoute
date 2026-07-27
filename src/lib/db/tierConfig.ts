@@ -1,7 +1,7 @@
 import { getDbInstance } from "./core";
 import type { TierConfig } from "../../../open-sse/services/tierTypes";
 import { validateTierConfig, DEFAULT_TIER_CONFIG } from "../../../open-sse/services/tierConfig";
-import { defaultLogger as log } from "@omniroute/open-sse/utils/logger";
+import { defaultLogger as log } from "@niyatnaroute/open-sse/utils/logger";
 
 const TABLE = "tier_config";
 const CORRUPTED_VALUE_PREVIEW_LEN = 200;
@@ -63,8 +63,9 @@ export function loadTierConfigFromDb(): TierConfig | null {
     parsed = JSON.parse(raw);
   } catch (err) {
     log.warn(
-      { err: err instanceof Error ? err.message : String(err), value: previewCorruptedValue(raw) },
-      "tier_config JSON.parse failed; falling back to DEFAULT_TIER_CONFIG"
+      "TIER_CONFIG",
+      "tier_config JSON.parse failed; falling back to DEFAULT_TIER_CONFIG",
+      { err: err instanceof Error ? err.message : String(err), value: previewCorruptedValue(raw) }
     );
     return null;
   }
@@ -73,11 +74,9 @@ export function loadTierConfigFromDb(): TierConfig | null {
     return validateTierConfig(parsed);
   } catch (err) {
     log.warn(
-      {
-        err: err instanceof Error ? err.message : String(err),
-        value: previewCorruptedValue(raw),
-      },
-      "tier_config Zod validation failed; falling back to DEFAULT_TIER_CONFIG"
+      "TIER_CONFIG",
+      "tier_config Zod validation failed; falling back to DEFAULT_TIER_CONFIG",
+      { err: err instanceof Error ? err.message : String(err), value: previewCorruptedValue(raw) }
     );
     return null;
   }

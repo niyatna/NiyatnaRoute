@@ -7,9 +7,9 @@ export function parsePort(value, fallback) {
 
 /**
  * Resolve the V8 heap ceiling (MB) for the server process from
- * `OMNIROUTE_MEMORY_MB`, mirroring `omniroute serve`. Clamped to [64, 16384];
+ * `NIYATNAROUTE_MEMORY_MB`, mirroring `niyatnaroute serve`. Clamped to [64, 16384];
  * invalid/unset → fallback (512). The standalone launcher uses this so
- * OMNIROUTE_MEMORY_MB can override the Docker image's NODE_OPTIONS fallback
+ * NIYATNAROUTE_MEMORY_MB can override the Docker image's NODE_OPTIONS fallback
  * without clobbering any other runtime flags (#2939).
  * @param {string | number | undefined | null} value
  * @param {number} [fallback]
@@ -21,12 +21,12 @@ export function resolveMaxOldSpaceMb(value, fallback = 512) {
 
 /**
  * Derive a sane DEFAULT V8 heap ceiling (MB) from the host's physical RAM, used
- * when `OMNIROUTE_MEMORY_MB` is unset. A fixed 512MB default crashed boxes with
+ * when `NIYATNAROUTE_MEMORY_MB` is unset. A fixed 512MB default crashed boxes with
  * plenty of RAM under load (65 providers / 2600 models → "Ineffective
  * mark-compacts near heap limit ~500MB"); see #5172 / #5160 / #5152. Targets
  * ~35% of total RAM, clamped to [512, 4096]. Invalid/zero totalmem → 512.
  * Pass the result as the `fallback` of {@link resolveMaxOldSpaceMb} so an
- * explicit OMNIROUTE_MEMORY_MB override always wins.
+ * explicit NIYATNAROUTE_MEMORY_MB override always wins.
  * @param {number | undefined | null} totalmemBytes — typically `os.totalmem()`
  */
 export function calibrateHeapFallbackMb(totalmemBytes) {
@@ -40,7 +40,7 @@ const MAX_OLD_SPACE_FLAG = "--max-old-space-size";
 
 /**
  * True when the caller already pinned the V8 heap via NODE_OPTIONS
- * (`--max-old-space-size=…`). Used to decide whether `omniroute serve` may
+ * (`--max-old-space-size=…`). Used to decide whether `niyatnaroute serve` may
  * append/inject the calibrated default — a user-set value must always win.
  * @param {NodeJS.ProcessEnv | Record<string, string | undefined>} [env]
  */
@@ -51,7 +51,7 @@ export function envHasExplicitHeapFlag(env) {
 
 /**
  * Assemble the NODE_OPTIONS string for the spawned server, preserving any flags
- * the user already exported. #5238: `omniroute serve` used to UNCONDITIONALLY
+ * the user already exported. #5238: `niyatnaroute serve` used to UNCONDITIONALLY
  * overwrite NODE_OPTIONS with the calibrated `--max-old-space-size`, silently
  * discarding a user-set `NODE_OPTIONS=--max-old-space-size=8192` (reporter set
  * 8192 and still OOM'd at ~505MB). Mirrors the Electron (electron/main.js) and
@@ -91,7 +91,7 @@ export function buildNodeHeapArgs(env = process.env, memoryLimit) {
  *        Defaults to process.env. Pass bootstrap `merged` so project `.env` PORT applies before spawn.
  */
 export function resolveRuntimePorts(fromEnv = process.env) {
-  const basePort = parsePort(fromEnv.PORT || "20128", 20128);
+  const basePort = parsePort(fromEnv.PORT || "9999", 9999);
   const apiPort = parsePort(fromEnv.API_PORT || String(basePort), basePort);
   const dashboardPort = parsePort(fromEnv.DASHBOARD_PORT || String(basePort), basePort);
 
@@ -103,7 +103,7 @@ export function withRuntimePortEnv(env, runtimePorts) {
 
   return {
     ...env,
-    OMNIROUTE_PORT: String(basePort),
+    NIYATNAROUTE_PORT: String(basePort),
     PORT: String(dashboardPort),
     DASHBOARD_PORT: String(dashboardPort),
     API_PORT: String(apiPort),

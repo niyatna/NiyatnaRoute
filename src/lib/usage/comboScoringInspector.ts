@@ -16,9 +16,9 @@ import {
   type ScoringFactors,
   type ScoringWeights,
   validateWeights,
-} from "@omniroute/open-sse/services/autoCombo/scoring.ts";
-import { getModePack } from "@omniroute/open-sse/services/autoCombo/modePacks.ts";
-import { getTaskFitness } from "@omniroute/open-sse/services/autoCombo/taskFitness.ts";
+} from "@niyatnaroute/open-sse/services/autoCombo/scoring.ts";
+import { getModePack } from "@niyatnaroute/open-sse/services/autoCombo/modePacks.ts";
+import { getTaskFitness } from "@niyatnaroute/open-sse/services/autoCombo/taskFitness.ts";
 import type {
   ComboAutopilotCombo,
   ComboAutopilotReport,

@@ -1,15 +1,10 @@
-import { registerMemory } from "./memory.mjs";
-import { registerSkills } from "./skills.mjs";
 import { registerAudit } from "./audit.mjs";
 import { registerOAuth } from "./oauth.mjs";
 import { registerLogin } from "./login.mjs";
 import { registerCloud } from "./cloud.mjs";
-import { registerEval } from "./eval.mjs";
 import { registerWebhooks } from "./webhooks.mjs";
 import { registerPolicy } from "./policy.mjs";
 import { registerCompression } from "./compression.mjs";
-import { registerFiles } from "./files.mjs";
-import { registerBatches } from "./batches.mjs";
 import { registerTranslator } from "./translator.mjs";
 import { registerPricing } from "./pricing.mjs";
 import { registerResilience } from "./resilience.mjs";
@@ -19,7 +14,6 @@ import { registerContextEng } from "./context-eng.mjs";
 import { registerSessions } from "./sessions.mjs";
 import { registerTags } from "./tags.mjs";
 import { registerOpenapi } from "./openapi.mjs";
-import { registerOneProxy } from "./oneproxy.mjs";
 import { registerTelemetry } from "./telemetry.mjs";
 import { registerOpen } from "./open.mjs";
 import { registerChat } from "./chat.mjs";
@@ -49,7 +43,6 @@ import { registerQuota } from "./quota.mjs";
 import { registerCache } from "./cache.mjs";
 import { registerRedis } from "./redis.mjs";
 import { registerMcp } from "./mcp.mjs";
-import { registerA2a } from "./a2a.mjs";
 import { registerTunnel } from "./tunnel.mjs";
 import { registerEnv } from "./env.mjs";
 import { registerTestProvider } from "./test-provider.mjs";
@@ -77,21 +70,15 @@ import { registerContexts } from "./contexts.mjs";
 import { registerTokens } from "./tokens.mjs";
 import { registerConfigure } from "./configure.mjs";
 import { registerApiCommands } from "../api-commands/registry.mjs";
-import { registerPlugin } from "./plugin.mjs";
 
 export function registerCommands(program) {
-  registerMemory(program);
-  registerSkills(program);
   registerAudit(program);
   registerOAuth(program);
   registerLogin(program);
   registerCloud(program);
-  registerEval(program);
   registerWebhooks(program);
   registerPolicy(program);
   registerCompression(program);
-  registerFiles(program);
-  registerBatches(program);
   registerTranslator(program);
   registerPricing(program);
   registerResilience(program);
@@ -101,7 +88,6 @@ export function registerCommands(program) {
   registerSessions(program);
   registerTags(program);
   registerOpenapi(program);
-  registerOneProxy(program);
   registerTelemetry(program);
   registerOpen(program);
   registerChat(program);
@@ -132,7 +118,6 @@ export function registerCommands(program) {
   registerCache(program);
   registerRedis(program);
   registerMcp(program);
-  registerA2a(program);
   registerTunnel(program);
   registerEnv(program);
   registerTestProvider(program);
@@ -160,5 +145,4 @@ export function registerCommands(program) {
   registerTokens(program);
   registerConfigure(program);
   registerApiCommands(program);
-  registerPlugin(program);
 }

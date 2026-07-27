@@ -1,7 +1,7 @@
 export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   // Home
   "home",
-  // OmniProxy — flat
+  // NiyatnaRouteProxy — flat
   "api-manager",
   "endpoints",
   "providers",
@@ -9,7 +9,7 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "combos",
   "combos-live",
   "quota",
-  // OmniProxy > Compression Context (Settings → Combos → engines → Studio)
+  // NiyatnaRouteProxy > Compression Context (Settings → Combos → engines → Studio)
   "context-settings",
   "context-combos",
   "context-caveman",
@@ -24,20 +24,14 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "context-omniglyph",
   "compression-studio",
   "compression-exclusions",
-  // OmniProxy > Tools
+  // NiyatnaRouteProxy > Tools
   "cli-code",
   "cli-agents",
   "acp-agents",
   "cloud-agents",
-  "agent-bridge",
-  "traffic-inspector",
-  "discovery",
-  // OmniProxy > Integrations
+  // NiyatnaRouteProxy > Integrations
   "api-endpoints",
   "webhooks",
-  // OmniProxy — proxy tools
-  "mitm-proxy",
-  "1proxy",
   // Analytics
   "analytics",
   "analytics-combo-health",
@@ -46,7 +40,6 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "cache",
   "analytics-compression",
   "analytics-search",
-  "analytics-evals",
   "provider-stats",
   // Monitoring — flat
   "activity",
@@ -65,28 +58,12 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   // Monitoring > Audit
   "audit",
   "audit-mcp",
-  "audit-a2a",
   // Dev Tools
   "translator",
   "playground",
   "search-tools",
-  // Agentic Features
-  "memory",
-  "skills",
-  "agent-skills",
-  "chaos-config",
+  // Core Extensions
   "mcp",
-  "a2a",
-  "plugins",
-  // Gamification
-  "leaderboard",
-  "profile",
-  "tokens",
-  // Other Features — flat
-  "media",
-  // Other Features > Batch
-  "batch",
-  "batch-files",
   // Configuration
   "settings-general",
   "settings-appearance",
@@ -119,8 +96,6 @@ export type SidebarSectionId =
   | "costs"
   | "monitoring"
   | "devtools"
-  | "agentic-features"
-  | "other-features"
   | "configuration"
   | "help";
 

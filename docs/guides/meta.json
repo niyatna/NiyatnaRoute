@@ -5,7 +5,6 @@
     "SETUP_GUIDE",
     "USER_GUIDE",
     "DOCKER_GUIDE",
-    "ELECTRON_GUIDE",
     "FEATURES",
     "FREE_PROVIDER_RANKINGS",
     "COST_TRACKING",
@@ -19,3 +18,4 @@
     "UNINSTALL"
   ]
 }
+

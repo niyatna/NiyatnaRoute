@@ -1,25 +1,25 @@
-import { handleEmbedding } from "@omniroute/open-sse/handlers/embeddings.ts";
+import { handleEmbedding } from "@niyatnaroute/open-sse/handlers/embeddings.ts";
 import {
   parseEmbeddingModel,
   getEmbeddingProvider,
   buildDynamicEmbeddingProvider,
   type EmbeddingProviderNodeRow,
   type EmbeddingProvider,
-} from "@omniroute/open-sse/config/embeddingRegistry.ts";
-import { errorResponse, unavailableResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+} from "@niyatnaroute/open-sse/config/embeddingRegistry.ts";
+import { errorResponse, unavailableResponse } from "@niyatnaroute/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatnaroute/open-sse/config/constants.ts";
 import * as log from "@/sse/utils/logger";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
 import { getProviderCredentials, clearRecoveredProviderState } from "@/sse/services/auth";
 import { getCachedProviderNodes, getComboByName, getCombos, getDatabaseSettings } from "@/lib/localDb";
 import { resolveProxyForConnection } from "@/lib/db/settings";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
-import { handleComboChat } from "@omniroute/open-sse/services/combo.ts";
-import { resolveBareModelToConnectionDefault } from "@omniroute/open-sse/services/model.ts";
+import { runWithProxyContext } from "@niyatnaroute/open-sse/utils/proxyFetch.ts";
+import { handleComboChat } from "@niyatnaroute/open-sse/services/combo.ts";
+import { resolveBareModelToConnectionDefault } from "@niyatnaroute/open-sse/services/model.ts";
 import { findEmbeddingComboDimensionConflict } from "./familyGuard";
 import { isPrivateHost, isCloudMetadataHost } from "@/shared/network/outboundUrlGuard";
 import { calculateCost } from "@/lib/usage/costCalculator";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 
 type ValidatedEmbeddingBody = Record<string, unknown> & { model: string };
@@ -284,7 +284,7 @@ export async function createEmbeddingResponse(
     responseHeaders.set("Content-Type", "application/json");
     const usage = (result.data as { usage?: Record<string, number> })?.usage ?? null;
     const costUsd = usage ? await calculateCost(provider, effectiveModel ?? "", usage) : 0;
-    attachOmniRouteMetaHeaders(responseHeaders, {
+    attachNiyatnaRouteMetaHeaders(responseHeaders, {
       provider,
       model: effectiveModel,
       usage,

@@ -1,4 +1,4 @@
-import { getActiveSessionCount } from "@omniroute/open-sse/services/sessionManager.ts";
+import { getActiveSessionCount } from "@niyatnaroute/open-sse/services/sessionManager.ts";
 
 /**
  * Connection back-pressure for SSE / streaming endpoints.
@@ -7,7 +7,7 @@ import { getActiveSessionCount } from "@omniroute/open-sse/services/sessionManag
  * session count from `sessionManager` — the same source the health endpoint
  * uses to report `activeConnections`.
  *
- * Set `OMNI_MAX_CONCURRENT_CONNECTIONS` to a positive integer to enable.
+ * Set `NIYATNAROUTE_MAX_CONCURRENT_CONNECTIONS` to a positive integer to enable.
  * Default is 0 (disabled) so existing deployments are unaffected until
  * an operator explicitly opts in.
  */
@@ -52,7 +52,7 @@ export function evalCapacity(active: number, cap: number): CapacityResult {
 
 /** Read cap from env on every call so tests can mutate process.env freely. */
 function readCap(): number {
-  const raw = parseInt(process.env.OMNI_MAX_CONCURRENT_CONNECTIONS ?? "0", 10);
+  const raw = parseInt(process.env.NIYATNAROUTE_MAX_CONCURRENT_CONNECTIONS ?? "0", 10);
   return Number.isFinite(raw) && raw > 0 ? raw : 0;
 }
 

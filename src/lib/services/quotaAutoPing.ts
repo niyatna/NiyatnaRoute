@@ -20,10 +20,10 @@
  * no real timers, no real DB, no real network.
  */
 
-import { logger } from "@omniroute/open-sse/utils/logger.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
-import { getExecutor } from "@omniroute/open-sse/executors/index.ts";
-import { getCodexUsage } from "@omniroute/open-sse/services/usage/codex.ts";
+import { logger } from "@niyatnaroute/open-sse/utils/logger.ts";
+import { sanitizeErrorMessage } from "@niyatnaroute/open-sse/utils/error.ts";
+import { getExecutor } from "@niyatnaroute/open-sse/executors/index.ts";
+import { getCodexUsage } from "@niyatnaroute/open-sse/services/usage/codex.ts";
 import { getSettings, getProviderConnections, updateProviderConnection } from "@/lib/localDb";
 import { refreshAndUpdateCredentials } from "@/lib/usage/providerLimits";
 import { getCircuitBreaker } from "@/shared/utils/circuitBreaker";

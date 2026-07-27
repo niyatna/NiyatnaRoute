@@ -147,3 +147,11 @@ export function deletePlan(connectionId: string): boolean {
     .run(connectionId);
   return result.changes > 0;
 }
+
+export {
+  getPlan as getProviderPlan,
+  upsertPlan as setProviderPlan,
+  deletePlan as deleteProviderPlan,
+  listPlans as listProviderPlans,
+};
+

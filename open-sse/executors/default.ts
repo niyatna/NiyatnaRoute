@@ -119,7 +119,7 @@ export class DefaultExecutor extends BaseExecutor {
       const normalized = baseUrl.replace(/\/$/, "");
       const customPath = typeof psd?.chatPath === "string" && psd.chatPath ? psd.chatPath : null;
       if (customPath) return `${normalized}${customPath}`;
-      const forceResponses = psd?._omnirouteForceResponsesUpstream === true;
+      const forceResponses = psd?._niyatnarouteForceResponsesUpstream === true;
       const path =
         forceResponses || getOpenAICompatibleType(this.provider, psd) === "responses"
           ? "/responses"
@@ -191,7 +191,7 @@ export class DefaultExecutor extends BaseExecutor {
       }
       case "azure-ai": {
         const forceResponses =
-          credentials?.providerSpecificData?._omnirouteForceResponsesUpstream === true;
+          credentials?.providerSpecificData?._niyatnarouteForceResponsesUpstream === true;
         const apiType =
           forceResponses || credentials?.providerSpecificData?.apiType === "responses"
             ? "responses"
@@ -210,7 +210,7 @@ export class DefaultExecutor extends BaseExecutor {
       }
       case "oci": {
         const forceResponses =
-          credentials?.providerSpecificData?._omnirouteForceResponsesUpstream === true;
+          credentials?.providerSpecificData?._niyatnarouteForceResponsesUpstream === true;
         const apiType =
           forceResponses || credentials?.providerSpecificData?.apiType === "responses"
             ? "responses"

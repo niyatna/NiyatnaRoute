@@ -8,14 +8,14 @@ import {
 } from "../../open-sse/utils/sseHeartbeat.ts";
 
 function withEnv(value: string | undefined, fn: () => void) {
-  const prev = process.env.OMNIROUTE_SSE_COMMENTS;
+  const prev = process.env.NIYATNAROUTE_SSE_COMMENTS;
   try {
-    if (value === undefined) delete process.env.OMNIROUTE_SSE_COMMENTS;
-    else process.env.OMNIROUTE_SSE_COMMENTS = value;
+    if (value === undefined) delete process.env.NIYATNAROUTE_SSE_COMMENTS;
+    else process.env.NIYATNAROUTE_SSE_COMMENTS = value;
     fn();
   } finally {
-    if (prev === undefined) delete process.env.OMNIROUTE_SSE_COMMENTS;
-    else process.env.OMNIROUTE_SSE_COMMENTS = prev;
+    if (prev === undefined) delete process.env.NIYATNAROUTE_SSE_COMMENTS;
+    else process.env.NIYATNAROUTE_SSE_COMMENTS = prev;
   }
 }
 
@@ -37,9 +37,9 @@ test("shapeForClientFormat maps known client formats", () => {
   assert.equal(shapeForClientFormat(undefined), HEARTBEAT_SHAPES.COMMENT);
 });
 
-test("createSseHeartbeatTransform suppresses COMMENT heartbeats when OMNIROUTE_SSE_COMMENTS=off", async () => {
-  const prev = process.env.OMNIROUTE_SSE_COMMENTS;
-  process.env.OMNIROUTE_SSE_COMMENTS = "off";
+test("createSseHeartbeatTransform suppresses COMMENT heartbeats when NIYATNAROUTE_SSE_COMMENTS=off", async () => {
+  const prev = process.env.NIYATNAROUTE_SSE_COMMENTS;
+  process.env.NIYATNAROUTE_SSE_COMMENTS = "off";
   try {
     const enc = new TextEncoder();
     const dec = new TextDecoder();
@@ -69,7 +69,7 @@ test("createSseHeartbeatTransform suppresses COMMENT heartbeats when OMNIROUTE_S
     assert.ok(!out.includes(": keepalive"), "no comment heartbeat should be emitted when disabled");
     assert.ok(out.includes("data: hello"), "original chunk passes through unchanged");
   } finally {
-    if (prev === undefined) delete process.env.OMNIROUTE_SSE_COMMENTS;
-    else process.env.OMNIROUTE_SSE_COMMENTS = prev;
+    if (prev === undefined) delete process.env.NIYATNAROUTE_SSE_COMMENTS;
+    else process.env.NIYATNAROUTE_SSE_COMMENTS = prev;
   }
 });

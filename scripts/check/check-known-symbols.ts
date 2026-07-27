@@ -249,9 +249,9 @@ export function findNewMcpTools(frozen: readonly string[], live: Set<string>): s
  * the reason in the commit message.
  *
  * Sources:
- *   - MCP_TOOLS (33 base tools: omniroute_* + compression + agent_skills)
- *   - memoryTools (3): omniroute_memory_*
- *   - skillTools (4): omniroute_skills_*
+ *   - MCP_TOOLS (33 base tools: niyatnaroute_* + compression + agent_skills)
+ *   - memoryTools (3): niyatnaroute_memory_*
+ *   - skillTools (4): niyatnaroute_skills_*
  *   - gamificationTools (8): gamification_*
  *   - pluginTools (8): plugin_*
  *   - notionTools (6): notion_*
@@ -260,48 +260,48 @@ export function findNewMcpTools(frozen: readonly string[], live: Set<string>): s
  */
 export const KNOWN_MCP_TOOL_NAMES: readonly string[] = [
   // MCP_TOOLS base (33)
-  "omniroute_get_health",
-  "omniroute_list_combos",
-  "omniroute_get_combo_metrics",
-  "omniroute_switch_combo",
-  "omniroute_check_quota",
-  "omniroute_route_request",
-  "omniroute_cost_report",
-  "omniroute_list_models_catalog",
-  "omniroute_web_search",
-  "omniroute_simulate_route",
-  "omniroute_set_budget_guard",
-  "omniroute_set_routing_strategy",
-  "omniroute_set_resilience_profile",
-  "omniroute_test_combo",
-  "omniroute_get_provider_metrics",
-  "omniroute_best_combo_for_task",
-  "omniroute_explain_route",
-  "omniroute_get_session_snapshot",
-  "omniroute_db_health_check",
-  "omniroute_sync_pricing",
-  "omniroute_cache_stats",
-  "omniroute_cache_flush",
-  "omniroute_compression_status",
-  "omniroute_compression_configure",
-  "omniroute_set_compression_engine",
-  "omniroute_list_compression_combos",
-  "omniroute_compression_combo_stats",
-  "omniroute_oneproxy_fetch",
-  "omniroute_oneproxy_rotate",
-  "omniroute_oneproxy_stats",
-  "omniroute_agent_skills_list",
-  "omniroute_agent_skills_get",
-  "omniroute_agent_skills_coverage",
+  "niyatnaroute_get_health",
+  "niyatnaroute_list_combos",
+  "niyatnaroute_get_combo_metrics",
+  "niyatnaroute_switch_combo",
+  "niyatnaroute_check_quota",
+  "niyatnaroute_route_request",
+  "niyatnaroute_cost_report",
+  "niyatnaroute_list_models_catalog",
+  "niyatnaroute_web_search",
+  "niyatnaroute_simulate_route",
+  "niyatnaroute_set_budget_guard",
+  "niyatnaroute_set_routing_strategy",
+  "niyatnaroute_set_resilience_profile",
+  "niyatnaroute_test_combo",
+  "niyatnaroute_get_provider_metrics",
+  "niyatnaroute_best_combo_for_task",
+  "niyatnaroute_explain_route",
+  "niyatnaroute_get_session_snapshot",
+  "niyatnaroute_db_health_check",
+  "niyatnaroute_sync_pricing",
+  "niyatnaroute_cache_stats",
+  "niyatnaroute_cache_flush",
+  "niyatnaroute_compression_status",
+  "niyatnaroute_compression_configure",
+  "niyatnaroute_set_compression_engine",
+  "niyatnaroute_list_compression_combos",
+  "niyatnaroute_compression_combo_stats",
+  "niyatnaroute_oneproxy_fetch",
+  "niyatnaroute_oneproxy_rotate",
+  "niyatnaroute_oneproxy_stats",
+  "niyatnaroute_agent_skills_list",
+  "niyatnaroute_agent_skills_get",
+  "niyatnaroute_agent_skills_coverage",
   // memoryTools (3)
-  "omniroute_memory_search",
-  "omniroute_memory_add",
-  "omniroute_memory_clear",
+  "niyatnaroute_memory_search",
+  "niyatnaroute_memory_add",
+  "niyatnaroute_memory_clear",
   // skillTools (4)
-  "omniroute_skills_list",
-  "omniroute_skills_enable",
-  "omniroute_skills_execute",
-  "omniroute_skills_executions",
+  "niyatnaroute_skills_list",
+  "niyatnaroute_skills_enable",
+  "niyatnaroute_skills_execute",
+  "niyatnaroute_skills_executions",
   // gamificationTools (8)
   "gamification_leaderboard",
   "gamification_rank",
@@ -444,7 +444,7 @@ async function main(): Promise<void> {
   const failures: string[] = [];
 
   // ── (1) Executor conformance ──────────────────────────────────────────────
-  const executorsMod = await import("@omniroute/open-sse/executors/index.ts");
+  const executorsMod = await import("@niyatnaroute/open-sse/executors/index.ts");
   const getExecutor = executorsMod.getExecutor as (alias: string) => ExecutorLike;
   const BaseExecutor = executorsMod.BaseExecutor as new (...args: never[]) => unknown;
   const indexSource = readFileSync(resolvePath(REPO_ROOT, "open-sse/executors/index.ts"), "utf8");
@@ -519,11 +519,11 @@ async function main(): Promise<void> {
   }
 
   // ── (3) Translator pairs ──────────────────────────────────────────────────
-  await import("@omniroute/open-sse/translator/bootstrap.ts").then((m) =>
+  await import("@niyatnaroute/open-sse/translator/bootstrap.ts").then((m) =>
     (m.bootstrapTranslatorRegistry as () => void)()
   );
-  const formatsMod = await import("@omniroute/open-sse/translator/formats.ts");
-  const registryMod = await import("@omniroute/open-sse/translator/registry.ts");
+  const formatsMod = await import("@niyatnaroute/open-sse/translator/formats.ts");
+  const registryMod = await import("@niyatnaroute/open-sse/translator/registry.ts");
   const FORMATS = formatsMod.FORMATS as Record<string, string>;
   const getRequestTranslator = registryMod.getRequestTranslator as (
     from: string,
@@ -554,14 +554,14 @@ async function main(): Promise<void> {
   const newPairs = findNewTranslatorPairs(KNOWN_TRANSLATOR_PAIRS, livePairs);
 
   // ── (4) MCP tools scope + snapshot ───────────────────────────────────────
-  const { MCP_TOOLS } = await import("@omniroute/open-sse/mcp-server/schemas/tools.ts");
-  const { memoryTools } = await import("@omniroute/open-sse/mcp-server/tools/memoryTools.ts");
-  const { skillTools } = await import("@omniroute/open-sse/mcp-server/tools/skillTools.ts");
+  const { MCP_TOOLS } = await import("@niyatnaroute/open-sse/mcp-server/schemas/tools.ts");
+  const { memoryTools } = await import("@niyatnaroute/open-sse/mcp-server/tools/memoryTools.ts");
+  const { skillTools } = await import("@niyatnaroute/open-sse/mcp-server/tools/skillTools.ts");
   const { gamificationTools } =
-    await import("@omniroute/open-sse/mcp-server/tools/gamificationTools.ts");
-  const { pluginTools } = await import("@omniroute/open-sse/mcp-server/tools/pluginTools.ts");
-  const { notionTools } = await import("@omniroute/open-sse/mcp-server/tools/notionTools.ts");
-  const { obsidianTools } = await import("@omniroute/open-sse/mcp-server/tools/obsidianTools.ts");
+    await import("@niyatnaroute/open-sse/mcp-server/tools/gamificationTools.ts");
+  const { pluginTools } = await import("@niyatnaroute/open-sse/mcp-server/tools/pluginTools.ts");
+  const { notionTools } = await import("@niyatnaroute/open-sse/mcp-server/tools/notionTools.ts");
+  const { obsidianTools } = await import("@niyatnaroute/open-sse/mcp-server/tools/obsidianTools.ts");
 
   // Build the full live set of registered tools (deduped by RESERVED_MCP_NAMES logic:
   // agentSkillTools + compressionTools are already in MCP_TOOLS).

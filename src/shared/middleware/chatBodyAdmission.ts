@@ -16,34 +16,34 @@ function parsePositiveInt(value: string | undefined, fallback: number): number {
 }
 
 export const CHAT_LARGE_BODY_BYTES = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_LARGE_BODY_BYTES,
+  process.env.NIYATNAROUTE_CHAT_LARGE_BODY_BYTES,
   256 * 1024
 );
 
 export const CHAT_HARD_MAX_BODY_BYTES = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HARD_MAX_BODY_BYTES,
+  process.env.NIYATNAROUTE_CHAT_HARD_MAX_BODY_BYTES,
   50 * 1024 * 1024
 );
 
 const CHAT_MAX_HEAVY_IN_FLIGHT = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_MAX_HEAVY_IN_FLIGHT,
+  process.env.NIYATNAROUTE_CHAT_MAX_HEAVY_IN_FLIGHT,
   1
 );
 
 export const CHAT_HEAVY_MESSAGE_COUNT = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HEAVY_MESSAGE_COUNT,
+  process.env.NIYATNAROUTE_CHAT_HEAVY_MESSAGE_COUNT,
   200
 );
 export const CHAT_HEAVY_TOOL_COUNT = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HEAVY_TOOL_COUNT,
+  process.env.NIYATNAROUTE_CHAT_HEAVY_TOOL_COUNT,
   64
 );
 export const CHAT_HEAVY_ESTIMATED_TOKENS = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HEAVY_ESTIMATED_TOKENS,
+  process.env.NIYATNAROUTE_CHAT_HEAVY_ESTIMATED_TOKENS,
   32_000
 );
 export const CHAT_HARD_MAX_MESSAGES = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HARD_MAX_MESSAGES,
+  process.env.NIYATNAROUTE_CHAT_HARD_MAX_MESSAGES,
   800
 );
 
@@ -54,7 +54,7 @@ export interface ChatAdmissionLease {
 
 /**
  * Process-local heavyweight reservation. The capacity check and increment execute in one
- * synchronous JavaScript turn, making acquisition atomic within an OmniRoute process.
+ * synchronous JavaScript turn, making acquisition atomic within an NiyatnaRoute process.
  * Queueing is intentionally separate: unavailable capacity is a retryable 503.
  */
 export class ChatAdmissionController {

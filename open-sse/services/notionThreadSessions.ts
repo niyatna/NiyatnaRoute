@@ -76,7 +76,7 @@ function getThreadStorePath(): string | null {
   try {
     const dataDir =
       process.env.DATA_DIR ||
-      process.env.OMNIROUTE_DATA_DIR ||
+      process.env.NIYATNAROUTE_DATA_DIR ||
       process.env.VIBEPROXY_DATA_DIR ||
       "";
     if (!dataDir) return null;

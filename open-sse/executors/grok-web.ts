@@ -28,10 +28,6 @@ import {
   type TlsFetchResult,
 } from "../services/grokTlsClient.ts";
 import { sanitizeErrorMessage } from "../utils/error.ts";
-import {
-  shouldUseGrokBrowserBacked,
-  acquireFreshGrokClearance,
-} from "../services/grokClearance.ts";
 import type { GrokStreamEvent } from "./grok-web/types.ts";
 import {
   type OpenAIToolCall,
@@ -56,7 +52,7 @@ const GROK_USER_AGENT =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36";
 
 // ─── Model mappings ─────────────────────────────────────────────────────────
-// Grok Web exposes UI modes, not stable public model IDs. Keep OmniRoute model
+// Grok Web exposes UI modes, not stable public model IDs. Keep NiyatnaRoute model
 // IDs mapped directly to Grok's modeId field.
 
 interface GrokModelInfo {
@@ -792,10 +788,7 @@ export async function resolveGrokNullBodyTlsResult(params: {
   const { tlsResult, headers, grokPayload, signal, log } = params;
   if (tlsResult.body) return tlsResult;
 
-  const classification = classifyGrokNullBodyError(tlsResult.status, tlsResult.text);
-  if (classification.type !== "cloudflare_challenge" || !shouldUseGrokBrowserBacked()) {
-    return tlsResult;
-  }
+  return tlsResult;
 
   log?.info?.(
     "GROK-WEB",

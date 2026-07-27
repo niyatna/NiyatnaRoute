@@ -1,18 +1,18 @@
 ---
-title: "OmniRoute Codebase Documentation"
+title: "NiyatnaRoute Codebase Documentation"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# OmniRoute Codebase Documentation
+# NiyatnaRoute Codebase Documentation
 
 > **Version:** v3.8.0
 > **Last updated:** 2026-06-28
-> **Audience:** Engineers contributing to OmniRoute or building integrations on top of it.
+> **Audience:** Engineers contributing to NiyatnaRoute or building integrations on top of it.
 >
 > For high-level architecture diagrams and the reasoning behind each subsystem, read
 > [ARCHITECTURE.md](./ARCHITECTURE.md). For deep dives on individual subsystems
-> (Auto Combo, MCP server, A2A server, Skills, Memory, Cloud Agents, Resilience,
+> (Auto Combo, MCP server, Skills, Cloud Agents, Resilience,
 > Compression, etc.) see their dedicated files in this `docs/` directory.
 
 This file describes **what exists in the repository today** so that a new engineer
@@ -29,8 +29,7 @@ without inventing new modules.
 | Language      | **TypeScript 6.0+** — target `ES2022`, `module: esnext`, `moduleResolution: bundler`, `strict: false`                    |
 | Runtime       | **Node.js** `>=22.22.2 <23` or `>=24.0.0 <27` (enforced via `engines` + `SUPPORTED_NODE_RANGE`)                          |
 | Database      | **SQLite** via `better-sqlite3` (singleton, WAL journaling)                                                              |
-| Desktop       | **Electron 41** + `electron-builder` 26.10 (separate workspace at `electron/`)                                           |
-| Tests         | **Node native test runner** (unit/integration), **Vitest** (MCP, autoCombo, cache), **Playwright** (e2e + protocols-e2e) |
+| Tests         | **Node native test runner** (unit/integration), **Vitest** (MCP, autoCombo, cache), **Playwright** (e2e)               |
 | Build         | Next.js standalone via `scripts/build/build-next-isolated.mjs`                                                           |
 | Lint/format   | ESLint flat config + Prettier (`lint-staged` via Husky pre-commit)                                                       |
 | Module system | ESM everywhere (`"type": "module"`)                                                                                      |
@@ -39,22 +38,21 @@ without inventing new modules.
 Path aliases (`tsconfig.json`):
 
 - `@/*` → `src/*`
-- `@omniroute/open-sse` → `open-sse/index.ts`
-- `@omniroute/open-sse/*` → `open-sse/*`
+- `@niyatnaroute/open-sse` → `open-sse/index.ts`
+- `@niyatnaroute/open-sse/*` → `open-sse/*`
 
-Default HTTP port: **`20128`** (API and dashboard share the same process). Data
-directory is `DATA_DIR` env var, defaulting to `~/.omniroute/`.
+Default HTTP port: **`9999`** (API and dashboard share the same process). Data
+directory is `DATA_DIR` env var, defaulting to `~/.niyatnaroute/`.
 
 ---
 
 ## 2. Repository Layout
 
 ```
-OmniRoute/
+NiyatnaRoute/
 ├── src/                  Next.js application (App Router, libs, domain, server, shared)
-├── open-sse/             Streaming engine workspace (@omniroute/open-sse)
-├── electron/             Desktop wrapper (Electron 41 main + preload)
-├── bin/                  CLI entry points (omniroute, reset-password)
+├── open-sse/             Streaming engine workspace (@niyatnaroute/open-sse)
+├── bin/                  CLI entry points (niyatnaroute, reset-password)
 ├── tests/                Unit, integration, e2e, protocols-e2e, translator, security, fixtures
 ├── scripts/              Build, sync, check, migration, and runtime helper scripts
 ├── docs/                 Public documentation (this directory)
@@ -103,8 +101,6 @@ Top-level segments under `src/app/`:
 | Path                                                                          | Purpose                                   |
 | ----------------------------------------------------------------------------- | ----------------------------------------- |
 | `api/`                                                                        | All HTTP API routes (see breakdown below) |
-| `a2a/`                                                                        | A2A JSON-RPC 2.0 endpoint (`POST /a2a`)   |
-| `.well-known/agent.json/`                                                     | A2A Agent Card discovery document         |
 | `(dashboard)/`                                                                | Dashboard UI (route group, no URL prefix) |
 | `auth/`, `login/`, `forgot-password/`, `callback/`                            | Auth flows                                |
 | `landing/`                                                                    | Marketing/landing page                    |
@@ -302,7 +298,7 @@ table groups the actual directories and notable top-level files.
 | `runtime/`        | Runtime feature detection                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `search/`         | `executeWebSearch.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `services/`       | Embedded services framework: `ServiceSupervisor.ts` (generic child-process supervisor with operation lock, ring buffer, health checker), `bootstrap.ts` (process-level registration and auto-start), `registry.ts` (tool → supervisor map), `apiKey.ts` (AES-256-GCM key store), `modelSync.ts` (periodic model sync), `ringBuffer.ts` (5 MB circular log buffer), `healthCheck.ts` (HTTP health probe), `types.ts`, `embedWsProxy.ts` (WebSocket proxy), `installers/{ninerouter,cliproxy}.ts`. See `docs/frameworks/EMBEDDED-SERVICES.md`                                                                                                                                      |
-| `agentSkills/`    | Agent Skills catalog + generator: `catalog.ts` (getCatalog/getSkillById/filterCatalog/computeCoverage), `generator.ts` (generateAgentSkills → writes `skills/{id}/SKILL.md`), `openapiParser.ts` (extracts REST endpoints from OpenAPI spec), `cliRegistryParser.ts` (extracts CLI subcommands from bin/cli-registry), `schemas.ts` (Zod: AgentSkillSchema, SkillCoverageSchema, ListQuerySchema, GenerateBodySchema), `types.ts` (AgentSkill, SkillCoverage, SkillMarkdown, GeneratorReport). Consumed by REST routes (`/api/agent-skills/*`), MCP tools (`omniroute_agent_skills_*`), and A2A skill `list-capabilities`. See [AGENT-SKILLS.md](../frameworks/AGENT-SKILLS.md). |
+| `agentSkills/`    | Agent Skills catalog + generator: `catalog.ts` (getCatalog/getSkillById/filterCatalog/computeCoverage), `generator.ts` (generateAgentSkills → writes `skills/{id}/SKILL.md`), `openapiParser.ts` (extracts REST endpoints from OpenAPI spec), `cliRegistryParser.ts` (extracts CLI subcommands from bin/cli-registry), `schemas.ts` (Zod: AgentSkillSchema, SkillCoverageSchema, ListQuerySchema, GenerateBodySchema), `types.ts` (AgentSkill, SkillCoverage, SkillMarkdown, GeneratorReport). Consumed by REST routes (`/api/agent-skills/*`), MCP tools (`niyatnaroute_agent_skills_*`), and A2A skill `list-capabilities`. See [AGENT-SKILLS.md](../frameworks/AGENT-SKILLS.md). |
 | `skills/`         | Skill framework: `registry.ts`, `executor.ts`, `interception.ts`, `injection.ts`, `sandbox.ts`, `custom.ts`, `hybrid.ts`, `builtins.ts`, `a2a.ts`, `providerSettings.ts`, `schemas.ts`, `skillssh.ts`, `types.ts`, plus `builtin/browser.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `spend/`          | `batchWriter.ts` (write-behind buffer)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `sync/`           | `bundle.ts`, `tokens.ts` (Cloud Sync)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -389,7 +385,7 @@ Pure business logic, no I/O. Imported by routes and handlers.
 | `degradation.ts`                           | Degraded-mode transitions                         |
 | `providerExpiration.ts`                    | Expired account/key detection                     |
 | `quotaCache.ts`                            | Cached quota decisions                            |
-| `responses.ts`, `omnirouteResponseMeta.ts` | Response shape helpers                            |
+| `responses.ts`, `niyatnarouteResponseMeta.ts` | Response shape helpers                            |
 | `configAudit.ts`                           | Config change audit                               |
 | `assessment/`                              | Model assessment (per RFC, partially implemented) |
 | `types.ts`                                 | Shared domain types                               |
@@ -441,7 +437,7 @@ Split into focused subdirectories:
 
 ## 4. `open-sse/` — Streaming engine workspace
 
-Separate npm workspace published as `@omniroute/open-sse`. Owns request
+Separate npm workspace published as `@niyatnaroute/open-sse`. Owns request
 processing, executors, translators, services, transformer, and the MCP server.
 
 ```
@@ -580,31 +576,11 @@ Streaming primitives and provider helpers: `stream.ts`, `streamHandler.ts`,
 
 ---
 
-## 5. `electron/` — Desktop wrapper
-
-```
-electron/
-├── main.js                  Electron main process
-├── preload.js               Preload bridge (contextIsolation enabled)
-├── types.d.ts
-├── package.json             electron-builder config, version 3.8.0
-├── README.md
-├── assets/                  Build resources (icons, entitlements, …)
-├── node_modules/            Dedicated node_modules (better-sqlite3, electron-updater)
-└── dist-electron/           Build output (not committed)
-```
-
-Five npm scripts at the workspace root: `electron:dev`, `electron:build`,
-`electron:build:{win,mac,linux}`, `electron:smoke:packaged`. Auto-update is via
-`electron-updater` pointing at the GitHub release feed.
-
----
-
-## 6. `bin/` — CLI
+## 5. `bin/` — CLI
 
 ```
 bin/
-├── omniroute.mjs           Main CLI entry (Node ESM)
+├── niyatnaroute.mjs           Main CLI entry (Node ESM)
 ├── reset-password.mjs      Reset the management password from CLI
 ├── mcp-server.mjs          MCP server launcher (stdio)
 ├── nodeRuntimeSupport.mjs  Node version guard
@@ -627,8 +603,8 @@ bin/
 
 Two binaries are exposed in `package.json` → `bin`:
 
-- `omniroute` → `bin/omniroute.mjs`
-- `omniroute-reset-password` → `bin/reset-password.mjs`
+- `niyatnaroute` → `bin/niyatnaroute.mjs`
+- `niyatnaroute-reset-password` → `bin/reset-password.mjs`
 
 ---
 
@@ -784,7 +760,7 @@ See [A2A-SERVER.md § Adding a New Skill](../frameworks/A2A-SERVER.md). Skills l
 
 - **Code style**: 2-space indent, double quotes, 100 char width, semicolons,
   `es5` trailing commas — enforced by Prettier via `lint-staged`.
-- **Imports**: external → internal (`@/`, `@omniroute/open-sse`) → relative.
+- **Imports**: external → internal (`@/`, `@niyatnaroute/open-sse`) → relative.
 - **Naming**: files `camelCase` or `kebab-case`, components `PascalCase`,
   constants `UPPER_SNAKE`.
 - **ESLint**: `no-eval`, `no-implied-eval`, `no-new-func` = `error` everywhere;
@@ -815,7 +791,7 @@ See [A2A-SERVER.md § Adding a New Skill](../frameworks/A2A-SERVER.md). Skills l
   sanitize/validation layer.
 - **Commits**: Conventional Commits — `feat(scope): subject`. Allowed scopes:
   `db`, `sse`, `oauth`, `dashboard`, `api`, `cli`, `docker`, `ci`, `mcp`,
-  `a2a`, `memory`, `skills`.
+  `skills`.
 - **Branches**: prefixes `feat/`, `fix/`, `refactor/`, `docs/`, `test/`,
   `chore/`. Never commit directly to `main`.
 - **Husky**: pre-commit runs `lint-staged` + `check:docs-sync` +
@@ -847,10 +823,9 @@ See [A2A-SERVER.md § Adding a New Skill](../frameworks/A2A-SERVER.md). Skills l
   lockout deep dive.
 - [AUTO-COMBO.md](../routing/AUTO-COMBO.md) — Auto Combo scoring and strategies.
 - [MCP-SERVER.md](../frameworks/MCP-SERVER.md) — full MCP tool catalog + transports.
-- [A2A-SERVER.md](../frameworks/A2A-SERVER.md) — A2A protocol skills and discovery.
 - [COMPRESSION_GUIDE.md](../compression/COMPRESSION_GUIDE.md) — RTK + Caveman compression.
 - [CLI-TOOLS.md](../reference/CLI-TOOLS.md) — CLI integrations.
-- [ELECTRON_GUIDE.md](../guides/ELECTRON_GUIDE.md) (if present), [DOCKER_GUIDE.md](../guides/DOCKER_GUIDE.md), [FLY_IO_DEPLOYMENT_GUIDE.md](../ops/FLY_IO_DEPLOYMENT_GUIDE.md), [VM_DEPLOYMENT_GUIDE.md](../ops/VM_DEPLOYMENT_GUIDE.md), [TERMUX_GUIDE.md](../guides/TERMUX_GUIDE.md), [PWA_GUIDE.md](../guides/PWA_GUIDE.md) — deployment targets.
+- [DOCKER_GUIDE.md](../guides/DOCKER_GUIDE.md), [FLY_IO_DEPLOYMENT_GUIDE.md](../ops/FLY_IO_DEPLOYMENT_GUIDE.md), [VM_DEPLOYMENT_GUIDE.md](../ops/VM_DEPLOYMENT_GUIDE.md), [TERMUX_GUIDE.md](../guides/TERMUX_GUIDE.md), [PWA_GUIDE.md](../guides/PWA_GUIDE.md) — deployment targets.
 - [TROUBLESHOOTING.md](../guides/TROUBLESHOOTING.md) — common operational issues.
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — contributor workflow.
 - [CLAUDE.md](../../CLAUDE.md) — repo rules for Claude Code (the source of truth

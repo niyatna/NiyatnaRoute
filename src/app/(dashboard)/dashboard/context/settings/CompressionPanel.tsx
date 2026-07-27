@@ -282,7 +282,7 @@ export default function CompressionPanel() {
             <h3 className="text-lg font-semibold">{t("compressionTitle")}</h3>
             <p className="text-sm text-text-muted">{t("compressionDesc")}</p>
             <a
-              href="https://github.com/diegosouzapw/OmniRoute/blob/main/docs/compression/COMPRESSION_GUIDE.md"
+              href="https://github.com/niyatnaroute/NiyatnaRoute/blob/main/docs/compression/COMPRESSION_GUIDE.md"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="compression-guide-link"
@@ -408,8 +408,12 @@ export default function CompressionPanel() {
         }).map((id) => {
           const meta = outputStyleMeta(id);
           const sel = config.outputStyles?.find((s) => s.id === id);
-          const styleLabel = t(`compressionOutputStyle.${id}.label`);
-          const styleDescription = t(`compressionOutputStyle.${id}.description`);
+          const styleLabel = t.has(`compressionOutputStyle.${id}.label`)
+            ? t(`compressionOutputStyle.${id}.label`)
+            : (meta?.label ?? id);
+          const styleDescription = t.has(`compressionOutputStyle.${id}.description`)
+            ? t(`compressionOutputStyle.${id}.description`)
+            : (meta?.description ?? "");
           return (
             <div
               key={id}

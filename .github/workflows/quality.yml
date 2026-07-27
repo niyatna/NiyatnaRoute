@@ -17,7 +17,7 @@ env:
   # CI must never mutate the runner's OS trust store (2026-07-05: a cert-flow
   # test installed a fake PEM on a persistent self-hosted runner and broke all
   # system TLS). Belt-and-suspenders with tests/_setup/isolateDataDir.ts.
-  OMNIROUTE_SKIP_SYSTEM_TRUST: "1"
+  NIYATNAROUTE_SKIP_SYSTEM_TRUST: "1"
   CI_NODE_VERSION: "24"
 
 jobs:
@@ -259,7 +259,7 @@ jobs:
         uses: trunk-io/analytics-uploader@385f1ccdf345b4532dc4b6c665dd432b702b8e28 # v2.1.2
         with:
           junit-paths: trunk-junit/**/*.xml
-          org-slug: omniroute
+          org-slug: niyatnaroute
           token: ${{ secrets.TRUNK_TOKEN }}
 
   fast-unit:

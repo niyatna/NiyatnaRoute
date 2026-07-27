@@ -635,7 +635,7 @@ export async function withRateLimit(provider, connectionId, model, fn, signal = 
     // Bottleneck's raw `This job timed out after <maxWaitMs> ms.` is
     // indistinguishable from an upstream gateway timeout, so it leaks into 502
     // bodies / call-log `last_error` and gets misdiagnosed as a provider outage
-    // (#4165). Rewrite it into a clear, OmniRoute-owned error (knob named,
+    // (#4165). Rewrite it into a clear, NiyatnaRoute-owned error (knob named,
     // upstream disclaimed, original kept as `cause`, `code` for classification).
     // Behavior is unchanged — the job is still dropped so combo can fall back.
     if (err?.message?.includes("This job timed out")) {
@@ -645,7 +645,7 @@ export async function withRateLimit(provider, connectionId, model, fn, signal = 
       );
       const queueErr = new Error(
         `Request dropped after exceeding the local rate-limit queue budget maxWaitMs (${maxWaitMs}ms) for ` +
-          `${model ? `${provider}/${model}` : provider} — this is OmniRoute's request queue ` +
+          `${model ? `${provider}/${model}` : provider} — this is NiyatnaRoute's request queue ` +
           `(resilienceSettings.requestQueue.maxWaitMs), not an upstream timeout. Raise it in ` +
           `Settings → Resilience if this is queue saturation rather than a slow provider.`,
         { cause: err }
@@ -655,13 +655,13 @@ export async function withRateLimit(provider, connectionId, model, fn, signal = 
     }
     // The watchdog's stop({ dropWaitingJobs: true }) wedge-recovery (above) rejects
     // queued jobs with this exact message. Rewrite it the same way as the timeout
-    // case — a clear, OmniRoute-owned, classifiable error — so combo's transient-error
+    // case — a clear, NiyatnaRoute-owned, classifiable error — so combo's transient-error
     // handling (which already treats a 502 as retryable) falls back to the next target
     // immediately instead of surfacing Bottleneck's internal wording.
     if (err?.message === "rate-limit-watchdog-wedge-reset") {
       const wedgeErr = new Error(
         `Request dropped: the local rate-limit queue for ${model ? `${provider}/${model}` : provider} ` +
-          `was detected as wedged (stalled with nothing executing) and force-reset. This is OmniRoute's ` +
+          `was detected as wedged (stalled with nothing executing) and force-reset. This is NiyatnaRoute's ` +
           `own queue recovering, not an upstream error.`,
         { cause: err }
       ) as Error & { code?: string };

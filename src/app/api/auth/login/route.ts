@@ -12,14 +12,7 @@ import { loginSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { checkLoginGuard, clearLoginAttempts, recordLoginFailure } from "@/server/auth/loginGuard";
 
-// SECURITY: No hardcoded fallback — JWT_SECRET must be configured.
-if (!process.env.JWT_SECRET) {
-  console.error("[SECURITY] FATAL: JWT_SECRET is not set. Login authentication is disabled.");
-}
-
-function getJwtSecret(): Uint8Array {
-  return new TextEncoder().encode(process.env.JWT_SECRET || "");
-}
+import { getJwtSecret, getJwtSecretBytes } from "@/lib/auth/jwtSecret";
 
 // Test seam for cookie store injection without affecting runtime behavior.
 export const authRouteInternals = {
@@ -30,8 +23,8 @@ export async function POST(request) {
   const auditContext = getAuditRequestContext(request);
 
   try {
-    // Fail-fast if JWT_SECRET is not configured
-    if (!process.env.JWT_SECRET) {
+    const jwtSecret = getJwtSecret();
+    if (!jwtSecret) {
       logAuditEvent({
         action: "auth.login.misconfigured",
         actor: "system",
@@ -134,7 +127,7 @@ export async function POST(request) {
       const token = await new SignJWT({ authenticated: true })
         .setProtectedHeader({ alg: "HS256" })
         .setExpirationTime("30d")
-        .sign(getJwtSecret());
+        .sign(getJwtSecretBytes());
 
       const cookieStore = await authRouteInternals.getCookieStore();
       cookieStore.set("auth_token", token, {

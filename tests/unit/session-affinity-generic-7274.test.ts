@@ -17,9 +17,9 @@
  *    124_generic_session_affinity_ttl.sql copies the old key's persisted
  *    value into the new key, additively and idempotently).
  * 3. None of the three session-affinity headers (`x-codex-session-id`,
- *    `x-session-id`, `x-omniroute-session`) are forwarded upstream by
+ *    `x-session-id`, `x-niyatnaroute-session`) are forwarded upstream by
  *    providers that use custom executors with no client-header passthrough.
- *    `x-codex-session-id` and `x-omniroute-session` are never forwarded by
+ *    `x-codex-session-id` and `x-niyatnaroute-session` are never forwarded by
  *    ANY executor (grep-verified, asserted here for the generic DefaultExecutor
  *    path). `x-session-id` is a known, pre-existing exception: DefaultExecutor
  *    (used by most providers without a bespoke executor) forwards it upstream
@@ -40,9 +40,9 @@ import Database from "better-sqlite3";
 // resolves DATA_DIR at MODULE-LOAD time, not lazily) must be imported
 // dynamically AFTER process.env.DATA_DIR is set below — a static top-level
 // `import` is hoisted and would run before the override, resolving against
-// the real ~/.omniroute data dir instead of this test's isolated tmp dir.
+// the real ~/.niyatnaroute data dir instead of this test's isolated tmp dir.
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-session-affinity-7274-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "niyatnaroute-session-affinity-7274-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.API_KEY_SECRET = process.env.API_KEY_SECRET || "session-affinity-7274-test-secret";
 
@@ -242,11 +242,11 @@ test("#7274 migration 124 is a no-op when the operator never configured the lega
 
 // ── 3. header-leak guard (data-leak-adjacent — Rule from the plan's Risks) ──
 
-test("#7274 x-codex-session-id and x-omniroute-session are never forwarded upstream by DefaultExecutor", () => {
+test("#7274 x-codex-session-id and x-niyatnaroute-session are never forwarded upstream by DefaultExecutor", () => {
   const executor = new DefaultExecutor("glm");
   const headers = executor.buildHeaders({ accessToken: "test-key" }, true, {
     "x-codex-session-id": "internal-correlation-id-should-not-leak",
-    "x-omniroute-session": "another-internal-correlation-id",
+    "x-niyatnaroute-session": "another-internal-correlation-id",
   }) as Record<string, string>;
 
   const lowerKeys = Object.keys(headers).map((k) => k.toLowerCase());
@@ -255,8 +255,8 @@ test("#7274 x-codex-session-id and x-omniroute-session are never forwarded upstr
     "x-codex-session-id must never reach the upstream request"
   );
   assert.ok(
-    !lowerKeys.includes("x-omniroute-session"),
-    "x-omniroute-session must never reach the upstream request"
+    !lowerKeys.includes("x-niyatnaroute-session"),
+    "x-niyatnaroute-session must never reach the upstream request"
   );
 });
 

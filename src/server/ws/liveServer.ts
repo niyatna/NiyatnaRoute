@@ -49,21 +49,11 @@ const MAX_EVENTS_PER_SECOND = 100;
 const MAX_PENDING_MESSAGES_PER_CLIENT = 32;
 const MAX_PENDING_MESSAGE_BYTES = 16_384;
 
-const ALLOWED_ORIGINS = buildAllowedOrigins();
-const ALLOWED_HOSTS = buildAllowedHosts();
-
 /**
  * Whether the given Origin is acceptable for a WS upgrade.
- *
- * Delegates to `liveServerAllowList` for the actual policy; this wrapper
- * exists so the connection handler can read the closure-bound allow-lists
- * without re-parsing env on every connection.
  */
 function isOriginAllowed(origin: string | undefined): boolean {
-  return isOriginAllowedPure(origin, process.env, {
-    allowedOrigins: ALLOWED_ORIGINS,
-    allowedHosts: ALLOWED_HOSTS,
-  });
+  return isOriginAllowedPure(origin, process.env);
 }
 
 // ── Client State ──────────────────────────────────────────────────────────
@@ -176,13 +166,15 @@ export function getCookieValueFromHeader(
   return match ? decodeURIComponent(match[1]) : null;
 }
 
+import { getJwtSecretBytes } from "@/lib/auth/jwtSecret";
+
 async function isDashboardCookieAuthenticated(
   request: import("http").IncomingMessage
 ): Promise<boolean> {
   const token = getCookieValueFromHeader(request.headers, "auth_token");
-  if (!token || !process.env.JWT_SECRET) return false;
+  if (!token) return false;
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const secret = getJwtSecretBytes();
     await jwtVerify(token, secret);
     return true;
   } catch {
@@ -314,7 +306,7 @@ function isLoopbackRequest(req: IncomingMessage): boolean {
 }
 
 function handleInternalEventRequest(req: IncomingMessage, res: ServerResponse): void {
-  if (req.method !== "POST" || req.url !== "/__omniroute_event") {
+  if (req.method !== "POST" || req.url !== "/__niyatnaroute_event") {
     res.writeHead(404).end();
     return;
   }
@@ -600,7 +592,7 @@ export async function startLiveDashboardServer(
 //
 // Default: ON, bound to loopback (127.0.0.1). The live dashboard WebSocket
 // starts automatically unless explicitly disabled. To disable, set:
-//   OMNIROUTE_ENABLE_LIVE_WS=0   (or "false")
+//   NIYATNAROUTE_ENABLE_LIVE_WS=0   (or "false")
 //
 // LAN exposure remains opt-in via LIVE_WS_HOST=0.0.0.0 combined with
 // LIVE_WS_ALLOWED_ORIGINS. DEFAULT_HOST stays "127.0.0.1".
@@ -614,7 +606,7 @@ function isBuildOrTest(): boolean {
 }
 
 export function isLiveWsEnabled(): boolean {
-  const v = process.env.OMNIROUTE_ENABLE_LIVE_WS;
+  const v = process.env.NIYATNAROUTE_ENABLE_LIVE_WS;
   if (v === undefined) return true; // default ON (loopback-bound)
   return v === "1" || v.toLowerCase() === "true";
 }

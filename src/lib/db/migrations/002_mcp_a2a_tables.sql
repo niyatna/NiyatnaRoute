@@ -19,40 +19,7 @@ CREATE INDEX IF NOT EXISTS idx_mta_tool ON mcp_tool_audit(tool_name);
 CREATE INDEX IF NOT EXISTS idx_mta_created ON mcp_tool_audit(created_at);
 CREATE INDEX IF NOT EXISTS idx_mta_apikey ON mcp_tool_audit(api_key_id);
 
--- ============ A2A Tasks ============
--- Stores A2A task lifecycle (submitted → working → completed/failed/cancelled).
-CREATE TABLE IF NOT EXISTS a2a_tasks (
-    id TEXT PRIMARY KEY,
-    state TEXT NOT NULL DEFAULT 'submitted',
-    skill_id TEXT,
-    input_json TEXT,
-    output_json TEXT,
-    cost_estimated REAL,
-    cost_actual REAL,
-    routing_explanation TEXT,
-    resilience_trace TEXT,
-    policy_verdict TEXT,
-    api_key_id TEXT,
-    created_at TEXT DEFAULT (datetime('now')),
-    updated_at TEXT DEFAULT (datetime('now')),
-    completed_at TEXT,
-    expires_at TEXT
-);
-CREATE INDEX IF NOT EXISTS idx_a2a_state ON a2a_tasks(state);
-CREATE INDEX IF NOT EXISTS idx_a2a_skill ON a2a_tasks(skill_id);
-CREATE INDEX IF NOT EXISTS idx_a2a_created ON a2a_tasks(created_at);
 
--- ============ A2A Task Events ============
--- Event log for each A2A task (state transitions, errors, fallbacks).
-CREATE TABLE IF NOT EXISTS a2a_task_events (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    task_id TEXT NOT NULL REFERENCES a2a_tasks(id) ON DELETE CASCADE,
-    event_type TEXT NOT NULL,
-    data_json TEXT,
-    created_at TEXT DEFAULT (datetime('now'))
-);
-CREATE INDEX IF NOT EXISTS idx_a2ae_task ON a2a_task_events(task_id);
-CREATE INDEX IF NOT EXISTS idx_a2ae_type ON a2a_task_events(event_type);
 
 -- ============ Routing Decisions ============
 -- Records every routing decision for explainability and learning.

@@ -8,7 +8,7 @@ import path from "node:path";
 
 process.env.NODE_ENV = "test";
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-hc-devin-cli-8407-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "niyatnaroute-hc-devin-cli-8407-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 
 const core = await import("../../src/lib/db/core.ts");

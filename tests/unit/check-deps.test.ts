@@ -37,12 +37,12 @@ test("6A.8: discoverManifests finds root and workspace package.json files", () =
   assert.ok(manifests.includes("electron/package.json"), "electron/package.json must be included");
   assert.ok(manifests.includes("open-sse/package.json"), "open-sse/package.json must be included");
   assert.ok(
-    manifests.includes("@omniroute/opencode-plugin/package.json"),
-    "@omniroute/opencode-plugin/package.json must be included"
+    manifests.includes("@niyatnaroute/opencode-plugin/package.json"),
+    "@niyatnaroute/opencode-plugin/package.json must be included"
   );
   assert.ok(
-    manifests.includes("@omniroute/opencode-provider/package.json"),
-    "@omniroute/opencode-provider/package.json must be included"
+    manifests.includes("@niyatnaroute/opencode-provider/package.json"),
+    "@niyatnaroute/opencode-provider/package.json must be included"
   );
 });
 

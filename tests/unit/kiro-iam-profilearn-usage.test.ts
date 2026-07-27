@@ -5,7 +5,7 @@ import {
   __testing,
   buildKiroUsageResult,
   discoverKiroProfileArn,
-} from "@omniroute/open-sse/services/usage.ts";
+} from "@niyatnaroute/open-sse/services/usage.ts";
 
 const { getKiroUsage } = __testing;
 

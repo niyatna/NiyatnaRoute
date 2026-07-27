@@ -1,8 +1,8 @@
 # Operator Proxy Subscriptions (Karing-style)
 
-> Feature design + implementation notes for OmniRoute's operator-level proxy
+> Feature design + implementation notes for NiyatnaRoute's operator-level proxy
 > subscription flow. This is the v1 cut: a single operator pastes subscription
-> links, picks a mode (global or rule), and OmniRoute binds the resulting proxy
+> links, picks a mode (global or rule), and NiyatnaRoute binds the resulting proxy
 > pool into the existing scope resolution. Multi-tenant per-API-key, advanced
 > traffic rules, latency-driven per-rule weights, and so on are explicitly
 > out-of-scope and listed in §7.
@@ -11,14 +11,14 @@
 
 ## 1. Motivation
 
-Today, OmniRoute's proxy pool is hand-curated: every node lives in
+Today, NiyatnaRoute's proxy pool is hand-curated: every node lives in
 `proxy_registry` with hand-written host/port/credentials, and every binding to
 the upstream dispatchers (account → provider → combo → global → direct) is a
 manual `proxy_assignments` row. Operators who already maintain a Clash/V2Ray/
 sing-box subscription (e.g. from an airport service) have to retype every node
-into OmniRoute and re-bind them whenever the upstream list changes.
+into NiyatnaRoute and re-bind them whenever the upstream list changes.
 
-The goal of v1 is to make OmniRoute first-class for **operator-supplied**
+The goal of v1 is to make NiyatnaRoute first-class for **operator-supplied**
 subscriptions, similar to how Karing / Clash / sing-box let users paste a
 `https://...` URL and have the client manage the lifecycle.
 
@@ -30,7 +30,7 @@ subscriptions, similar to how Karing / Clash / sing-box let users paste a
 | U2 | Operator | toggle the subscription on/off | I can fall back to direct without deleting the URL |
 | U3 | Operator | pick **global** mode | every provider's traffic exits via the subscription |
 | U4 | Operator | pick **rule** mode and select specific providers | only selected providers route through the proxy; others stay direct |
-| U5 | Operator | supply a local sing-box/clash SOCKS5 endpoint | SS/VMess/Trojan/VLESS nodes (which OmniRoute's dispatcher can't speak natively) become usable through a local kernel bridge |
+| U5 | Operator | supply a local sing-box/clash SOCKS5 endpoint | SS/VMess/Trojan/VLESS nodes (which NiyatnaRoute's dispatcher can't speak natively) become usable through a local kernel bridge |
 | U6 | Operator | see fetch status and a recent redacted node summary | I can debug "why is this empty / erroring" without leaking credentials |
 
 ## 3. Non-goals (v1)

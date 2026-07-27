@@ -15,7 +15,7 @@ import { invalidateDbCache, getCachedRawProviderConnections } from "./readCache"
 import {
   removeConnectionHealth,
   removeConnectionIndex,
-} from "@omniroute/open-sse/services/apiKeyRotator.ts";
+} from "@niyatnaroute/open-sse/services/apiKeyRotator.ts";
 import { invalidateReasoningRoutingRuleCache } from "./reasoningRoutingRules";
 import { normalizeProviderSpecificData } from "@/lib/providers/requestDefaults";
 import { bumpProxyConfigGeneration } from "./settings";

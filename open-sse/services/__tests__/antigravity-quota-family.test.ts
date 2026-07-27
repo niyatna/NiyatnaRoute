@@ -2,13 +2,13 @@ import { describe, expect, it, beforeEach, vi } from "vitest";
 import {
   getAntigravityQuotaFamily,
   getQuotaScopedModelForProvider,
-} from "@omniroute/open-sse/services/antigravityQuotaFamily.ts";
+} from "@niyatnaroute/open-sse/services/antigravityQuotaFamily.ts";
 import {
   clearAllModelLockouts,
   getModelLockoutInfo,
   isModelLocked,
   recordModelLockoutFailure,
-} from "@omniroute/open-sse/services/accountFallback.ts";
+} from "@niyatnaroute/open-sse/services/accountFallback.ts";
 
 const provider = "antigravity";
 

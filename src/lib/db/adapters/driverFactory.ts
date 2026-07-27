@@ -23,23 +23,23 @@ function logSwallowedDriverError(driver: string, err: unknown): void {
 }
 
 declare global {
-  var __omnirouteSqlJsAdapters: Map<string, SqliteAdapter> | undefined;
-  var __omnirouteSqlJsInitPromises: Map<string, Promise<SqliteAdapter>> | undefined;
-  var __omnirouteSqlJsPreInitErrors: Map<string, string> | undefined;
+  var __niyatnarouteSqlJsAdapters: Map<string, SqliteAdapter> | undefined;
+  var __niyatnarouteSqlJsInitPromises: Map<string, Promise<SqliteAdapter>> | undefined;
+  var __niyatnarouteSqlJsPreInitErrors: Map<string, string> | undefined;
 }
 
 function getSqlJsCache(): Map<string, SqliteAdapter> {
-  if (!globalThis.__omnirouteSqlJsAdapters) {
-    globalThis.__omnirouteSqlJsAdapters = new Map();
+  if (!globalThis.__niyatnarouteSqlJsAdapters) {
+    globalThis.__niyatnarouteSqlJsAdapters = new Map();
   }
-  return globalThis.__omnirouteSqlJsAdapters;
+  return globalThis.__niyatnarouteSqlJsAdapters;
 }
 
 function getSqlJsPreInitErrorCache(): Map<string, string> {
-  if (!globalThis.__omnirouteSqlJsPreInitErrors) {
-    globalThis.__omnirouteSqlJsPreInitErrors = new Map();
+  if (!globalThis.__niyatnarouteSqlJsPreInitErrors) {
+    globalThis.__niyatnarouteSqlJsPreInitErrors = new Map();
   }
-  return globalThis.__omnirouteSqlJsPreInitErrors;
+  return globalThis.__niyatnarouteSqlJsPreInitErrors;
 }
 
 /**
@@ -61,10 +61,10 @@ export function getSqlJsPreInitError(filePath: string): string | undefined {
  * fs.readFileSync + WASM decode independentemente (#6628 — thundering herd).
  */
 function getSqlJsPendingCache(): Map<string, Promise<SqliteAdapter>> {
-  if (!globalThis.__omnirouteSqlJsInitPromises) {
-    globalThis.__omnirouteSqlJsInitPromises = new Map();
+  if (!globalThis.__niyatnarouteSqlJsInitPromises) {
+    globalThis.__niyatnarouteSqlJsInitPromises = new Map();
   }
-  return globalThis.__omnirouteSqlJsInitPromises;
+  return globalThis.__niyatnarouteSqlJsInitPromises;
 }
 
 /** Tenta abrir com better-sqlite3 e node:sqlite sincronamente. Retorna null se ambos falharem. */

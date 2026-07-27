@@ -9,11 +9,7 @@ import { isPublicDisplayBaseUrl, useDisplayBaseUrl } from "@/shared/hooks";
 import { AI_PROVIDERS, getProviderByAlias } from "@/shared/constants/providers";
 import { getProviderDisplayName } from "@/lib/display/names";
 import { useTranslations } from "next-intl";
-import A2ADashboardPage from "./components/A2ADashboard";
 import McpDashboardPage from "./components/MCPDashboard";
-import NotionSourceCard from "./components/NotionSourceCard";
-import ObsidianSourceCard from "./components/ObsidianSourceCard";
-import VscodeTokenAliasCard from "./VscodeTokenAliasCard";
 
 const BUILD_TIME_CLOUD_URL = process.env.NEXT_PUBLIC_CLOUD_URL || null;
 const CLOUD_ACTION_TIMEOUT_MS = 15000;
@@ -108,13 +104,11 @@ type EndpointTunnelVisibility = {
   showNgrokTunnel: boolean;
 };
 
-type EndpointTab = "apis" | "mcp" | "a2a" | "context-sources";
+type EndpointTab = "apis" | "mcp";
 
 const ENDPOINT_TABS: Array<{ value: EndpointTab; labelKey: string; icon: string }> = [
   { value: "apis", labelKey: "tabApis", icon: "api" },
   { value: "mcp", labelKey: "tabMcp", icon: "extension" },
-  { value: "a2a", labelKey: "tabA2a", icon: "hub" },
-  { value: "context-sources", labelKey: "tabContextSources", icon: "database" },
 ];
 
 const DEFAULT_TUNNEL_VISIBILITY: EndpointTunnelVisibility = {
@@ -152,7 +146,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const [cloudBaseUrl, setCloudBaseUrl] = useState(BUILD_TIME_CLOUD_URL); // dynamic cloud URL from API response
   const [cloudConfigured, setCloudConfigured] = useState(Boolean(BUILD_TIME_CLOUD_URL));
   const [mcpStatus, setMcpStatus] = useState<any>(null);
-  const [a2aStatus, setA2aStatus] = useState<any>(null);
   const [searchProviders, setSearchProviders] = useState<any[]>([]);
   const [cloudflaredStatus, setCloudflaredStatus] = useState<CloudflaredTunnelStatus | null>(null);
   const [cloudflaredBusy, setCloudflaredBusy] = useState(false);
@@ -366,16 +359,9 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
   const fetchProtocolStatus = async () => {
     try {
-      const [mcpRes, a2aRes] = await Promise.allSettled([
-        fetch("/api/mcp/status"),
-        fetch("/api/a2a/status"),
-      ]);
-
-      if (mcpRes.status === "fulfilled" && mcpRes.value.ok) {
-        setMcpStatus(await mcpRes.value.json());
-      }
-      if (a2aRes.status === "fulfilled" && a2aRes.value.ok) {
-        setA2aStatus(await a2aRes.value.json());
+      const mcpRes = await fetch("/api/mcp/status");
+      if (mcpRes.ok) {
+        setMcpStatus(await mcpRes.json());
       }
     } catch {
       // Ignore status failures; protocols panel has fallback text.
@@ -833,7 +819,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           type: "info",
           message: translateOrFallback(
             "tailscaleWaitingForLogin",
-            "Complete the Tailscale login in the opened browser tab. OmniRoute will retry automatically."
+            "Complete the Tailscale login in the opened browser tab. NiyatnaRoute will retry automatically."
           ),
         });
 
@@ -861,7 +847,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           type: "info",
           message: translateOrFallback(
             "tailscaleWaitingForFunnel",
-            "Enable Funnel for this device in the opened browser tab. OmniRoute will keep polling."
+            "Enable Funnel for this device in the opened browser tab. NiyatnaRoute will keep polling."
           ),
         });
 
@@ -1130,9 +1116,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   ].filter(Boolean).length;
 
   const mcpOnline = Boolean(mcpStatus?.online);
-  const a2aOnline = a2aStatus?.status === "ok";
   const mcpToolCount = Number(mcpStatus?.heartbeat?.toolCount || 0);
-  const a2aActiveStreams = Number(a2aStatus?.tasks?.activeStreams || 0);
   const cloudflaredPhase = cloudflaredStatus?.phase || "not_installed";
   const cloudflaredPhaseMeta: Record<CloudflaredTunnelPhase, { label: string; className: string }> =
     {
@@ -1256,13 +1240,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       />
 
       {activeEndpointTab === "mcp" ? <McpDashboardPage /> : null}
-      {activeEndpointTab === "a2a" ? <A2ADashboardPage /> : null}
-      {activeEndpointTab === "context-sources" ? (
-        <div className="flex flex-col gap-4">
-          <NotionSourceCard />
-          <ObsidianSourceCard />
-        </div>
-      ) : null}
 
       {/* Endpoint Card */}
       <Card>
@@ -1384,13 +1361,13 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             </span>
           </div>
 
-          {/* Cloud OmniRoute */}
+          {/* Cloud NiyatnaRoute */}
           <div className="flex items-center gap-3 py-3">
             <span className="material-symbols-outlined text-[18px] text-blue-400 shrink-0">
               cloud
             </span>
             <div className="flex-1 min-w-0">
-              <span className="text-sm font-medium">{t("cloudOmniroute")}</span>
+              <span className="text-sm font-medium">{t("cloudNiyatnaroute")}</span>
             </div>
             <span
               className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border shrink-0 ${
@@ -2038,29 +2015,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
               modelsLoading={modelsLoading}
             />
             <EndpointCard
-              icon="view_list"
-              iconColor="text-teal-500"
-              iconBg="bg-teal-500/10"
-              title={t("batchApi") || "Batch API"}
-              path="/v1/batches"
-              models={null}
-              badge="OpenAI"
-              copy={copy}
-              copied={copied}
-              baseUrl={currentEndpoint}
-            />
-            <EndpointCard
-              icon="folder"
-              iconColor="text-yellow-500"
-              iconBg="bg-yellow-500/10"
-              title={t("filesApi") || "Files API"}
-              path="/v1/files"
-              models={null}
-              copy={copy}
-              copied={copied}
-              baseUrl={currentEndpoint}
-            />
-            <EndpointCard
               icon="list"
               iconColor="text-teal-500"
               iconBg="bg-teal-500/10"
@@ -2072,8 +2026,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
               baseUrl={currentEndpoint}
             />
           </div>
-
-          <VscodeTokenAliasCard className="mt-4" />
         </div>
       </Card>
 
@@ -2246,7 +2198,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             <p className="text-sm font-medium text-blue-300">
               {translateOrFallback(
                 "tailscaleInstallIntro",
-                "Installs Tailscale on this machine and prepares OmniRoute to enable Funnel."
+                "Installs Tailscale on this machine and prepares NiyatnaRoute to enable Funnel."
               )}
             </p>
             <p className="mt-2 text-sm text-blue-200/80">

@@ -3,7 +3,7 @@ import { t } from "../i18n.mjs";
 import { resolveActiveContext } from "../contexts.mjs";
 
 /** OpenAI/Codex env keys stripped from the child so a stale OpenAI key/base-url
- *  in the shell can't shadow the omniroute provider (defense-in-depth). Mirrors
+ *  in the shell can't shadow the niyatnaroute provider (defense-in-depth). Mirrors
  *  free-claude-code's codex adapter. NOTE: this does NOT silence codex's
  *  `refresh_token` log noise — that comes from a stored OpenAI session in
  *  ~/.codex/auth.json, not the env; it is cosmetic and does not block requests. */
@@ -17,7 +17,7 @@ const STRIPPED_CODEX_ENV_KEYS = [
 ];
 
 /** Placeholder so codex's `env_key` is always satisfied when the backend is open. */
-const NO_AUTH_SENTINEL = "omniroute-no-auth";
+const NO_AUTH_SENTINEL = "niyatnaroute-no-auth";
 
 // On Windows the `codex` binary is an npm `.cmd` shim that `spawn` cannot resolve
 // without a shell (bare "codex" → ENOENT). Mirror the qodercli Windows fix (#6263):
@@ -43,7 +43,7 @@ function tomlAssign(key, value) {
 }
 
 /**
- * Resolve the OmniRoute root base URL + auth for codex, honouring (in order):
+ * Resolve the NiyatnaRoute root base URL + auth for codex, honouring (in order):
  * explicit flags → active context (remote mode) → localhost:<port>.
  * @returns {{ baseUrl:string, authToken:string|undefined }}
  */
@@ -55,7 +55,7 @@ export function resolveCodexTarget(opts = {}) {
   } else {
     let fromCtx;
     try {
-      fromCtx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl;
+      fromCtx = resolveActiveContext(opts.context ?? process.env.NIYATNAROUTE_CONTEXT)?.baseUrl;
     } catch {
       /* no context */
     }
@@ -67,17 +67,17 @@ export function resolveCodexTarget(opts = {}) {
   let authToken = opts.apiKey ?? opts["api-key"];
   if (!authToken) {
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.NIYATNAROUTE_CONTEXT);
       authToken = ctx?.accessToken || ctx?.apiKey || undefined;
     } catch {
       /* no context auth */
     }
   }
-  if (!authToken) authToken = process.env.OMNIROUTE_API_KEY;
+  if (!authToken) authToken = process.env.NIYATNAROUTE_API_KEY;
   return { baseUrl, authToken };
 }
 
-/** Health-check an OmniRoute root URL before launching Codex. */
+/** Health-check an NiyatnaRoute root URL before launching Codex. */
 async function healthCheck(baseUrl, timeoutMs = 3000) {
   try {
     const res = await fetch(`${baseUrl}/api/monitoring/health`, {
@@ -91,7 +91,7 @@ async function healthCheck(baseUrl, timeoutMs = 3000) {
 
 /**
  * Build the env for the Codex child: strip stale OpenAI/Codex creds, then set
- * OMNIROUTE_API_KEY (the provider env_key) to the resolved token or a sentinel.
+ * NIYATNAROUTE_API_KEY (the provider env_key) to the resolved token or a sentinel.
  * @param {Record<string,string>} baseEnv
  * @param {string|undefined} authToken
  * @returns {Record<string,string>}
@@ -99,30 +99,30 @@ async function healthCheck(baseUrl, timeoutMs = 3000) {
 export function buildCodexEnv(baseEnv, authToken) {
   const env = { ...baseEnv };
   for (const key of STRIPPED_CODEX_ENV_KEYS) delete env[key];
-  env.OMNIROUTE_API_KEY = (authToken && String(authToken).trim()) || NO_AUTH_SENTINEL;
+  env.NIYATNAROUTE_API_KEY = (authToken && String(authToken).trim()) || NO_AUTH_SENTINEL;
   return env;
 }
 
 /**
- * Codex `-c` flags that define the `omniroute` provider inline, so launch works
+ * Codex `-c` flags that define the `niyatnaroute` provider inline, so launch works
  * WITHOUT a pre-existing ~/.codex/config.toml. Mirrors free-claude-code.
- * @param {string} baseUrl  OmniRoute root URL (no /v1)
+ * @param {string} baseUrl  NiyatnaRoute root URL (no /v1)
  * @returns {string[]}
  */
 export function buildCodexProviderArgs(baseUrl) {
   return [
     "-c",
-    tomlAssign("model_provider", "omniroute"),
+    tomlAssign("model_provider", "niyatnaroute"),
     "-c",
-    tomlAssign("model_providers.omniroute.name", "OmniRoute"),
+    tomlAssign("model_providers.niyatnaroute.name", "NiyatnaRoute"),
     "-c",
-    tomlAssign("model_providers.omniroute.base_url", `${baseUrl}/v1`),
+    tomlAssign("model_providers.niyatnaroute.base_url", `${baseUrl}/v1`),
     "-c",
-    tomlAssign("model_providers.omniroute.env_key", "OMNIROUTE_API_KEY"),
+    tomlAssign("model_providers.niyatnaroute.env_key", "NIYATNAROUTE_API_KEY"),
     "-c",
-    tomlAssign("model_providers.omniroute.wire_api", "responses"),
+    tomlAssign("model_providers.niyatnaroute.wire_api", "responses"),
     "-c",
-    tomlAssign("model_providers.omniroute.requires_openai_auth", false),
+    tomlAssign("model_providers.niyatnaroute.requires_openai_auth", false),
   ];
 }
 
@@ -138,7 +138,7 @@ export async function runLaunchCodexCommand(opts = {}, codexArgs = []) {
     console.error(
       (
         t("launch.notRunning") ||
-        "OmniRoute is not reachable at {port}. Start it with 'omniroute serve'."
+        "NiyatnaRoute is not reachable at {port}. Start it with 'niyatnaroute serve'."
       ).replace("{port}", baseUrl)
     );
     return 1;
@@ -177,18 +177,18 @@ export function registerLaunchCodex(program) {
   program
     .command("launch-codex")
     .description(
-      t("launchCodex.description") || "Launch Codex CLI pointed at OmniRoute (local or remote VPS)"
+      t("launchCodex.description") || "Launch Codex CLI pointed at NiyatnaRoute (local or remote VPS)"
     )
-    .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "20128")
+    .option("--port <port>", "Local NiyatnaRoute port (ignored when --remote is set)", "20128")
     .option(
       "--remote <url>",
-      "Remote OmniRoute base URL, e.g. http://192.168.0.15:20128 (overrides --port + context)"
+      "Remote NiyatnaRoute base URL, e.g. http://192.168.0.15:20128 (overrides --port + context)"
     )
     .option("--profile <name>", "Codex profile to activate (passed as --profile <name>)")
     .option("-p, --p <name>", "Alias for --profile")
     .option(
       "--api-key <key>",
-      "OmniRoute API key (overrides OMNIROUTE_API_KEY env var for this invocation)"
+      "NiyatnaRoute API key (overrides NIYATNAROUTE_API_KEY env var for this invocation)"
     )
     .allowUnknownOption(true)
     .allowExcessArguments(true)

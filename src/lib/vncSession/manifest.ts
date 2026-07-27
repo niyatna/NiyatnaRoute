@@ -11,7 +11,7 @@ export interface VncProviderEntry {
   name: string;
   /** Login page opened by the browser container. */
   url: string;
-  /** Canonical OmniRoute credential contract for this provider. */
+  /** Canonical NiyatnaRoute credential contract for this provider. */
   requirement: Exclude<WebSessionCredentialRequirement, { kind: "none" }>;
 }
 
@@ -68,28 +68,28 @@ function envFlag(name: string, fallback: boolean): boolean {
 }
 
 const profileRoot =
-  process.env.OMNIROUTE_VNC_PROFILE_DIR ||
-  `${process.env.HOME || "/tmp"}/.omniroute/browser-login-profiles`;
+  process.env.NIYATNAROUTE_VNC_PROFILE_DIR ||
+  `${process.env.HOME || "/tmp"}/.niyatnaroute/browser-login-profiles`;
 
 export const VNC_CONFIG = {
   /**
    * This feature uses Chromium CDP only. Build docker/vnc-browser/chromium and
-   * tag it with this name, or override OMNIROUTE_VNC_IMAGE.
+   * tag it with this name, or override NIYATNAROUTE_VNC_IMAGE.
    */
-  image: process.env.OMNIROUTE_VNC_IMAGE || "omniroute-vnc-chromium:local",
-  containerVncPort: Number(process.env.OMNIROUTE_VNC_CONTAINER_VNC_PORT || 3000),
-  containerCdpPort: Number(process.env.OMNIROUTE_VNC_CONTAINER_CDP_PORT || 9223),
-  containerProfileDir: process.env.OMNIROUTE_VNC_CONTAINER_PROFILE_DIR || "/config",
+  image: process.env.NIYATNAROUTE_VNC_IMAGE || "niyatnaroute-vnc-chromium:local",
+  containerVncPort: Number(process.env.NIYATNAROUTE_VNC_CONTAINER_VNC_PORT || 3000),
+  containerCdpPort: Number(process.env.NIYATNAROUTE_VNC_CONTAINER_CDP_PORT || 9223),
+  containerProfileDir: process.env.NIYATNAROUTE_VNC_CONTAINER_PROFILE_DIR || "/config",
   profileDir: profileRoot,
-  persistProfiles: envFlag("OMNIROUTE_VNC_PERSIST_PROFILES", false),
-  idleTimeoutMs: Number(process.env.OMNIROUTE_VNC_IDLE_MS || 10 * 60 * 1000),
-  maxSessionMs: Number(process.env.OMNIROUTE_VNC_MAX_MS || 30 * 60 * 1000),
-  maxSessions: Number(process.env.OMNIROUTE_VNC_MAX_SESSIONS || 4),
-  dockerBin: process.env.OMNIROUTE_DOCKER_BIN || "docker",
-  browserReadyTimeoutMs: Number(process.env.OMNIROUTE_VNC_READY_MS || 45_000),
-  harvestTimeoutMs: Number(process.env.OMNIROUTE_VNC_HARVEST_MS || 20_000),
+  persistProfiles: envFlag("NIYATNAROUTE_VNC_PERSIST_PROFILES", false),
+  idleTimeoutMs: Number(process.env.NIYATNAROUTE_VNC_IDLE_MS || 10 * 60 * 1000),
+  maxSessionMs: Number(process.env.NIYATNAROUTE_VNC_MAX_MS || 30 * 60 * 1000),
+  maxSessions: Number(process.env.NIYATNAROUTE_VNC_MAX_SESSIONS || 4),
+  dockerBin: process.env.NIYATNAROUTE_DOCKER_BIN || "docker",
+  browserReadyTimeoutMs: Number(process.env.NIYATNAROUTE_VNC_READY_MS || 45_000),
+  harvestTimeoutMs: Number(process.env.NIYATNAROUTE_VNC_HARVEST_MS || 20_000),
   chromiumArgs:
-    process.env.OMNIROUTE_VNC_CHROMIUM_ARGS ||
+    process.env.NIYATNAROUTE_VNC_CHROMIUM_ARGS ||
     "--remote-debugging-port=9222 --no-first-run --no-default-browser-check",
 } as const;
 
