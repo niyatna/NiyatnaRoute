@@ -1,7 +1,9 @@
 name: Build Prebuilt Standalone
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - upstream-3.8.50
 
 permissions:
   contents: write
