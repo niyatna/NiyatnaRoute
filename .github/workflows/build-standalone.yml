@@ -1,0 +1,43 @@
+name: Build Prebuilt Standalone
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Standalone Dist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js & CLI
+        run: |
+          npm run build
+          npm run build:cli
+
+      - name: Package Standalone Artifacts
+        run: |
+          tar -czvf omniroute-3.8.50-standalone.tar.gz dist bin package.json scripts open-sse
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v3.8.50-standalone
+          name: "OmniRoute v3.8.50 Standalone (Pre-built)"
+          draft: false
+          prerelease: false
+          files: omniroute-3.8.50-standalone.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
