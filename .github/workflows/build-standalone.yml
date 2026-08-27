@@ -13,6 +13,11 @@ jobs:
     name: Build Standalone Dist
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 10
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -26,7 +31,7 @@ jobs:
 
       - name: Build Next.js & CLI
         env:
-          NODE_OPTIONS: "--max-old-space-size=6144"
+          NODE_OPTIONS: "--max-old-space-size=12288"
           OMNIROUTE_USE_TURBOPACK: "0"
           NEXT_TELEMETRY_DISABLED: "1"
         run: |
