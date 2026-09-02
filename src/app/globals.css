@@ -12,6 +12,7 @@
    instead of in the component so node:test / esbuild never see a .css import. */
 @import "react18-json-view/src/style.css";
 @import "react18-json-view/src/dark.css";
+@import "./liquid-glass-theme.css";
 @source "../../node_modules/fumadocs-ui/css/generated/*.css";
 
 /* Keep Tailwind v4 from scanning the entire repository. The UI lives in the

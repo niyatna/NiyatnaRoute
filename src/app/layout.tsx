@@ -10,6 +10,7 @@ import type { Viewport } from "next";
 import { PwaRegister } from "@/shared/components/PwaRegister";
 import { LocaleAutoDetect } from "@/shared/components/LocaleAutoDetect";
 import { BasePathNetworkProvider } from "@/shared/components/BasePathNetworkProvider";
+import { GlassFilter } from "@/components/ui/liquid-glass";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -147,6 +148,7 @@ export default async function RootLayout({ children }) {
             <PwaRegister />
             <LocaleAutoDetect />
             <ThemeProvider>{children}</ThemeProvider>
+            <GlassFilter />
           </BasePathNetworkProvider>
         </NextIntlClientProvider>
       </body>
