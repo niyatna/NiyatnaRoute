@@ -90,23 +90,28 @@ export const GlassDock: React.FC<{
   className?: string;
 }> = ({ icons, className = "" }) => (
   <div
-    className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 pointer-events-auto ${className}`}
+    className={`fixed bottom-3 inset-x-0 mx-auto w-fit max-w-[calc(100vw-1rem)] z-50 pointer-events-auto flex justify-center items-center ${className}`}
     style={{
       position: "fixed",
-      bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
-      left: "50%",
-      transform: "translateX(-50%)",
+      bottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))",
+      left: 0,
+      right: 0,
+      marginLeft: "auto",
+      marginRight: "auto",
+      width: "fit-content",
+      maxWidth: "calc(100vw - 1rem)",
+      transform: "none",
       zIndex: 50,
     }}
   >
-    <GlassEffect className="rounded-full px-2.5 py-1.5 border border-white/20 shadow-2xl backdrop-blur-2xl">
+    <GlassEffect className="rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 border border-white/20 shadow-2xl backdrop-blur-2xl w-fit">
       <div className="flex items-center justify-center gap-1 sm:gap-2">
         {icons.map((icon, index) => {
           const itemContent = (
             <div
               key={index}
               title={icon.title || icon.alt}
-              className={`relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all duration-300 active:scale-95 cursor-pointer group ${
+              className={`relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all duration-300 active:scale-95 cursor-pointer group ${
                 icon.active ? "bg-white/25 text-white shadow-md" : "hover:bg-white/10 text-white/80"
               }`}
               style={{
