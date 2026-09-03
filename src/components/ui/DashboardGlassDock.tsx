@@ -10,7 +10,7 @@ export const DashboardGlassDock: React.FC = () => {
   const dockIcons: DockIcon[] = [
     {
       alt: "Dashboard",
-      title: "Dashboard",
+      title: "Home",
       href: "/dashboard",
       active: pathname === "/dashboard",
       icon: (
@@ -21,7 +21,7 @@ export const DashboardGlassDock: React.FC = () => {
     },
     {
       alt: "Providers",
-      title: "AI Providers",
+      title: "Providers",
       href: "/dashboard/providers",
       active: pathname?.startsWith("/dashboard/providers"),
       icon: (
@@ -32,7 +32,7 @@ export const DashboardGlassDock: React.FC = () => {
     },
     {
       alt: "Combos",
-      title: "Smart Routing",
+      title: "Routing",
       href: "/dashboard/combos",
       active: pathname?.startsWith("/dashboard/combos"),
       icon: (
@@ -43,7 +43,7 @@ export const DashboardGlassDock: React.FC = () => {
     },
     {
       alt: "Logs",
-      title: "Real-time Logs",
+      title: "Logs",
       href: "/dashboard/logs",
       active: pathname?.startsWith("/dashboard/logs"),
       icon: (
@@ -54,7 +54,7 @@ export const DashboardGlassDock: React.FC = () => {
     },
     {
       alt: "Analytics",
-      title: "Usage & Costs",
+      title: "Stats",
       href: "/dashboard/analytics",
       active: pathname?.startsWith("/dashboard/analytics") || pathname?.startsWith("/dashboard/costs"),
       icon: (
@@ -77,5 +77,6 @@ export const DashboardGlassDock: React.FC = () => {
     },
   ];
 
-  return <GlassDock icons={dockIcons} className="hidden md:flex" />;
+  /* Mobile-only: Completely hidden on desktop (lg and above) where sidebar is visible */
+  return <GlassDock icons={dockIcons} className="lg:hidden" />;
 };
