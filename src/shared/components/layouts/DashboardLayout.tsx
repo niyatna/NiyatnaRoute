@@ -14,7 +14,6 @@ import {
   prefetchDashboardCsrfToken,
 } from "@/shared/utils/dashboardCsrf";
 import { installBasePathFetch } from "@/shared/utils/basePathFetch";
-import { DashboardGlassDock } from "@/components/ui/DashboardGlassDock";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebar-collapsed";
 const isE2EMode = process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE === "1";
@@ -133,9 +132,6 @@ export default function DashboardLayout({ children }) {
 
       {/* Global notification toast system */}
       <NotificationToast />
-
-      {/* Floating Liquid Glass Dock */}
-      <DashboardGlassDock />
 
       <CommandPalette isOpen={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
     </div>
