@@ -89,16 +89,25 @@ export const GlassDock: React.FC<{
   icons: DockIcon[];
   className?: string;
 }> = ({ icons, className = "" }) => (
-  <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 ${className}`}>
-    <GlassEffect className="rounded-full px-3 py-2 border border-white/20 shadow-2xl hover:scale-[1.02]">
-      <div className="flex items-center justify-center gap-2">
+  <div
+    className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 pointer-events-auto ${className}`}
+    style={{
+      position: "fixed",
+      bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+      left: "50%",
+      transform: "translateX(-50%)",
+      zIndex: 50,
+    }}
+  >
+    <GlassEffect className="rounded-full px-2.5 py-1.5 border border-white/20 shadow-2xl backdrop-blur-2xl">
+      <div className="flex items-center justify-center gap-1 sm:gap-2">
         {icons.map((icon, index) => {
           const itemContent = (
             <div
               key={index}
               title={icon.title || icon.alt}
-              className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-125 hover:-translate-y-1 cursor-pointer group ${
-                icon.active ? "bg-white/20 text-white shadow-lg" : "hover:bg-white/10 text-white/80"
+              className={`relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all duration-300 active:scale-95 cursor-pointer group ${
+                icon.active ? "bg-white/25 text-white shadow-md" : "hover:bg-white/10 text-white/80"
               }`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
@@ -109,13 +118,13 @@ export const GlassDock: React.FC<{
                 <img
                   src={icon.src}
                   alt={icon.alt}
-                  className="w-7 h-7 object-contain drop-shadow"
+                  className="w-5 h-5 object-contain drop-shadow"
                 />
               ) : (
                 icon.icon
               )}
               {icon.title && (
-                <span className="absolute -top-8 px-2 py-1 text-xs text-white bg-black/80 backdrop-blur-md rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                <span className="absolute -top-7 px-2 py-0.5 text-[11px] text-white bg-black/85 backdrop-blur-md rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                   {icon.title}
                 </span>
               )}

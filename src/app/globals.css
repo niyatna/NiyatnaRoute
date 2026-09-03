@@ -20,6 +20,7 @@
    explicit because node_modules is ignored by automatic detection. */
 @source "../app";
 @source "../shared";
+@source "../components";
 @source "../../node_modules/fumadocs-ui/dist/**/*.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
