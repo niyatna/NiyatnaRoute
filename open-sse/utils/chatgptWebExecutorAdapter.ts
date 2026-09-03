@@ -331,7 +331,7 @@ async function createDefaultSession(
     timezone: input.timezone,
     proxyProviderKey: "chatgpt-web",
     warmupUrl: CHATGPT_WEB_PAGE_URL,
-    headless: false,
+    headless: Boolean(process.env.CHATGPT_WEB_HEADLESS ?? !process.env.DISPLAY),
     executablePath: input.chromeExecutablePath,
   });
   const page =
