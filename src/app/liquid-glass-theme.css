@@ -100,29 +100,5 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Liquid Glass Floating Dock (Mobile-Only Centering) */
-@media (min-width: 1024px) {
-  .liquid-glass-dock-wrapper {
-    display: none !important;
-  }
-}
 
-@media (max-width: 1023px) {
-  .liquid-glass-dock-wrapper {
-    position: fixed !important;
-    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: -moz-fit-content !important;
-    width: fit-content !important;
-    max-width: calc(100vw - 1rem) !important;
-    transform: none !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    z-index: 50 !important;
-    pointer-events: auto !important;
-  }
-}
+
