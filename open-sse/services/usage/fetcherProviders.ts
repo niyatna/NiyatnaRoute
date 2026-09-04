@@ -55,6 +55,8 @@ export const USAGE_FETCHER_PROVIDERS = [
   "vertex",
   "vertex-partner",
   "codebuddy-cn",
+  "codebuddy-intl",
+  "cbai",
   "openrouter",
   // PromptQL playground credits (data.pro.ql.app getCreditSummary)
   "promptql",
