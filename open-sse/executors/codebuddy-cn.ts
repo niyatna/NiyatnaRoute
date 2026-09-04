@@ -102,8 +102,8 @@ async function isSensitiveContentRejection(response: Response): Promise<boolean>
  * so flatten before matching and preserve the original shape on replacement.
  */
 export class CodeBuddyCnExecutor extends DefaultExecutor {
-  constructor() {
-    super("codebuddy-cn");
+  constructor(providerId = "codebuddy-cn") {
+    super(providerId);
   }
 
   async execute(input: ExecuteInput): Promise<ExecutorExecuteResult> {
