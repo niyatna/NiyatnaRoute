@@ -93,7 +93,7 @@ export const codebuddyIntl = {
     );
     if (!response.ok) return { ok: false, data: { error: "request_failed" } };
     const data = (await response.json()) as { code?: number; data?: any; msg?: string };
-    // code 11217 = pending (RetryFetchToken), code 0 = success
+    // code 11217 = pending (RetryFetchToken / login ing...), code 0 = success
     if (data.code === 0 && data.data?.accessToken) {
       return {
         ok: true,
@@ -105,7 +105,10 @@ export const codebuddyIntl = {
         },
       };
     }
-    return { ok: false, data: { code: data.code, msg: data.msg } };
+    if (data.code === 11217 || data.msg?.includes("login ing") || data.msg?.includes("RetryFetchToken")) {
+      return { ok: true, data: { error: "authorization_pending" } };
+    }
+    return { ok: false, data: { error: data.msg || "auth_failed", code: data.code, msg: data.msg } };
   },
 
   mapTokens: (tokens: CodeBuddyTokens) => ({
