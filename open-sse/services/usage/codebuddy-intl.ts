@@ -78,15 +78,38 @@ function pickNumber(
   return 0;
 }
 
+function parseResetTime(value: unknown): string | null {
+  if (!value) return null;
+  try {
+    if (value instanceof Date) return value.toISOString();
+    if (typeof value === "number") {
+      const ts = value < 1e12 ? value * 1000 : value;
+      const d = new Date(ts);
+      return d.getTime() > 0 ? d.toISOString() : null;
+    }
+    if (typeof value === "string") {
+      if (/^\d+$/.test(value)) {
+        const n = Number(value);
+        const d = new Date(n < 1e12 ? n * 1000 : n);
+        return d.getTime() > 0 ? d.toISOString() : null;
+      }
+      const d = new Date(value);
+      return Number.isNaN(d.getTime()) || d.getTime() <= 0 ? null : d.toISOString();
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 interface CodeBuddyUsageResult {
   plan?: string;
   quotas?: Record<
     string,
     {
       used: number;
-      limit: number;
-      percentage: number;
-      resetAt?: number;
+      total: number;
+      resetAt?: string | null;
       unlimited: boolean;
     }
   >;
@@ -151,11 +174,10 @@ export async function getCodeBuddyIntlUsage(
       const a = refillAccounts[i];
       const baseLabel = labelForRefill(a);
       const label = refillAccounts.length > 1 ? `${baseLabel} ${i + 1}` : baseLabel;
-      const limit = pickNumber(a.CycleCapacitySizePrecise, a.CycleCapacitySize);
+      const total = pickNumber(a.CycleCapacitySizePrecise, a.CycleCapacitySize);
       const used = pickNumber(a.CycleCapacityUsedPrecise, a.CycleCapacityUsed);
-      const resetAt = parseCycleTimestamp(a.CycleEndTime) ?? undefined;
-      const percentage = limit > 0 ? Math.min(100, Math.round((used / limit) * 100)) : 0;
-      quotas[label] = { used, limit, percentage, resetAt, unlimited: false };
+      const resetAt = parseResetTime(a.CycleEndTime);
+      quotas[label] = { used, total, resetAt, unlimited: false };
     }
 
     bonusAccounts.sort((a, b) => {
@@ -167,11 +189,10 @@ export async function getCodeBuddyIntlUsage(
     for (let i = 0; i < bonusAccounts.length; i++) {
       const a = bonusAccounts[i];
       const label = bonusAccounts.length > 1 ? `Bonus Pack ${i + 1}` : "Bonus Pack";
-      const limit = pickNumber(a.CapacitySizePrecise, a.CapacitySize);
+      const total = pickNumber(a.CapacitySizePrecise, a.CapacitySize);
       const used = pickNumber(a.CapacityUsedPrecise, a.CapacityUsed);
-      const resetAt = parseCycleTimestamp(a.CycleEndTime) ?? undefined;
-      const percentage = limit > 0 ? Math.min(100, Math.round((used / limit) * 100)) : 0;
-      quotas[label] = { used, limit, percentage, resetAt, unlimited: false };
+      const resetAt = parseResetTime(a.CycleEndTime);
+      quotas[label] = { used, total, resetAt, unlimited: false };
     }
 
     const basePkg = refillAccounts[0] || bonusAccounts[0] || accounts[0];
