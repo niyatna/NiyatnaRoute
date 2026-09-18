@@ -17,6 +17,7 @@ export const codebuddy_cnProvider: RegistryEntry = {
   format: "openai",
   executor: "codebuddy-cn",
   baseUrl: "https://copilot.tencent.com/v2/chat/completions",
+  liveCatalogAuthoritative: false,
   authType: "oauth",
   authHeader: "bearer",
   headers: {
