@@ -14,6 +14,7 @@ export const codebuddy_intlProvider: RegistryEntry = {
   format: "openai",
   executor: "codebuddy-intl",
   baseUrl: "https://www.codebuddy.ai/v2/chat/completions",
+  liveCatalogAuthoritative: false,
   authType: "oauth",
   authHeader: "bearer",
   headers: {
