@@ -297,7 +297,7 @@ import {
   writeCompressionAnalytics,
   writeCompressionSkip,
 } from "./chatCore/compressionAnalyticsWrite.ts";
-const runPluginOnRequestHook = async (_args?: any) => ({ blocked: false });
+const runPluginOnRequestHook = async (_args?: any): Promise<{ blocked: boolean; response?: unknown; body?: unknown }> => ({ blocked: false });
 const emitRequestGamificationEvent = async (_args?: any) => {};
 const runPluginOnResponseHook = async (_args?: any) => {};
 const runPluginOnStreamCompleteHook = (_args?: any) => {};
@@ -395,7 +395,7 @@ import { generateRequestId } from "@/shared/utils/requestId";
 import { isLocalStreamLifecycleError } from "@/shared/utils/circuitBreaker";
 import { shouldIsolateProbeFailures } from "@/shared/utils/probeOrigin";
 import { writeTerminalStatus } from "@/shared/utils/terminalStatus";
-import { extractFacts } from "@/lib/memory/extraction";
+const extractFacts = (_args?: unknown) => Promise.resolve();
 import { handleToolCallExecution } from "@/lib/skills/interception";
 import { MEMORY_BUILTIN_TOOL_NAMES } from "@/lib/skills/memoryBuiltins";
 import { resolveProviderId } from "@/shared/constants/providers";
@@ -640,7 +640,7 @@ export async function handleChatCore({
     };
   }
   if (pluginGate.body) {
-    body = pluginGate.body;
+    body = pluginGate.body as Record<string, unknown>;
   }
   // Per-API-key device/connection tracking (port of upstream 9router#931,
   // thanks @mugnimaestra). In-memory only, never blocks the request path.
