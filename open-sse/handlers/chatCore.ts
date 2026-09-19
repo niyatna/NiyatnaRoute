@@ -297,16 +297,10 @@ import {
   writeCompressionAnalytics,
   writeCompressionSkip,
 } from "./chatCore/compressionAnalyticsWrite.ts";
-import { runPluginOnRequestHook } from "./chatCore/pluginOnRequest.ts";
-import { recordContextEditingTelemetryHook } from "./chatCore/contextEditingTelemetry.ts";
-import { recordCompressionCacheStats } from "./chatCore/compressionCacheStats.ts";
-import { writeCavemanOutputAnalytics } from "./chatCore/cavemanOutputAnalytics.ts";
-import { scheduleQuotaShareConsumption } from "./chatCore/quotaShareConsumption.ts";
-import { emitRequestGamificationEvent } from "./chatCore/gamificationEvent.ts";
-import {
-  runPluginOnResponseHook,
-  runPluginOnStreamCompleteHook,
-} from "./chatCore/pluginOnResponse.ts";
+const runPluginOnRequestHook = async (_args?: any) => ({ blocked: false });
+const emitRequestGamificationEvent = async (_args?: any) => {};
+const runPluginOnResponseHook = async (_args?: any) => {};
+const runPluginOnStreamCompleteHook = (_args?: any) => {};
 import { scheduleStreamingQuotaShareConsumption } from "./chatCore/streamingQuotaShare.ts";
 import { recordStreamingUsageStats } from "./chatCore/streamingUsageStats.ts";
 import { recordStreamingCost } from "./chatCore/streamingCost.ts";
@@ -2595,18 +2589,6 @@ export async function handleChatCore({
       );
     }
   } catch (error) {
-    // ── Plugin onError hook ──
-    try {
-      const { runOnError } = await import("@/lib/plugins/hooks");
-      await runOnError(
-        { requestId: traceId, body, model, provider, apiKeyInfo, metadata: {} },
-        error instanceof Error ? error : new Error(String(error))
-      );
-    } catch (pluginErr) {
-      const pluginErrorMessage = sanitizeErrorMessage(pluginErr) || "Plugin onError hook failed";
-      log?.debug?.("PLUGIN", `onError hook error (non-fatal): ${pluginErrorMessage}`);
-    }
-
     let parsedStatus = Number.NaN;
     try {
       parsedStatus = Number(error?.statusCode);

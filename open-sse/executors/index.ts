@@ -139,8 +139,6 @@ const lazyExecutors: Record<string, () => Promise<BaseExecutor>> = {
   // routed API-key traffic to GraphQL /api/gql_POST → HTTP 405.
   "venice-web": () => import("./venice-web.ts").then((m) => new m.VeniceWebExecutor()),
   ven: () => import("./venice-web.ts").then((m) => new m.VeniceWebExecutor()), // Alias
-  "notion-web": () => import("./notion-web.ts").then((m) => new m.NotionWebExecutor()),
-  nw: () => import("./notion-web.ts").then((m) => new m.NotionWebExecutor()), // Alias
   promptql: () => import("./promptql.ts").then((m) => new m.PromptQlExecutor()),
   pql: () => import("./promptql.ts").then((m) => new m.PromptQlExecutor()), // Alias
   "v0-vercel-web": () => import("./v0-vercel-web.ts").then((m) => new m.V0VercelWebExecutor()),

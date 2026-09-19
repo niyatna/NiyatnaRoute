@@ -12,13 +12,6 @@ import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { checkAndRefreshToken } from "@/sse/services/tokenRefresh";
 import { resolveCodexWsModelInfo } from "./modelResolution";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
-import { formatMemoryContext } from "@/lib/memory/injection";
-import { retrieveMemories } from "@/lib/memory/retrieval";
-import {
-  DEFAULT_MEMORY_SETTINGS,
-  getMemorySettings,
-  toMemoryRetrievalConfig,
-} from "@/lib/memory/settings";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { logger } from "@omniroute/open-sse/utils/logger.ts";
 import { resolveProxy } from "@omniroute/open-sse/utils/networkProxy.ts";
@@ -231,40 +224,11 @@ export function injectResponsesWsMemoryInstructions(
   };
 }
 
-async function getMemorySettingsForResponsesWs() {
-  try {
-    return await getMemorySettings();
-  } catch (error) {
-    log.warn("memory.settings.defaulted", {
-      error: sanitizeErrorMessage(error instanceof Error ? error.message : String(error)),
-    });
-    return DEFAULT_MEMORY_SETTINGS;
-  }
-}
-
 async function maybeInjectResponsesWsMemory(
   responseBody: JsonRecord,
-  metadata: ApiKeyMetadata | null
+  _metadata: ApiKeyMetadata | null
 ): Promise<JsonRecord> {
-  if (!metadata?.id) return responseBody;
-
-  const query = extractResponsesWsMemoryQuery(responseBody);
-  if (!query) return responseBody;
-
-  try {
-    const memorySettings = await getMemorySettingsForResponsesWs();
-    const memories = await retrieveMemories(
-      metadata.id,
-      toMemoryRetrievalConfig(memorySettings, { query })
-    );
-    const memoryText = formatMemoryContext(memories);
-    return injectResponsesWsMemoryInstructions(responseBody, memoryText);
-  } catch (error) {
-    log.warn("memory.injection.skipped", {
-      error: sanitizeErrorMessage(error instanceof Error ? error.message : String(error)),
-    });
-    return responseBody;
-  }
+  return responseBody;
 }
 
 function getBridgeSecret(): string {
