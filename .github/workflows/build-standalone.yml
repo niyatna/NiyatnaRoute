@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Release Tag override (e.g. v3.8.51-prebuilt)'
+        description: 'Release Tag override (e.g. v3.8.51-niyatna)'
         required: false
-        default: 'v3.8.51-prebuilt'
+        default: 'v3.8.51-niyatna'
   push:
     branches:
-      - upstream-v3.8.51
+      - main
 
 permissions:
   contents: write
@@ -30,31 +30,33 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: "24"
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Next.js & CLI
         env:
           NODE_OPTIONS: "--max-old-space-size=12288"
           OMNIROUTE_USE_TURBOPACK: "0"
           NEXT_TELEMETRY_DISABLED: "1"
+          OMNIROUTE_SKIP_NATIVE_DEP_CHECK: "1"
         run: |
           npm run build
           npm run build:cli
 
       - name: Package Standalone Artifacts
         run: |
-          tar -czvf omniroute-standalone-v3.8.51.tar.gz dist bin package.json scripts open-sse
+          tar -czvf niyatnaroute-standalone-v3.8.51.tar.gz dist bin package.json scripts open-sse
 
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.tag_name || 'v3.8.51-prebuilt' }}
-          name: "OmniRoute v3.8.51 Pre-built (Release Branch)"
+          tag_name: ${{ inputs.tag_name || 'v3.8.51-niyatna' }}
+          name: "NiyatnaRoute v3.8.51 Standalone Release"
           draft: false
           prerelease: false
-          files: omniroute-standalone-v3.8.51.tar.gz
+          files: niyatnaroute-standalone-v3.8.51.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

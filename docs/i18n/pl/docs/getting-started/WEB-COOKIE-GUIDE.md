@@ -1,9 +1,4 @@
-# Web Cookie Providers (Polski)
-
-🌐 **Languages:** 🇺🇸 [English](../../../../getting-started/WEB-COOKIE-GUIDE.md) · 🇪🇹 [am](../../../am/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇦🇿 [az](../../../az/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇩🇰 [da](../../../da/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇩🇪 [de](../../../de/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇬🇷 [el](../../../el/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇪🇸 [es](../../../es/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇪🇪 [et](../../../et/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇱 [he](../../../he/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇩 [id](../../../id/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇹 [it](../../../it/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇰🇭 [km](../../../km/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇲🇲 [my](../../../my/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇴 [no](../../../no/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [or](../../../or/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇱🇰 [si](../../../si/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇸🇰 [sk](../../../sk/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇮🇳 [te](../../../te/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇹🇭 [th](../../../th/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/getting-started/WEB-COOKIE-GUIDE.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/getting-started/WEB-COOKIE-GUIDE.md)
-
 ---
-
 title: "Pierwsze kroki — dostawcy Web Cookie"
 version: 3.8.40
 lastUpdated: 2026-07-20
@@ -41,67 +36,66 @@ Choć te ciasteczka wyglądają poprawnie, mogą być:
 
 Użycie tych wartości może powodować błędy uwierzytelniania, nawet jeśli wydają się poprawne.
 
-## Kopiowanie z aktywnego żądania
+## Kopiuj z aktywnego żądania
 
-Zamiast tego użyj plików cookie z pomyślnie zrealizowanego żądania:
+Zamiast tego użyj ciasteczek z udanego żądania:
 
 ```
 DevTools
 → Network
-→ Odśwież stronę
-→ Otwórz żądanie czatu lub konwersacji
+→ Refresh the page
+→ Open a chat or conversation request
 → Request Headers
 → Cookie
 ```
 
-Nagłówek żądania `Cookie` zawiera dokładne informacje uwierzytelniające, których przeglądarka pomyślnie użyła.
+Nagłówek żądania `Cookie` zawiera dokładne informacje uwierzytelniające, których przeglądarka skutecznie użyła.
 
-W przypadku większości dostawców Web Cookie jest to wartość, którą należy wkleić do OmniRoute.
+Dla większości dostawców Web Cookie właśnie tę wartość należy wkleić do OmniRoute.
 
 ---
 
-# Konfiguracja ogólna
+# Ogólna konfiguracja
 
 Proces konfiguracji jest taki sam dla większości dostawców Web Cookie.
 
-1. Zaloguj się w witrynie dostawcy.
+1. Zaloguj się na stronie dostawcy.
 2. Otwórz narzędzia deweloperskie przeglądarki.
 3. Otwórz kartę **Network**.
 4. Odśwież stronę.
-5. Otwórz uwierzytelnione żądanie czatu lub konwersacji.
-6. Skopiuj wymagane dane uwierzytelniające.
+5. Otwórz uwierzytelnione żądanie czatu lub rozmowy.
+6. Skopiuj wymagane poświadczenia uwierzytelniające.
 7. Otwórz OmniRoute.
 8. Przejdź do **Providers → Add Provider**.
 9. Wybierz dostawcę Web Cookie.
-10. Wklej dane uwierzytelniające.
+10. Wklej poświadczenia.
 11. Kliknij **Test Connection**.
 12. Zapisz dostawcę.
 
-Wymagane dane uwierzytelniające zależą od dostawcy.
+Dokładne wymagane poświadczenia zależą od dostawcy.
 
 ---
 
-# Formaty danych uwierzytelniających dostawców
+# Formaty poświadczeń dostawców
 
-Różne witryny przechowują dane uwierzytelniające na różne sposoby. Niektóre wymagają tylko plików cookie, natomiast inne mogą wymagać dodatkowych nagłówków lub tokenów.
+Różne witryny przechowują uwierzytelnianie na różne sposoby. Niektóre wymagają tylko ciasteczek, inne mogą wymagać dodatkowych nagłówków lub tokenów.
 
-| Dostawca                        | Format danych uwierzytelniających | Przewodnik dostawcy              |
-| ------------------------------- | --------------------------------- | -------------------------------- |
-| Claude Web                      | Pełny nagłówek żądania Cookie     | `docs/providers/CLAUDE_WEB.md`   |
-| ChatGPT Web (Codex)             | Pełny nagłówek Cookie             | `docs/providers/CHATGPT_WEB.md`  |
-| Gemini Web                      | _(do zweryfikowania)_             |                                  |
-| Copilot Web                     | _(do zweryfikowania)_             | `docs/providers/COPILOT-M365.md` |
-| Microsoft 365 Copilot (BizChat) | WS access_token + chathubPath     | `docs/providers/COPILOT-M365.md` |
-| Grok Web                        | _(do zweryfikowania)_             |                                  |
-| ...                             | ...                               | ...                              |
+| Dostawca            | Format poświadczeń            | Przewodnik dostawcy             |
+| ------------------- | ----------------------------- | ------------------------------- |
+| Claude Web          | Pełny nagłówek żądania Cookie | `docs/providers/CLAUDE_WEB.md`  |
+| ChatGPT Web (Codex) | Pełny nagłówek Cookie         | `docs/providers/CHATGPT_WEB.md` |
+| Gemini Web          | _(verify)_                    |                                 |
+| Copilot Web         | _(verify)_                    |                                 |
+| Grok Web            | _(verify)_                    |                                 |
+| ...                 | ...                           | ...                             |
 
-> Aktualizuj tę tabelę w miarę dodawania nowych dostawców Web Cookie lub zmian wymagań uwierzytelniania istniejących dostawców.
+> Aktualizuj tę tabelę, gdy dodawani są nowi dostawcy Web Cookie lub gdy istniejący dostawcy zmieniają wymagania uwierzytelniania.
 
 ---
 
-# Możliwości i ograniczenia dostawców Web Cookie
+# Co dostawcy Web Cookie mogą, a czego nie mogą
 
-Dostawcy Web Cookie ponownie wykorzystują interfejs czatu witryny. **Nie** oferują takich samych możliwości jak oficjalne interfejsy API.
+Dostawcy Web Cookie wykorzystują interfejs czatu witryny. **Nie** zapewniają tych samych możliwości co oficjalne API.
 
 ## Obsługiwane
 

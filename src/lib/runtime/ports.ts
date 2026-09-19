@@ -1,4 +1,4 @@
-const DEFAULT_PORT = 20128;
+const DEFAULT_PORT = 9999;
 
 function parsePort(value: string | undefined, fallback: number): number {
   if (!value) return fallback;

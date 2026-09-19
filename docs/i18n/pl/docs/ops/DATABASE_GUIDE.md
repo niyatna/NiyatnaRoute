@@ -1,19 +1,21 @@
-# Database Schema & Operations Guide (Polski)
-
-🌐 **Languages:** 🇺🇸 [English](../../../../ops/DATABASE_GUIDE.md) · 🇪🇹 [am](../../../am/docs/ops/DATABASE_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/ops/DATABASE_GUIDE.md) · 🇦🇿 [az](../../../az/docs/ops/DATABASE_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/ops/DATABASE_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/ops/DATABASE_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/ops/DATABASE_GUIDE.md) · 🇩🇰 [da](../../../da/docs/ops/DATABASE_GUIDE.md) · 🇩🇪 [de](../../../de/docs/ops/DATABASE_GUIDE.md) · 🇬🇷 [el](../../../el/docs/ops/DATABASE_GUIDE.md) · 🇪🇸 [es](../../../es/docs/ops/DATABASE_GUIDE.md) · 🇪🇪 [et](../../../et/docs/ops/DATABASE_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/ops/DATABASE_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/ops/DATABASE_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/ops/DATABASE_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/ops/DATABASE_GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/ops/DATABASE_GUIDE.md) · 🇮🇱 [he](../../../he/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/ops/DATABASE_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/ops/DATABASE_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/ops/DATABASE_GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/ops/DATABASE_GUIDE.md) · 🇮🇩 [id](../../../id/docs/ops/DATABASE_GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/ops/DATABASE_GUIDE.md) · 🇮🇹 [it](../../../it/docs/ops/DATABASE_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/ops/DATABASE_GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/ops/DATABASE_GUIDE.md) · 🇰🇭 [km](../../../km/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/ops/DATABASE_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/ops/DATABASE_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/ops/DATABASE_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/ops/DATABASE_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/ops/DATABASE_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/ops/DATABASE_GUIDE.md) · 🇲🇲 [my](../../../my/docs/ops/DATABASE_GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/ops/DATABASE_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/ops/DATABASE_GUIDE.md) · 🇳🇴 [no](../../../no/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [or](../../../or/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/ops/DATABASE_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/ops/DATABASE_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/ops/DATABASE_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/ops/DATABASE_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/ops/DATABASE_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/ops/DATABASE_GUIDE.md) · 🇱🇰 [si](../../../si/docs/ops/DATABASE_GUIDE.md) · 🇸🇰 [sk](../../../sk/docs/ops/DATABASE_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/ops/DATABASE_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/ops/DATABASE_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/ops/DATABASE_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/ops/DATABASE_GUIDE.md) · 🇮🇳 [te](../../../te/docs/ops/DATABASE_GUIDE.md) · 🇹🇭 [th](../../../th/docs/ops/DATABASE_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/ops/DATABASE_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/ops/DATABASE_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/ops/DATABASE_GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/ops/DATABASE_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/ops/DATABASE_GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/ops/DATABASE_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/ops/DATABASE_GUIDE.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/ops/DATABASE_GUIDE.md)
-
+---
+title: "Przewodnik po schemacie bazy danych i operacjach"
+version: 3.8.40
+lastUpdated: 2026-06-28
 ---
 
-> **TL;DR**: OmniRoute używa **SQLite z dziennikiem WAL** jako głównego magazynu danych oraz szyfrowania **AES-256-GCM** dla poufnych pól przechowywanych na dysku. Ten przewodnik obejmuje schemat, migracje, tworzenie i przywracanie kopii zapasowych oraz procedury operacyjne.
+# Przewodnik po schemacie bazy danych i operacjach
+
+> **TL;DR**: OmniRoute używa **SQLite z journalingiem WAL** jako głównego magazynu, z szyfrowaniem **AES-256-GCM** w spoczynku dla wrażliwych pól. Ten przewodnik obejmuje schemat, migracje, kopie zapasowe/odzyskiwanie oraz runbooki operacyjne.
 
 **Źródła:**
 
 - `src/lib/db/core.ts` — singleton + SCHEMA_SQL (17 tabel bazowych)
 - `src/lib/db/migrationRunner.ts` — wersjonowane migracje
-- `src/lib/db/migrations/` — 167 wersjonowanych plików SQL
-- `src/lib/db/encryption.ts` — funkcje pomocnicze szyfrowania
+- `src/lib/db/migrations/` — 106 wersjonowanych plików SQL
+- `src/lib/db/encryption.ts` — helpery szyfrowania
 - `src/lib/db/backup.ts` — eksport/import kopii zapasowych
-- `src/lib/db/healthCheck.ts` — diagnostyka stanu
+- `src/lib/db/healthCheck.ts` — diagnostyka kondycji
 
 ---
 
@@ -21,57 +23,52 @@
 
 OmniRoute wybrał SQLite zamiast PostgreSQL/MySQL z kilku powodów:
 
-| Czynnik            | SQLite                                               | PostgreSQL                                        |
-| ------------------ | ---------------------------------------------------- | ------------------------------------------------- |
-| **Wdrożenie**      | Wbudowana — bez oddzielnego serwera                  | Wymaga skonfigurowania serwera                    |
-| **Szyfrowanie**    | Warstwa aplikacji (AES-256-GCM)                      | Wbudowane TDE                                     |
-| **Wydajność**      | Szybsza dla małych/średnich obciążeń                 | Lepsza przy ogromnej liczbie równoległych zapisów |
-| **Współbieżność**  | Tryb WAL umożliwia równoległe odczyty                | Pełne MVCC                                        |
-| **Kopia zapasowa** | Kopia pojedynczego pliku                             | `pg_dump` lub migawka systemu plików              |
-| **Zastosowanie**   | Instalacja dla jednego użytkownika, system wbudowany | Wielodostępny SaaS                                |
+| Czynnik              | SQLite                                    | PostgreSQL                                  |
+| -------------------- | ----------------------------------------- | ------------------------------------------- |
+| **Wdrożenie**        | Osadzony — bez osobnego serwera           | Wymaga konfiguracji serwera                 |
+| **Szyfrowanie**      | Warstwa aplikacji (AES-256-GCM)           | Wbudowane TDE                               |
+| **Wydajność**        | Szybszy przy małych/średnich obciążeniach | Lepszy przy ogromnych równoległych zapisach |
+| **Współbieżność**    | Tryb WAL pozwala na równoległe odczyty    | Pełne MVCC                                  |
+| **Kopia zapasowa**   | Kopia pojedynczego pliku                  | `pg_dump` lub snapshot systemu plików       |
+| **Przypadek użycia** | Instalacja per-użytkownik, osadzona       | Multi-tenant SaaS                           |
 
-W przypadku wdrożeń przeznaczonych dla **jednego użytkownika i jednej instancji** (głównego zastosowania OmniRoute) SQLite jest prostszy i szybszy.
+Dla wdrożeń **jednoużytkownikowych, jednainstancyjnych** (główny przypadek użycia OmniRoute) SQLite jest prostszy i szybszy.
 
-### Dziennik WAL
+### Journaling WAL
 
-`core.ts` otwiera bazę danych w **trybie WAL (Write-Ahead Logging)**:
+`core.ts` otwiera bazę w trybie **WAL (Write-Ahead Logging)**:
 
 ```ts
 // src/lib/db/core.ts
 db.pragma("journal_mode = WAL");
 db.pragma("busy_timeout = 2000");
 db.pragma("synchronous = NORMAL");
-db.pragma(`cache_size = -${DEFAULT_DATABASE_SETTINGS.optimization.cacheSize}`);
+// Settings > System & Storage > Cache Size is applied as KiB.
+db.pragma("cache_size = -16384");
 ```
 
-WAL umożliwia **równoległe odczyty** podczas zapisu — jest to ważne dla panelu, który wykonuje zapytania w trakcie rejestrowania żądań.
-
-Domyślny rozmiar pamięci podręcznej wynosi **65 536 KiB (64 MiB)**. SQLite interpretuje ujemną wartość
-`cache_size` jako przybliżony górny limit w KiB i przydziela strony na żądanie.
-Ustawienie **Ustawienia > System i pamięć masowa > Rozmiar pamięci podręcznej** przyjmuje wartości całkowite od **1 do
-1 000 000 KiB**; zapisanie ustawienia powoduje zastosowanie go do aktywnego połączenia z bazą danych,
-a OmniRoute przywraca zapisaną wartość podczas uruchamiania.
+WAL pozwala na **równoległe odczyty** podczas zapisów — ważne dla dashboardu, który wykonuje zapytania, gdy rejestrowane są żądania.
 
 ---
 
 ## Lokalizacja bazy danych
 
-Plik SQLite jest przechowywany w następującej lokalizacji:
+Plik SQLite jest przechowywany w:
 
-| System operacyjny | Ścieżka                                                          |
-| ----------------- | ---------------------------------------------------------------- |
-| Linux             | `~/.omniroute/storage.sqlite`                                    |
-| macOS             | `~/.omniroute/storage.sqlite`                                    |
-| Windows           | `%USERPROFILE%\.omniroute\storage.sqlite`                        |
-| Docker            | `/app/data/storage.sqlite` (konfigurowalne za pomocą `DATA_DIR`) |
+| OS      | Ścieżka                                                      |
+| ------- | ------------------------------------------------------------ |
+| Linux   | `~/.omniroute/storage.sqlite`                                |
+| macOS   | `~/.omniroute/storage.sqlite`                                |
+| Windows | `%USERPROFILE%\.omniroute\storage.sqlite`                    |
+| Docker  | `/app/data/storage.sqlite` (konfigurowalne przez `DATA_DIR`) |
 
 Pliki towarzyszące:
 
-- `storage.sqlite-wal` — dziennik zapisu wyprzedzającego
+- `storage.sqlite-wal` — write-ahead log
 - `storage.sqlite-shm` — plik pamięci współdzielonej
-- `call_logs/` — artefakty danych żądań (jeśli włączono)
+- `call_logs/` — artefakty payloadów żądań (jeśli włączone)
 
-**Zmiana lokalizacji:**
+**Nadpisanie lokalizacji:**
 
 ```bash
 DATA_DIR=/custom/path omniroute
@@ -81,112 +78,112 @@ DATA_DIR=/custom/path omniroute
 
 ## Architektura modułów domenowych
 
-Baza danych OmniRoute obejmuje **110 modułów TypeScript najwyższego poziomu** w katalogu `src/lib/db/`. Każdy moduł domenowy:
+Baza OmniRoute ma **94 moduły domenowe** w `src/lib/db/`. Każdy moduł:
 
-- Jest właścicielem co najmniej jednej konkretnej tabeli
+- Posiada jedną lub więcej konkretnych tabel
 - Eksportuje typowane funkcje CRUD
-- Nigdy nie uzyskuje dostępu do tabel innego modułu
-- Używa funkcji `getDbInstance()` z pliku `core.ts`, aby uzyskać dostęp do bazy danych
+- Nigdy nie dotyka tabel innego modułu
+- Używa `getDbInstance()` z `core.ts` do dostępu do DB
 
-### 110 modułów DB najwyższego poziomu
+### 94 moduły DB
 
-OmniRoute zawiera **110 plików TypeScript najwyższego poziomu** w katalogu `src/lib/db/`. Poniżej przedstawiono przykładowe moduły podstawowe; pełna lista znajduje się w wykazie zawartości katalogu:
+OmniRoute ma **94 pliki modułów** w `src/lib/db/`. Poniżej próbka kluczowych modułów; pełna lista w listingu katalogu:
 
-| Moduł                   | Tabele                                                         | Odpowiedzialność                                                                  |
-| ----------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `providers.ts`          | `provider_connections`                                         | Rejestrowanie dostawców oraz danych uwierzytelniających OAuth/kluczy API          |
-| `models.ts`             | `key_value` (dane modeli)                                      | Definicje modeli, możliwości, ceny                                                |
-| `combos.ts`             | `combos`                                                       | Konfiguracje routingu kombinacji i ich kolejność                                  |
-| `apiKeys.ts`            | `api_keys`                                                     | Cykl życia kluczy API, zakresy uprawnień, śledzenie limitów                       |
-| `settings.ts`           | `key_value`, `api_keys`, `combos`                              | Konfiguracja systemu i współdzielony magazyn KV                                   |
-| `backup.ts`             | —                                                              | Operacje eksportowania/importowania kopii zapasowych                              |
-| `proxies.ts`            | `proxy_registry`, `proxy_assignments`, `provider_connections`  | Konfiguracje serwerów proxy i reguły routingu                                     |
-| `prompts.ts`            | `prompt_templates`                                             | Szablony promptów wielokrotnego użytku i wersjonowanie                            |
-| `webhooks.ts`           | `webhooks`                                                     | Subskrypcje webhooków sterowane zdarzeniami oraz dzienniki                        |
-| `detailedLogs.ts`       | `request_detail_logs`                                          | Rejestrowanie audytowe poszczególnych żądań (opcjonalne, duży wolumen)            |
-| `domainState.ts`        | `domain_*` (5 tabel)                                           | Budżety domen, wyłączniki awaryjne, blokady, łańcuchy rezerwowe, historia kosztów |
-| `registeredKeys.ts`     | `registered_keys`, `account_key_limits`, `provider_key_limits` | Klucze API z listy dozwolonych dla MCP/A2A                                        |
-| `quotaSnapshots.ts`     | `quota_snapshots`                                              | Historyczne wykorzystanie limitów                                                 |
-| `modelComboMappings.ts` | `model_combo_mappings`                                         | Mapowanie modeli na domyślne kombinacje                                           |
-| `cliToolState.ts`       | `cli_tool_state`                                               | Trwały stan specyficzny dla CLI                                                   |
-| `encryption.ts`         | —                                                              | Funkcje pomocnicze do szyfrowania/odszyfrowywania pól                             |
-| `readCache.ts`          | —                                                              | Pamięć podręczna w pamięci operacyjnej dla operacji z dużą liczbą odczytów        |
-| `secrets.ts`            | `key_value` (zaszyfrowane wpisy)                               | Przechowywanie zaszyfrowanych sekretów                                            |
-| `stateReset.ts`         | —                                                              | Czyszczenie/resetowanie stanu bazy danych na potrzeby testów                      |
-| `contextHandoffs.ts`    | `context_handoffs`                                             | Kontekst sesji na potrzeby przekazywania zadań między agentami                    |
-| `usage*.ts`             | `usage_history`, `call_logs`, `proxy_logs`                     | Śledzenie użycia                                                                  |
-| `compression*.ts`       | `compression_settings`, `compression_combos`                   | Konfiguracja kompresji                                                            |
+| Moduł                   | Tabele                                                         | Odpowiedzialność                                                               |
+| ----------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `providers.ts`          | `provider_connections`                                         | Rejestracja providerów OAuth/API key i poświadczenia                           |
+| `models.ts`             | `key_value` (model data)                                       | Definicje modeli, możliwości, cennik                                           |
+| `combos.ts`             | `combos`                                                       | Konfiguracje routingu combo i kolejność                                        |
+| `apiKeys.ts`            | `api_keys`                                                     | Cykl życia kluczy API, zakresy, śledzenie limitów                              |
+| `settings.ts`           | `key_value`, `api_keys`, `combos`                              | Konfiguracja systemu i współdzielony magazyn KV                                |
+| `backup.ts`             | —                                                              | Operacje eksportu/importu kopii zapasowych                                     |
+| `proxies.ts`            | `proxy_registry`, `proxy_assignments`, `provider_connections`  | Konfiguracje proxy i reguły routingu                                           |
+| `prompts.ts`            | `prompt_templates`                                             | Wielokrotnego użytku szablony promptów, wersjonowanie                          |
+| `webhooks.ts`           | `webhooks`                                                     | Subskrypcje webhooków sterowane zdarzeniami i logi                             |
+| `detailedLogs.ts`       | `request_detail_logs`                                          | Logowanie audytu per-żądanie (opcjonalne, duża objętość)                       |
+| `domainState.ts`        | `domain_*` (5 tables)                                          | Budżety domen, circuit breakery, lockouty, łańcuchy fallback, historia kosztów |
+| `registeredKeys.ts`     | `registered_keys`, `account_key_limits`, `provider_key_limits` | Whitelistowane klucze API dla MCP/A2A                                          |
+| `quotaSnapshots.ts`     | `quota_snapshots`                                              | Historyczne zużycie limitów                                                    |
+| `modelComboMappings.ts` | `model_combo_mappings`                                         | Mapowanie modeli na domyślne combo                                             |
+| `cliToolState.ts`       | `cli_tool_state`                                               | Trwały stan specyficzny dla CLI                                                |
+| `encryption.ts`         | —                                                              | Helpery do szyfrowania/deszyfrowania pól                                       |
+| `readCache.ts`          | —                                                              | Cache w pamięci dla operacji intensywnych w odczytach                          |
+| `secrets.ts`            | `key_value` (encrypted entries)                                | Szyfrowany magazyn sekretów                                                    |
+| `stateReset.ts`         | —                                                              | Czyszczenie/reset stanu DB do testów                                           |
+| `contextHandoffs.ts`    | `context_handoffs`                                             | Kontekst sesji do handoffu agentów                                             |
+| `usage*.ts`             | `usage_history`, `call_logs`, `proxy_logs`                     | Śledzenie użycia                                                               |
+| `compression*.ts`       | `compression_settings`, `compression_combos`                   | Konfiguracja kompresji                                                         |
 
 ### Granice modułów
 
-Podstawowa reguła architektoniczna: **moduły nie uzyskują bezpośredniego dostępu do tabel innych modułów**. Aby pracować z danymi innego modułu, należy zaimportować funkcję z tego modułu.
+Kluczowa reguła architektoniczna: **moduły nie sięgają bezpośrednio do tabel innych modułów**. Aby pracować z danymi innego modułu, zaimportuj funkcję z tego modułu.
 
 ```ts
-// ❌ ŹLE: bezpośrednie zapytanie SQL do tabeli innego modułu
+// ❌ WRONG: direct SQL from another module
 db.prepare("SELECT * FROM provider_connections").all();
 
-// ✅ DOBRZE: użycie funkcji modułu providers
+// ✅ RIGHT: use the providers module function
 import { listProviders } from "@/lib/db/providers";
 const providers = await listProviders();
 ```
 
-Przestrzeganie tej reguły jest egzekwowane podczas przeglądu kodu — nie istnieje kontrola statyczna, ale naruszenia są oznaczane.
+Ta reguła jest egzekwowana w code review — nie ma statycznego sprawdzenia, ale naruszenia są oznaczane.
 
 ---
 
 ## Schemat bazowy (17 tabel)
 
-`core.ts` definiuje 17 tabel bazowych w `SCHEMA_SQL`. Są one tworzone przez migrację `001_initial_schema.sql` i stanowią główny schemat.
+`core.ts` definiuje 17 tabel bazowych w `SCHEMA_SQL`. Tworzy je migracja `001_initial_schema.sql` i stanowią one rdzeń schematu.
 
-### Główne tabele (tworzone podczas migracji początkowej)
+### Tabele rdzeniowe (utworzone w początkowej migracji)
 
-| Tabela                     | Przeznaczenie                                | Kluczowe kolumny                                                        |
-| -------------------------- | -------------------------------------------- | ----------------------------------------------------------------------- |
-| `provider_connections`     | Dane uwierzytelniające dostawcy (szyfrowane) | `id`, `provider`, `auth_type`, `api_key`, `is_active`                   |
-| `provider_nodes`           | Informacje o routingu węzłów dostawcy        | `id`, `type`, `name`, `base_url`, `created_at`                          |
-| `key_value`                | Ogólny magazyn klucz-wartość                 | `namespace`, `key`, `value`                                             |
-| `combos`                   | Definicje kombinacji routingu                | `id`, `name`, `data`, `sort_order`                                      |
-| `api_keys`                 | Klucze API dla bramy                         | `id`, `name`, `key`, `machine_id`, `allowed_models`                     |
-| `db_meta`                  | Metadane bazy danych                         | `key`, `value`                                                          |
-| `usage_history`            | Rekordy wykorzystania żądań                  | `id`, `provider`, `model`, `tokens_input`, `tokens_output`, `timestamp` |
-| `call_logs`                | Dane żądań i odpowiedzi                      | `id`, `timestamp`, `status`, `model`, `provider`, `latency_ms`          |
-| `proxy_logs`               | Dzienniki żądań proxy                        | `id`, `timestamp`, `proxy_type`, `status`, `provider`                   |
-| `domain_fallback_chains`   | Łańcuchy model–dostawca                      | `model`, `chain`                                                        |
-| `domain_budgets`           | Budżety wydatków dla poszczególnych domen    | `api_key_id`, `daily_limit_usd`, `warning_threshold`, `reset_interval`  |
-| `domain_budget_reset_logs` | Historia resetowania budżetów                | `id`, `api_key_id`, `reset_interval`, `previous_spend`, `reset_at`      |
-| `domain_cost_history`      | Śledzenie kosztów dla poszczególnych domen   | `id`, `api_key_id`, `cost`, `timestamp`                                 |
-| `domain_lockout_state`     | Stan limitowania częstotliwości dla domen    | `identifier`, `attempts`, `locked_until`                                |
-| `domain_circuit_breakers`  | Stan wyłącznika awaryjnego dla każdej domeny | `name`, `state`, `failure_count`, `last_failure_time`                   |
-| `semantic_cache`           | Pamięć podręczna odpowiedzi LLM              | `id`, `signature`, `model`, `prompt_hash`, `response`                   |
-| `quota_snapshots`          | Historyczne migawki limitów                  | `id`, `provider`, `connection_id`, `window_key`, `remaining_percentage` |
+| Tabela                     | Cel                                  | Kluczowe kolumny                                                        |
+| -------------------------- | ------------------------------------ | ----------------------------------------------------------------------- |
+| `provider_connections`     | Poświadczenia providera (szyfrowane) | `id`, `provider`, `auth_type`, `api_key`, `is_active`                   |
+| `provider_nodes`           | Info routingu węzła providera        | `id`, `type`, `name`, `base_url`, `created_at`                          |
+| `key_value`                | Ogólny magazyn KV                    | `namespace`, `key`, `value`                                             |
+| `combos`                   | Definicje combo routingu             | `id`, `name`, `data`, `sort_order`                                      |
+| `api_keys`                 | Klucze API bramki                    | `id`, `name`, `key`, `machine_id`, `allowed_models`                     |
+| `db_meta`                  | Metadane bazy danych                 | `key`, `value`                                                          |
+| `usage_history`            | Rekordy użycia żądań                 | `id`, `provider`, `model`, `tokens_input`, `tokens_output`, `timestamp` |
+| `call_logs`                | Payloady i odpowiedzi żądań          | `id`, `timestamp`, `status`, `model`, `provider`, `latency_ms`          |
+| `proxy_logs`               | Logi żądań proxy                     | `id`, `timestamp`, `proxy_type`, `status`, `provider`                   |
+| `domain_fallback_chains`   | Łańcuchy model→provider              | `model`, `chain`                                                        |
+| `domain_budgets`           | Budżety wydatków per-domena          | `api_key_id`, `daily_limit_usd`, `warning_threshold`, `reset_interval`  |
+| `domain_budget_reset_logs` | Historia resetów budżetu             | `id`, `api_key_id`, `reset_interval`, `previous_spend`, `reset_at`      |
+| `domain_cost_history`      | Śledzenie kosztów per-domena         | `id`, `api_key_id`, `cost`, `timestamp`                                 |
+| `domain_lockout_state`     | Stan rate-limitu domeny              | `identifier`, `attempts`, `locked_until`                                |
+| `domain_circuit_breakers`  | Stan circuit breakera per domena     | `name`, `state`, `failure_count`, `last_failure_time`                   |
+| `semantic_cache`           | Cache odpowiedzi LLM                 | `id`, `signature`, `model`, `prompt_hash`, `response`                   |
+| `quota_snapshots`          | Historyczne snapshoty limitów        | `id`, `provider`, `connection_id`, `window_key`, `remaining_percentage` |
 
-### Dodatkowe tabele (dodane przez późniejsze migracje)
+### Dodatkowe tabele (dodane w późniejszych migracjach)
 
-Kolejne migracje dodają między innymi następujące tabele:
+Kolejne migracje dodają m.in. tabele:
 
-- `cli_tool_state` (migracja 011) — stan narzędzia CLI
-- tabele `mcp_*` — audyt serwera MCP
-- tabele `a2a_*` — stan zadań A2A
-- tabele `usage_*` — śledzenie wykorzystania
-- tabele `plugin_*` — system wtyczek
-- `skill_executions` — historia wykonywania umiejętności
-- tabele `memory_*` — system pamięci
-- tabele `compression_*` — system kompresji
-- tabele `webhook_*` — dziennik dostarczania webhooków
-- tabele `acp_*` — Agent Client Protocol
-- tabele `oneproxy_*` — platforma handlowa 1proxy
-- `proxy_assignments` — powiązania zakresów proxy
-- `detailed_call_artifacts` — metadane artefaktów dziennika wywołań
-- `quota_alert_history` — audyt alertów dotyczących limitów
+- `cli_tool_state` (migration 011) — stan narzędzi CLI
+- `mcp_*` tables — audyt serwera MCP
+- `a2a_*` tables — stan zadań A2A
+- `usage_*` tables — śledzenie użycia
+- `plugin_*` tables — system pluginów
+- `skill_executions` — historia wykonania skilli
+- `memory_*` tables — system pamięci
+- `compression_*` tables — system kompresji
+- `webhook_*` tables — log dostarczania webhooków
+- `acp_*` tables — Agent Client Protocol
+- `oneproxy_*` tables — marketplace 1proxy
+- `proxy_assignments` — powiązania zakresu proxy
+- `detailed_call_artifacts` — metadane artefaktów logów wywołań
+- `quota_alert_history` — audyt alertów limitów
 - `command_code_auth_sessions` — sesje OAuth Command Code
 
-Pełna lista ponad 30 tabel znajduje się w `src/lib/db/migrations/`.
+Pełna lista ~30+ tabel jest w `src/lib/db/migrations/`.
 
 ---
 
 ## Migracje
 
-OmniRoute używa **wersjonowanych, idempotentnych migracji** w katalogu `src/lib/db/migrations/`. Każda migracja jest pojedynczym plikiem SQL o nazwie `NNN_description.sql`.
+OmniRoute używa **wersjonowanych, idempotentnych migracji** w `src/lib/db/migrations/`. Każda migracja to pojedynczy plik SQL o nazwie `NNN_description.sql`.
 
 ### Nazewnictwo migracji
 
@@ -198,17 +195,17 @@ OmniRoute używa **wersjonowanych, idempotentnych migracji** w katalogu `src/lib
 021_combo_call_log_targets.sql
 ```
 
-### Sposób uruchamiania migracji
+### Jak działają migracje
 
-Podczas uruchamiania `migrationRunner.ts`:
+Przy starcie `migrationRunner.ts`:
 
-1. Tworzy tabelę `_omniroute_migrations`, jeśli jeszcze nie istnieje
-2. Wyszukuje już zastosowane migracje
-3. Stosuje kolejno wszystkie nowe migracje, każdą w osobnej transakcji
-4. Rejestruje każdą zastosowaną migrację wraz ze znacznikiem czasu
+1. Tworzy tabelę `_omniroute_migrations`, jeśli nie istnieje
+2. Odpytuje już zastosowane migracje
+3. Stosuje nowe migracje po kolei, każdą w transakcji
+4. Zapisuje każdą zastosowaną migrację ze znacznikiem czasu
 
 ```ts
-// src/lib/db/migrationRunner.ts (uproszczony)
+// src/lib/db/migrationRunner.ts (simplified)
 export async function runMigrations(db: SqliteDatabase, migrationsDir: string) {
   const applied = getAppliedMigrations(db);
   const available = readMigrationFiles(migrationsDir);
@@ -223,9 +220,9 @@ export async function runMigrations(db: SqliteDatabase, migrationsDir: string) {
 }
 ```
 
-### Idempotentność
+### Idempotencja
 
-Migracje muszą być **idempotentne** — ich dwukrotne uruchomienie nie powinno powodować żadnych zmian:
+Migracje muszą być **idempotentne** — dwukrotne uruchomienie powinno być no-op:
 
 ```sql
 -- 004_proxy_registry.sql
@@ -237,15 +234,15 @@ CREATE TABLE IF NOT EXISTS proxy_registry (
 );
 ```
 
-Należy często używać klauzul `IF NOT EXISTS`, `IF EXISTS` oraz `OR IGNORE` / `OR REPLACE`.
+Używaj swobodnie klauzul `IF NOT EXISTS`, `IF EXISTS` oraz `OR IGNORE` / `OR REPLACE`.
 
 ### Dodawanie nowej migracji
 
-1. **Ustal następny numer**: `ls src/lib/db/migrations/ | tail -1`
+1. **Ustal kolejny numer**: `ls src/lib/db/migrations/ | tail -1`
 2. **Utwórz plik**: `NNN_my_change.sql`
-3. **Używaj bezpiecznych instrukcji DDL**: `CREATE TABLE IF NOT EXISTS`, `ALTER TABLE ... ADD COLUMN`
-4. **Ostrożnie uzupełniaj dane**: używaj `UPDATE ... WHERE ...`, aby prawidłowo obsłużyć istniejące wiersze
-5. **Przetestuj na kopii**: nigdy nie uruchamiaj nieprzetestowanych migracji w środowisku produkcyjnym
+3. **Używaj bezpiecznego DDL**: `CREATE TABLE IF NOT EXISTS`, `ALTER TABLE ... ADD COLUMN`
+4. **Uzupełniaj dane ostrożnie**: używaj `UPDATE ... WHERE ...` dla istniejących wierszy
+5. **Testuj na kopii**: nigdy nie uruchamiaj nietestowanych migracji na produkcji
 
 Przykład:
 
@@ -256,18 +253,18 @@ UPDATE combos SET priority = 100 WHERE priority IS NULL;
 CREATE INDEX IF NOT EXISTS idx_combos_priority ON combos(priority);
 ```
 
-> **Zmiany niekompatybilne wstecznie** (np. usuwanie kolumn) są problematyczne. OmniRoute NIE obsługuje wycofywania wersji — po zastosowaniu migracji zmiana schematu jest trwała. Należy odpowiednio ją zaplanować.
+> **Zmiany niekompatybilne wstecz** (np. usuwanie kolumn) są trudne. OmniRoute NIE wspiera downgrade — po zastosowaniu migracji zmiana schematu jest trwała. Planuj odpowiednio.
 
 ---
 
-## Szyfrowanie danych przechowywanych
+## Szyfrowanie w spoczynku
 
-Pola poufne (klucze API, tokeny OAuth, parametry połączenia) są szyfrowane podczas przechowywania za pomocą algorytmu **AES-256-GCM**.
+Wrażliwe pola (klucze API, tokeny OAuth, connection stringi) są szyfrowane w spoczynku przy użyciu **AES-256-GCM**.
 
 ### Jak to działa
 
 ```ts
-// src/lib/db/encryption.ts (uproszczony)
+// src/lib/db/encryption.ts (simplified)
 const key = deriveKeyFromPassphrase(passphrase, salt);
 const iv = randomBytes(12);
 const cipher = createCipheriv("aes-256-gcm", key, iv);
@@ -280,149 +277,149 @@ return { encrypted, iv, authTag };
 
 - `provider_connections.api_key` — szyfrowane na poziomie aplikacji
 - `provider_connections.access_token`, `refresh_token`, `id_token` — szyfrowane na poziomie aplikacji
-- Wpisy `key_value` z `namespace = "secrets"` — szyfrowane na poziomie aplikacji
-- `proxy_registry.auth` — szyfrowane na poziomie aplikacji (jeśli występuje)
+- `key_value` entries with `namespace = "secrets"` — szyfrowane na poziomie aplikacji
+- `proxy_registry.auth` — szyfrowane na poziomie aplikacji (jeśli obecne)
 
 ### Klucz szyfrowania
 
-Klucz szyfrowania jest wyprowadzany z **hasła** (ustawianego za pomocą zmiennej środowiskowej `STORAGE_ENCRYPTION_KEY`) oraz **soli** (przechowywanej w bazie danych). Obie wartości są wymagane do odszyfrowania danych.
+Klucz szyfrowania jest wyprowadzany z **hasła** (ustawianego przez zmienną env `STORAGE_ENCRYPTION_KEY`) i **soli** (przechowywanej w DB). Oba są wymagane do odszyfrowania danych.
 
 ```bash
-# Wygeneruj bezpieczne hasło
+# Generate a secure passphrase
 openssl rand -hex 32
 
-# Ustaw w pliku .env
-STORAGE_ENCRYPTION_KEY=<twój-klucz>
+# Set in .env
+STORAGE_ENCRYPTION_KEY=<your-key>
 ```
 
-> **Krytyczne**: Utrata klucza szyfrowania oznacza utratę dostępu do wszystkich zaszyfrowanych danych. **Utwórz kopię zapasową klucza oddzielnie od bazy danych**.
+> **Krytyczne**: Utrata klucza szyfrowania oznacza utratę dostępu do wszystkich zaszyfrowanych danych. **Twórz kopię zapasową klucza osobno od bazy danych**.
 
-### Co NIE jest szyfrowane
+### Czego NIE szyfrujemy
 
-Ze względów wydajnościowych następujące dane są przechowywane w postaci jawnego tekstu:
+Ze względów wydajnościowych w plaintexcie przechowywane są:
 
-- Nazwy wyświetlane dostawców
-- Definicje modeli (są już publiczne)
+- Nazwy wyświetlane providerów
+- Definicje modeli (już publiczne)
 - Reguły routingu
-- Rekordy użycia (nie zawierają danych osobowych)
+- Rekordy użycia (bez PII)
 
 ---
 
-## Uwagi dotyczące szyfrowania (v3.8.16+)
+## Zastrzeżenia dotyczące szyfrowania (v3.8.16+)
 
-OmniRoute używa funkcji **`migrateLegacyEncryptedString()`**, aby w sposób niewidoczny obsługiwać dwa schematy szyfrowania:
+OmniRoute używa **`migrateLegacyEncryptedString()`**, aby przezroczyście obsługiwać dwa schematy szyfrowania:
 
-- **Starszy** (sprzed v3.5.0): „szyfrowanie” oparte na XOR (nie jest to prawdziwa kryptografia)
-- **Obecny**: AES-256-GCM z prawidłowym wektorem IV i tagiem uwierzytelniającym
+- **Legacy** (pre-v3.5.0): „szyfrowanie” oparte na XOR (nie prawdziwa kryptografia)
+- **Current**: AES-256-GCM z właściwym IV i auth tag
 
-Funkcja pomocnicza migracji wykrywa starszy format i przy pierwszym odczycie ponownie szyfruje dane przy użyciu nowego schematu. Oznacza to, że można zaktualizować starą bazę danych bez utraty danych uwierzytelniających.
+Helper migracji wykrywa format legacy i przy pierwszym odczycie ponownie szyfruje nowym schematem. Dzięki temu możesz zaktualizować starą bazę bez utraty poświadczeń.
 
 ---
 
-## Pamięć podręczna odczytu
+## Cache odczytów
 
-W przypadku często odczytywanych danych (modeli, dostawców, ustawień) plik `readCache.ts` zapewnia **pamięć podręczną w pamięci operacyjnej**:
+Dla często odczytywanych danych (modele, providery, ustawienia) `readCache.ts` zapewnia **cache w pamięci**:
 
 ```ts
-// Buforowane podczas uruchamiania, unieważniane przy zapisie
-const providers = await getCachedProviders(); // Szybkie, z pamięci operacyjnej
-const fresh = await listProviders(); // Wolne, odczytuje z bazy danych
+// Cached at startup, invalidated on write
+const providers = await getCachedProviders(); // Fast, in-memory
+const fresh = await listProviders(); // Slow, hits DB
 ```
 
-| Buforowana encja       | Klucz pamięci podręcznej | TTL               |
-| ---------------------- | ------------------------ | ----------------- |
-| `models`               | `models:v1`              | Do momentu zapisu |
-| `provider_connections` | `providers:v1`           | Do momentu zapisu |
-| `settings`             | `settings:v1`            | Do momentu zapisu |
-| `combos`               | `combos:v1`              | Do momentu zapisu |
+| Buforowana encja       | Klucz cache    | TTL       |
+| ---------------------- | -------------- | --------- |
+| `models`               | `models:v1`    | Do zapisu |
+| `provider_connections` | `providers:v1` | Do zapisu |
+| `settings`             | `settings:v1`  | Do zapisu |
+| `combos`               | `combos:v1`    | Do zapisu |
 
-Pamięć podręczna jest unieważniana przy każdym zapisie do odpowiedniej tabeli.
+Cache jest unieważniany przy każdym zapisie do odpowiadającej tabeli.
 
 ---
 
-## Tworzenie i przywracanie kopii zapasowych
+## Kopie zapasowe i odzyskiwanie
 
-### Ręczne tworzenie kopii zapasowej
+### Ręczna kopia zapasowa
 
 ```bash
-# Użyj interfejsu CLI, aby utworzyć lokalną kopię zapasową
+# Use the CLI to create a local backup
 omniroute backup create --name pre-migration
 
-# Lub za pośrednictwem API
+# Or via the API
 curl -X PUT http://localhost:20128/api/db-backups \
   -H "Authorization: Bearer $MANAGEMENT_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name": "pre-migration"}'
 ```
 
-Plik kopii zapasowej zawiera:
+Plik kopii zapasowej obejmuje:
 
-- Wszystkie tabele bazy danych (serializowane do formatu JSON)
-- Artefakty dziennika wywołań (zakodowane w formacie base64, opcjonalne)
-- Ustawienia i dane poufne (zaszyfrowane)
-- Konfigurację wtyczek
+- Wszystkie tabele DB (zserializowane do JSON)
+- Artefakty logów wywołań (base64, opcjonalnie)
+- Ustawienia + sekrety (zaszyfrowane)
+- Konfigurację pluginów
 
 ### Przywracanie
 
 ```bash
-# Za pośrednictwem CLI
+# Via CLI
 omniroute restore pre-migration
 
-# Za pośrednictwem API
+# Via API
 curl -X POST http://localhost:20128/api/db-backups/restore \
   -H "Authorization: Bearer $MANAGEMENT_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name": "pre-migration"}'
 ```
 
-> **Ostrzeżenie**: Przywracanie nadpisuje całą bazę danych. Najpierw zatrzymaj wszystkich klientów.
+> **Ostrzeżenie**: Przywracanie nadpisuje całą DB. Najpierw zatrzymaj wszystkich klientów.
 
 ### Automatyczne kopie zapasowe
 
 ```bash
-# Włącz automatyczne codzienne kopie zapasowe za pośrednictwem CLI
+# Enable automated daily backups via CLI
 omniroute backup auto enable --cron "0 2 * * *" --retention 7
 ```
 
-Harmonogram jest wykonywany po stronie serwera przez zadanie działające w tle, które uruchamia się co 30 sekund
-(domyślnie) i sprawdza wyrażenie cron względem lokalnego czasu serwera.
+Harmonogram jest wykonywany po stronie serwera przez zadanie w tle, które tyka co 30 sekund
+(domyślnie) i ewaluuje wyrażenie cron względem lokalnego czasu serwera.
 
-| Zmienna                                     | Wartość domyślna | Opis                                                                                                                             |
-| ------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `OMNIROUTE_BACKUP_SCHEDULE_JOB_INTERVAL_MS` | `30000`          | Interwał uruchamiania w ms (min. `5000`). Musi być krótszy niż 60 s, aby niezawodnie trafić w pasującą minutę harmonogramu cron. |
+| Zmienna                                     | Domyślnie | Opis                                                                                                         |
+| ------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------ |
+| `OMNIROUTE_BACKUP_SCHEDULE_JOB_INTERVAL_MS` | `30000`   | Interwał ticka w ms (min `5000`). Musi być krótszy niż 60 s, aby niezawodnie trafiać w pasującą minutę cron. |
 
-### Kopia zapasowa działającej bazy SQLite
+### Gorąca kopia SQLite
 
-Aby utworzyć kopię zapasową działającej bazy danych bez przestojów:
+Dla kopii na żywo bez przestoju:
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite ".backup /backups/omniroute-hot.db"
 ```
 
-Wykorzystuje to internetowy interfejs API kopii zapasowych SQLite — można go bezpiecznie używać podczas działania OmniRoute.
+Używa online backup API SQLite — bezpieczne podczas działania OmniRoute.
 
 ---
 
-## Dostrajanie wydajności
+## Strojenie wydajności
 
 ### Tryb WAL
 
-Tryb WAL jest domyślnie włączony. W przypadku obciążeń z dużą liczbą zapisów warto rozważyć:
+WAL jest włączony domyślnie. Przy obciążeniach z dużą liczbą zapisów rozważ:
 
 ```sql
-PRAGMA wal_autocheckpoint = 1000;  -- Punkt kontrolny co 1000 stron
-PRAGMA journal_size_limit = 67108864;  -- Limit WAL wynoszący 64MB
+PRAGMA wal_autocheckpoint = 1000;  -- Checkpoint every 1000 pages
+PRAGMA journal_size_limit = 67108864;  -- 64MB WAL cap
 ```
 
 ### Indeksy
 
-Kluczowe indeksy zwiększające wydajność (tworzone automatycznie przez migracje):
+Kluczowe indeksy wydajnościowe (tworzone automatycznie przez migracje):
 
-- `idx_models_provider` — wyszukiwanie modeli według dostawcy
-- `idx_combo_targets_combo_id` — rozwijanie celów kombinacji
-- `idx_usage_history_api_key_timestamp` — analiza użycia
+- `idx_models_provider` — wyszukiwanie modeli po providerze
+- `idx_combo_targets_combo_id` — rozwijanie celów combo
+- `idx_usage_history_api_key_timestamp` — analityka użycia
 - `idx_quota_snapshots_api_key_window` — śledzenie limitów
-- `idx_call_logs_timestamp` — zapytania dotyczące rejestru wywołań
+- `idx_call_logs_timestamp` — zapytania do logów wywołań
 
 Aby dodać nowy indeks, utwórz migrację:
 
@@ -431,95 +428,75 @@ Aby dodać nowy indeks, utwórz migrację:
 CREATE INDEX IF NOT EXISTS idx_my_table_my_column ON my_table(my_column);
 ```
 
-### Operacje wejścia/wyjścia mapowane w pamięci
+### Mapowanie pamięci (Memory-Mapped I/O)
 
-W przypadku bardzo dużych baz danych (>10GB) mapowanie pamięci można dostosować za pomocą dyrektywy pragma SQLite:
+Dla bardzo dużych baz (>10GB) mapowanie pamięci można dostosować pragma SQLite:
 
 ```sql
--- Ustaw za pomocą dyrektywy pragma SQLite (dostosuj w core.ts lub w środowisku uruchomieniowym)
+-- Set via SQLite pragma (adjust in core.ts or runtime)
 PRAGMA mmap_size = 268435456;  -- 256MB
 ```
 
 ### Kompaktowanie
 
-Długotrwale działające instancje OmniRoute mogą skorzystać na okresowym wykonywaniu polecenia `VACUUM`:
+Długo działające instancje OmniRoute zyskują na okazjonalnym `VACUUM`:
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite "VACUUM;"
 ```
 
-Uruchamiaj je co miesiąc w okresach małego ruchu. (Tryb WAL zmniejsza tę potrzebę, ale jej nie eliminuje).
+Uruchamiaj miesięcznie w oknach niskiego ruchu. (Tryb WAL zmniejsza potrzebę, ale jej nie eliminuje.)
 
 ---
 
-## Kontrola kondycji
+## Health check
 
-Plik `src/lib/db/healthCheck.ts` udostępnia **diagnostykę kondycji na poziomie bazy danych**:
+`src/lib/db/healthCheck.ts` zapewnia **diagnostykę kondycji na poziomie DB**:
 
-Obie metody wymagają uwierzytelnienia (w przeciwnym razie zwracany jest kod `401`). Metoda `GET` wykonuje tylko diagnostykę, natomiast `POST` uruchamia tę samą kontrolę z włączoną opcją `autoRepair`.
+````bash
+GET /api/db/health
 
-```bash
-GET  /api/db/health   # diagnostyka
-POST /api/db/health   # diagnostyka + naprawa
-```
-
-Odpowiedzią jest obiekt `DbHealthCheckResult` utworzony przez funkcję `runDbHealthCheck()`
-(`src/lib/db/healthCheck.ts`):
+Returns:
 
 ```json
 {
-  "isHealthy": false,
-  "issues": [
-    {
-      "type": "broken_reference",
-      "table": "domain_budgets",
-      "description": "Limity domen odwoływały się do kluczy API, które już nie istnieją.",
-      "count": 2
+  "status": "healthy",
+  "checks": {
+    "writable": { "status": "pass" },
+    "integrity": { "status": "pass", "result": "ok" },
+    "foreign_keys": { "status": "pass", "violations": 0 },
+    "orphaned_artifacts": { "status": "warn", "count": 12 },
+    "table_sizes": {
+      "usage_history": { "rows": 12345, "size_mb": 12.3 },
+      "call_logs": { "rows": 567, "size_mb": 2.1 }
     }
-  ],
-  "repairedCount": 0,
-  "backupCreated": false,
-  "autoRepair": false,
-  "checkedAt": "2026-08-18T09:00:00.000Z",
-  "driver": { "name": "better-sqlite3", "degraded": false }
+  }
 }
-```
+````
 
-| Pole              | Znaczenie                                                                                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `isHealthy`       | Ma wartość `true`, gdy `issues` jest puste. Pole `driver` nigdy nie wpływa na tę wartość.                                                                                                         |
-| `issues[].type`   | Jedna z wartości: `integrity_check_failed`, `broken_reference`, `stale_snapshot`, `invalid_state`.                                                                                                |
-| `repairedCount`   | Liczba wierszy naprawionych podczas tego uruchomienia; zawsze `0`, gdy `autoRepair` ma wartość false.                                                                                             |
-| `backupCreated`   | Określa, czy przed naprawą utworzono kopię zapasową.                                                                                                                                              |
-| `checkedAt`       | Znacznik czasu ISO wspólny dla uruchomienia oraz dla każdej zapisanej przez nie notatki dotyczącej naprawy.                                                                                       |
-| `driver.name`     | Sterownik SQLite obsługujący sprawdzaną bazę danych.                                                                                                                                              |
-| `driver.degraded` | Ma wartość `true`, gdy zapisy nie są trwale przechowywane w pliku bazy danych — w przypadku awaryjnego sterownika WASM `sql.js` (trwałość całego pliku) lub bazy danych przechowywanej w pamięci. |
-
-Ten sam ładunek jest zwracany przez narzędzie MCP `omniroute_db_health_check`.
-
-Uruchom `PRAGMA integrity_check`, aby wykryć uszkodzenia:
+Uruchom `PRAGMA integrity_check`, aby wykryć korupcję:
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite "PRAGMA integrity_check;"
-# Powinno zostać wyświetlone: ok
+# Should print: ok
 ```
 
-Jeśli zostanie zwrócone cokolwiek innego niż `ok`, **natychmiast przestań używać bazy danych** i przywróć ją z kopii zapasowej.
+Jeśli zwróci cokolwiek innego niż `ok`, **natychmiast przestań używać bazy** i przywróć z kopii zapasowej.
 
 ---
 
 ## Odzyskiwanie po awarii
 
-### Scenariusz 1: Utrata pliku WAL
+### Scenariusz 1: Utracony plik WAL
 
-Brakuje pliku `-wal`, ale plik `-shm` i główna baza danych są nienaruszone:
+Brakuje pliku `-wal`, ale `-shm` i główna DB są nienaruszone:
 
 ```bash
-# Automatyczne odzyskiwanie przy następnym otwarciu
+# Recovers automatically on next open
 omniroute
 ```
 
-Jeśli SQLite nie może przeprowadzić automatycznego odzyskiwania:
+Jeśli SQLite nie może odzyskać automatycznie:
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite ".recover" > recovered.sql
@@ -527,26 +504,26 @@ sqlite3 recovered.db < recovered.sql
 mv recovered.db ~/.omniroute/storage.sqlite
 ```
 
-### Scenariusz 2: Uszkodzenie głównego pliku bazy danych
+### Scenariusz 2: Uszkodzony główny plik DB
 
-Przywróć dane z kopii zapasowej:
+Przywróć z kopii zapasowej:
 
 ```bash
-omniroute sync pull --merge   # lub: omniroute backup restore <backup-id>
+omniroute sync pull --merge   # or: omniroute backup restore <backup-id>
 ```
 
-### Scenariusz 3: Utrata klucza szyfrowania
+### Scenariusz 3: Utracony klucz szyfrowania
 
-Bez klucza **odzyskanie danych nie jest możliwe**. Zaszyfrowanych pól nie można odczytać. Ponownie dodaj ręcznie wszystkich dostawców, używając nowych danych uwierzytelniających.
+**Odzyskanie niemożliwe** bez klucza. Zaszyfrowane pola są nieczytelne. Dodaj ponownie wszystkich providerów ręcznie z nowymi poświadczeniami.
 
-> **Środek zaradczy**: Zawsze przechowuj oddzielną kopię zapasową klucza szyfrowania, najlepiej w menedżerze haseł lub systemie KMS.
+> **Mitygacja**: Zawsze twórz kopię zapasową klucza szyfrowania osobno, najlepiej w menedżerze haseł lub KMS.
 
-### Scenariusz 4: Brak miejsca na dysku
+### Scenariusz 4: Pełny dysk
 
-SQLite zwróci błędy `SQLITE_FULL`. Zwolnij miejsce na dysku, a następnie wykonaj:
+SQLite zwróci błędy `SQLITE_FULL`. Zwolnij miejsce na dysku, potem:
 
 ```bash
-# Wykonaj punkt kontrolny WAL, aby zwolnić miejsce
+# Checkpoint WAL to free up space
 sqlite3 ~/.omniroute/storage.sqlite "PRAGMA wal_checkpoint(TRUNCATE);"
 ```
 
@@ -554,13 +531,13 @@ sqlite3 ~/.omniroute/storage.sqlite "PRAGMA wal_checkpoint(TRUNCATE);"
 
 ## Typowe operacje
 
-### Sprawdzanie tabeli
+### Podgląd tabeli
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite "SELECT * FROM api_keys LIMIT 5;"
 ```
 
-### Liczenie wierszy we wszystkich tabelach
+### Liczba wierszy we wszystkich tabelach
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite <<EOF
@@ -568,20 +545,20 @@ SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';
 EOF
 ```
 
-### Resetowanie (usuwanie) wszystkich danych
+### Reset (wyczyszczenie) wszystkich danych
 
 ```bash
-# Najpierw zatrzymaj OmniRoute
+# Stop OmniRoute first
 omniroute stop
 
-# Usuń plik bazy danych
+# Delete the DB file
 rm ~/.omniroute/storage.sqlite*
 
-# Uruchom ponownie (zostanie utworzona pusta baza danych)
+# Restart (will recreate empty DB)
 omniroute
 ```
 
-Aby wykonać reset **selektywny** (zachować dostawców, usunąć dane dotyczące użycia):
+Dla **selektywnego** resetu (zachowaj providerów, wyczyść użycie):
 
 ```bash
 DELETE FROM usage_history WHERE timestamp < datetime('now', '-30 day');
@@ -589,7 +566,7 @@ DELETE FROM call_logs WHERE timestamp < datetime('now', '-30 day');
 DELETE FROM proxy_logs WHERE timestamp < datetime('now', '-30 day');
 ```
 
-### Eksportowanie pojedynczej tabeli
+### Eksport pojedynczej tabeli
 
 ```bash
 sqlite3 ~/.omniroute/storage.sqlite <<EOF
@@ -603,54 +580,54 @@ EOF
 
 ## Rozwiązywanie problemów
 
-### „Baza danych jest zablokowana”
+### "Database is locked"
 
-Inny proces utrzymuje blokadę zapisu. Możesz:
+Inny proces trzyma blokadę zapisu. Albo:
 
-- Poczekać na zakończenie innego procesu (sprawdź za pomocą `lsof | grep storage.sqlite`)
-- Zakończyć inny proces
-- Jeśli problem nie ustępuje, uruchomić ponownie OmniRoute
+- Poczekaj, aż drugi proces skończy (sprawdź `lsof | grep storage.sqlite`)
+- Zabij drugi proces
+- Jeśli problem się utrzymuje, zrestartuj OmniRoute
 
-### „Naruszono ograniczenie klucza obcego”
+### "Foreign key constraint failed"
 
-Moduł domeny narusza integralność referencyjną. Sprawdź:
+Moduł domenowy narusza integralność referencyjną. Sprawdź:
 
 - Osierocone wiersze w tabelach zależnych
-- Kaskadowe usunięcia, które nie zostały rozpropagowane
-- Ostatnią migrację, która zmieniła klucz obcy
+- Kaskadowe usunięcia, które się nie rozpropagowały
+- Niedawną migrację zmieniającą klucz obcy
 
 Uruchom `PRAGMA foreign_key_check;`, aby znaleźć naruszenia.
 
-### „Brak pamięci”
+### "Out of memory"
 
-Operacje wejścia/wyjścia SQLite mapowane w pamięci przekraczają limit systemu operacyjnego. Zmniejsz limit za pomocą dyrektywy pragma SQLite:
+Memory-mapped I/O SQLite przekracza limit OS. Zmniejsz przez pragma SQLite:
 
 ```sql
-PRAGMA mmap_size = 134217728;  -- 128 MB zamiast 256 MB
+PRAGMA mmap_size = 134217728;  -- 128MB instead of 256MB
 ```
 
-Możesz też wyłączyć tę funkcję:
+Lub wyłącz:
 
 ```sql
 PRAGMA mmap_size = 0;
 ```
 
-### „Migracja nie powiodła się w trakcie wykonywania”
+### "Migration failed mid-way"
 
-Migracja została wykonana w ramach transakcji, dlatego jej zmiany powinny zostać wycofane. Jeśli tak się nie stało:
+Migracja działała w transakcji, więc powinna się wycofać. Jeśli nie:
 
-1. **Zatrzymaj OmniRoute** (aby zapobiec kolejnym próbom)
-2. **Sprawdź stan bazy danych** za pomocą `sqlite3`
-3. **Ręcznie napraw** częściowo wykonaną migrację
+1. **Zatrzymaj OmniRoute** (zapobiegaj dalszym próbom)
+2. **Sprawdź stan DB** przez `sqlite3`
+3. **Napraw ręcznie** częściową migrację
 4. **Uruchom ponownie** OmniRoute (migracja zostanie ponowiona)
 
-Aby temu zapobiec, zawsze najpierw testuj migracje na kopii bazy danych.
+Aby temu zapobiec, zawsze testuj migracje najpierw na kopii.
 
 ---
 
-## Zobacz także
+## Zobacz też
 
 - [USAGE_QUOTA_GUIDE.md](../guides/USAGE_QUOTA_GUIDE.md) — tabele użycia
-- [MONITORING_GUIDE.md](./MONITORING_GUIDE.md) — monitorowanie stanu
-- [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) — proces wydawania wersji
-- Źródło: `src/lib/db/` (ponad 80 plików, około 25 tys. wierszy kodu)
+- [MONITORING_GUIDE.md](./MONITORING_GUIDE.md) — monitoring kondycji
+- [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) — flow wydania
+- Źródło: `src/lib/db/` (80+ files, ~25K LOC)

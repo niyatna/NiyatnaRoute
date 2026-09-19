@@ -72,12 +72,8 @@ const HEADER_DESCRIPTIONS: Partial<Record<HideableSidebarItemId | "omni-skills",
   changelog: "changelogDescription",
   // Protocols
   mcp: "mcpDescription",
-  a2a: "a2aDescription",
   "api-endpoints": "apiEndpointsDescription",
-  // Agents & AI sub-pages
-  "batch-files": "batchFilesDescription",
   // Analytics sub-pages
-  "analytics-evals": "analyticsEvalsDescription",
   "analytics-search": "analyticsSearchDescription",
   "analytics-utilization": "analyticsUtilizationDescription",
   "analytics-combo-health": "analyticsComboHealthDescription",

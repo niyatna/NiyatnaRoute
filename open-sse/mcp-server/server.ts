@@ -69,18 +69,13 @@ import {
   handleOneproxyStats,
 } from "./tools/advancedTools.ts";
 import { handlePickFastestModel } from "./tools/pickFastestModel.ts";
-import { memoryTools } from "./tools/memoryTools.ts";
 import { skillTools } from "./tools/skillTools.ts";
 import { agentSkillTools } from "./tools/agentSkillTools.ts";
 import { githubSkillTools } from "./tools/githubSkillTools.ts";
 import { skillRegistry } from "../../src/lib/skills/registry.ts";
 import { skillExecutor } from "../../src/lib/skills/executor.ts";
-import { pluginTools } from "./tools/pluginTools.ts";
 import { compressionTools } from "./tools/compressionTools.ts";
 import { poolTools } from "./tools/poolTools.ts";
-import { gamificationTools } from "./tools/gamificationTools.ts";
-import { notionTools } from "./tools/notionTools.ts";
-import { obsidianTools } from "./tools/obsidianTools.ts";
 import { localCorpusTools } from "./tools/localCorpusTools.ts";
 import { compressMcpRegistryMetadata } from "./descriptionCompressor.ts";
 import { reduceToolManifest, readMcpToolProfileFromEnv } from "./toolCardinality.ts";
@@ -110,15 +105,10 @@ const MCP_ALLOWED_SCOPES = new Set(
 );
 const TOTAL_MCP_TOOL_COUNT = countUniqueMcpTools({
   MCP_TOOLS,
-  memoryTools,
   skillTools,
   agentSkillTools,
   githubSkillTools,
   poolTools,
-  gamificationTools,
-  pluginTools,
-  notionTools,
-  obsidianTools,
   localCorpusTools,
   compressionTools,
 });
@@ -808,14 +798,9 @@ export function createMcpServer(options?: CreateMcpServerOptions): McpServer {
 
   const RESERVED_MCP_NAMES = new Set([
     ...MCP_TOOLS.map((t) => t.name),
-    ...Object.keys(memoryTools),
     ...Object.keys(skillTools),
     ...Object.keys(compressionTools),
     ...Object.keys(poolTools),
-    ...pluginTools.map((t) => t.name),
-    ...gamificationTools.map((t) => t.name),
-    ...obsidianTools.map((t) => t.name),
-    ...notionTools.map((t) => t.name),
     ...localCorpusTools.map((t) => t.name),
   ]);
 
@@ -1162,33 +1147,6 @@ export function createMcpServer(options?: CreateMcpServerOptions): McpServer {
 
   registerToolSearchTool(server, withScopeEnforcement);
 
-  // ── Memory Tools ──────────────────────────────
-  Object.values(memoryTools).forEach((toolDef: any) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore - handler type lost through dynamic Object.values() access
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = toSafeMcpErrorMessage(err, "Memory tool execution failed");
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
   // ── Skill Tools ──────────────────────────────
   Object.values(skillTools).forEach((toolDef: any) => {
     server.registerTool(
@@ -1266,33 +1224,6 @@ export function createMcpServer(options?: CreateMcpServerOptions): McpServer {
     );
   });
 
-  // ── Plugin Tools ──────────────────────────────
-  pluginTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = toSafeMcpErrorMessage(err, "Plugin tool execution failed");
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
   // ── Compression Tools ─────────────────────────
   Object.values(compressionTools).forEach((toolDef: any) => {
     server.registerTool(
@@ -1358,60 +1289,6 @@ export function createMcpServer(options?: CreateMcpServerOptions): McpServer {
     }
   );
 
-  // ── Gamification Tools ────────────────────────
-  gamificationTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = toSafeMcpErrorMessage(err, "Gamification tool execution failed");
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Notion Context Source Tools ───────────────
-  notionTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = toSafeMcpErrorMessage(err, "Notion tool execution failed");
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
   // ── Local Corpus Context Source Tools ─────────
   localCorpusTools.forEach((toolDef) => {
     server.registerTool(
@@ -1435,33 +1312,6 @@ export function createMcpServer(options?: CreateMcpServerOptions): McpServer {
               content: [{ type: "text" as const, text: `Error: ${msg}` }],
               isError: true,
             };
-          }
-        },
-        toolDef.scopes
-      )
-    );
-  });
-
-  // ── Obsidian Context Source Tools ─────────────
-  obsidianTools.forEach((toolDef) => {
-    server.registerTool(
-      toolDef.name,
-      {
-        description: toolDef.description,
-        // @ts-ignore: dynamic zod access
-        inputSchema: toolDef.inputSchema,
-      },
-      withScopeEnforcement(
-        toolDef.name,
-        async (args, extra) => {
-          try {
-            const parsedArgs = toolDef.inputSchema.parse(args ?? {});
-            // @ts-ignore: handler expected specific object
-            const result = await toolDef.handler(parsedArgs, extra);
-            return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-          } catch (err) {
-            const msg = toSafeMcpErrorMessage(err, "Obsidian tool execution failed");
-            return { content: [{ type: "text" as const, text: `Error: ${msg}` }], isError: true };
           }
         },
         toolDef.scopes

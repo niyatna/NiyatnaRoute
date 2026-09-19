@@ -1,58 +1,56 @@
 # OmniRoute — Uninstall Guide (Български)
 
-🌐 **Languages:** 🇺🇸 [English](../../../../guides/UNINSTALL.md) · 🇪🇹 [am](../../../am/docs/guides/UNINSTALL.md) · 🇸🇦 [ar](../../../ar/docs/guides/UNINSTALL.md) · 🇦🇿 [az](../../../az/docs/guides/UNINSTALL.md) · 🇧🇩 [bn](../../../bn/docs/guides/UNINSTALL.md) · 🇨🇿 [cs](../../../cs/docs/guides/UNINSTALL.md) · 🇩🇰 [da](../../../da/docs/guides/UNINSTALL.md) · 🇩🇪 [de](../../../de/docs/guides/UNINSTALL.md) · 🇬🇷 [el](../../../el/docs/guides/UNINSTALL.md) · 🇪🇸 [es](../../../es/docs/guides/UNINSTALL.md) · 🇪🇪 [et](../../../et/docs/guides/UNINSTALL.md) · 🇮🇷 [fa](../../../fa/docs/guides/UNINSTALL.md) · 🇫🇮 [fi](../../../fi/docs/guides/UNINSTALL.md) · 🇫🇷 [fr](../../../fr/docs/guides/UNINSTALL.md) · 🇮🇪 [ga](../../../ga/docs/guides/UNINSTALL.md) · 🇮🇳 [gu](../../../gu/docs/guides/UNINSTALL.md) · 🇳🇬 [ha](../../../ha/docs/guides/UNINSTALL.md) · 🇮🇱 [he](../../../he/docs/guides/UNINSTALL.md) · 🇮🇳 [hi](../../../hi/docs/guides/UNINSTALL.md) · 🇭🇷 [hr](../../../hr/docs/guides/UNINSTALL.md) · 🇭🇺 [hu](../../../hu/docs/guides/UNINSTALL.md) · 🇦🇲 [hy](../../../hy/docs/guides/UNINSTALL.md) · 🇮🇩 [id](../../../id/docs/guides/UNINSTALL.md) · 🇳🇬 [ig](../../../ig/docs/guides/UNINSTALL.md) · 🇮🇹 [it](../../../it/docs/guides/UNINSTALL.md) · 🇯🇵 [ja](../../../ja/docs/guides/UNINSTALL.md) · 🇬🇪 [ka](../../../ka/docs/guides/UNINSTALL.md) · 🇰🇭 [km](../../../km/docs/guides/UNINSTALL.md) · 🇮🇳 [kn](../../../kn/docs/guides/UNINSTALL.md) · 🇰🇷 [ko](../../../ko/docs/guides/UNINSTALL.md) · 🇱🇹 [lt](../../../lt/docs/guides/UNINSTALL.md) · 🇱🇻 [lv](../../../lv/docs/guides/UNINSTALL.md) · 🇮🇳 [ml](../../../ml/docs/guides/UNINSTALL.md) · 🇮🇳 [mr](../../../mr/docs/guides/UNINSTALL.md) · 🇲🇾 [ms](../../../ms/docs/guides/UNINSTALL.md) · 🇲🇹 [mt](../../../mt/docs/guides/UNINSTALL.md) · 🇲🇲 [my](../../../my/docs/guides/UNINSTALL.md) · 🇳🇵 [ne](../../../ne/docs/guides/UNINSTALL.md) · 🇳🇱 [nl](../../../nl/docs/guides/UNINSTALL.md) · 🇳🇴 [no](../../../no/docs/guides/UNINSTALL.md) · 🇮🇳 [or](../../../or/docs/guides/UNINSTALL.md) · 🇮🇳 [pa](../../../pa/docs/guides/UNINSTALL.md) · 🇵🇭 [phi](../../../phi/docs/guides/UNINSTALL.md) · 🇵🇱 [pl](../../../pl/docs/guides/UNINSTALL.md) · 🇵🇹 [pt](../../../pt/docs/guides/UNINSTALL.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/UNINSTALL.md) · 🇷🇴 [ro](../../../ro/docs/guides/UNINSTALL.md) · 🇷🇺 [ru](../../../ru/docs/guides/UNINSTALL.md) · 🇱🇰 [si](../../../si/docs/guides/UNINSTALL.md) · 🇸🇰 [sk](../../../sk/docs/guides/UNINSTALL.md) · 🇸🇮 [sl](../../../sl/docs/guides/UNINSTALL.md) · 🇷🇸 [sr](../../../sr/docs/guides/UNINSTALL.md) · 🇸🇪 [sv](../../../sv/docs/guides/UNINSTALL.md) · 🇰🇪 [sw](../../../sw/docs/guides/UNINSTALL.md) · 🇮🇳 [ta](../../../ta/docs/guides/UNINSTALL.md) · 🇮🇳 [te](../../../te/docs/guides/UNINSTALL.md) · 🇹🇭 [th](../../../th/docs/guides/UNINSTALL.md) · 🇹🇷 [tr](../../../tr/docs/guides/UNINSTALL.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/UNINSTALL.md) · 🇵🇰 [ur](../../../ur/docs/guides/UNINSTALL.md) · 🇺🇿 [uz](../../../uz/docs/guides/UNINSTALL.md) · 🇻🇳 [vi](../../../vi/docs/guides/UNINSTALL.md) · 🇳🇬 [yo](../../../yo/docs/guides/UNINSTALL.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/UNINSTALL.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/guides/UNINSTALL.md)
+🌐 **Languages:** 🇺🇸 [English](../../../../guides/UNINSTALL.md) · 🇸🇦 [ar](../../../ar/docs/guides/UNINSTALL.md) · 🇦🇿 [az](../../../az/docs/guides/UNINSTALL.md) · 🇧🇩 [bn](../../../bn/docs/guides/UNINSTALL.md) · 🇨🇿 [cs](../../../cs/docs/guides/UNINSTALL.md) · 🇩🇰 [da](../../../da/docs/guides/UNINSTALL.md) · 🇩🇪 [de](../../../de/docs/guides/UNINSTALL.md) · 🇬🇷 [el](../../../el/docs/guides/UNINSTALL.md) · 🇪🇸 [es](../../../es/docs/guides/UNINSTALL.md) · 🇪🇪 [et](../../../et/docs/guides/UNINSTALL.md) · 🇮🇷 [fa](../../../fa/docs/guides/UNINSTALL.md) · 🇫🇮 [fi](../../../fi/docs/guides/UNINSTALL.md) · 🇫🇷 [fr](../../../fr/docs/guides/UNINSTALL.md) · 🇮🇪 [ga](../../../ga/docs/guides/UNINSTALL.md) · 🇮🇳 [gu](../../../gu/docs/guides/UNINSTALL.md) · 🇮🇱 [he](../../../he/docs/guides/UNINSTALL.md) · 🇮🇳 [hi](../../../hi/docs/guides/UNINSTALL.md) · 🇭🇷 [hr](../../../hr/docs/guides/UNINSTALL.md) · 🇭🇺 [hu](../../../hu/docs/guides/UNINSTALL.md) · 🇮🇩 [id](../../../id/docs/guides/UNINSTALL.md) · 🇮🇹 [it](../../../it/docs/guides/UNINSTALL.md) · 🇯🇵 [ja](../../../ja/docs/guides/UNINSTALL.md) · 🇰🇷 [ko](../../../ko/docs/guides/UNINSTALL.md) · 🇱🇹 [lt](../../../lt/docs/guides/UNINSTALL.md) · 🇱🇻 [lv](../../../lv/docs/guides/UNINSTALL.md) · 🇮🇳 [mr](../../../mr/docs/guides/UNINSTALL.md) · 🇲🇾 [ms](../../../ms/docs/guides/UNINSTALL.md) · 🇲🇹 [mt](../../../mt/docs/guides/UNINSTALL.md) · 🇳🇱 [nl](../../../nl/docs/guides/UNINSTALL.md) · 🇳🇴 [no](../../../no/docs/guides/UNINSTALL.md) · 🇵🇭 [phi](../../../phi/docs/guides/UNINSTALL.md) · 🇵🇱 [pl](../../../pl/docs/guides/UNINSTALL.md) · 🇵🇹 [pt](../../../pt/docs/guides/UNINSTALL.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/UNINSTALL.md) · 🇷🇴 [ro](../../../ro/docs/guides/UNINSTALL.md) · 🇷🇺 [ru](../../../ru/docs/guides/UNINSTALL.md) · 🇸🇰 [sk](../../../sk/docs/guides/UNINSTALL.md) · 🇸🇮 [sl](../../../sl/docs/guides/UNINSTALL.md) · 🇷🇸 [sr](../../../sr/docs/guides/UNINSTALL.md) · 🇸🇪 [sv](../../../sv/docs/guides/UNINSTALL.md) · 🇰🇪 [sw](../../../sw/docs/guides/UNINSTALL.md) · 🇮🇳 [ta](../../../ta/docs/guides/UNINSTALL.md) · 🇮🇳 [te](../../../te/docs/guides/UNINSTALL.md) · 🇹🇭 [th](../../../th/docs/guides/UNINSTALL.md) · 🇹🇷 [tr](../../../tr/docs/guides/UNINSTALL.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/UNINSTALL.md) · 🇵🇰 [ur](../../../ur/docs/guides/UNINSTALL.md) · 🇻🇳 [vi](../../../vi/docs/guides/UNINSTALL.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/UNINSTALL.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/guides/UNINSTALL.md)
 
 ---
 
-🌐 **Languages:** 🇺🇸 [English](../../../../guides/UNINSTALL.md) · 🇪🇹 [am](../../../am/docs/guides/UNINSTALL.md) · 🇸🇦 [ar](../../../ar/docs/guides/UNINSTALL.md) · 🇦🇿 [az](../../../az/docs/guides/UNINSTALL.md) · 🇧🇩 [bn](../../../bn/docs/guides/UNINSTALL.md) · 🇨🇿 [cs](../../../cs/docs/guides/UNINSTALL.md) · 🇩🇰 [da](../../../da/docs/guides/UNINSTALL.md) · 🇩🇪 [de](../../../de/docs/guides/UNINSTALL.md) · 🇬🇷 [el](../../../el/docs/guides/UNINSTALL.md) · 🇪🇸 [es](../../../es/docs/guides/UNINSTALL.md) · 🇪🇪 [et](../../../et/docs/guides/UNINSTALL.md) · 🇮🇷 [fa](../../../fa/docs/guides/UNINSTALL.md) · 🇫🇮 [fi](../../../fi/docs/guides/UNINSTALL.md) · 🇫🇷 [fr](../../../fr/docs/guides/UNINSTALL.md) · 🇮🇪 [ga](../../../ga/docs/guides/UNINSTALL.md) · 🇮🇳 [gu](../../../gu/docs/guides/UNINSTALL.md) · 🇳🇬 [ha](../../../ha/docs/guides/UNINSTALL.md) · 🇮🇱 [he](../../../he/docs/guides/UNINSTALL.md) · 🇮🇳 [hi](../../../hi/docs/guides/UNINSTALL.md) · 🇭🇷 [hr](../../../hr/docs/guides/UNINSTALL.md) · 🇭🇺 [hu](../../../hu/docs/guides/UNINSTALL.md) · 🇦🇲 [hy](../../../hy/docs/guides/UNINSTALL.md) · 🇮🇩 [id](../../../id/docs/guides/UNINSTALL.md) · 🇳🇬 [ig](../../../ig/docs/guides/UNINSTALL.md) · 🇮🇹 [it](../../../it/docs/guides/UNINSTALL.md) · 🇯🇵 [ja](../../../ja/docs/guides/UNINSTALL.md) · 🇬🇪 [ka](../../../ka/docs/guides/UNINSTALL.md) · 🇰🇭 [km](../../../km/docs/guides/UNINSTALL.md) · 🇮🇳 [kn](../../../kn/docs/guides/UNINSTALL.md) · 🇰🇷 [ko](../../../ko/docs/guides/UNINSTALL.md) · 🇱🇹 [lt](../../../lt/docs/guides/UNINSTALL.md) · 🇱🇻 [lv](../../../lv/docs/guides/UNINSTALL.md) · 🇮🇳 [ml](../../../ml/docs/guides/UNINSTALL.md) · 🇮🇳 [mr](../../../mr/docs/guides/UNINSTALL.md) · 🇲🇾 [ms](../../../ms/docs/guides/UNINSTALL.md) · 🇲🇹 [mt](../../../mt/docs/guides/UNINSTALL.md) · 🇲🇲 [my](../../../my/docs/guides/UNINSTALL.md) · 🇳🇵 [ne](../../../ne/docs/guides/UNINSTALL.md) · 🇳🇱 [nl](../../../nl/docs/guides/UNINSTALL.md) · 🇳🇴 [no](../../../no/docs/guides/UNINSTALL.md) · 🇮🇳 [or](../../../or/docs/guides/UNINSTALL.md) · 🇮🇳 [pa](../../../pa/docs/guides/UNINSTALL.md) · 🇵🇭 [phi](../../../phi/docs/guides/UNINSTALL.md) · 🇵🇱 [pl](../../../pl/docs/guides/UNINSTALL.md) · 🇵🇹 [pt](../../../pt/docs/guides/UNINSTALL.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/UNINSTALL.md) · 🇷🇴 [ro](../../../ro/docs/guides/UNINSTALL.md) · 🇷🇺 [ru](../../../ru/docs/guides/UNINSTALL.md) · 🇱🇰 [si](../../../si/docs/guides/UNINSTALL.md) · 🇸🇰 [sk](../../../sk/docs/guides/UNINSTALL.md) · 🇸🇮 [sl](../../../sl/docs/guides/UNINSTALL.md) · 🇷🇸 [sr](../../../sr/docs/guides/UNINSTALL.md) · 🇸🇪 [sv](../../../sv/docs/guides/UNINSTALL.md) · 🇰🇪 [sw](../../../sw/docs/guides/UNINSTALL.md) · 🇮🇳 [ta](../../../ta/docs/guides/UNINSTALL.md) · 🇮🇳 [te](../../../te/docs/guides/UNINSTALL.md) · 🇹🇭 [th](../../../th/docs/guides/UNINSTALL.md) · 🇹🇷 [tr](../../../tr/docs/guides/UNINSTALL.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/UNINSTALL.md) · 🇵🇰 [ur](../../../ur/docs/guides/UNINSTALL.md) · 🇺🇿 [uz](../../../uz/docs/guides/UNINSTALL.md) · 🇻🇳 [vi](../../../vi/docs/guides/UNINSTALL.md) · 🇳🇬 [yo](../../../yo/docs/guides/UNINSTALL.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/UNINSTALL.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/guides/UNINSTALL.md)
-
-Това ръководство описва как да премахнете OmniRoute напълно от системата си.
+This guide covers how to cleanly remove OmniRoute from your system.
 
 ---
 
-## Бързо деинсталиране (v3.6.2+)
+## Quick Uninstall (v3.6.2+)
 
-OmniRoute предоставя два вградени скрипта за чисто премахване:
+OmniRoute provides two built-in scripts for clean removal:
 
-### Запазване на данните ви
+### Keep Your Data
 
 ```bash
 npm run uninstall
 ```
 
-Това премахва приложението OmniRoute, но **запазва** вашата база данни, конфигурации, API ключове и настройки на доставчиците в `~/.omniroute/`. Използвайте тази опция, ако планирате да преинсталирате приложението по-късно и искате да запазите настройките си.
+This removes the OmniRoute application but **preserves** your database, configurations, API keys, and provider settings in `~/.omniroute/`. Use this if you plan to reinstall later and want to keep your setup.
 
-### Пълно премахване
+### Full Removal
 
 ```bash
 npm run uninstall:full
 ```
 
-Това премахва приложението **и изтрива окончателно** всички данни:
+This removes the application **and permanently erases** all data:
 
-- База данни (`storage.sqlite`)
-- Конфигурации на доставчиците и API ключове
-- Архивни файлове
-- Регистрационни файлове
-- Всички файлове в директорията `~/.omniroute/`
+- Database (`storage.sqlite`)
+- Provider configurations and API keys
+- Backup files
+- Log files
+- All files in the `~/.omniroute/` directory
 
-> ⚠️ **Предупреждение:** `npm run uninstall:full` е необратимо. Всички ваши връзки с доставчици, комбинации, API ключове и хронология на използването ще бъдат изтрити окончателно.
+> ⚠️ **Warning:** `npm run uninstall:full` is irreversible. All your provider connections, combos, API keys, and usage history will be permanently deleted.
 
 ---
 
-## Ръчно деинсталиране
+## Manual Uninstall
 
-### Глобална инсталация чрез NPM
+### NPM Global Install
 
 ```bash
-# Премахване на глобалния пакет
+# Remove the global package
 npm uninstall -g omniroute
 
-# (Незадължително) Премахване на директорията с данни
+# (Optional) Remove data directory
 rm -rf ~/.omniroute
 ```
 
-### Глобална инсталация чрез pnpm
+### pnpm Global Install
 
 ```bash
 pnpm uninstall -g omniroute
@@ -62,97 +60,97 @@ rm -rf ~/.omniroute
 ### Docker
 
 ```bash
-# Спиране и премахване на контейнера
+# Stop and remove the container
 docker stop omniroute
 docker rm omniroute
 
-# Премахване на тома (изтрива всички данни)
+# Remove the volume (deletes all data)
 docker volume rm omniroute-data
 
-# (Незадължително) Премахване на образа
+# (Optional) Remove the image
 docker rmi diegosouzapw/omniroute:latest
 ```
 
 ### Docker Compose
 
 ```bash
-# Спиране и премахване на контейнерите
+# Stop and remove containers
 docker compose down
 
-# Премахване и на томовете (изтрива всички данни)
+# Also remove volumes (deletes all data)
 docker compose down -v
 ```
 
-### Настолно приложение Electron
+### Electron Desktop App
 
 **Windows:**
 
-- Отворете `Settings → Apps → OmniRoute → Uninstall`
-- Или стартирайте програмата за деинсталиране NSIS от инсталационната директория
+- Open `Settings → Apps → OmniRoute → Uninstall`
+- Or run the NSIS uninstaller from the install directory
 
 **macOS:**
 
-- Преместете `OmniRoute.app` от `/Applications` в кошчето
-- Премахнете данните: `rm -rf ~/Library/Application Support/omniroute`
+- Drag `OmniRoute.app` from `/Applications` to Trash
+- Remove data: `rm -rf ~/Library/Application Support/omniroute`
 
 **Linux:**
 
-- Премахнете файла AppImage
-- Премахнете данните: `rm -rf ~/.omniroute`
+- Remove the AppImage file
+- Remove data: `rm -rf ~/.omniroute`
 
-### Инсталиране от изходния код (git clone)
+### Source Install (git clone)
 
 ```bash
-# Премахване на клонираната директория
+# Remove the cloned directory
 rm -rf /path/to/omniroute
 
-# (Незадължително) Премахване на директорията с данни
+# (Optional) Remove data directory
 rm -rf ~/.omniroute
 ```
 
 ---
 
-## Директории с данни
+## Data Directories
 
-По подразбиране OmniRoute съхранява данни на следните места:
+OmniRoute stores data in the following locations by default:
 
-| Платформа      | Път по подразбиране           | Замяна                                  |
-| -------------- | ----------------------------- | --------------------------------------- |
-| Linux          | `~/.omniroute/`               | променлива на средата `DATA_DIR`        |
-| macOS          | `~/.omniroute/`               | променлива на средата `DATA_DIR`        |
-| Windows        | `%APPDATA%/omniroute/`        | променлива на средата `DATA_DIR`        |
-| Docker         | `/app/data/` (монтиран том)   | променлива на средата `DATA_DIR`        |
-| XDG-съвместима | `$XDG_CONFIG_HOME/omniroute/` | променлива на средата `XDG_CONFIG_HOME` |
+| Platform      | Default Path                  | Override                  |
+| ------------- | ----------------------------- | ------------------------- |
+| Linux         | `~/.omniroute/`               | `DATA_DIR` env var        |
+| macOS         | `~/.omniroute/`               | `DATA_DIR` env var        |
+| Windows       | `%APPDATA%/omniroute/`        | `DATA_DIR` env var        |
+| Docker        | `/app/data/` (mounted volume) | `DATA_DIR` env var        |
+| XDG-compliant | `$XDG_CONFIG_HOME/omniroute/` | `XDG_CONFIG_HOME` env var |
 
-### Файлове в директорията с данни
+### Files in the data directory
 
-| Файл/директория      | Описание                                                        |
-| -------------------- | --------------------------------------------------------------- |
-| `storage.sqlite`     | Основна база данни (доставчици, комбинации, настройки, ключове) |
-| `storage.sqlite-wal` | Журнал за предварителен запис на SQLite (временен)              |
-| `storage.sqlite-shm` | Споделена памет на SQLite (временна)                            |
-| `call_logs/`         | Архиви на съдържанието на заявките                              |
-| `backups/`           | Автоматични резервни копия на базата данни                      |
-| `log.txt`            | Остарял регистър на заявките (незадължителен)                   |
+| File/Directory       | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `storage.sqlite`     | Main database (providers, combos, settings, keys) |
+| `storage.sqlite-wal` | SQLite write-ahead log (temporary)                |
+| `storage.sqlite-shm` | SQLite shared memory (temporary)                  |
+| `call_logs/`         | Request payload archives                          |
+| `backups/`           | Automatic database backups                        |
+| `log.txt`            | Legacy request log (optional)                     |
 
 ---
 
-## Проверка за пълно премахване
+## Verify Complete Removal
 
-След деинсталирането проверете дали няма останали файлове:
+After uninstalling, verify there are no remaining files:
 
 ```bash
-# Проверка за глобален npm пакет
+# Check for global npm package
 npm list -g omniroute 2>/dev/null
 
-# Проверка за директорията с данни
+# Check for data directory
 ls -la ~/.omniroute/ 2>/dev/null
 
-# Проверка за работещи процеси
+# Check for running processes
 pgrep -f omniroute
 ```
 
-Ако някой процес все още работи, спрете го:
+If any process is still running, stop it:
 
 ```bash
 pkill -f omniroute

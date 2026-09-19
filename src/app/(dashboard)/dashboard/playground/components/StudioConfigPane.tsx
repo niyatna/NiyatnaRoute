@@ -9,8 +9,8 @@ import type { PlaygroundEndpoint } from "@/lib/playground/codeExport";
 import { endpointToPath } from "@/lib/playground/codeExport";
 import PresetPicker from "./PresetPicker";
 import ImprovePromptButton from "./ImprovePromptButton";
-import { useProviderOptions } from "@/app/(dashboard)/dashboard/translator/hooks/useProviderOptions";
-import { useAvailableModels } from "@/app/(dashboard)/dashboard/translator/hooks/useAvailableModels";
+import { useProviderOptions } from "../hooks/useProviderOptions";
+import { useAvailableModels } from "../hooks/useAvailableModels";
 import {
   ANTHROPIC_COMPATIBLE_PREFIX,
   CLAUDE_CODE_COMPATIBLE_PREFIX,

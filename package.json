@@ -1,5 +1,5 @@
 {
-  "name": "omniroute",
+  "name": "niyatnaroute",
   "version": "3.8.51",
   "description": "Unified AI router with 359 providers, RTK+Caveman compression, auto fallback, MCP/A2A, desktop, PWA, and OpenAI-compatible APIs.",
   "type": "module",

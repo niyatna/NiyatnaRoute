@@ -6,7 +6,6 @@ export const ANTIGRAVITY_PUBLIC_MODELS = buildSurfaceCatalog(ANTIGRAVITY_SHARED_
 });
 
 export const ANTIGRAVITY_MODEL_ALIASES = Object.freeze({
-  "gemini-3.8-flash": "gemini-3.8-flash-high",
   // Gemini 3.7 Flash tiers map to the upstream tiered endpoint model; the thinking
   // budget is steered via generationConfig.thinkingConfig.thinkingBudget.
   "gemini-3.7-flash": "gemini-3.7-flash-tiered",

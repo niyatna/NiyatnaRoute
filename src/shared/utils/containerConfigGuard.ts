@@ -48,7 +48,7 @@ export function buildContainerWriteRefusal(
     "",
     "Configure from the host instead (recommended):",
     "  npm install -g omniroute",
-    "  omniroute connect http://localhost:20128",
+    "  omniroute connect http://localhost:9999",
     `  ${hostCommand || "omniroute setup-<tool>"}`,
     "",
     'Or bind-mount the host config dir into the container (compose profile "host"):',
