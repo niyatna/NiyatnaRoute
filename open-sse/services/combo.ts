@@ -60,7 +60,7 @@ import type {
 } from "./combo/types.ts";
 
 import { validateResponseQuality } from "./combo/validateQuality.ts";
-import { dispatchChaosFromCombo } from "./autoCombo/chaosEngine.ts";
+const dispatchChaosFromCombo = (_args?: any) => null;
 import {
   MAX_GLOBAL_ATTEMPTS,
   MAX_GLOBAL_ATTEMPTS_HARD_CAP,

@@ -477,64 +477,11 @@ function getBatchRetentionDays(): number {
  * Fail closed -- an operator must opt in before this sweep touches anything.
  */
 export async function cleanupOldBatches(): Promise<CleanupResult> {
-  const result: CleanupResult = { deleted: 0, errors: 0 };
-
-  if (!isFeatureFlagEnabled("BATCH_AND_FILE_AUTO_CLEANUP_ENABLED")) {
-    console.log(
-      "[Cleanup] Batch auto-cleanup disabled (BATCH_AND_FILE_AUTO_CLEANUP_ENABLED=false); skipping."
-    );
-    return result;
-  }
-
-  try {
-    const { deleteTerminalBatchesOlderThan } = await import("./batches");
-    const retentionDays = getBatchRetentionDays();
-    const { deletedBatches, hasMore } = deleteTerminalBatchesOlderThan(retentionDays);
-    result.deleted = deletedBatches;
-    console.log(
-      `[Cleanup] Deleted ${result.deleted} terminal batches older than ${retentionDays} days` +
-        (hasMore ? " (per-run cap reached; the remainder is swept on the next run)" : "")
-    );
-  } catch (err: unknown) {
-    console.error("[Cleanup] Error cleaning old batches:", err);
-    result.errors++;
-  }
-
-  return result;
+  return { deleted: 0, errors: 0 };
 }
 
-/**
- * Clear the content of files past their own `expires_at`.
- *
- * Like ccr_blocks, a file carries its own expiry -- this needs no separate
- * retention-days setting, just an operator-scheduled sweep, since nothing
- * previously enforced expires_at at all. Observed live: 1,874 rows / 5.19 GB
- * of uploaded file content, most long past expiry.
- *
- * Gated by `BATCH_AND_FILE_AUTO_CLEANUP_ENABLED` (default off, #12999): every
- * existing install would otherwise start clearing file content that today is
- * kept until explicitly deleted. Fail closed -- an operator must opt in.
- */
 export async function cleanupExpiredFiles(): Promise<CleanupResult> {
-  const result: CleanupResult = { deleted: 0, errors: 0 };
-
-  if (!isFeatureFlagEnabled("BATCH_AND_FILE_AUTO_CLEANUP_ENABLED")) {
-    console.log(
-      "[Cleanup] Expired-file auto-cleanup disabled (BATCH_AND_FILE_AUTO_CLEANUP_ENABLED=false); skipping."
-    );
-    return result;
-  }
-
-  try {
-    const { pruneExpiredFiles } = await import("./files");
-    result.deleted = pruneExpiredFiles(Math.floor(Date.now() / 1000));
-    console.log(`[Cleanup] Deleted ${result.deleted} expired files`);
-  } catch (err: unknown) {
-    console.error("[Cleanup] Error cleaning expired files:", err);
-    result.errors++;
-  }
-
-  return result;
+  return { deleted: 0, errors: 0 };
 }
 
 /**

@@ -87,8 +87,8 @@ export async function loadRerankProviderNodes(): Promise<DynamicRerankProvider[]
   let nodes: RerankProviderNodeRow[] = [];
   try {
     const rows = await getCachedProviderNodes();
-    nodes = (Array.isArray(rows) ? rows : []).filter(
-      (n): n is RerankProviderNodeRow => n !== null && typeof n === "object"
+    nodes = (Array.isArray(rows) ? (rows as unknown as RerankProviderNodeRow[]) : []).filter(
+      (n) => n !== null && typeof n === "object"
     );
   } catch {
     // Non-critical — continue with cloud providers only
