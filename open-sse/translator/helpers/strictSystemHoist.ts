@@ -1,4 +1,19 @@
-import { systemMessageMustBeFirst } from "../../../src/lib/memory/injection.ts";
+const STRICT_SYSTEM_PROVIDERS = new Set(["xiaomi-mimo", "mimo", "tokenrouter"]);
+
+export function systemMessageMustBeFirst(
+  provider: string | null | undefined,
+  env: Record<string, string | undefined> = process.env
+): boolean {
+  if (!provider) return false;
+  const p = provider.toLowerCase();
+  if (STRICT_SYSTEM_PROVIDERS.has(p)) return true;
+  const extra = env.OMNIROUTE_STRICT_SYSTEM_PROVIDERS;
+  if (extra) {
+    const list = extra.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+    if (list.includes(p)) return true;
+  }
+  return false;
+}
 
 type Message = { role: string; content: unknown; [key: string]: unknown };
 

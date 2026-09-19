@@ -28,7 +28,6 @@ import { getModelLockoutInfo, isModelLocked } from "../accountFallback.ts";
 import { parseAutoPrefix } from "../autoCombo/autoPrefix.ts";
 import { handlePipelineCombo, buildPipelineResponse } from "../autoCombo/pipelineRouter.ts";
 import type { resolveComboSetupConfig } from "../comboConfig.ts";
-import { orderTargetsByEvalScores } from "../evalRouting.ts";
 import { parseModel } from "../model.ts";
 import { getRemainingCooldownMs, isProviderInCooldown } from "../providerCooldownTracker.ts";
 import {
@@ -538,9 +537,7 @@ async function applyContinuityFilters(
         combo.name
       );
   let orderedTargets = sticky.targets;
-  if (!cacheStrategyAffinityApplied) {
-    orderedTargets = orderTargetsByEvalScores(orderedTargets, config.evalRouting, log);
-  }
+  
   // #8488 / #8494: fail closed when hard capability filters empty the pool.
   // Opt-in escape hatch: combo.config.compatFilterFailOpen OR settings.compatFilterFailOpen.
   const compatFilterFailOpen =

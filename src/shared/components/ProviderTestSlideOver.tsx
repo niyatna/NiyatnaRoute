@@ -4,10 +4,10 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import {
-  LlmChatCard,
-  type LlmChatControls,
-} from "@/app/(dashboard)/dashboard/media-providers/components/LlmChatCard";
+export interface LlmChatControls {
+  clear: () => void;
+  hasMessages: boolean;
+}
 import ProviderIcon from "@/shared/components/ProviderIcon";
 import { useApiKey } from "@/app/(dashboard)/dashboard/providers/hooks/useApiKey";
 import { useProviderModels } from "@/app/(dashboard)/dashboard/providers/hooks/useProviderModels";
@@ -114,17 +114,21 @@ function ProviderTestSlideOverPanel({
         <SlideOverTabs tab={tab} onChange={setTab} />
         <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
           {tab === "test" && (
-            <div className="flex-1 min-h-0 flex flex-col pl-4 pr-2 py-3">
-              <LlmChatCard
-                providerId={providerId}
-                embedded
-                hideToolbar
-                model={model}
-                onModelChange={setModel}
-                selectedKey={selectedKey}
-                onSelectedKeyChange={setSelectedKey}
-                onControlsChange={onControlsChange}
-              />
+            <div className="flex-1 min-h-0 flex flex-col items-center justify-center p-8 text-center gap-4">
+              <div className="size-12 rounded-full bg-accent/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-accent text-[24px]">terminal</span>
+              </div>
+              <h3 className="text-sm font-semibold text-text-main">Test Provider in Playground</h3>
+              <p className="text-xs text-text-muted max-w-sm">
+                Open the unified NiyatnaRoute playground to test models and prompts for this provider.
+              </p>
+              <a
+                href={`/dashboard/playground?provider=${encodeURIComponent(providerId)}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+              >
+                <span>Open Playground</span>
+                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
             </div>
           )}
           {tab === "logs" && <LogsTab providerId={providerId} />}

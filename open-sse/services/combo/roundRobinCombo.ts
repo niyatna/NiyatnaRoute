@@ -28,7 +28,7 @@ import {
   getDefaultComboConfig,
   resolveComboQueueDepth,
 } from "../comboConfig.ts";
-import { getHiddenModelsByProvider } from "@/models";
+import { getHiddenModelsByProvider } from "../../../src/lib/db/models";
 import * as semaphore from "../rateLimitSemaphore.ts";
 import { getCircuitBreaker } from "../../../src/shared/utils/circuitBreaker";
 import { parseModel } from "../model.ts";
@@ -41,7 +41,6 @@ import {
 } from "./sessionStickiness.ts";
 import { makeConnectionConcurrencyResolver } from "./concurrencyCaps.ts";
 import { getCachedProviderConnectionById } from "../../../src/lib/db/readCache.ts";
-import { orderTargetsByEvalScores } from "../evalRouting.ts";
 import {
   applyPromptCacheAffinity,
   expandPromptCacheAffinityTargets,
@@ -231,7 +230,7 @@ export async function handleRoundRobinCombo({
     apiKeyAllowedConnectionIds: apiKeyAllowedConnections,
   });
   const tagFilteredTargets = await applyRequestTagRouting(orderedTargets, body, log);
-  const evalRankedTargets = orderTargetsByEvalScores(tagFilteredTargets, config.evalRouting, log);
+  const evalRankedTargets = tagFilteredTargets;
   // Align with the main/auto paths: combo config OR top-level settings (#8488 / #8494).
   const rrCompatFailOpen =
     (config as { compatFilterFailOpen?: unknown }).compatFilterFailOpen === true ||

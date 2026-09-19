@@ -5,7 +5,6 @@
 // Extracted so the frozen host file stays within the file-size ratchet
 // (#6649 review follow-up: keeps ProviderDetailPageClient.tsx at its ≤784 cap).
 
-import ProviderPlaygroundPanel from "./ProviderPlaygroundPanel";
 import ProviderParamFilterSection from "./ProviderParamFilterSection";
 import ProviderInterceptionSection from "./ProviderInterceptionSection";
 import ProviderCcAliasSection from "./ProviderCcAliasSection";
@@ -13,9 +12,6 @@ import ProviderCcAliasSection from "./ProviderCcAliasSection";
 export default function ProviderExtraPanels({ providerId }: { providerId: string }) {
   return (
     <>
-      {/* Playground panel — rendered for providers that declare serviceKinds */}
-      <ProviderPlaygroundPanel providerId={providerId} />
-
       {/* Param filters — denylist/allowlist config per provider/model (#6625) */}
       <ProviderParamFilterSection providerId={providerId} />
 

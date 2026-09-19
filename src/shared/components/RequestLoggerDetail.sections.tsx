@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { JsonView } from "@/shared/components/jsonView";
-import { ChatBubble } from "@/app/(dashboard)/dashboard/tools/traffic-inspector/components/chat/ChatBubble";
 import { buildRequestTurns, buildResponseTurns } from "@/mitm/inspector/conversationNormalizer";
 import type { InterceptedRequest, NormalizedTurn } from "@/mitm/inspector/types";
 import { useTheme } from "@/shared/hooks/useTheme";
@@ -376,6 +375,66 @@ export function ConversationContextSection({ log, detail }) {
             <ChatBubble key={i} turn={turn} />
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+
+function ChatBubble({ turn }: { turn: any }) {
+  const isUser = turn.role === "user";
+  const isSystem = turn.role === "system";
+  const [collapsed, setCollapsed] = useState(isSystem);
+
+  const roleStyles: Record<string, string> = {
+    system: "border border-red-500/40 bg-red-900/20 text-red-200",
+    user: "ml-auto bg-blue-600/30 border border-blue-500/30 text-blue-100",
+    assistant: "bg-purple-900/30 border border-purple-500/30 text-purple-100",
+    tool: "bg-gray-800 border border-gray-600/30 text-gray-200",
+  };
+
+  return (
+    <div
+      className={`max-w-[85%] rounded-lg px-3 py-2 text-xs ${
+        isUser ? "ml-auto" : "mr-auto"
+      } ${roleStyles[turn.role] || "bg-bg-subtle text-text-main"}`}
+    >
+      <div className="flex items-center justify-between gap-2 mb-1">
+        <span className="font-semibold uppercase tracking-wider opacity-70 text-[10px]">
+          {turn.role}
+        </span>
+        {isSystem && (
+          <button
+            type="button"
+            onClick={() => setCollapsed(!collapsed)}
+            className="text-[10px] opacity-70 hover:opacity-100 underline"
+          >
+            {collapsed ? "Expand" : "Collapse"}
+          </button>
+        )}
+      </div>
+      {!collapsed && (
+        <div className="space-y-1 whitespace-pre-wrap break-words">
+          {turn.blocks.map((b: any, idx: number) => {
+            if (b.type === "text") return <p key={idx}>{b.text}</p>;
+            if (b.type === "tool_use")
+              return (
+                <div key={idx} className="font-mono text-[11px] bg-black/20 p-1.5 rounded">
+                  Tool: {b.name} ({JSON.stringify(b.input)})
+                </div>
+              );
+            if (b.type === "tool_result")
+              return (
+                <div key={idx} className="font-mono text-[11px] bg-black/20 p-1.5 rounded">
+                  Result: {typeof b.content === "string" ? b.content : JSON.stringify(b.content)}
+                </div>
+              );
+            return null;
+          })}
+        </div>
+      )}
+      {collapsed && isSystem && (
+        <p className="text-[11px] opacity-60 italic">System prompt hidden</p>
       )}
     </div>
   );

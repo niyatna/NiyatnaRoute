@@ -6,10 +6,7 @@ import Toggle from "@/shared/components/Toggle";
 import { useCopyToClipboard } from "@/shared/hooks/useCopyToClipboard";
 import { isPublicDisplayBaseUrl, useDisplayBaseUrl } from "@/shared/hooks";
 import { useTranslations } from "next-intl";
-import A2ADashboardPage from "./components/A2ADashboard";
 import McpDashboardPage from "./components/MCPDashboard";
-import NotionSourceCard from "./components/NotionSourceCard";
-import ObsidianSourceCard from "./components/ObsidianSourceCard";
 import VscodeTokenAliasCard from "./VscodeTokenAliasCard";
 
 const BUILD_TIME_CLOUD_URL = process.env.NEXT_PUBLIC_CLOUD_URL || null;
@@ -105,13 +102,11 @@ type EndpointTunnelVisibility = {
   showNgrokTunnel: boolean;
 };
 
-type EndpointTab = "apis" | "mcp" | "a2a" | "context-sources";
+type EndpointTab = "apis" | "mcp";
 
 const ENDPOINT_TABS: Array<{ value: EndpointTab; labelKey: string; icon: string }> = [
   { value: "apis", labelKey: "tabApis", icon: "api" },
   { value: "mcp", labelKey: "tabMcp", icon: "extension" },
-  { value: "a2a", labelKey: "tabA2a", icon: "hub" },
-  { value: "context-sources", labelKey: "tabContextSources", icon: "database" },
 ];
 
 const DEFAULT_TUNNEL_VISIBILITY: EndpointTunnelVisibility = {
@@ -168,9 +163,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const [ngrokToken, setNgrokToken] = useState("");
   const [showNgrokTunnel, setShowNgrokTunnel] = useState(true);
   const [expandedTunnel, setExpandedTunnel] = useState<string | null>(null);
-  const [localApiUrl, setLocalApiUrl] = useState(
-    typeof window !== "undefined" ? `${window.location.origin}/v1` : "http://localhost:20128/v1"
-  );
+  const [localApiUrl, setLocalApiUrl] = useState("http://localhost:20128/v1");
   const [lanUrls, setLanUrls] = useState<string[]>([]);
   const [tailscaleIpUrl, setTailscaleIpUrl] = useState<string | null>(null);
   const [activeEndpointTab, setActiveEndpointTab] = useState<EndpointTab>("apis");
@@ -1268,13 +1261,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       />
 
       {activeEndpointTab === "mcp" ? <McpDashboardPage /> : null}
-      {activeEndpointTab === "a2a" ? <A2ADashboardPage /> : null}
-      {activeEndpointTab === "context-sources" ? (
-        <div className="flex flex-col gap-4">
-          <NotionSourceCard />
-          <ObsidianSourceCard />
-        </div>
-      ) : null}
 
       {/* Endpoint Card */}
       <Card>

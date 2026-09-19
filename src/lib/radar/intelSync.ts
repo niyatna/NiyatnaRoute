@@ -79,9 +79,8 @@ function supporterIdentity(key: string): string {
   return `radar:${crypto.createHash("sha256").update(key, "utf8").digest("hex")}`;
 }
 
-async function recognizeVerifiedSupporter(identity: string): Promise<void> {
-  const { emitGamificationEvent } = await import("@/lib/gamification/events");
-  await emitGamificationEvent({ apiKeyId: identity, action: "radar_supporter" });
+async function recognizeVerifiedSupporter(_identity: string): Promise<void> {
+  // Gamification purged: supporter recognition is a no-op
 }
 
 export async function syncRadarIntel(deps: IntelSyncDeps = {}): Promise<IntelSyncStatus> {

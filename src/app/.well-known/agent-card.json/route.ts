@@ -13,7 +13,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { getFleetSkills } from "@/lib/conductor/fleetSkills";
 import { getBaseUrl } from "@/lib/wellKnown";
 
 const PACKAGE_VERSION = process.env.npm_package_version || "1.8.1";
@@ -24,7 +23,6 @@ const PACKAGE_VERSION = process.env.npm_package_version || "1.8.1";
  * Returns the OmniRoute Agent Card (A2A v1.0).
  */
 export async function GET(request?: NextRequest) {
-  const fleetSkills = await getFleetSkills();
   const baseUrl = getBaseUrl(request);
 
   const agentCard = {
@@ -107,7 +105,6 @@ export async function GET(request?: NextRequest) {
         tags: ["discovery", "capabilities"],
         examples: ["What can you do?", "List your skills"],
       },
-      ...fleetSkills,
     ],
     security: {
       schemes: ["api-key"],

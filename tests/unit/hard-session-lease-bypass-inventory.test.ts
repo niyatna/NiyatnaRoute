@@ -229,7 +229,6 @@ const CLASSIFICATION: Record<InventoryKind, Record<string, BypassClass>> = {
     "open-sse/handlers/chatCore/cliproxyapiCredentials.ts": "A",
     "open-sse/handlers/videoGeneration.ts": "B",
     "open-sse/services/compression/eval/executorModelClient.ts": "B",
-    "src/lib/compression/judgeModelClient.ts": "B",
     "src/lib/services/quotaAutoPing.ts": "B",
   },
   connection: Object.fromEntries(

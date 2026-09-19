@@ -1,64 +1,64 @@
 # Contributor Covenant Code of Conduct (Dansk)
 
-🌐 **Languages:** 🇺🇸 [English](../../../CODE_OF_CONDUCT.md) · 🇪🇹 [am](../am/CODE_OF_CONDUCT.md) · 🇸🇦 [ar](../ar/CODE_OF_CONDUCT.md) · 🇦🇿 [az](../az/CODE_OF_CONDUCT.md) · 🇧🇬 [bg](../bg/CODE_OF_CONDUCT.md) · 🇧🇩 [bn](../bn/CODE_OF_CONDUCT.md) · 🇨🇿 [cs](../cs/CODE_OF_CONDUCT.md) · 🇩🇪 [de](../de/CODE_OF_CONDUCT.md) · 🇬🇷 [el](../el/CODE_OF_CONDUCT.md) · 🇪🇸 [es](../es/CODE_OF_CONDUCT.md) · 🇪🇪 [et](../et/CODE_OF_CONDUCT.md) · 🇮🇷 [fa](../fa/CODE_OF_CONDUCT.md) · 🇫🇮 [fi](../fi/CODE_OF_CONDUCT.md) · 🇫🇷 [fr](../fr/CODE_OF_CONDUCT.md) · 🇮🇪 [ga](../ga/CODE_OF_CONDUCT.md) · 🇮🇳 [gu](../gu/CODE_OF_CONDUCT.md) · 🇳🇬 [ha](../ha/CODE_OF_CONDUCT.md) · 🇮🇱 [he](../he/CODE_OF_CONDUCT.md) · 🇮🇳 [hi](../hi/CODE_OF_CONDUCT.md) · 🇭🇷 [hr](../hr/CODE_OF_CONDUCT.md) · 🇭🇺 [hu](../hu/CODE_OF_CONDUCT.md) · 🇦🇲 [hy](../hy/CODE_OF_CONDUCT.md) · 🇮🇩 [id](../id/CODE_OF_CONDUCT.md) · 🇳🇬 [ig](../ig/CODE_OF_CONDUCT.md) · 🇮🇹 [it](../it/CODE_OF_CONDUCT.md) · 🇯🇵 [ja](../ja/CODE_OF_CONDUCT.md) · 🇬🇪 [ka](../ka/CODE_OF_CONDUCT.md) · 🇰🇭 [km](../km/CODE_OF_CONDUCT.md) · 🇮🇳 [kn](../kn/CODE_OF_CONDUCT.md) · 🇰🇷 [ko](../ko/CODE_OF_CONDUCT.md) · 🇱🇹 [lt](../lt/CODE_OF_CONDUCT.md) · 🇱🇻 [lv](../lv/CODE_OF_CONDUCT.md) · 🇮🇳 [ml](../ml/CODE_OF_CONDUCT.md) · 🇮🇳 [mr](../mr/CODE_OF_CONDUCT.md) · 🇲🇾 [ms](../ms/CODE_OF_CONDUCT.md) · 🇲🇹 [mt](../mt/CODE_OF_CONDUCT.md) · 🇲🇲 [my](../my/CODE_OF_CONDUCT.md) · 🇳🇵 [ne](../ne/CODE_OF_CONDUCT.md) · 🇳🇱 [nl](../nl/CODE_OF_CONDUCT.md) · 🇳🇴 [no](../no/CODE_OF_CONDUCT.md) · 🇮🇳 [or](../or/CODE_OF_CONDUCT.md) · 🇮🇳 [pa](../pa/CODE_OF_CONDUCT.md) · 🇵🇭 [phi](../phi/CODE_OF_CONDUCT.md) · 🇵🇱 [pl](../pl/CODE_OF_CONDUCT.md) · 🇵🇹 [pt](../pt/CODE_OF_CONDUCT.md) · 🇧🇷 [pt-BR](../pt-BR/CODE_OF_CONDUCT.md) · 🇷🇴 [ro](../ro/CODE_OF_CONDUCT.md) · 🇷🇺 [ru](../ru/CODE_OF_CONDUCT.md) · 🇱🇰 [si](../si/CODE_OF_CONDUCT.md) · 🇸🇰 [sk](../sk/CODE_OF_CONDUCT.md) · 🇸🇮 [sl](../sl/CODE_OF_CONDUCT.md) · 🇷🇸 [sr](../sr/CODE_OF_CONDUCT.md) · 🇸🇪 [sv](../sv/CODE_OF_CONDUCT.md) · 🇰🇪 [sw](../sw/CODE_OF_CONDUCT.md) · 🇮🇳 [ta](../ta/CODE_OF_CONDUCT.md) · 🇮🇳 [te](../te/CODE_OF_CONDUCT.md) · 🇹🇭 [th](../th/CODE_OF_CONDUCT.md) · 🇹🇷 [tr](../tr/CODE_OF_CONDUCT.md) · 🇺🇦 [uk-UA](../uk-UA/CODE_OF_CONDUCT.md) · 🇵🇰 [ur](../ur/CODE_OF_CONDUCT.md) · 🇺🇿 [uz](../uz/CODE_OF_CONDUCT.md) · 🇻🇳 [vi](../vi/CODE_OF_CONDUCT.md) · 🇳🇬 [yo](../yo/CODE_OF_CONDUCT.md) · 🇨🇳 [zh-CN](../zh-CN/CODE_OF_CONDUCT.md) · 🇹🇼 [zh-TW](../zh-TW/CODE_OF_CONDUCT.md)
+🌐 **Languages:** 🇺🇸 [English](../../../CODE_OF_CONDUCT.md) · 🇸🇦 [ar](../ar/CODE_OF_CONDUCT.md) · 🇦🇿 [az](../az/CODE_OF_CONDUCT.md) · 🇧🇬 [bg](../bg/CODE_OF_CONDUCT.md) · 🇧🇩 [bn](../bn/CODE_OF_CONDUCT.md) · 🇨🇿 [cs](../cs/CODE_OF_CONDUCT.md) · 🇩🇪 [de](../de/CODE_OF_CONDUCT.md) · 🇬🇷 [el](../el/CODE_OF_CONDUCT.md) · 🇪🇸 [es](../es/CODE_OF_CONDUCT.md) · 🇪🇪 [et](../et/CODE_OF_CONDUCT.md) · 🇮🇷 [fa](../fa/CODE_OF_CONDUCT.md) · 🇫🇮 [fi](../fi/CODE_OF_CONDUCT.md) · 🇫🇷 [fr](../fr/CODE_OF_CONDUCT.md) · 🇮🇪 [ga](../ga/CODE_OF_CONDUCT.md) · 🇮🇳 [gu](../gu/CODE_OF_CONDUCT.md) · 🇮🇱 [he](../he/CODE_OF_CONDUCT.md) · 🇮🇳 [hi](../hi/CODE_OF_CONDUCT.md) · 🇭🇷 [hr](../hr/CODE_OF_CONDUCT.md) · 🇭🇺 [hu](../hu/CODE_OF_CONDUCT.md) · 🇮🇩 [id](../id/CODE_OF_CONDUCT.md) · 🇮🇹 [it](../it/CODE_OF_CONDUCT.md) · 🇯🇵 [ja](../ja/CODE_OF_CONDUCT.md) · 🇰🇷 [ko](../ko/CODE_OF_CONDUCT.md) · 🇱🇹 [lt](../lt/CODE_OF_CONDUCT.md) · 🇱🇻 [lv](../lv/CODE_OF_CONDUCT.md) · 🇮🇳 [mr](../mr/CODE_OF_CONDUCT.md) · 🇲🇾 [ms](../ms/CODE_OF_CONDUCT.md) · 🇲🇹 [mt](../mt/CODE_OF_CONDUCT.md) · 🇳🇱 [nl](../nl/CODE_OF_CONDUCT.md) · 🇳🇴 [no](../no/CODE_OF_CONDUCT.md) · 🇵🇭 [phi](../phi/CODE_OF_CONDUCT.md) · 🇵🇱 [pl](../pl/CODE_OF_CONDUCT.md) · 🇵🇹 [pt](../pt/CODE_OF_CONDUCT.md) · 🇧🇷 [pt-BR](../pt-BR/CODE_OF_CONDUCT.md) · 🇷🇴 [ro](../ro/CODE_OF_CONDUCT.md) · 🇷🇺 [ru](../ru/CODE_OF_CONDUCT.md) · 🇸🇰 [sk](../sk/CODE_OF_CONDUCT.md) · 🇸🇮 [sl](../sl/CODE_OF_CONDUCT.md) · 🇷🇸 [sr](../sr/CODE_OF_CONDUCT.md) · 🇸🇪 [sv](../sv/CODE_OF_CONDUCT.md) · 🇰🇪 [sw](../sw/CODE_OF_CONDUCT.md) · 🇮🇳 [ta](../ta/CODE_OF_CONDUCT.md) · 🇮🇳 [te](../te/CODE_OF_CONDUCT.md) · 🇹🇭 [th](../th/CODE_OF_CONDUCT.md) · 🇹🇷 [tr](../tr/CODE_OF_CONDUCT.md) · 🇺🇦 [uk-UA](../uk-UA/CODE_OF_CONDUCT.md) · 🇵🇰 [ur](../ur/CODE_OF_CONDUCT.md) · 🇻🇳 [vi](../vi/CODE_OF_CONDUCT.md) · 🇨🇳 [zh-CN](../zh-CN/CODE_OF_CONDUCT.md) · 🇹🇼 [zh-TW](../zh-TW/CODE_OF_CONDUCT.md)
 
 ---
 
-## Vores løfte
+## Our Pledge
 
-Vi som medlemmer, bidragydere og ledere forpligter os til at gøre deltagelse i vores
-fællesskab til en oplevelse uden chikane for alle, uanset alder, kropsstørrelse,
-synligt eller usynligt handicap, etnicitet, kønskarakteristika, kønsidentitet
-og -udtryk, erfaringsniveau, uddannelse, socioøkonomisk status, nationalitet,
-personligt udseende, race, religion eller seksuel identitet
-og orientering.
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, religion, or sexual identity
+and orientation.
 
-Vi forpligter os til at handle og interagere på måder, der bidrager til et åbent,
-imødekommende, mangfoldigt, inkluderende og sundt fællesskab.
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
 
-## Vores standarder
+## Our Standards
 
-Eksempler på adfærd, der bidrager til et positivt miljø for vores
-fællesskab, omfatter:
+Examples of behavior that contributes to a positive environment for our
+community include:
 
-- At udvise empati og venlighed over for andre mennesker
-- At respektere forskellige meninger, synspunkter og erfaringer
-- At give og imødekommende modtage konstruktiv feedback
-- At tage ansvar og undskylde over for dem, der er berørt af vores fejl,
-  samt at lære af erfaringen
-- At fokusere på, hvad der er bedst, ikke kun for os som enkeltpersoner, men for
-  hele fællesskabet
+- Demonstrating empathy and kindness toward other people
+- Being respectful of differing opinions, viewpoints, and experiences
+- Giving and gracefully accepting constructive feedback
+- Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+- Focusing on what is best not just for us as individuals, but for the
+  overall community
 
-Eksempler på uacceptabel adfærd omfatter:
+Examples of unacceptable behavior include:
 
-- Brug af seksualiseret sprog eller billedmateriale samt seksuel opmærksomhed eller
-  tilnærmelser af enhver art
-- Trolling, fornærmende eller nedsættende kommentarer samt personlige eller politiske angreb
-- Offentlig eller privat chikane
-- Offentliggørelse af andres private oplysninger, såsom en fysisk adresse eller
-  e-mailadresse, uden deres udtrykkelige tilladelse
-- Anden adfærd, der med rimelighed kan anses for upassende i en
-  professionel sammenhæng
+- The use of sexualized language or imagery, and sexual attention or
+  advances of any kind
+- Trolling, insulting or derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information, such as a physical or email
+  address, without their explicit permission
+- Other conduct which could reasonably be considered inappropriate in a
+  professional setting
 
-## Ansvar for håndhævelse
+## Enforcement Responsibilities
 
-Fællesskabets ledere er ansvarlige for at tydeliggøre og håndhæve vores standarder for
-acceptabel adfærd og vil træffe passende og retfærdige korrigerende foranstaltninger som
-reaktion på enhver adfærd, som de vurderer er upassende, truende, krænkende
-eller skadelig.
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
 
-Fællesskabets ledere har ret og pligt til at fjerne, redigere eller afvise
-kommentarer, commits, kode, wiki-redigeringer, issues og andre bidrag, der
-ikke er i overensstemmelse med disse adfærdsregler, og vil oplyse årsagerne til beslutninger
-om moderation, når det er relevant.
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
 
-## Omfang
+## Scope
 
-Dette adfærdskodeks gælder i alle fællesskabets rum og gælder også, når en person
-officielt repræsenterer fællesskabet i offentlige rum.
-Eksempler på at repræsentere vores fællesskab omfatter brug af en officiel e-mailadresse,
-opslag via en officiel konto på sociale medier eller at fungere som udpeget
-repræsentant ved et online- eller offlinearrangement.
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
 
 ## Enforcement
 
@@ -70,33 +70,51 @@ All complaints will be reviewed and investigated promptly and fairly.
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
 
-## Retningslinjer for håndhævelse
+## Enforcement Guidelines
 
-Fællesskabets ledere vil følge disse retningslinjer for påvirkning af fællesskabet, når de fastlægger konsekvenserne af enhver handling, som de vurderer er i strid med dette adfærdskodeks:
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
 
-### 1. Korrektion
+### 1. Correction
 
-**Påvirkning af fællesskabet**: Brug af upassende sprog eller anden adfærd, der anses for uprofessionel eller uønsket i fællesskabet.
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
 
-**Konsekvens**: En privat, skriftlig advarsel fra fællesskabets ledere, som tydeliggør overtrædelsens karakter og forklarer, hvorfor adfærden var upassende. Der kan blive anmodet om en offentlig undskyldning.
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
 
-### 2. Advarsel
+### 2. Warning
 
-**Påvirkning af fællesskabet**: En overtrædelse gennem en enkelt hændelse eller en række handlinger.
+**Community Impact**: A violation through a single incident or series
+of actions.
 
-**Konsekvens**: En advarsel med konsekvenser ved fortsat adfærd. Ingen kontakt med de involverede personer, herunder uopfordret kontakt med dem, der håndhæver adfærdskodekset, i en nærmere angivet periode. Dette omfatter at undgå interaktioner i fællesskabets fora såvel som via eksterne kanaler såsom sociale medier. Overtrædelse af disse vilkår kan føre til en midlertidig eller permanent udelukkelse.
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.
 
-### 3. Midlertidig udelukkelse
+### 3. Temporary Ban
 
-**Påvirkning af fællesskabet**: En alvorlig overtrædelse af fællesskabets standarder, herunder vedvarende upassende adfærd.
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
 
-**Konsekvens**: En midlertidig udelukkelse fra enhver form for interaktion eller offentlig kommunikation med fællesskabet i en nærmere angivet periode. Ingen offentlig eller privat kontakt med de involverede personer, herunder uopfordret kontakt med dem, der håndhæver adfærdskodekset, er tilladt i denne periode. Overtrædelse af disse vilkår kan føre til en permanent udelukkelse.
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
 
-### 4. Permanent udelukkelse
+### 4. Permanent Ban
 
-**Påvirkning af fællesskabet**: Udvisning af et mønster af overtrædelser af fællesskabets standarder, herunder vedvarende upassende adfærd, chikane af en person eller aggression mod eller nedgørelse af grupper af personer.
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior, harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
 
-**Konsekvens**: En permanent udelukkelse fra enhver form for offentlig interaktion i fællesskabet.
+**Consequence**: A permanent ban from any sort of public interaction within
+the community.
 
 ## Attribution
 

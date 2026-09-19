@@ -1,136 +1,130 @@
 # OmniRoute — Deployment Guide on VM with Cloudflare (Slovenčina)
 
-🌐 **Languages:** 🇺🇸 [English](../../../../ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇹 [am](../../../am/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇦🇿 [az](../../../az/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇰 [da](../../../da/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇪 [de](../../../de/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇬🇷 [el](../../../el/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇸 [es](../../../es/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇪 [et](../../../et/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇱 [he](../../../he/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇩 [id](../../../id/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇹 [it](../../../it/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇭 [km](../../../km/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇲 [my](../../../my/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇴 [no](../../../no/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [or](../../../or/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇰 [si](../../../si/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [te](../../../te/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇭 [th](../../../th/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/ops/VM_DEPLOYMENT_GUIDE.md)
+🌐 **Languages:** 🇺🇸 [English](../../../../ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇦🇿 [az](../../../az/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇰 [da](../../../da/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇪 [de](../../../de/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇬🇷 [el](../../../el/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇸 [es](../../../es/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇪 [et](../../../et/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇱 [he](../../../he/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇩 [id](../../../id/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇹 [it](../../../it/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇴 [no](../../../no/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [te](../../../te/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇭 [th](../../../th/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/ops/VM_DEPLOYMENT_GUIDE.md)
 
 ---
 
-🌐 **Languages:** 🇺🇸 [English](../../../../ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇹 [am](../../../am/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇦🇿 [az](../../../az/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇰 [da](../../../da/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇩🇪 [de](../../../de/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇬🇷 [el](../../../el/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇸 [es](../../../es/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇪🇪 [et](../../../et/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇱 [he](../../../he/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇩 [id](../../../id/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇹 [it](../../../it/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇭 [km](../../../km/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇲🇲 [my](../../../my/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇴 [no](../../../no/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [or](../../../or/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇱🇰 [si](../../../si/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇮🇳 [te](../../../te/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇭 [th](../../../th/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/ops/VM_DEPLOYMENT_GUIDE.md) · 🇹🇼 [zh-TW](../../../zh-TW/docs/ops/VM_DEPLOYMENT_GUIDE.md)
-
-Kompletná príručka na inštaláciu a konfiguráciu OmniRoute na virtuálnom počítači (VPS) s doménou spravovanou prostredníctvom Cloudflare.
+Complete guide to install and configure OmniRoute on a VM (VPS) with domain managed via Cloudflare.
 
 ---
 
-## Predpoklady
+## Prerequisites
 
-| Položka    | Minimum                   | Odporúčané       |
-| ---------- | ------------------------- | ---------------- |
-| **CPU**    | 1 vCPU                    | 2 vCPU           |
-| **RAM**    | 1 GB                      | 2 GB             |
-| **Disk**   | 10 GB SSD                 | 25 GB SSD        |
-| **OS**     | Ubuntu 22.04 LTS          | Ubuntu 24.04 LTS |
-| **Doména** | Registrovaná v Cloudflare | —                |
-| **Docker** | Docker Engine 24+         | Docker 27+       |
+| Item       | Minimum                  | Recommended      |
+| ---------- | ------------------------ | ---------------- |
+| **CPU**    | 1 vCPU                   | 2 vCPU           |
+| **RAM**    | 1 GB                     | 2 GB             |
+| **Disk**   | 10 GB SSD                | 25 GB SSD        |
+| **OS**     | Ubuntu 22.04 LTS         | Ubuntu 24.04 LTS |
+| **Domain** | Registered on Cloudflare | —                |
+| **Docker** | Docker Engine 24+        | Docker 27+       |
 
-**Testovaní poskytovatelia**: Akamai (Linode), DigitalOcean, Vultr, Hetzner, AWS Lightsail.
+**Tested providers**: Akamai (Linode), DigitalOcean, Vultr, Hetzner, AWS Lightsail.
 
 ---
 
-## 1. Konfigurácia VM
+## 1. Configure the VM
 
-### 1.1 Vytvorenie inštancie
+### 1.1 Create the instance
 
-U preferovaného poskytovateľa VPS:
+On your preferred VPS provider:
 
-- Vyberte Ubuntu 24.04 LTS
-- Vyberte minimálny program (1 vCPU / 1 GB RAM)
-- Nastavte silné heslo používateľa root alebo nakonfigurujte kľúč SSH
-- Poznačte si **verejnú IP adresu** (napr. `203.0.113.10`)
+- Choose Ubuntu 24.04 LTS
+- Select the minimum plan (1 vCPU / 1 GB RAM)
+- Set a strong root password or configure SSH key
+- Note the **public IP** (e.g., `203.0.113.10`)
 
-### 1.2 Pripojenie prostredníctvom SSH
+### 1.2 Connect via SSH
 
 ```bash
 ssh root@203.0.113.10
 ```
 
-### 1.3 Aktualizácia systému
+### 1.3 Update the system
 
 ```bash
 apt update && apt upgrade -y
 ```
 
-### 1.4 Inštalácia Dockeru
+### 1.4 Install Docker
 
 ```bash
-# Inštalácia závislostí
+# Install dependencies
 apt install -y ca-certificates curl gnupg
 
-# Pridanie oficiálneho repozitára Docker
+# Add official Docker repository
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $ (. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $ (. /etc/os-release && echo “$VERSION_CODENAME”) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-### 1.5 Inštalácia nginx
+### 1.5 Install nginx
 
 ```bash
 apt install -y nginx
 ```
 
-### 1.6 Konfigurácia firewallu (UFW)
+### 1.6 Configure Firewall (UFW)
 
 ```bash
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp    # SSH
-ufw allow 80/tcp    # HTTP (presmerovanie)
+ufw allow 80/tcp    # HTTP (redirect)
 ufw allow 443/tcp   # HTTPS
 ufw enable
 ```
 
-> **Tip**: Na dosiahnutie maximálnej bezpečnosti obmedzte porty 80 a 443 iba na IP adresy Cloudflare. Pozrite si sekciu [Pokročilé zabezpečenie](#advanced-security).
+> **Tip**: For maximum security, restrict ports 80 and 443 to Cloudflare IPs only. See the [Advanced Security](#advanced-security) section.
 
 ---
 
-## 2. Inštalácia OmniRoute
+## 2. Install OmniRoute
 
-### 2.1 Vytvorenie konfiguračného adresára
+### 2.1 Create configuration directory
 
 ```bash
 mkdir -p /opt/omniroute
 ```
 
-### 2.2 Vytvorenie súboru s premennými prostredia
+### 2.2 Create environment variables file
 
 ```bash
-cat > /opt/omniroute/.env << 'EOF'
-# === Zabezpečenie ===
+cat > /opt/omniroute/.env << ‘EOF’
+# === Security ===
 JWT_SECRET=CHANGE-TO-A-UNIQUE-64-CHAR-SECRET-KEY
 INITIAL_PASSWORD=YourSecurePassword123!
 API_KEY_SECRET=REPLACE-WITH-ANOTHER-SECRET-KEY
 STORAGE_ENCRYPTION_KEY=REPLACE-WITH-THIRD-SECRET-KEY
 STORAGE_ENCRYPTION_KEY_VERSION=v1
 MACHINE_ID_SALT=CHANGE-TO-A-UNIQUE-SALT
-OMNIROUTE_WS_BRIDGE_SECRET=REPLACE-WITH-WS-BRIDGE-SECRET  # V produkcii POVINNÉ: používa ho Codex Responses WS bridge
 
-# === Aplikácia ===
+# === App ===
 PORT=20128
 NODE_ENV=production
 HOSTNAME=0.0.0.0
 DATA_DIR=/app/data
+STORAGE_DRIVER=sqlite
 APP_LOG_TO_FILE=true
-AUTH_COOKIE_SECURE=true
+AUTH_COOKIE_SECURE=false
 REQUIRE_API_KEY=false
 
-# === URL adresy (zmeňte na svoju doménu) ===
-# Interná základná URL adresa medzi servermi pre naplánované úlohy / požiadavky na vlastný server.
-BASE_URL=http://127.0.0.1:20128
-# URL adresa určená pre prehliadač, používaná pre spätné volania OAuth, odkazy na ovládací panel a generované verejné URL adresy.
+# === Domain (change to your domain) ===
+BASE_URL=https://llms.seudominio.com
 NEXT_PUBLIC_BASE_URL=https://llms.seudominio.com
-# Voliteľné explicitné prepísanie verejného pôvodu pre generované verejné URL adresy prostriedkov.
-# OMNIROUTE_PUBLIC_BASE_URL=https://llms.seudominio.com
 
-# === Cloudová synchronizácia (voliteľné) ===
+# === Cloud Sync (optional) ===
 # CLOUD_URL=https://cloud.omniroute.online
 # NEXT_PUBLIC_CLOUD_URL=https://cloud.omniroute.online
 EOF
 ```
 
-> ⚠️ **DÔLEŽITÉ**: Vygenerujte jedinečné tajné kľúče! Pre každý kľúč použite `openssl rand -hex 32`.
+> ⚠️ **IMPORTANT**: Generate unique secret keys! Use `openssl rand -hex 32` for each key.
 
-### 2.3 Spustenie kontajnera
+### 2.3 Start the container
 
 ```bash
 docker pull diegosouzapw/omniroute:latest
@@ -144,45 +138,45 @@ docker run -d \
   diegosouzapw/omniroute:latest
 ```
 
-### 2.4 Overenie, či je spustený
+### 2.4 Verify that it is running
 
 ```bash
 docker ps | grep omniroute
 docker logs omniroute --tail 20
 ```
 
-Mali by sa zobraziť hlásenia: `[DB] SQLite database ready` a `listening on port 20128`.
+It should display: `[DB] SQLite database ready` and `listening on port 20128`.
 
 ---
 
-## 3. Konfigurácia nginx (reverzný proxy server)
+## 3. Configure nginx (Reverse Proxy)
 
-### 3.1 Vygenerovanie SSL certifikátu (Cloudflare Origin)
+### 3.1 Generate SSL certificate (Cloudflare Origin)
 
-V ovládacom paneli Cloudflare:
+In the Cloudflare dashboard:
 
-1. Prejdite na **SSL/TLS → Origin Server**
-2. Kliknite na **Create Certificate**
-3. Ponechajte predvolené nastavenia (15 rokov, \*.yourdomain.com)
-4. Skopírujte **Origin Certificate** a **Private Key**
+1. Go to **SSL/TLS → Origin Server**
+2. Click **Create Certificate**
+3. Keep the defaults (15 years, \*.yourdomain.com)
+4. Copy the **Origin Certificate** and the **Private Key**
 
 ```bash
 mkdir -p /etc/nginx/ssl
 
-# Vložte certifikát
+# Paste the certificate
 nano /etc/nginx/ssl/origin.crt
 
-# Vložte súkromný kľúč
+# Paste the private key
 nano /etc/nginx/ssl/origin.key
 
 chmod 600 /etc/nginx/ssl/origin.key
 ```
 
-### 3.2 Konfigurácia nginx
+### 3.2 Nginx Configuration
 
 ```bash
-cat > /etc/nginx/sites-available/omniroute << 'NGINX'
-# Predvolený server — blokuje priamy prístup cez IP adresu
+cat > /etc/nginx/sites-available/omniroute << ‘NGINX’
+# Default server — blocks direct access via IP
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -198,7 +192,7 @@ server {
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
-    server_name llms.yourdomain.com;  # Zmeňte na svoju doménu
+    server_name llms.yourdomain.com;  # Change to your domain
 
     ssl_certificate     /etc/nginx/ssl/origin.crt;
     ssl_certificate_key /etc/nginx/ssl/origin.key;
@@ -209,17 +203,16 @@ server {
     location / {
         proxy_pass http://127.0.0.1:20128;
         proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # Podpora WebSocket
+        # WebSocket support
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
+        proxy_set_header Connection “upgrade”;
 
-        # SSE (udalosti odosielané serverom) — streamovanie odpovedí AI
+        # SSE (Server-Sent Events) — streaming AI responses
         proxy_buffering off;
         proxy_cache off;
         proxy_read_timeout 600s;
@@ -227,7 +220,7 @@ server {
     }
 }
 
-# Presmerovanie HTTP → HTTPS
+# HTTP → HTTPS redirect
 server {
     listen 80;
     listen [::]:80;
@@ -237,67 +230,59 @@ server {
 NGINX
 ```
 
-Udržujte časové limity streamovania reverzného proxy servera zosúladené s premennými prostredia časových limitov OmniRoute. Ak zvýšite
-`FETCH_TIMEOUT_MS` / `STREAM_IDLE_TIMEOUT_MS`, zvýšte `proxy_read_timeout` / `proxy_send_timeout`
-nad rovnakú prahovú hodnotu.
+Keep reverse-proxy stream timeouts aligned with your OmniRoute timeout env vars. If you raise
+`FETCH_TIMEOUT_MS` / `STREAM_IDLE_TIMEOUT_MS`, raise `proxy_read_timeout` / `proxy_send_timeout`
+above the same threshold.
 
-OmniRoute používa `NEXT_PUBLIC_BASE_URL` ako kanonický zdroj prístupný z prehliadača pre spätné volania OAuth
-a generované verejné odkazy. Autentifikované zápisy z ovládacieho panela používajú požiadavky rovnakého pôvodu
-spolu s ochranou CSRF viazanou na reláciu, takže nevyžadujú statickú verejnú základnú URL adresu. Vyššie uvedené
-hlavičky `X-Forwarded-*` sú aj naďalej užitočnými metadátami smerovania, ale nenahrádzajú
-nastavenie explicitnej verejnej URL adresy, keď ju OAuth alebo generované odkazy pre prehliadač potrebujú. Premennú
-`OMNIROUTE_TRUST_PROXY` povoľte iba vtedy, ak OmniRoute nie je priamo dostupný klientom a váš proxy server
-odstraňuje alebo nanovo vytvára prichádzajúce preposielané hlavičky.
-
-### 3.3 Povolenie a otestovanie
+### 3.3 Enable and Test
 
 ```bash
-# Odstráňte predvolenú konfiguráciu
+# Remove default configuration
 rm -f /etc/nginx/sites-enabled/default
 
-# Povoľte OmniRoute
+# Enable OmniRoute
 ln -sf /etc/nginx/sites-available/omniroute /etc/nginx/sites-enabled/omniroute
 
-# Otestujte a znova načítajte
+# Test and reload
 nginx -t && systemctl reload nginx
 ```
 
 ---
 
-## 4. Konfigurácia DNS v Cloudflare
+## 4. Configure Cloudflare DNS
 
-### 4.1 Pridanie záznamu DNS
+### 4.1 Add DNS record
 
-V ovládacom paneli Cloudflare → DNS:
+In the Cloudflare dashboard → DNS:
 
-| Typ | Názov  | Obsah                  | Proxy        |
-| --- | ------ | ---------------------- | ------------ |
-| A   | `llms` | `203.0.113.10` (IP VM) | ✅ Cez proxy |
+| Type | Name   | Content                | Proxy      |
+| ---- | ------ | ---------------------- | ---------- |
+| A    | `llms` | `203.0.113.10` (VM IP) | ✅ Proxied |
 
-### 4.2 Konfigurácia SSL
+### 4.2 Configure SSL
 
-V časti **SSL/TLS → Prehľad**:
+Under **SSL/TLS → Overview**:
 
-- Režim: **Úplný (prísny)**
+- Mode: **Full (Strict)**
 
-V časti **SSL/TLS → Certifikáty na okraji siete**:
+Under **SSL/TLS → Edge Certificates**:
 
-- Vždy používať HTTPS: ✅ Zapnuté
-- Minimálna verzia TLS: TLS 1.2
-- Automatické prepisovanie na HTTPS: ✅ Zapnuté
+- Always Use HTTPS: ✅ On
+- Minimum TLS Version: TLS 1.2
+- Automatic HTTPS Rewrites: ✅ On
 
-### 4.3 Testovanie
+### 4.3 Testing
 
 ```bash
 curl -sI https://llms.seudominio.com/health
-# Malo by vrátiť HTTP/2 200
+# Should return HTTP/2 200
 ```
 
 ---
 
-## 5. Prevádzka a údržba
+## 5. Operations and Maintenance
 
-### Aktualizácia na novú verziu
+### Upgrade to a new version
 
 ```bash
 docker pull diegosouzapw/omniroute:latest
@@ -309,42 +294,42 @@ docker run -d --name omniroute --restart unless-stopped \
   diegosouzapw/omniroute:latest
 ```
 
-### Zobrazenie protokolov
+### View logs
 
 ```bash
-docker logs -f omniroute          # Prúd v reálnom čase
-docker logs omniroute --tail 50   # Posledných 50 riadkov
+docker logs -f omniroute          # Real-time stream
+docker logs omniroute --tail 50   # Last 50 lines
 ```
 
-### Manuálne zálohovanie databázy
+### Manual database backup
 
 ```bash
-# Skopírujte údaje zo zväzku do hostiteľského systému
+# Copy data from the volume to the host
 docker cp omniroute:/app/data ./backup-$(date +%F)
 
-# Alebo skomprimujte celý zväzok
+# Or compress the entire volume
 docker run --rm -v omniroute-data:/data -v $(pwd):/backup \
   alpine tar czf /backup/omniroute-data-$(date +%F).tar.gz /data
 ```
 
-### Obnovenie zo zálohy
+### Restore from backup
 
 ```bash
 docker stop omniroute
 docker run --rm -v omniroute-data:/data -v $(pwd):/backup \
-  alpine sh -c "rm -rf /data/* && tar xzf /backup/omniroute-data-YYYY-MM-DD.tar.gz -C /"
+  alpine sh -c “rm -rf /data/* && tar xzf /backup/omniroute-data-YYYY-MM-DD.tar.gz -C /”
 docker start omniroute
 ```
 
 ---
 
-## 6. Pokročilé zabezpečenie
+## 6. Advanced Security
 
-### Obmedzenie nginx na IP adresy Cloudflare
+### Restrict nginx to Cloudflare IPs
 
 ```bash
-cat > /etc/nginx/cloudflare-ips.conf << 'CF'
-# Rozsahy IPv4 adries Cloudflare — pravidelne aktualizujte
+cat > /etc/nginx/cloudflare-ips.conf << ‘CF’
+# Cloudflare IPv4 ranges — update periodically
 # https://www.cloudflare.com/ips-v4/
 set_real_ip_from 173.245.48.0/20;
 set_real_ip_from 103.21.244.0/22;
@@ -365,69 +350,58 @@ real_ip_header CF-Connecting-IP;
 CF
 ```
 
-Do súboru `nginx.conf` v rámci bloku `http {}` pridajte nasledujúci riadok:
+Add the following to `nginx.conf` inside the `http {}` block:
 
 ```nginx
 include /etc/nginx/cloudflare-ips.conf;
 ```
 
-### Inštalácia fail2ban
+### Install fail2ban
 
 ```bash
 apt install -y fail2ban
 systemctl enable fail2ban
 systemctl start fail2ban
 
-# Skontrolujte stav
+# Check status
 fail2ban-client status sshd
 ```
 
-### Zablokovanie priameho prístupu k portu Docker
+### Block direct access to the Docker port
 
 ```bash
-# Zabráňte priamemu externému prístupu k portu 20128
+# Prevent direct external access to port 20128
 iptables -I DOCKER-USER -p tcp --dport 20128 -j DROP
 iptables -I DOCKER-USER -i lo -p tcp --dport 20128 -j ACCEPT
 
-# Natrvalo uložte pravidlá
+# Persist the rules
 apt install -y iptables-persistent
 netfilter-persistent save
 ```
 
 ---
 
-## 7. Nasadenie do Cloudflare Workers (voliteľné)
+## 7. Deploy to Cloudflare Workers (Optional)
 
-Pre vzdialený prístup prostredníctvom Cloudflare Workers (bez priameho vystavenia VM):
+For remote access via Cloudflare Workers (without exposing the VM directly):
 
 ```bash
-# V lokálnom repozitári
+# In the local repository
 cd omnirouteCloud
 npm install
 npx wrangler login
 npx wrangler deploy
 ```
 
-Pozrite si tiež [TUNNELS_GUIDE.md](./TUNNELS_GUIDE.md), ktorý obsahuje postup nastavenia Cloudflare Tunnel v repozitári. Samostatný worker `omnirouteCloud/` sa nachádza v oddelenom sprievodnom repozitári.
+See the full documentation at [omnirouteCloud/README.md](../omnirouteCloud/README.md).
 
 ---
 
-## Súhrn portov
+## Port Summary
 
-| Port  | Služba      | Prístup                   |
-| ----- | ----------- | ------------------------- |
-| 22    | SSH         | Verejný (s fail2ban)      |
-| 80    | nginx HTTP  | Presmerovanie → HTTPS     |
-| 443   | nginx HTTPS | Cez proxy Cloudflare      |
-| 20128 | OmniRoute   | Iba localhost (cez nginx) |
-
-## Optimalizácia pre málo pamäte / malý VPS
-
-Pre nasadenia na malých inštanciách VPS (1 GB RAM alebo menej):
-
-- **Zakážte služby na pozadí** — nastavte `OMNIROUTE_DISABLE_BACKGROUND_SERVICES=1`, aby sa vynechal plánovač, server MCP a pravidelné úlohy údržby. Pozrite si `docs/reference/ENVIRONMENT.md`.
-- **Použite režim WAL databázy SQLite** — predvolene je povolený a znižuje špičkovú spotrebu pamäte pri súbežnom čítaní.
-- **Obmedzte haldu V8** — nastavte `OMNIROUTE_MEMORY_MB` (napr. `512`), aby modul runtime nenastavil limit väčší ako virtuálny počítač. Pozrite si `docs/reference/ENVIRONMENT.md`.
-- **Prijímanie náročných požiadaviek sa automaticky škáluje podľa limitu haldy** -- po nastavení hodnoty `OMNIROUTE_MEMORY_MB` uvedenej vyššie sa rozpočet bajtov na príjem (`OMNIROUTE_CHAT_MAX_INFLIGHT_BYTES`) odvodí z rovnakého limitu, takže virtuálny počítač s obmedzenou pamäťou automaticky získa menší rozpočet na súbežné požiadavky bez ďalšieho ladenia; nadbytočné požiadavky namiesto súperenia o pamäť dostanú opakovateľnú odpoveď `503` s hlavičkou `Retry-After`. Starší limit počtu požiadaviek `OMNIROUTE_CHAT_MAX_HEAVY_IN_FLIGHT` nastavte iba vtedy, ak nad rámec toho potrebujete pevný strop.
-- **Nespúšťajte `next build` na VPS** — zostavenie vykonajte lokálne a nasaďte samostatný výstup (`.next/standalone/`).
-- **Monitorujte pomocou `top` / `free -m`** — OmniRoute na virtuálnom počítači s 1 GB RAM v nečinnosti zvyčajne využíva 200 – 400 MB RSS.
+| Port  | Service     | Access                     |
+| ----- | ----------- | -------------------------- |
+| 22    | SSH         | Public (with fail2ban)     |
+| 80    | nginx HTTP  | Redirect → HTTPS           |
+| 443   | nginx HTTPS | Via Cloudflare Proxy       |
+| 20128 | OmniRoute   | Localhost only (via nginx) |

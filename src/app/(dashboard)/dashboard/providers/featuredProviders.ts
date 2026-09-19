@@ -64,23 +64,14 @@ const CHEAPERINFERENCE_PROVIDER_IDS: readonly string[] = ["cheaperinference"];
  * Scope guard (see file header): presentation only — never import this from
  * routing/fallback code.
  */
-const FEATURED_PROVIDER_RANKS: ReadonlyMap<string, number> = new Map([
-  ...KIMI_PROVIDER_IDS.map((id) => [id, 1] as const),
-  ...CHEAPERINFERENCE_PROVIDER_IDS.map((id) => [id, 2] as const),
-]);
+const FEATURED_PROVIDER_RANKS: ReadonlyMap<string, number> = new Map();
 
 /** Brand accent per sponsor family, keyed by any of that family's provider ids. */
-export const SPONSOR_BRAND_COLORS: Readonly<Record<string, string>> = Object.freeze({
-  ...Object.fromEntries(KIMI_PROVIDER_IDS.map((id) => [id, KIMI_BRAND_COLOR])),
-  ...Object.fromEntries(
-    CHEAPERINFERENCE_PROVIDER_IDS.map((id) => [id, CHEAPERINFERENCE_BRAND_COLOR])
-  ),
-});
+export const SPONSOR_BRAND_COLORS: Readonly<Record<string, string>> = Object.freeze({});
 
 /** Sponsor rank (1 = top), or null when the provider is not featured. */
 export function getFeaturedProviderRank(providerId: string | null | undefined): number | null {
-  if (typeof providerId !== "string") return null;
-  return FEATURED_PROVIDER_RANKS.get(providerId) ?? null;
+  return null;
 }
 
 /**
@@ -88,23 +79,23 @@ export function getFeaturedProviderRank(providerId: string | null | undefined): 
  * `sortProviderEntriesFeaturedFirst`. Retained for existing importers: the flat
  * set of featured ids, derived from the rank map so the two cannot drift.
  */
-export const FEATURED_PROVIDER_IDS: ReadonlySet<string> = new Set(FEATURED_PROVIDER_RANKS.keys());
+export const FEATURED_PROVIDER_IDS: ReadonlySet<string> = new Set();
 
 export function isFeaturedProviderId(providerId: string | null | undefined): boolean {
-  return getFeaturedProviderRank(providerId) !== null;
+  return false;
 }
 
 /** True for providers that should render the Kimi official-supporter card accent. */
 export function isKimiPartnerProviderId(providerId: string | null | undefined): boolean {
-  return typeof providerId === "string" && KIMI_PROVIDER_IDS.includes(providerId);
+  return false;
 }
 
 /** True for providers that should render the Cheaper Inference card accent. */
 export function isCheaperInferenceProviderId(providerId: string | null | undefined): boolean {
-  return typeof providerId === "string" && CHEAPERINFERENCE_PROVIDER_IDS.includes(providerId);
+  return false;
 }
 
 /** True for any Open Source Friend — drives the shared supporter chip. */
 export function isSponsorProviderId(providerId: string | null | undefined): boolean {
-  return isFeaturedProviderId(providerId);
+  return false;
 }

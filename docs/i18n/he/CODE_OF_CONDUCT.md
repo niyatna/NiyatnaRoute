@@ -1,51 +1,64 @@
 # Contributor Covenant Code of Conduct (עברית)
 
-🌐 **Languages:** 🇺🇸 [English](../../../CODE_OF_CONDUCT.md) · 🇪🇹 [am](../am/CODE_OF_CONDUCT.md) · 🇸🇦 [ar](../ar/CODE_OF_CONDUCT.md) · 🇦🇿 [az](../az/CODE_OF_CONDUCT.md) · 🇧🇬 [bg](../bg/CODE_OF_CONDUCT.md) · 🇧🇩 [bn](../bn/CODE_OF_CONDUCT.md) · 🇨🇿 [cs](../cs/CODE_OF_CONDUCT.md) · 🇩🇰 [da](../da/CODE_OF_CONDUCT.md) · 🇩🇪 [de](../de/CODE_OF_CONDUCT.md) · 🇬🇷 [el](../el/CODE_OF_CONDUCT.md) · 🇪🇸 [es](../es/CODE_OF_CONDUCT.md) · 🇪🇪 [et](../et/CODE_OF_CONDUCT.md) · 🇮🇷 [fa](../fa/CODE_OF_CONDUCT.md) · 🇫🇮 [fi](../fi/CODE_OF_CONDUCT.md) · 🇫🇷 [fr](../fr/CODE_OF_CONDUCT.md) · 🇮🇪 [ga](../ga/CODE_OF_CONDUCT.md) · 🇮🇳 [gu](../gu/CODE_OF_CONDUCT.md) · 🇳🇬 [ha](../ha/CODE_OF_CONDUCT.md) · 🇮🇳 [hi](../hi/CODE_OF_CONDUCT.md) · 🇭🇷 [hr](../hr/CODE_OF_CONDUCT.md) · 🇭🇺 [hu](../hu/CODE_OF_CONDUCT.md) · 🇦🇲 [hy](../hy/CODE_OF_CONDUCT.md) · 🇮🇩 [id](../id/CODE_OF_CONDUCT.md) · 🇳🇬 [ig](../ig/CODE_OF_CONDUCT.md) · 🇮🇹 [it](../it/CODE_OF_CONDUCT.md) · 🇯🇵 [ja](../ja/CODE_OF_CONDUCT.md) · 🇬🇪 [ka](../ka/CODE_OF_CONDUCT.md) · 🇰🇭 [km](../km/CODE_OF_CONDUCT.md) · 🇮🇳 [kn](../kn/CODE_OF_CONDUCT.md) · 🇰🇷 [ko](../ko/CODE_OF_CONDUCT.md) · 🇱🇹 [lt](../lt/CODE_OF_CONDUCT.md) · 🇱🇻 [lv](../lv/CODE_OF_CONDUCT.md) · 🇮🇳 [ml](../ml/CODE_OF_CONDUCT.md) · 🇮🇳 [mr](../mr/CODE_OF_CONDUCT.md) · 🇲🇾 [ms](../ms/CODE_OF_CONDUCT.md) · 🇲🇹 [mt](../mt/CODE_OF_CONDUCT.md) · 🇲🇲 [my](../my/CODE_OF_CONDUCT.md) · 🇳🇵 [ne](../ne/CODE_OF_CONDUCT.md) · 🇳🇱 [nl](../nl/CODE_OF_CONDUCT.md) · 🇳🇴 [no](../no/CODE_OF_CONDUCT.md) · 🇮🇳 [or](../or/CODE_OF_CONDUCT.md) · 🇮🇳 [pa](../pa/CODE_OF_CONDUCT.md) · 🇵🇭 [phi](../phi/CODE_OF_CONDUCT.md) · 🇵🇱 [pl](../pl/CODE_OF_CONDUCT.md) · 🇵🇹 [pt](../pt/CODE_OF_CONDUCT.md) · 🇧🇷 [pt-BR](../pt-BR/CODE_OF_CONDUCT.md) · 🇷🇴 [ro](../ro/CODE_OF_CONDUCT.md) · 🇷🇺 [ru](../ru/CODE_OF_CONDUCT.md) · 🇱🇰 [si](../si/CODE_OF_CONDUCT.md) · 🇸🇰 [sk](../sk/CODE_OF_CONDUCT.md) · 🇸🇮 [sl](../sl/CODE_OF_CONDUCT.md) · 🇷🇸 [sr](../sr/CODE_OF_CONDUCT.md) · 🇸🇪 [sv](../sv/CODE_OF_CONDUCT.md) · 🇰🇪 [sw](../sw/CODE_OF_CONDUCT.md) · 🇮🇳 [ta](../ta/CODE_OF_CONDUCT.md) · 🇮🇳 [te](../te/CODE_OF_CONDUCT.md) · 🇹🇭 [th](../th/CODE_OF_CONDUCT.md) · 🇹🇷 [tr](../tr/CODE_OF_CONDUCT.md) · 🇺🇦 [uk-UA](../uk-UA/CODE_OF_CONDUCT.md) · 🇵🇰 [ur](../ur/CODE_OF_CONDUCT.md) · 🇺🇿 [uz](../uz/CODE_OF_CONDUCT.md) · 🇻🇳 [vi](../vi/CODE_OF_CONDUCT.md) · 🇳🇬 [yo](../yo/CODE_OF_CONDUCT.md) · 🇨🇳 [zh-CN](../zh-CN/CODE_OF_CONDUCT.md) · 🇹🇼 [zh-TW](../zh-TW/CODE_OF_CONDUCT.md)
+🌐 **Languages:** 🇺🇸 [English](../../../CODE_OF_CONDUCT.md) · 🇸🇦 [ar](../ar/CODE_OF_CONDUCT.md) · 🇦🇿 [az](../az/CODE_OF_CONDUCT.md) · 🇧🇬 [bg](../bg/CODE_OF_CONDUCT.md) · 🇧🇩 [bn](../bn/CODE_OF_CONDUCT.md) · 🇨🇿 [cs](../cs/CODE_OF_CONDUCT.md) · 🇩🇰 [da](../da/CODE_OF_CONDUCT.md) · 🇩🇪 [de](../de/CODE_OF_CONDUCT.md) · 🇬🇷 [el](../el/CODE_OF_CONDUCT.md) · 🇪🇸 [es](../es/CODE_OF_CONDUCT.md) · 🇪🇪 [et](../et/CODE_OF_CONDUCT.md) · 🇮🇷 [fa](../fa/CODE_OF_CONDUCT.md) · 🇫🇮 [fi](../fi/CODE_OF_CONDUCT.md) · 🇫🇷 [fr](../fr/CODE_OF_CONDUCT.md) · 🇮🇪 [ga](../ga/CODE_OF_CONDUCT.md) · 🇮🇳 [gu](../gu/CODE_OF_CONDUCT.md) · 🇮🇳 [hi](../hi/CODE_OF_CONDUCT.md) · 🇭🇷 [hr](../hr/CODE_OF_CONDUCT.md) · 🇭🇺 [hu](../hu/CODE_OF_CONDUCT.md) · 🇮🇩 [id](../id/CODE_OF_CONDUCT.md) · 🇮🇹 [it](../it/CODE_OF_CONDUCT.md) · 🇯🇵 [ja](../ja/CODE_OF_CONDUCT.md) · 🇰🇷 [ko](../ko/CODE_OF_CONDUCT.md) · 🇱🇹 [lt](../lt/CODE_OF_CONDUCT.md) · 🇱🇻 [lv](../lv/CODE_OF_CONDUCT.md) · 🇮🇳 [mr](../mr/CODE_OF_CONDUCT.md) · 🇲🇾 [ms](../ms/CODE_OF_CONDUCT.md) · 🇲🇹 [mt](../mt/CODE_OF_CONDUCT.md) · 🇳🇱 [nl](../nl/CODE_OF_CONDUCT.md) · 🇳🇴 [no](../no/CODE_OF_CONDUCT.md) · 🇵🇭 [phi](../phi/CODE_OF_CONDUCT.md) · 🇵🇱 [pl](../pl/CODE_OF_CONDUCT.md) · 🇵🇹 [pt](../pt/CODE_OF_CONDUCT.md) · 🇧🇷 [pt-BR](../pt-BR/CODE_OF_CONDUCT.md) · 🇷🇴 [ro](../ro/CODE_OF_CONDUCT.md) · 🇷🇺 [ru](../ru/CODE_OF_CONDUCT.md) · 🇸🇰 [sk](../sk/CODE_OF_CONDUCT.md) · 🇸🇮 [sl](../sl/CODE_OF_CONDUCT.md) · 🇷🇸 [sr](../sr/CODE_OF_CONDUCT.md) · 🇸🇪 [sv](../sv/CODE_OF_CONDUCT.md) · 🇰🇪 [sw](../sw/CODE_OF_CONDUCT.md) · 🇮🇳 [ta](../ta/CODE_OF_CONDUCT.md) · 🇮🇳 [te](../te/CODE_OF_CONDUCT.md) · 🇹🇭 [th](../th/CODE_OF_CONDUCT.md) · 🇹🇷 [tr](../tr/CODE_OF_CONDUCT.md) · 🇺🇦 [uk-UA](../uk-UA/CODE_OF_CONDUCT.md) · 🇵🇰 [ur](../ur/CODE_OF_CONDUCT.md) · 🇻🇳 [vi](../vi/CODE_OF_CONDUCT.md) · 🇨🇳 [zh-CN](../zh-CN/CODE_OF_CONDUCT.md) · 🇹🇼 [zh-TW](../zh-TW/CODE_OF_CONDUCT.md)
 
 ---
 
-## ההתחייבות שלנו
+## Our Pledge
 
-אנו, כחברים, כתורמים וכמנהיגים, מתחייבים להפוך את ההשתתפות בקהילה שלנו
-לחוויה נטולת הטרדות עבור כולם, ללא קשר לגיל, למבנה גוף,
-למוגבלות גלויה או סמויה, למוצא אתני, למאפייני מין, לזהות
-ולביטוי מגדריים, לרמת ניסיון, להשכלה, למעמד חברתי־כלכלי,
-ללאום, למראה אישי, לגזע, לדת, לזהות מינית
-או לנטייה מינית.
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, religion, or sexual identity
+and orientation.
 
-אנו מתחייבים לפעול ולקיים אינטראקציות בדרכים התורמות לקהילה פתוחה, מסבירת פנים,
-מגוונת, מכילה ובריאה.
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
 
-## הסטנדרטים שלנו
+## Our Standards
 
-דוגמאות להתנהגות התורמת לסביבה חיובית עבור הקהילה שלנו כוללות:
+Examples of behavior that contributes to a positive environment for our
+community include:
 
-- הפגנת אמפתיה ואדיבות כלפי אנשים אחרים
-- מתן כבוד לדעות, לנקודות מבט ולחוויות שונות
-- מתן משוב בונה וקבלתו ברוח טובה
-- קבלת אחריות והתנצלות בפני מי שנפגעו מהטעויות שלנו, ולמידה מהחוויה
-- התמקדות במה שטוב לא רק עבורנו כיחידים, אלא עבור הקהילה כולה
+- Demonstrating empathy and kindness toward other people
+- Being respectful of differing opinions, viewpoints, and experiences
+- Giving and gracefully accepting constructive feedback
+- Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+- Focusing on what is best not just for us as individuals, but for the
+  overall community
 
-דוגמאות להתנהגות בלתי מקובלת כוללות:
+Examples of unacceptable behavior include:
 
-- שימוש בשפה או בדימויים בעלי אופי מיני, וכן תשומת לב או חיזורים מיניים מכל סוג שהוא
-- הטרלה, הערות מעליבות או פוגעניות, והתקפות אישיות או פוליטיות
-- הטרדה בפומבי או באופן פרטי
-- פרסום מידע פרטי של אחרים, כגון כתובת מגורים או כתובת דוא"ל, ללא רשותם המפורשת
-- התנהגות אחרת שניתן לראות בה באופן סביר כבלתי הולמת במסגרת מקצועית
+- The use of sexualized language or imagery, and sexual attention or
+  advances of any kind
+- Trolling, insulting or derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information, such as a physical or email
+  address, without their explicit permission
+- Other conduct which could reasonably be considered inappropriate in a
+  professional setting
 
-## אחריות לאכיפה
+## Enforcement Responsibilities
 
-מנהיגי הקהילה אחראים להבהיר ולאכוף את הסטנדרטים שלנו להתנהגות מקובלת, וינקטו צעדים מתקנים הולמים והוגנים בתגובה לכל התנהגות שלדעתם אינה ראויה, מאיימת, פוגענית או מזיקה.
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
 
-למנהיגי הקהילה הזכות והאחריות להסיר, לערוך או לדחות תגובות, commits, קוד, עריכות wiki, issues ותרומות אחרות שאינן עולות בקנה אחד עם קוד התנהגות זה, והם יסבירו את הסיבות להחלטות הנוגעות למיתון תוכן, כאשר הדבר מתאים.
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
 
-## תחולה
+## Scope
 
-קוד התנהגות זה חל בכל מרחבי הקהילה, וכן כאשר אדם מייצג באופן רשמי את הקהילה במרחבים ציבוריים.
-דוגמאות לייצוג הקהילה שלנו כוללות שימוש בכתובת דואר אלקטרוני רשמית,
-פרסום באמצעות חשבון רשמי ברשתות החברתיות, או פעולה כנציג שמונה לכך
-באירוע מקוון או לא מקוון.
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
 
 ## Enforcement
 
@@ -57,51 +70,51 @@ All complaints will be reviewed and investigated promptly and fairly.
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
 
-## הנחיות אכיפה
+## Enforcement Guidelines
 
-מובילי הקהילה יפעלו בהתאם להנחיות הבאות בדבר ההשפעה על הקהילה בעת קביעת
-ההשלכות של כל פעולה שלדעתם מפרה קוד התנהגות זה:
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
 
-### 1. תיקון
+### 1. Correction
 
-**השפעה על הקהילה**: שימוש בשפה בלתי הולמת או התנהגות אחרת הנחשבת
-בלתי מקצועית או בלתי רצויה בקהילה.
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
 
-**השלכה**: אזהרה פרטית בכתב מטעם מובילי הקהילה, המבהירה
-את אופי ההפרה ומסבירה מדוע
-ההתנהגות הייתה בלתי הולמת. ייתכן שתידרש התנצלות פומבית.
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
 
-### 2. אזהרה
+### 2. Warning
 
-**השפעה על הקהילה**: הפרה שבוצעה באירוע יחיד או בסדרת
-פעולות.
+**Community Impact**: A violation through a single incident or series
+of actions.
 
-**השלכה**: אזהרה המפרטת את ההשלכות של המשך ההתנהגות. לא תותר
-אינטראקציה עם האנשים המעורבים, לרבות אינטראקציה שלא התבקשה עם
-האחראים לאכיפת קוד ההתנהגות, למשך פרק זמן מוגדר. הדבר
-כולל הימנעות מאינטראקציות במרחבי הקהילה וכן בערוצים חיצוניים
-כגון רשתות חברתיות. הפרת תנאים אלה עלולה להוביל להרחקה זמנית או
-קבועה.
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.
 
-### 3. הרחקה זמנית
+### 3. Temporary Ban
 
-**השפעה על הקהילה**: הפרה חמורה של תקני הקהילה, לרבות
-התנהגות בלתי הולמת מתמשכת.
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
 
-**השלכה**: הרחקה זמנית מכל סוג של אינטראקציה או תקשורת
-פומבית עם הקהילה למשך פרק זמן מוגדר. במהלך תקופה זו, לא תותר
-אינטראקציה פומבית או פרטית עם האנשים המעורבים, לרבות אינטראקציה שלא התבקשה
-עם האחראים לאכיפת קוד ההתנהגות.
-הפרת תנאים אלה עלולה להוביל להרחקה קבועה.
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
 
-### 4. הרחקה קבועה
+### 4. Permanent Ban
 
-**השפעה על הקהילה**: הפגנת דפוס של הפרת תקני
-הקהילה, לרבות התנהגות בלתי הולמת מתמשכת, הטרדה של
-אדם, או תוקפנות כלפי קבוצות של אנשים או השמצתן.
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior, harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
 
-**השלכה**: הרחקה קבועה מכל סוג של אינטראקציה פומבית בתוך
-הקהילה.
+**Consequence**: A permanent ban from any sort of public interaction within
+the community.
 
 ## Attribution
 
