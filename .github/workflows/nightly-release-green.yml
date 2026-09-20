@@ -36,6 +36,7 @@ on:
       - "tsconfig*.json"
       - "README.md"
       - "docs/**"
+      - ".github/**"
   schedule:
     - cron: "23 5 * * *" # full sweep — off-peak, distinct from other nightlies
     - cron: "23 12 * * *" # full sweep — midday (WS5.1: 3×/day instead of 1×)
