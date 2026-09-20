@@ -11,7 +11,6 @@
 import { fetch as undiciFetch } from "undici";
 import { createProxyDispatcher, normalizeProxyUrl } from "./proxyDispatcher.ts";
 import { resolveProxyForScopeFromRegistry, listProxies } from "@/lib/db/proxies";
-import { listOneproxyProxies } from "@/lib/db/oneproxy";
 import { decodeUserinfo } from "@/shared/utils/decodeUserinfo";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 
@@ -188,17 +187,6 @@ export async function getProxyCandidates(targetUrl?: string): Promise<string[]> 
     // Table may not exist yet
   }
 
-  // 3. Top 5 1proxy marketplace proxies
-  try {
-    const oneproxyProxies = await listOneproxyProxies({ limit: 5 });
-    for (const p of oneproxyProxies) {
-      if (p.host && p.port) {
-        candidates.add(proxyRecordToUrl(p as unknown as ProxyShape));
-      }
-    }
-  } catch {
-    // Table may not exist yet
-  }
 
   // 4. Environment proxy (needs targetUrl to determine protocol)
   if (targetUrl) {
