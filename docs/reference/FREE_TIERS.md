@@ -21,7 +21,7 @@ lastUpdated: 2026-09-03
 | **+ behind a regional identity check**      | **+~6M**          | `modelscope` (Alibaba Cloud binding + mainland-China real-name verification). Real recurring quota, exposed as `gatedRecurringTokens` / `gatedProviders` and on the dashboard. Never summed into the headline: +~6M behind regional identity verification.                       |
 | Theoretical ceiling (all rate limits, 24/7) | ~10B              | Sum of every provider rate limit extrapolated to non-stop use. **Not a guarantee** — do not headline this.                                                                                                                                                                       |
 
-**Honest headline:** _OmniRoute aggregates **~1.47B documented free tokens per month** (up to ~2.10B in your first month with signup credits) across 34 free-tier pools — plus a long tail of permanently-free, no-cap providers — and RTK + Caveman compression (15–95% token savings) stretches that further._
+**Honest headline:** _OmniRoute aggregates **~1.62B documented free tokens per month** (up to ~2.22B in your first month with signup credits) across 35 free-tier pools — plus a long tail of permanently-free, no-cap providers — and RTK + Caveman compression (15–95% token savings) stretches that further._
 
 > **Why this dropped from the previous ~1.94B.** The 2026-06-17 refresh is an honesty correction, not a loss: `gemini` is now pool-deduped (was inflated by counting each Flash variant separately, 462M → 60M), `cloudflare-ai` corrected to its real 10k-Neurons/day (122M → 30M), `doubao` reclassified as a one-time signup credit (not recurring), and shut-down tiers removed (`chutes`/`phind`/`kluster` discontinued). Partly offset by `llm7` (correct 5M/day → 150M) and new free providers (Kilo, OpenCode Zen, Z.AI GLM-Flash).
 >
@@ -87,7 +87,7 @@ purpose.
 
 Most "free tokens per month" figures in this space are sums of per-model labels. Ours is not, on purpose:
 
-- **Each shared pool is counted once.** Mistral's free plan is one 1B/month allowance per organization; listing it under five models does not make it 5B. Summed per model, our own catalog would read **~7.4B** (recomputed on 2026-09-03; this figure is not CI-gated — re-measure it whenever the catalog changes) — the headline says **~1.47B** because that is what one account of each provider can actually spend.
+- **Each shared pool is counted once.** Mistral's free plan is one 1B/month allowance per organization; listing it under five models does not make it 5B. Summed per model, our own catalog would read **~7.4B** (recomputed on 2026-09-03; this figure is not CI-gated — re-measure it whenever the catalog changes) — the headline says **~1.62B** because that is what one account of each provider can actually spend.
 - **Daily caps are converted, rates are not.** A documented tokens/day cap becomes `× 30`; a documented requests/day cap becomes `RPD × ~800 tokens × 30`; a provider that only publishes requests-per-minute has **no** monthly figure and is listed as _uncapped_, never summed. Multiplying a rate limit by 24/7 is the inflation we refuse.
 - **Quotas behind a regional identity check are shown apart** (`+~6M behind regional identity verification`), because most readers cannot use them.
 - **Signup credits are first-month only** and reported as a second figure, never blended into the steady number.

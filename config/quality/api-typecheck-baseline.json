@@ -198,9 +198,6 @@
   "src/app/api/settings/models-dev/route.ts": {
     "TS2339": 1
   },
-  "src/app/api/settings/obsidian/webdav/route.ts": {
-    "TS2339": 1
-  },
   "src/app/api/settings/proxies/bulk-import/route.ts": {
     "TS2345": 1
   },
@@ -256,17 +253,8 @@
   "src/app/api/usage/combo-health-autopilot/route.ts": {
     "TS2769": 2
   },
-  "src/app/api/v1/batches/route.ts": {
-    "TS2339": 1
-  },
   "src/app/api/v1/classify/route.ts": {
     "TS2322": 1
-  },
-  "src/app/api/v1/files/[id]/content/route.ts": {
-    "TS2345": 1
-  },
-  "src/app/api/v1/files/route.ts": {
-    "TS2339": 1
   },
   "src/app/api/v1/images/edits/route.ts": {
     "TS2339": 18,
@@ -315,15 +303,6 @@
   "src/app/api/v1beta/models/route.ts": {
     "TS2345": 1,
     "TS2538": 1
-  },
-  "src/app/api/version-manager/restart/route.ts": {
-    "TS2339": 1
-  },
-  "src/app/api/version-manager/start/route.ts": {
-    "TS2339": 1
-  },
-  "src/app/api/version-manager/stop/route.ts": {
-    "TS2339": 1
   },
   "src/app/api/webhooks/[id]/route.ts": {
     "TS2554": 1
