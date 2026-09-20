@@ -150,7 +150,7 @@ export async function getCodeBuddyIntlUsage(
       return { message: `CodeBuddy Intl quota API error (${response.status}).` };
     }
 
-    const json = (await response.json()) as Record<string, unknown>;
+    const json = (await response.json()) as { code?: number; msg?: string; data?: { Response?: { Data?: { Accounts?: TencentAccount[] } } } };
     if (json?.code !== 0) {
       return { message: `CodeBuddy Intl quota error: ${json?.msg || "unknown"}` };
     }

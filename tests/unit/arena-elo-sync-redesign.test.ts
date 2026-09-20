@@ -41,7 +41,6 @@ const { syncArenaElo, stopArenaEloSync } =
   await import("../../src/lib/arenaEloSync.ts");
 import type {
   ArenaLeaderboardData,
-  ArenaLeaderboardMap,
   ArenaModelEntry,
 } from "../../src/lib/arenaEloSync.ts";
 
