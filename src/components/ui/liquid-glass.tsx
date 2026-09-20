@@ -120,6 +120,7 @@ export const GlassDock: React.FC<{
               onClick={icon.onClick}
             >
               {icon.src ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={icon.src}
                   alt={icon.alt}

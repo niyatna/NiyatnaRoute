@@ -297,14 +297,10 @@ import {
   writeCompressionAnalytics,
   writeCompressionSkip,
 } from "./chatCore/compressionAnalyticsWrite.ts";
-const runPluginOnRequestHook = async (_args?: any): Promise<{ blocked: boolean; response?: unknown; body?: unknown }> => ({ blocked: false });
-const emitRequestGamificationEvent = async (_args?: any) => {};
-const runPluginOnResponseHook = async (_args?: any) => {};
-const runPluginOnStreamCompleteHook = (_args?: any) => {};
-const recordContextEditingTelemetryHook = (_args?: any) => {};
-const recordCompressionCacheStats = (_args?: any) => {};
-const writeCavemanOutputAnalytics = (_args?: any): Promise<void> => Promise.resolve();
-const scheduleQuotaShareConsumption = (_args?: any) => {};
+import { recordContextEditingTelemetryHook } from "./chatCore/contextEditingTelemetry.ts";
+import { recordCompressionCacheStats } from "./chatCore/compressionCacheStats.ts";
+import { writeCavemanOutputAnalytics } from "./chatCore/cavemanOutputAnalytics.ts";
+import { scheduleQuotaShareConsumption } from "./chatCore/quotaShareConsumption.ts";
 import { scheduleStreamingQuotaShareConsumption } from "./chatCore/streamingQuotaShare.ts";
 import { recordStreamingUsageStats } from "./chatCore/streamingUsageStats.ts";
 import { recordStreamingCost } from "./chatCore/streamingCost.ts";
@@ -617,34 +613,6 @@ export async function handleChatCore({
       body = injectCustomSystemPrompt(body as Record<string, unknown>, _s.customSystemPrompt);
       log?.debug?.("CUSTOMSP", "custom system prompt injected");
     }
-  }
-  // ── Plugin onRequest hook ──
-  // Dynamic import cached by Node.js after first call — minimal overhead
-  const pluginGate = await runPluginOnRequestHook({
-    requestId: traceId,
-    body,
-    model,
-    provider,
-    apiKeyInfo,
-    headers: clientRawRequest?.headers,
-    log,
-  });
-  if (pluginGate.blocked === true) {
-    return {
-      success: false,
-      status: 403,
-      // Label the source: this 403 is our own policy decision, not the provider
-      // rejecting us. Unlabelled, it is indistinguishable from a real upstream 403
-      // and gets the connection banned. Matches the type already sent to the client
-      // in pluginOnRequest.ts.
-      errorType: "plugin_block",
-      errorCode: "plugin_block",
-      error: "Request blocked by plugin",
-      response: pluginGate.response,
-    };
-  }
-  if (pluginGate.body) {
-    body = pluginGate.body as Record<string, unknown>;
   }
   // Per-API-key device/connection tracking (port of upstream 9router#931,
   // thanks @mugnimaestra). In-memory only, never blocks the request path.
@@ -5609,9 +5577,6 @@ export async function handleChatCore({
       });
       // === /Quota Share POST-hook ===
 
-      // ── Gamification event (fire-and-forget) ──
-      await emitRequestGamificationEvent({ apiKeyId: apiKeyInfo?.id, model, provider });
-
       finalizePendingScope(pendingScope, {
         providerResponse: responseBody,
         clientResponse: translatedResponse,
@@ -5636,20 +5601,6 @@ export async function handleChatCore({
       if (typeof model === "string" && model) echoModelInObject(translatedResponse, model);
       // #1311: echo the requested alias/combo name in the non-streaming response model.
       if (echoModel) echoModelInObject(translatedResponse, echoModel);
-
-      // ── Plugin onResponse hook (fire-and-forget) ──
-      // #8395: the streaming branch below already calls this; the non-streaming
-      // (stream:false) branch returned without it, so onResponse never fired for
-      // non-streaming requests at all.
-      await runPluginOnResponseHook({
-        requestId: traceId,
-        body,
-        model,
-        provider,
-        apiKeyInfo,
-        headers: clientRawRequest?.headers,
-        response: { status: 200, data: translatedResponse },
-      });
 
       // Routing event (feedback foundation) — fire-and-forget, cheap.
       void emitRoutingEvent(
@@ -6076,19 +6027,6 @@ export async function handleChatCore({
       log,
     });
 
-    // Plugin onStreamComplete hook — fire-and-forget, fail-open (#9571)
-    // Pass traceId as requestId so plugins can correlate the stream-completion event
-    // with the originating request (the same id used for onRequest/onResponse). (#11825)
-    runPluginOnStreamCompleteHook({
-      status: normalizedStreamStatus,
-      usage: streamUsage as Record<string, unknown> | undefined,
-      ttft,
-      model,
-      provider,
-      errorCode: streamErrorCode,
-      startTime,
-      requestId: traceId,
-    });
   };
 
   const streamFailureFinalizers = streamFailure.createStreamFailureFinalizers({
@@ -6229,19 +6167,6 @@ export async function handleChatCore({
       releaseTurnExecution
     );
 
-    // ── Gamification event (fire-and-forget) ──
-  await emitRequestGamificationEvent({ apiKeyId: apiKeyInfo?.id, model, provider });
-
-  // ── Plugin onResponse hook (fire-and-forget) ──
-  await runPluginOnResponseHook({
-    requestId: traceId,
-    body,
-    model,
-    provider,
-    apiKeyInfo,
-    headers: clientRawRequest?.headers,
-    response: { status: 200, streamed: true },
-  });
 
     const response = new Response(clientFacingStream, {
       headers: responseHeaders,

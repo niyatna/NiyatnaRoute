@@ -41,36 +41,12 @@ export const CHEAPERINFERENCE_BRAND_COLOR = "#31f889";
  *  - "kimi-web"           Kimi Web — web-cookie category (visible card)
  *  - "moonshot"           Moonshot AI — apikey category (visible card)
  */
-const KIMI_PROVIDER_IDS: readonly string[] = [
-  "kimi",
-  "kimi-coding",
-  "kimi-coding-apikey",
-  "kimi-web",
-  "moonshot",
-];
-
-/** Cheaper Inference (api.cheaperinference.com) — apikey category, single id. */
-const CHEAPERINFERENCE_PROVIDER_IDS: readonly string[] = ["cheaperinference"];
-
-/**
- * Explicit sponsor ordering for the dashboard provider grids.
- *
- * A plain Set is NOT enough: `sortProviderEntriesFeaturedFirst` pins featured
- * entries while preserving alphabetical order among them, and "Cheaper Inference"
- * sorts before "Kimi". The operator requires Kimi 1st and Cheaper Inference 2nd
- * (2026-07-31), so rank is stated here rather than derived from the display name.
- * Lower number = higher on the page; equal ranks fall back to alphabetical.
- *
- * Scope guard (see file header): presentation only — never import this from
- * routing/fallback code.
- */
-const FEATURED_PROVIDER_RANKS: ReadonlyMap<string, number> = new Map();
 
 /** Brand accent per sponsor family, keyed by any of that family's provider ids. */
 export const SPONSOR_BRAND_COLORS: Readonly<Record<string, string>> = Object.freeze({});
 
 /** Sponsor rank (1 = top), or null when the provider is not featured. */
-export function getFeaturedProviderRank(providerId: string | null | undefined): number | null {
+export function getFeaturedProviderRank(_providerId: string | null | undefined): number | null {
   return null;
 }
 
@@ -81,21 +57,21 @@ export function getFeaturedProviderRank(providerId: string | null | undefined): 
  */
 export const FEATURED_PROVIDER_IDS: ReadonlySet<string> = new Set();
 
-export function isFeaturedProviderId(providerId: string | null | undefined): boolean {
+export function isFeaturedProviderId(_providerId: string | null | undefined): boolean {
   return false;
 }
 
 /** True for providers that should render the Kimi official-supporter card accent. */
-export function isKimiPartnerProviderId(providerId: string | null | undefined): boolean {
+export function isKimiPartnerProviderId(_providerId: string | null | undefined): boolean {
   return false;
 }
 
 /** True for providers that should render the Cheaper Inference card accent. */
-export function isCheaperInferenceProviderId(providerId: string | null | undefined): boolean {
+export function isCheaperInferenceProviderId(_providerId: string | null | undefined): boolean {
   return false;
 }
 
 /** True for any Open Source Friend — drives the shared supporter chip. */
-export function isSponsorProviderId(providerId: string | null | undefined): boolean {
+export function isSponsorProviderId(_providerId: string | null | undefined): boolean {
   return false;
 }

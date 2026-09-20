@@ -60,7 +60,6 @@ import type {
 } from "./combo/types.ts";
 
 import { validateResponseQuality } from "./combo/validateQuality.ts";
-const dispatchChaosFromCombo = (_args?: any) => null;
 import {
   MAX_GLOBAL_ATTEMPTS,
   MAX_GLOBAL_ATTEMPTS_HARD_CAP,
@@ -736,23 +735,6 @@ async function handleComboChatInner({
   });
   if (fusionDispatch) return fusionDispatch;
 
-  // Chaos mode (parallel multi-model dispatch): detection + dispatch live in
-  // chaosEngine.ts (dispatchChaosFromCombo), returning null when not chaos-enabled.
-  const chaosDispatch = dispatchChaosFromCombo({
-    cfg,
-    comboModels: resolveComboTargets(
-      combo,
-      allCombos,
-      clampComboDepth(config.maxComboDepth),
-      hiddenModelsByProvider
-    ).map((target) => target.modelStr),
-    comboName: combo.name,
-    body,
-    handleSingleModel: handleSingleModelWithTimeout,
-    log,
-    perTargetAdmission,
-  });
-  if (chaosDispatch) return chaosDispatch;
 
   const pipelineDispatch = await tryPipelineDispatch({
     body,

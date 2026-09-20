@@ -46,7 +46,7 @@ Repository map and Reference Documentation sections below.
 
 ## Project at a Glance
 
-**OmniRoute** — unified AI proxy/router. One endpoint, 356 LLM providers, auto-fallback.
+**OmniRoute** — unified AI proxy/router. One endpoint, 360 LLM providers, auto-fallback.
 
 | Layer         | Location                | Purpose                                                                                                                                                                   |
 | ------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -58,10 +58,9 @@ Repository map and Reference Documentation sections below.
 | Services      | `open-sse/services/`    | Combo routing, rate limits, caching, etc                                                                                                                                  |
 | Database      | `src/lib/db/`           | SQLite domain modules (178 migrations)                                                                                                                                    |
 | Domain/Policy | `src/domain/`           | Policy engine, cost rules, fallback logic                                                                                                                                 |
-| MCP Server    | `open-sse/mcp-server/`  | 110 tools (45 canonical + memory/skill/GitHub/pool/gamification/plugin/Notion/Obsidian/local-corpus/RTK modules), 3 transports (stdio / SSE / Streamable HTTP), 33 scopes |
+| MCP Server    | `open-sse/mcp-server/`  | 63 tools (45 canonical + memory/skill/GitHub/pool/gamification/plugin/Notion/Obsidian/local-corpus/RTK modules), 3 transports (stdio / SSE / Streamable HTTP), 23 scopes |
 | A2A Server    | `src/lib/a2a/`          | JSON-RPC 2.0 agent protocol                                                                                                                                               |
 | Skills        | `src/lib/skills/`       | Extensible skill framework                                                                                                                                                |
-| Memory        | `src/lib/memory/`       | Persistent conversational memory                                                                                                                                          |
 
 Monorepo: `src/` (Next.js 16 app), `open-sse/` (streaming engine workspace), `electron/` (desktop app), `tests/`, `bin/` (CLI entry point).
 

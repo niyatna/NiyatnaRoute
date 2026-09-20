@@ -53,7 +53,7 @@ export const codebuddyIntl = {
 
     if (!response.ok) {
       const err = await response.text();
-      throw new Error(`CodeBuddy Intl state request failed (${response.status})`);
+      throw new Error(`CodeBuddy Intl state request failed (${response.status}): ${err}`);
     }
 
     const json = (await response.json()) as { code?: number; data?: any; msg?: string };

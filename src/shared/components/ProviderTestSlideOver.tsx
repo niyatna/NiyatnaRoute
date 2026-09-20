@@ -55,8 +55,7 @@ function ProviderTestSlideOverPanel({
   const [tab, setTab] = useState<TabKey>(initialTab);
   const [model, setModel] = useState<string>("");
   const [selectedKey, setSelectedKey] = useState<string>("");
-  const [controls, setControls] = useState<LlmChatControls | null>(null);
-  const onControlsChange = useCallback((c: LlmChatControls) => setControls(c), []);
+  const [_controls, _setControls] = useState<LlmChatControls | null>(null);
 
   const { keys } = useApiKey();
   const { models } = useProviderModels(providerId);
