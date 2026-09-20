@@ -303,7 +303,7 @@ const runPluginOnResponseHook = async (_args?: any) => {};
 const runPluginOnStreamCompleteHook = (_args?: any) => {};
 const recordContextEditingTelemetryHook = (_args?: any) => {};
 const recordCompressionCacheStats = (_args?: any) => {};
-const writeCavemanOutputAnalytics = (_args?: any) => {};
+const writeCavemanOutputAnalytics = (_args?: any): Promise<void> => Promise.resolve();
 const scheduleQuotaShareConsumption = (_args?: any) => {};
 import { scheduleStreamingQuotaShareConsumption } from "./chatCore/streamingQuotaShare.ts";
 import { recordStreamingUsageStats } from "./chatCore/streamingUsageStats.ts";
