@@ -150,7 +150,7 @@ export async function getCodeBuddyIntlUsage(
       return { message: `CodeBuddy Intl quota API error (${response.status}).` };
     }
 
-    const json: any = await response.json();
+    const json = (await response.json()) as Record<string, unknown>;
     if (json?.code !== 0) {
       return { message: `CodeBuddy Intl quota error: ${json?.msg || "unknown"}` };
     }
@@ -199,7 +199,7 @@ export async function getCodeBuddyIntlUsage(
     const plan = basePkg.PackageName || basePkg.SubProductName || "CodeBuddy Intl";
 
     return { plan, quotas };
-  } catch (error) {
+  } catch {
     return { message: "CodeBuddy Intl error: failed to fetch quota." };
   }
 }

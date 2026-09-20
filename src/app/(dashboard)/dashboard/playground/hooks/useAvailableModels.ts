@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 export function useAvailableModels(_modelFilterKey: string) {
   return {

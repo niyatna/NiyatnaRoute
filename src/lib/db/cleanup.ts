@@ -26,7 +26,6 @@ import {
   type DeleteByPeriodTarget,
 } from "./cleanup/usagePurge";
 import { ensureCompressionRunTelemetryTable } from "./compressionRunTelemetry";
-import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 
 interface CleanupResult {
   deleted: number;
@@ -451,14 +450,6 @@ export async function cleanupCcrBlocks(): Promise<CleanupResult> {
   return result;
 }
 
-const BATCH_RETENTION_DAYS_DEFAULT = 30; // matches OpenAI's own Batch API output retention window
-
-function getBatchRetentionDays(): number {
-  const raw = process.env.OMNIROUTE_BATCH_RETENTION_DAYS;
-  if (!raw) return BATCH_RETENTION_DAYS_DEFAULT;
-  const parsed = Number.parseInt(raw, 10);
-  return Number.isInteger(parsed) && parsed >= 0 ? parsed : BATCH_RETENTION_DAYS_DEFAULT;
-}
 
 /**
  * Clean up terminal batches (completed/failed/cancelled/expired) older than the

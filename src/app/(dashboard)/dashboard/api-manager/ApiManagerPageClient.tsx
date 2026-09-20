@@ -13,7 +13,6 @@ import {
   isExpired,
   isRestricted as isKeyRestricted,
   buildModelAccessSavePayload,
-  classifyKeyStatus,
   computeApiKeyCounts,
   formatProviderModelPermissionSummary,
   formatUsdCost,
@@ -1861,7 +1860,7 @@ const PermissionsModal = memo(function PermissionsModal({
   const [usageCommandEnabled, setUsageCommandEnabled] = useState(
     apiKey?.allowUsageCommand === true
   );
-  const [chaosModeEnabled, setChaosModeEnabled] = useState(apiKey?.chaosModeEnabled === true);
+  const [chaosModeEnabled] = useState(apiKey?.chaosModeEnabled === true);
   const [usageLimitEnabled, setUsageLimitEnabled] = useState(apiKey?.usageLimitEnabled === true);
   const [dailyUsageLimitUsd, setDailyUsageLimitUsd] = useState(
     typeof apiKey?.dailyUsageLimitUsd === "number" && apiKey.dailyUsageLimitUsd > 0
