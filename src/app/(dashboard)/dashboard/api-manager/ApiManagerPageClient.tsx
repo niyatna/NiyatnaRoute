@@ -28,7 +28,7 @@ import { SELF_ACCOUNT_QUOTA_SCOPE, SELF_USAGE_SCOPE } from "@/shared/constants/s
 import { extractApiErrorMessage } from "@/shared/http/apiErrorMessage";
 import { hasProviderQuotaBypassScope } from "@/shared/constants/apiKeyPolicyScopes";
 import { UsageLimitSettings } from "./components/UsageLimitSettings";
-import { ChaosModeAccessToggle } from "./components/ChaosModeAccessToggle";
+
 import { BypassProviderQuotaToggle } from "./components/BypassProviderQuotaToggle";
 import { ApiKeyCompressionToggle } from "./components/ApiKeyCompressionToggle";
 import { ApiKeyAutoCombosToggle } from "./components/ApiKeyAutoCombosToggle";
@@ -2727,12 +2727,6 @@ const PermissionsModal = memo(function PermissionsModal({
             onWeeklyLimitUsdChange={setWeeklyUsageLimitUsd}
           />
         </div>
-
-        {/* Chaos Mode Access Toggle */}
-        <ChaosModeAccessToggle
-          enabled={chaosModeEnabled}
-          onToggle={() => setChaosModeEnabled((prev) => !prev)}
-        />
 
         {/* Advanced Provider Quota Policy Override */}
         <BypassProviderQuotaToggle
