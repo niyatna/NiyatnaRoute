@@ -1,6 +1,6 @@
 # Free Tiers Guide: Understand and Combine Free AI Access
 
-> **TL;DR**: OmniRoute registers 352 provider IDs, with **152 provider-catalog entries marked `hasFree`**. The stricter audited free-model catalog covers **34 recurring pool keys / 444 entries** (437 active + 7 discontinued). Connect several suitable providers for broader fallback capacity; every quota, approval rule, privacy policy, and paid-overage condition still applies.
+> **TL;DR**: OmniRoute registers 360 provider IDs, with **152 provider-catalog entries marked `hasFree`**. The stricter audited free-model catalog covers **35 recurring pool keys / 492 entries** (485 active + 7 discontinued). Connect several suitable providers for broader fallback capacity; every quota, approval rule, privacy policy, and paid-overage condition still applies.
 
 ---
 
@@ -161,9 +161,9 @@ The live, pool-deduplicated catalog currently reports:
 
 | Metric                                               |                            Current audited value | Interpretation                                                                                                             |
 | ---------------------------------------------------- | -----------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------- |
-| Recurring quantified grant                           |                          **~1.47B tokens/month** | Shared pools counted once; excludes uncapped providers from the sum                                                        |
-| First month with signup grants                       |                                **~2.10B tokens** | Recurring total plus one-time and recurring credits                                                                        |
-| Audited free-model inventory                         | **34 recurring pool keys / 444 catalog entries** | 437 active + 7 discontinued; distinct from the 352-provider catalog                                                        |
+| Recurring quantified grant                           |                          **~1.62B tokens/month** | Shared pools counted once; excludes uncapped providers from the sum                                                        |
+| First month with signup grants                       |                                **~2.22B tokens** | Recurring total plus one-time and recurring credits                                                                        |
+| Audited free-model inventory                         | **35 recurring pool keys / 492 catalog entries** | 485 active + 7 discontinued; distinct from the 360-provider catalog                                                        |
 | Recurring/keyless free-forever providers represented |                                           **52** | Unique providers across recurring daily/monthly/credit/uncapped and keyless catalog types, eligibility-gated rows excluded |
 | Provider catalog entries marked `hasFree`            |                                    **152 / 352** | Broader provider metadata; not all have a quantifiable recurring quota                                                     |
 
