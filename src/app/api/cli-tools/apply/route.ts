@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     const { toolId, baseUrl, apiKey, model, dryRun } = parsed.data;
     const canonicalToolId = normalizeCliToolId(toolId);
 
-    const defaultPort = process.env.API_PORT || process.env.PORT || 20128;
+    const defaultPort = process.env.API_PORT || process.env.PORT || 9999;
     const defaultBaseUrl =
       process.env.OMNIROUTE_BASE_URL ||
       process.env.BASE_URL ||
