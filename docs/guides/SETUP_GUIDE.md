@@ -265,7 +265,7 @@ curl -X POST http://localhost:20128/a2a \
   -d '{"jsonrpc":"2.0","id":"quickstart","method":"message/send","params":{"skill":"quota-management","messages":[{"role":"user","content":"Give me a short quota summary."}]}}'
 ```
 
-**Full A2A documentation:** [A2A Server README](../../src/lib/a2a/README.md) — JSON-RPC 2.0, skills, streaming, task lifecycle.
+**A2A documentation:** [A2A Server](../frameworks/A2A-SERVER.md) — JSON-RPC 2.0, skills, streaming, task lifecycle.
 
 ---
 
