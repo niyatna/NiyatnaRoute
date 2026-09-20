@@ -34,6 +34,8 @@ on:
       - "package.json"
       - "package-lock.json"
       - "tsconfig*.json"
+      - "README.md"
+      - "docs/**"
   schedule:
     - cron: "23 5 * * *" # full sweep — off-peak, distinct from other nightlies
     - cron: "23 12 * * *" # full sweep — midday (WS5.1: 3×/day instead of 1×)
@@ -44,6 +46,11 @@ on:
         description: "Release branch to validate (default: highest release/vX.Y.Z)"
         required: false
         type: string
+      quick:
+        description: "Run in quick mode (--quick)"
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -262,8 +269,8 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set +e
-          # push (a merge into main) → --quick fast HARD gates; schedule/dispatch → full sweep.
-          if [ "$EVENT_NAME" = "push" ]; then
+          # push (a merge into main) or quick dispatch → --quick fast HARD gates; schedule → full sweep.
+          if [ "$EVENT_NAME" = "push" ] || [ "${{ github.event.inputs.quick }}" = "true" ]; then
             MODE="--quick"
           else
             MODE="--with-build --full-ci"
