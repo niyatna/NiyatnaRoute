@@ -1,6 +1,6 @@
 # OmniRoute
 
-> OmniRoute is a free, open-source AI Gateway that acts as a universal API proxy for multi-provider LLMs. It provides smart routing, automatic fallback, load balancing, and format translation across 359 AI providers — all through a single OpenAI-compatible endpoint. Includes a built-in MCP Server (110 tools), A2A v0.3 protocol, Memory/Skills systems, Cloud Agents (codex, cursor, devin, jules), Guardrails framework, and an Electron desktop app.
+> OmniRoute is a free, open-source AI Gateway that acts as a universal API proxy for multi-provider LLMs. It provides smart routing, automatic fallback, load balancing, and format translation across 356 AI providers — all through a single OpenAI-compatible endpoint. Includes a built-in MCP Server (110 tools), Skills systems, Cloud Agents (codex, cursor, devin, jules), and Guardrails framework.
 
 ## Overview
 
@@ -247,10 +247,6 @@ OmniRoute solves the problem of managing multiple AI provider subscriptions, quo
 │   │   ├── helpers/              # Translation helpers
 │   │   └── image/                # Image format translation
 │   └── utils/                    # 100+ utility modules (stream, TLS, proxy, logging, etc.)
-├── electron/                     # Electron desktop app (cross-platform)
-│   ├── main.js                   # Electron main process
-│   ├── preload.js                # Preload script (IPC bridge)
-│   └── assets/                   # App icons and assets
 ├── tests/                        # Test suites
 │   ├── unit/                     # 5,000+ unit test files
 │   ├── integration/              # Integration tests
@@ -277,7 +273,7 @@ OmniRoute solves the problem of managing multiple AI provider subscriptions, quo
 ## Key Features (v3.8.50)
 
 ### Core Proxy
-- **359 AI providers** with automatic format translation
+- **356 AI providers** with automatic format translation
 - **Provider categories**: Free (90+ free tiers), OAuth, API Key, Self-Hosted, Custom (OpenAI/Anthropic-compatible)
 - **19 routing strategies**: priority, weighted, round-robin, fill-first, p2c, random, least-used, cost-optimized, reset-aware, reset-window, headroom, strict-random, auto, lkgp, context-optimized, cache-optimized, context-relay, fusion, pipeline
 - **4-tier fallback**: Subscription → API Key → Cheap → Free
@@ -445,25 +441,21 @@ diagnostics) plus **memory**, **skill**, **agentSkill**, **githubSkill**, **pool
 
 10. **Docker:** Dockerfile has two targets: `runner-base` and `runner-cli`. `docker-compose.yml` for dev (8 profiles), `docker-compose.prod.yml` for production (port 20130).
 
-11. **Electron desktop app** in `electron/` with main.js and preload.js. Build with `npm run electron:build` (supports Windows, macOS, Linux).
+11. **Pricing data** syncs from LiteLLM via `src/lib/pricingSync.ts`. Use `sync_pricing` MCP tool or API endpoint.
 
-12. **Pricing data** syncs from LiteLLM via `src/lib/pricingSync.ts`. Use `sync_pricing` MCP tool or API endpoint.
+12. **Skills system** in `src/lib/skills/` provides registry, executor, sandbox isolation, built-in skills, custom skill support, request interception, and context injection. Exposed via MCP skill tools and `/api/skills/` API.
 
-13. **Memory system** in `src/lib/memory/` provides extraction, injection, retrieval, summarization, and persistent store. Exposed via MCP memory tools and `/api/memory/ API.
+13. **Zod v4** is used for all validation. Import from `zod` package. Provider schemas validated at module load time.
 
-14. **Skills system** in `src/lib/skills/` provides registry, executor, sandbox isolation, built-in skills, custom skill support, request interception, and context injection. Exposed via MCP skill tools and `/api/skills/` API.
+14. **Context Relay** strategy (`context-relay`) is split across two layers: `combo.ts` decides if a handoff should be generated after a successful turn; `chat.ts` injects the handoff only after account resolution. Handoff data lives in `context_handoffs` SQLite table. Config: `handoffThreshold`, `handoffModel`, `handoffProviders`.
 
-15. **Zod v4** is used for all validation. Import from `zod` package. Provider schemas validated at module load time.
+15. **Proxy enforcement** is now comprehensive: token health checks resolve proxy per connection, provider validation wraps in `runWithProxyContext`, and proxy dispatchers use `undici.fetch()` instead of the Node built-in `fetch()` to avoid dispatcher incompatibilities on Node 22.
 
-16. **Context Relay** strategy (`context-relay`) is split across two layers: `combo.ts` decides if a handoff should be generated after a successful turn; `chat.ts` injects the handoff only after account resolution. Handoff data lives in `context_handoffs` SQLite table. Config: `handoffThreshold`, `handoffModel`, `handoffProviders`.
+16. **Node.js 24+ compatibility**: The login page (`/api/settings/require-login`) detects the Node.js version and sends `nodeVersion`/`nodeCompatible` fields. The login UI renders a warning banner when `nodeCompatible` is false.
 
-17. **Proxy enforcement** is now comprehensive: token health checks resolve proxy per connection, provider validation wraps in `runWithProxyContext`, and proxy dispatchers use `undici.fetch()` instead of the Node built-in `fetch()` to avoid dispatcher incompatibilities on Node 22.
+17. **Cloud Agents** in `src/lib/cloudAgent/` — four external autonomous coding agents (Codex Cloud, Cursor, Devin, Jules) with task lifecycle endpoints under `/api/v1/agents/tasks/`. Require management auth, not client auth.
 
-18. **Node.js 24+ compatibility**: The login page (`/api/settings/require-login`) detects the Node.js version and sends `nodeVersion`/`nodeCompatible` fields. The login UI renders a warning banner when `nodeCompatible` is false.
-
-19. **Cloud Agents** in `src/lib/cloudAgent/` — four external autonomous coding agents (Codex Cloud, Cursor, Devin, Jules) with task lifecycle endpoints under `/api/v1/agents/tasks/`. Require management auth, not client auth.
-
-20. **Guardrails framework** in `src/lib/guardrails/` — hot-reloadable registry. Built-ins (priority-ordered): `vision-bridge` (5) → `audio-bridge` (6) → `video-bridge` (7) → `pii-masker` (10) → `prompt-injection` (20) → `credential-masker` (95). Fail-open model: exceptions never block traffic. Per-request opt-out via `x-omniroute-disabled-guardrails` header.
+18. **Guardrails framework** in `src/lib/guardrails/` — hot-reloadable registry. Built-ins (priority-ordered): `vision-bridge` (5) → `audio-bridge` (6) → `video-bridge` (7) → `pii-masker` (10) → `prompt-injection` (20) →
 
 21. **Authz pipeline** (`src/server/authz/`): every request is classified as `PUBLIC`, `CLIENT_API`, or `MANAGEMENT`, then run through policy + enforce stages. See `docs/architecture/AUTHZ_GUIDE.md`.
 
