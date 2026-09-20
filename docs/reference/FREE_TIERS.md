@@ -31,7 +31,7 @@ lastUpdated: 2026-09-03
 >
 > **Re-audited on 2026-09-02 against the providers' own pages** (sources: the `// evidence:` comments next to each re-audited entry in `open-sse/config/freeModelCatalog.data.ts`): `gemini` and `ollama-cloud` no longer publish a token figure (Google removed the per-model free table on 2025-12-23; Ollama's Free plan is "starter usage credits") and are now listed as **uncapped**, never summed (−80M); `groq` is five **per-model** 200K-TPD caps (6M each, +15M) with three retired IDs dropped; `nara` is one 7M/day bucket (+60M, 210M). `mistral`'s 1B is visible only in the account console — see _Evidence classes_ under Methodology. The source reported 35 such keys at that point (−3: `gemini` and `ollama-cloud` moved to the uncapped list, and Groq's per-model caps are not a shared pool).
 >
-> **Corrected to ~1.47B on 2026-09-03 (#11773):** `cerebras` was reclassified from a 30M/mo recurring grant (old no-card 1M tokens/day trial) to a one-time $5 signup credit that requires a payment method. Same honesty rule as LongCat. The source now reports 34 recurring pool keys and ~1.47B steady.
+> **Updated on 2026-09-19:** Added xKiro free pool (+150M steady recurring). The source now reports 35 recurring pool keys and ~1.62B steady.
 
 Biggest **documented** contributors: `mistral` 1.00B, `nara` 210M, `llm7` 150M, `groq` 30M (five per-model caps), `cloudflare-ai` 30M, `api-airforce` 24M. (`longcat` is excluded — its 10M LongCat-2.0 grant is a one-time, KYC-gated signup credit, not a recurring monthly budget.)
 
