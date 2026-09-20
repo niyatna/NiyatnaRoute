@@ -10,7 +10,9 @@ import {
 import { extractApiKey, isValidApiKey } from "@/sse/services/auth";
 import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
 import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { z } from "zod";
 
+const inputTokensBodySchema = z.record(z.string(), z.unknown());
 /**
  * POST /v1/responses/input_tokens — local Responses token count.
  *
@@ -146,13 +148,14 @@ async function postHandler(request: Request): Promise<Response> {
     return json({ error: { message: "Invalid JSON body", type: "invalid_request_error" } }, 400);
   }
 
-  const record = asRecord(body);
-  if (!record) {
+  const parseResult = inputTokensBodySchema.safeParse(body);
+  if (!parseResult.success) {
     return json(
       { error: { message: "Request body must be a JSON object", type: "invalid_request_error" } },
       400
     );
   }
+  const record = parseResult.data;
 
   // Preserve the same API-key and model-policy boundary as the catch-all
   // Responses route this static route shadows. Token counting is local, but it
