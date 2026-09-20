@@ -452,9 +452,7 @@ export async function registerNodejs(): Promise<void> {
     console.log(
       `[STARTUP] Cloud/model sync background bootstrap ${cloudSyncInitialized ? "initialized" : "skipped"}`
     );
-    const { initBatchProcessor } = await import("@omniroute/open-sse/services/batchProcessor");
-    initBatchProcessor();
-    console.log("[STARTUP] Batch processor started");
+    // Batch processor purged in NiyatnaRoute
   }
 
   try {
@@ -636,16 +634,7 @@ export async function registerNodejs(): Promise<void> {
           console.warn("[STARTUP] Auto-refresh daemon failed to start (non-fatal):", msg);
         }),
 
-      // Conductor bridge (PRD Conductor RF1): mirrors OmniConductor hub tasks into the
-      // A2A TaskManager via the hub SSE. Opt-in — self-gated on CONDUCTOR_HUB_URL.
-      import("@/lib/conductor/boot")
-        .then((m) => {
-          if (m.initConductorBridge()) console.log("[STARTUP] Conductor bridge started");
-        })
-        .catch((err: unknown) => {
-          const msg = err instanceof Error ? err.message : String(err);
-          console.warn("[STARTUP] Conductor bridge failed to start (non-fatal):", msg);
-        }),
+      // Conductor bridge purged in NiyatnaRoute
 
       // Proactive connection-cooldown recovery (#8): re-validate connections whose
       // transient `rate_limited_until` window has elapsed OUTSIDE the request hot path,
