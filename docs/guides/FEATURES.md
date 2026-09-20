@@ -282,7 +282,6 @@ Key features:
 - Hardened Electron build packaging — symlinked `node_modules` in the standalone bundle is detected and rejected before packaging, preventing runtime dependency on the build machine (v2.5.5+)
 - **Graceful shutdown** — Electron `before-quit` shuts down Next.js cleanly, preventing SQLite WAL database locks (v3.6.2+)
 
-📖 See [`electron/README.md`](../../electron/README.md) for full documentation.
 
 ---
 

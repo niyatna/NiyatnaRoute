@@ -1312,4 +1312,3 @@ Output → `electron/dist-electron/`
 | `OMNIROUTE_PORT`      | `20128` | Server port                      |
 | `OMNIROUTE_MEMORY_MB` | `512`   | Node.js heap limit (64–16384 MB) |
 
-📖 Full documentation: [`electron/README.md`](../../electron/README.md)
