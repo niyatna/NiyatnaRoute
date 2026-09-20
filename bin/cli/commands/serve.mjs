@@ -118,7 +118,7 @@ export async function runServe(opts = {}) {
   if (trayOptionError) throw new Error(trayOptionError);
 
   if (opts.tray === true && opts.trayWorker !== true) {
-    const port = parsePort(opts.port ?? process.env.PORT ?? "20128", 20128);
+    const port = parsePort(opts.port ?? process.env.PORT ?? "9999", 9999);
     const tlsCert = opts.tlsCert ?? process.env.OMNIROUTE_TLS_CERT;
     const tlsKey = opts.tlsKey ?? process.env.OMNIROUTE_TLS_KEY;
     urlScheme = resolveTlsOptions({
@@ -149,7 +149,7 @@ export async function runServe(opts = {}) {
   const { getNodeRuntimeSupport, getNodeRuntimeWarning } =
     await import("../../nodeRuntimeSupport.mjs");
 
-  const port = parsePort(opts.port ?? process.env.PORT ?? "20128", 20128);
+  const port = parsePort(opts.port ?? process.env.PORT ?? "9999", 9999);
   const apiPort = parsePort(process.env.API_PORT ?? String(port), port);
   const dashboardPort = parsePort(process.env.DASHBOARD_PORT ?? String(port), port);
   const noOpen = opts.open === false;

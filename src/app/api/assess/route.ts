@@ -16,7 +16,7 @@ function getAssessBaseUrl(): string {
     process.env.OMNIROUTE_BASE_URL ??
     process.env.OMNIROUTe_BASE_URL ??
     process.env.BASE_URL ??
-    `http://localhost:${process.env.API_PORT ?? process.env.PORT ?? 20128}/v1`
+    `http://localhost:${process.env.API_PORT ?? process.env.PORT ?? 9999}/v1`
   );
 }
 

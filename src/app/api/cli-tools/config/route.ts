@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   if (authError) return authError;
 
   const { searchParams } = new URL(request.url);
-  const defaultPort = process.env.API_PORT || process.env.PORT || 20128;
+  const defaultPort = process.env.API_PORT || process.env.PORT || 9999;
   const defaultBaseUrl =
     process.env.OMNIROUTE_BASE_URL || process.env.BASE_URL || `http://localhost:${defaultPort}/v1`;
   const baseUrl = searchParams.get("baseUrl") || defaultBaseUrl;
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       );
     }
     const { toolId, baseUrl, apiKey, model } = parsed.data;
-    const defaultPort = process.env.API_PORT || process.env.PORT || 20128;
+    const defaultPort = process.env.API_PORT || process.env.PORT || 9999;
     const defaultBaseUrl =
       process.env.OMNIROUTE_BASE_URL ||
       process.env.BASE_URL ||

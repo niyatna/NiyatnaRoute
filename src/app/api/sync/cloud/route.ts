@@ -230,7 +230,7 @@ async function handleDisable(machineId: string, request: any) {
   }
 
   // Update Claude CLI settings to use local endpoint
-  const defaultPort = process.env.PORT || process.env.DASHBOARD_PORT || "20128";
+  const defaultPort = process.env.PORT || process.env.DASHBOARD_PORT || "9999";
   const host = request.headers.get("host") || `localhost:${defaultPort}`;
   await updateClaudeSettingsToLocal(machineId, host);
 
