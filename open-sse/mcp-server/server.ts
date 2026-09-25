@@ -95,10 +95,10 @@ import { registerRadarCatalogTool } from "./radarCatalog.ts";
 import type { TextToolResult } from "./toolResult.ts";
 export { getMcpModelsCatalog } from "./catalog.ts";
 
-const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
-const MCP_ENFORCE_SCOPES = process.env.OMNIROUTE_MCP_ENFORCE_SCOPES === "true";
+const NIYATNA_BASE_URL = resolveOmniRouteBaseUrl();
+const MCP_ENFORCE_SCOPES = process.env.NIYATNA_MCP_ENFORCE_SCOPES === "true";
 const MCP_ALLOWED_SCOPES = new Set(
-  (process.env.OMNIROUTE_MCP_SCOPES || "")
+  (process.env.NIYATNA_MCP_SCOPES || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
@@ -188,11 +188,11 @@ function normalizeComboModels(
 }
 
 function getOmniRouteApiKey(): string {
-  return process.env.OMNIROUTE_API_KEY || "";
+  return process.env.NIYATNA_API_KEY || "";
 }
 
 export async function omniRouteFetch(path: string, options: RequestInit = {}): Promise<unknown> {
-  const url = `${OMNIROUTE_BASE_URL}${path}`;
+  const url = `${NIYATNA_BASE_URL}${path}`;
   const apiKey = getOmniRouteApiKey();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",

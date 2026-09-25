@@ -16,13 +16,13 @@
  * Operator usage (all knobs are env vars — no secrets on the command line):
  *
  *   RUN_CLI_SMOKE=1 \
- *   OMNIROUTE_SMOKE_BASE_URL="http://localhost:20128" \
- *   OMNIROUTE_SMOKE_MODEL="<provider/model>" \
- *   OMNIROUTE_SMOKE_API_KEY_ENV="OMNIROUTE_API_KEY" \
+ *   NIYATNA_SMOKE_BASE_URL="http://localhost:20128" \
+ *   NIYATNA_SMOKE_MODEL="<provider/model>" \
+ *   NIYATNA_SMOKE_API_KEY_ENV="NIYATNA_API_KEY" \
  *   node --import tsx/esm --test tests/integration/upstream-cli-smoke.int.test.ts
  *
- * Optional: OMNIROUTE_SMOKE_TARGETS="codex,opencode,qwen" restricts the sweep;
- * OMNIROUTE_SMOKE_TIMEOUT_MS overrides the per-target timeout (default 120s).
+ * Optional: NIYATNA_SMOKE_TARGETS="codex,opencode,qwen" restricts the sweep;
+ * NIYATNA_SMOKE_TIMEOUT_MS overrides the per-target timeout (default 120s).
  */
 
 import { test } from "node:test";
@@ -32,15 +32,15 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const ENABLED = process.env.RUN_CLI_SMOKE === "1";
-const BASE_URL = (process.env.OMNIROUTE_SMOKE_BASE_URL || "http://localhost:20128").replace(
+const BASE_URL = (process.env.NIYATNA_SMOKE_BASE_URL || "http://localhost:20128").replace(
   /\/+$/,
   ""
 );
-const MODEL = process.env.OMNIROUTE_SMOKE_MODEL || "";
-const API_KEY_ENV = process.env.OMNIROUTE_SMOKE_API_KEY_ENV || "OMNIROUTE_API_KEY";
-const TIMEOUT_MS = Number(process.env.OMNIROUTE_SMOKE_TIMEOUT_MS || 120_000);
+const MODEL = process.env.NIYATNA_SMOKE_MODEL || "";
+const API_KEY_ENV = process.env.NIYATNA_SMOKE_API_KEY_ENV || "NIYATNA_API_KEY";
+const TIMEOUT_MS = Number(process.env.NIYATNA_SMOKE_TIMEOUT_MS || 120_000);
 
-const CLI_ENTRY = fileURLToPath(new URL("../../bin/omniroute.mjs", import.meta.url));
+const CLI_ENTRY = fileURLToPath(new URL("../../bin/niyatnaroute.mjs", import.meta.url));
 
 /** One-shot, non-interactive invocation per target. Prompts are inert. */
 const SMOKE_TARGETS: Record<string, { args: string[] }> = {
@@ -53,7 +53,7 @@ const SMOKE_TARGETS: Record<string, { args: string[] }> = {
 };
 
 function selectedTargets(): string[] {
-  const filter = String(process.env.OMNIROUTE_SMOKE_TARGETS || "")
+  const filter = String(process.env.NIYATNA_SMOKE_TARGETS || "")
     .split(",")
     .map((t) => t.trim())
     .filter(Boolean);
@@ -163,7 +163,7 @@ test(
       t.skip("RUN_CLI_SMOKE!=1 — real smoke is operator opt-in, never automatic");
       return;
     }
-    assert.ok(MODEL, "OMNIROUTE_SMOKE_MODEL must name the provider/model to exercise");
+    assert.ok(MODEL, "NIYATNA_SMOKE_MODEL must name the provider/model to exercise");
     assert.ok(
       process.env[API_KEY_ENV] !== undefined,
       `credential env var '${API_KEY_ENV}' must exist (value is never printed)`

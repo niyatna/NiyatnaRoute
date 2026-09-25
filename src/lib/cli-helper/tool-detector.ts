@@ -82,7 +82,7 @@ function isConfigured(content: string, baseUrl: string): boolean {
     content.includes(normalized) ||
     content.includes("localhost:20128") ||
     (!!port && content.includes(`localhost:${port}`)) ||
-    content.includes("OMNIROUTE_BASE_URL")
+    content.includes("NIYATNA_BASE_URL")
   );
 }
 

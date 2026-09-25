@@ -16,7 +16,7 @@ const core = await import("../../src/lib/db/core.ts");
 // getCachedResponse checks first, so the signature checkSemanticCache rebuilds resolves.
 const { generateSignature, setCachedResponse, clearCache } =
   await import("../../src/lib/semanticCache.ts");
-const { OMNIROUTE_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
+const { NIYATNA_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
 const { calculateCost } = await import("../../src/lib/usage/costCalculator.ts");
 const { formatOmniRouteCost } = await import("../../src/domain/omnirouteResponseMeta.ts");
 
@@ -245,9 +245,9 @@ test("checkSemanticCache returns a non-streaming JSON HIT with cache headers + l
   assert.ok(result, "HIT -> non-null result");
   assert.equal(result.success, true, "HIT result.success is true");
   const res = result.response as Response;
-  assert.equal(res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cache), "HIT", "X-OmniRoute-Cache: HIT");
+  assert.equal(res.headers.get(NIYATNA_RESPONSE_HEADERS.cache), "HIT", "X-OmniRoute-Cache: HIT");
   assert.equal(
-    res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cacheHit),
+    res.headers.get(NIYATNA_RESPONSE_HEADERS.cacheHit),
     "true",
     "cacheHit meta header is true"
   );
@@ -307,7 +307,7 @@ test("checkSemanticCache returns a streaming SSE HIT (text/event-stream) when st
     "text/event-stream",
     "streaming HIT -> text/event-stream"
   );
-  assert.equal(res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cache), "HIT");
+  assert.equal(res.headers.get(NIYATNA_RESPONSE_HEADERS.cache), "HIT");
   const bodyText = await res.text();
   assert.ok(bodyText.includes("data: "), "SSE body contains data frames");
   assert.ok(bodyText.includes("streamed cached answer"), "SSE body carries the cached content");
@@ -342,10 +342,10 @@ test("checkSemanticCache HITs even when the cached body has no usage (cost falls
   assert.ok(result, "HIT with no usage -> non-null result");
   assert.equal(result.success, true);
   const res = result.response as Response;
-  assert.equal(res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cache), "HIT");
+  assert.equal(res.headers.get(NIYATNA_RESPONSE_HEADERS.cache), "HIT");
   // cachedUsage resolves to undefined -> cachedCost = 0 -> the zero-cost sentinel header.
   assert.equal(
-    res.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost),
+    res.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost),
     "0.0000000000",
     "no usage -> zero responseCost header"
   );
@@ -393,16 +393,16 @@ test("checkSemanticCache HIT bills 0 incremental cost and reports the original c
   assert.ok(result, "HIT -> non-null result");
   const res = result.response as Response;
 
-  assert.equal(res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cache), "HIT");
+  assert.equal(res.headers.get(NIYATNA_RESPONSE_HEADERS.cache), "HIT");
   // Incremental cost billed to the client on a HIT is 0 (no upstream call happened).
   assert.equal(
-    res.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost),
+    res.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost),
     "0.0000000000",
     "cache HIT must bill 0 incremental cost"
   );
   // The avoided cost is surfaced for cache analytics.
   assert.equal(
-    res.headers.get(OMNIROUTE_RESPONSE_HEADERS.costSaved),
+    res.headers.get(NIYATNA_RESPONSE_HEADERS.costSaved),
     expectedSaved,
     "X-OmniRoute-Cost-Saved reflects the original cost the cache avoided"
   );
@@ -517,7 +517,7 @@ test("checkSemanticCache HIT includes X-OmniRoute-Cache-Latency: synthetic heade
   assert.ok(result, "HIT -> non-null result");
   const res = result.response as Response;
   assert.equal(
-    res.headers.get(OMNIROUTE_RESPONSE_HEADERS.cacheLatency),
+    res.headers.get(NIYATNA_RESPONSE_HEADERS.cacheLatency),
     "synthetic",
     "HIT response carries X-OmniRoute-Cache-Latency: synthetic marker"
   );

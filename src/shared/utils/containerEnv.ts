@@ -35,11 +35,11 @@ const FALSE_VALUES = new Set(["0", "false", "no", "off"]);
  * Best-effort container detection. Superset of the Zed-specific
  * `isRunningInDocker()` (kept separate so its callers keep their behavior).
  *
- * `OMNIROUTE_CONTAINER` forces the answer either way — needed for tests and for
+ * `NIYATNA_CONTAINER` forces the answer either way — needed for tests and for
  * operators on exotic runtimes we fail to recognise.
  */
 export function isRunningInContainer(deps: ContainerEnvDeps = defaultDeps()): boolean {
-  const override = String(deps.env?.OMNIROUTE_CONTAINER ?? "")
+  const override = String(deps.env?.NIYATNA_CONTAINER ?? "")
     .trim()
     .toLowerCase();
   if (TRUE_VALUES.has(override)) return true;

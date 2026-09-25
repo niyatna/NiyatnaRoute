@@ -53,7 +53,7 @@ type ProviderConnectionRef = {
 const DEFAULT_SYNCED_CATALOG_STALE_AFTER_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 function getSyncedCatalogStaleAfterMs(): number {
-  const raw = process.env.OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS;
+  const raw = process.env.NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS;
   const parsed = raw !== undefined ? Number(raw) : NaN;
   return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_SYNCED_CATALOG_STALE_AFTER_MS;
 }

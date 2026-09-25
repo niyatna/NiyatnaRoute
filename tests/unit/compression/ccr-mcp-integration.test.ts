@@ -7,19 +7,19 @@ import { join } from "node:path";
 process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "omniroute-ccr-mcp-"));
 
 // `resolveCcrPrincipal` dá precedência a `resolveMcpCallerApiKeyId()`, que cai em
-// `OMNIROUTE_API_KEY`/`ROUTER_API_KEY` no transporte stdio. Estes testes gravam blocos
+// `NIYATNA_API_KEY`/`ROUTER_API_KEY` no transporte stdio. Estes testes gravam blocos
 // com um principal LITERAL ("tenant-a") e leem pelos handlers MCP: com a env presente no
 // shell, o handler resolve um principal diferente e todo bloco vira "not found" — red
 // fantasma que não reproduz no CI, onde a env não existe. A precondição era implícita;
 // aqui ela passa a ser declarada. Mesmo idioma de api-key-lifecycle e cli-remote-mode.
-const ORIGINAL_OMNIROUTE_API_KEY = process.env.OMNIROUTE_API_KEY;
+const ORIGINAL_NIYATNA_API_KEY = process.env.NIYATNA_API_KEY;
 const ORIGINAL_ROUTER_API_KEY = process.env.ROUTER_API_KEY;
-delete process.env.OMNIROUTE_API_KEY;
+delete process.env.NIYATNA_API_KEY;
 delete process.env.ROUTER_API_KEY;
 
 after(() => {
-  if (ORIGINAL_OMNIROUTE_API_KEY === undefined) delete process.env.OMNIROUTE_API_KEY;
-  else process.env.OMNIROUTE_API_KEY = ORIGINAL_OMNIROUTE_API_KEY;
+  if (ORIGINAL_NIYATNA_API_KEY === undefined) delete process.env.NIYATNA_API_KEY;
+  else process.env.NIYATNA_API_KEY = ORIGINAL_NIYATNA_API_KEY;
   if (ORIGINAL_ROUTER_API_KEY === undefined) delete process.env.ROUTER_API_KEY;
   else process.env.ROUTER_API_KEY = ORIGINAL_ROUTER_API_KEY;
 });

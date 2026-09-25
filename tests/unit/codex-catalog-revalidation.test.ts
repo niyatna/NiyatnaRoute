@@ -52,7 +52,7 @@ test("resolveCodexCatalogAppVersion uses stable, source-qualified identities", (
   assert.equal(
     resolveCodexCatalogAppVersion(
       {
-        OMNIROUTE_BUILD_SHA: "abc123",
+        NIYATNA_BUILD_SHA: "abc123",
         npm_package_version: "9.9.9",
       },
       { runtimeRoot }

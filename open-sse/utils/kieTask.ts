@@ -24,11 +24,11 @@ function callbackUrlFromBaseUrl(baseUrl: string | undefined): string | null {
 
 function getConfiguredKieCallbackUrl(): string {
   const explicit =
-    process.env.KIE_CALLBACK_URL?.trim() || process.env.OMNIROUTE_KIE_CALLBACK_URL?.trim();
+    process.env.KIE_CALLBACK_URL?.trim() || process.env.NIYATNA_KIE_CALLBACK_URL?.trim();
   if (explicit) return explicit;
 
   return (
-    callbackUrlFromBaseUrl(process.env.OMNIROUTE_PUBLIC_URL) ||
+    callbackUrlFromBaseUrl(process.env.NIYATNA_PUBLIC_URL) ||
     callbackUrlFromBaseUrl(process.env.NEXT_PUBLIC_APP_URL) ||
     callbackUrlFromBaseUrl(process.env.APP_URL) ||
     callbackUrlFromBaseUrl(process.env.PUBLIC_URL) ||

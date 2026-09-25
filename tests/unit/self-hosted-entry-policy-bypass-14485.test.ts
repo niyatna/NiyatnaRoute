@@ -5,7 +5,7 @@
  * inside `handleChat()`, which the divert never reaches). A disabled/banned
  * OmniRoute API key — normally rejected with 403 "This API key is disabled" —
  * sails straight through to the self-hosted provider once
- * OMNIROUTE_SELF_HOSTED_PROVIDERS is configured.
+ * NIYATNA_SELF_HOSTED_PROVIDERS is configured.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -52,7 +52,7 @@ await new Promise<void>((resolve) => upstream.listen(0, "127.0.0.1", resolve));
 const upstreamPort = (upstream.address() as AddressInfo).port;
 const upstreamBaseUrl = `http://127.0.0.1:${upstreamPort}/v1`;
 
-process.env.OMNIROUTE_SELF_HOSTED_PROVIDERS = [
+process.env.NIYATNA_SELF_HOSTED_PROVIDERS = [
   "providers:",
   "  - id: stub",
   "    kind: openai",
@@ -174,8 +174,8 @@ test("#14485: a cloud request (no self-hosted config) runs the key policy ONCE, 
     rateLimits: [{ limit: 1, window: 60 }],
   });
 
-  const savedConfig = process.env.OMNIROUTE_SELF_HOSTED_PROVIDERS;
-  delete process.env.OMNIROUTE_SELF_HOSTED_PROVIDERS;
+  const savedConfig = process.env.NIYATNA_SELF_HOSTED_PROVIDERS;
+  delete process.env.NIYATNA_SELF_HOSTED_PROVIDERS;
   const before = upstreamCalls;
   try {
     const request = new Request("http://localhost/v1/chat/completions", {
@@ -202,7 +202,7 @@ test("#14485: a cloud request (no self-hosted config) runs the key policy ONCE, 
     assert.doesNotMatch(text, /Request limit exceeded/);
     assert.equal(upstreamCalls, before, "a cloud request must never reach the self-hosted stub");
   } finally {
-    process.env.OMNIROUTE_SELF_HOSTED_PROVIDERS = savedConfig;
+    process.env.NIYATNA_SELF_HOSTED_PROVIDERS = savedConfig;
   }
 });
 

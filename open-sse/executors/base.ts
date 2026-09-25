@@ -401,7 +401,7 @@ export class BaseExecutor {
    * and exfiltrate the stored upstream key. Mirror the provider VALIDATION
    * guard so runtime dispatch makes the same decision the validation layer
    * already makes: local / self-hosted providers are exempt (they legitimately
-   * use private URLs, and the OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS opt-in still
+   * use private URLs, and the NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS opt-in still
    * applies through the guard), and for everything else `public-only` mode
    * blocks private + metadata while the default `block-metadata` mode blocks the
    * cloud-metadata IMDS pivot. Throws on a blocked URL.

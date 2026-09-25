@@ -8,11 +8,11 @@ const TEST_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-skills-interc
 const TEST_DATA_DIR = path.join(TEST_ROOT, "data");
 const TEST_PLUGINS_DIR = path.join(TEST_ROOT, "plugins");
 const ORIGINAL_DATA_DIR = process.env.DATA_DIR;
-const ORIGINAL_PLUGINS_DIR = process.env.OMNIROUTE_PLUGINS_DIR;
+const ORIGINAL_PLUGINS_DIR = process.env.NIYATNA_PLUGINS_DIR;
 fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
 fs.mkdirSync(TEST_PLUGINS_DIR, { recursive: true });
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_PLUGINS_DIR = TEST_PLUGINS_DIR;
+process.env.NIYATNA_PLUGINS_DIR = TEST_PLUGINS_DIR;
 
 const coreDb = await import("../../src/lib/db/core.ts");
 const { skillRegistry } = await import("../../src/lib/skills/registry.ts");
@@ -20,7 +20,7 @@ const { skillExecutor } = await import("../../src/lib/skills/executor.ts");
 const { builtinSkills } = await import("../../src/lib/skills/builtins.ts");
 const { interceptToolCalls, extractToolCalls, handleToolCallExecution, buildWebSearchCallItem } =
   await import("../../src/lib/skills/interception.ts");
-const { OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME } =
+const { NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME } =
   await import("../../open-sse/services/webSearchFallback.ts");
 
 function resetRuntime() {
@@ -81,13 +81,13 @@ test.after(() => {
   coreDb.resetDbInstance();
   if (ORIGINAL_DATA_DIR === undefined) delete process.env.DATA_DIR;
   else process.env.DATA_DIR = ORIGINAL_DATA_DIR;
-  if (ORIGINAL_PLUGINS_DIR === undefined) delete process.env.OMNIROUTE_PLUGINS_DIR;
-  else process.env.OMNIROUTE_PLUGINS_DIR = ORIGINAL_PLUGINS_DIR;
+  if (ORIGINAL_PLUGINS_DIR === undefined) delete process.env.NIYATNA_PLUGINS_DIR;
+  else process.env.NIYATNA_PLUGINS_DIR = ORIGINAL_PLUGINS_DIR;
   fs.rmSync(TEST_ROOT, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
 
 test("buildWebSearchCallItem emits a native web_search_call item only for successful web-search fallback results", () => {
-  const call = { id: "call_search", name: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME, arguments: {} };
+  const call = { id: "call_search", name: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME, arguments: {} };
   const item = buildWebSearchCallItem(call, {
     success: true,
     provider: "serper-search",
@@ -184,7 +184,7 @@ test("extractToolCalls supports OpenAI, Anthropic and Gemini shapes", () => {
         {
           type: "function_call",
           call_id: "call-response",
-          name: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+          name: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
           arguments: '{"query":"latest omniroute"}',
         },
       ],
@@ -219,7 +219,7 @@ test("extractToolCalls supports OpenAI, Anthropic and Gemini shapes", () => {
   assert.deepEqual(responses, [
     {
       id: "call-response",
-      name: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      name: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       arguments: { query: "latest omniroute" },
     },
   ]);

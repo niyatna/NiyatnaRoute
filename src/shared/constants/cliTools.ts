@@ -449,7 +449,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       },
       {
         type: "info",
-        text: "The API key is stored only as OMNIROUTE_API_KEY in ~/.qwen/.env, leaving your existing provider credentials untouched.",
+        text: "The API key is stored only as NIYATNA_API_KEY in ~/.qwen/.env, leaving your existing provider credentials untouched.",
       },
     ],
     guideSteps: [
@@ -471,7 +471,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       {
         "id": "{{model}}",
         "name": "{{model}} (OmniRoute)",
-        "envKey": "OMNIROUTE_API_KEY",
+        "envKey": "NIYATNA_API_KEY",
         "baseUrl": "{{baseUrl}}"
       }
     ]

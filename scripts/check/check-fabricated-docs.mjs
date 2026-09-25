@@ -92,18 +92,18 @@ const ENV_VAR_ALLOWLIST = new Set([
   "PORT", // generic, not OmniRoute-specific
   "DATA_DIR",
   "REQUIRE_API_KEY",
-  "OMNIROUTE_BUILD_PROFILE", // build-time only
+  "NIYATNA_BUILD_PROFILE", // build-time only
   // Docker builder-stage knobs. Both are documented in docs/guides/DOCKER_GUIDE.md
   // because they are the two levers for a memory-constrained build host, but
-  // neither is read through process.env in this repo: OMNIROUTE_BUILD_WORKERS is
+  // neither is read through process.env in this repo: NIYATNA_BUILD_WORKERS is
   // a Dockerfile ARG that only feeds CIRCLE_NODE_TOTAL, and CIRCLE_NODE_TOTAL is
   // read by Next itself (node_modules) to size the page-data worker pool. Pinned
   // by tests/unit/docker-build-memory-budget.test.ts.
-  "OMNIROUTE_BUILD_WORKERS",
+  "NIYATNA_BUILD_WORKERS",
   "CIRCLE_NODE_TOTAL",
-  "OMNIROUTE_BUILD_SHA",
-  "OMNIROUTE_URL", // used by ad-hoc tooling, validated elsewhere
-  "OMNIROUTE_KEY", // ditto
+  "NIYATNA_BUILD_SHA",
+  "NIYATNA_URL", // used by ad-hoc tooling, validated elsewhere
+  "NIYATNA_KEY", // ditto
   "OPENCODE_API_KEY", // ditto
   // ── External-tool / spawn-injected / ops env vars ────────────────────────
   // Real environment variables, but they belong to an UPSTREAM CLI/tool, a

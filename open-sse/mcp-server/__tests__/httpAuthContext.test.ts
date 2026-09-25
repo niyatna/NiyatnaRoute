@@ -108,13 +108,13 @@ describe("MCP HTTP auth context", () => {
     }
   });
 
-  it("forwarded caller auth wins over the OMNIROUTE_API_KEY env fallback (#5819)", async () => {
+  it("forwarded caller auth wins over the NIYATNA_API_KEY env fallback (#5819)", async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ combos: [] }),
     });
     vi.stubGlobal("fetch", fetchMock);
-    vi.stubEnv("OMNIROUTE_API_KEY", "env-fallback-key");
+    vi.stubEnv("NIYATNA_API_KEY", "env-fallback-key");
 
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
     const server = createMcpServer();

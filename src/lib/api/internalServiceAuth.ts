@@ -5,10 +5,10 @@ import { AUTHZ_HEADER_PEER_LOCALITY } from "@/server/authz/headers";
 export const INTERNAL_SERVICE_AUTH_HEADER = "x-omniroute-internal-service-token";
 
 function configuredToken(): string {
-  const inlineToken = process.env.OMNIROUTE_INTERNAL_SERVICE_TOKEN?.trim();
+  const inlineToken = process.env.NIYATNA_INTERNAL_SERVICE_TOKEN?.trim();
   if (inlineToken) return inlineToken;
 
-  const tokenFile = process.env.OMNIROUTE_INTERNAL_SERVICE_TOKEN_FILE?.trim();
+  const tokenFile = process.env.NIYATNA_INTERNAL_SERVICE_TOKEN_FILE?.trim();
   if (!tokenFile) return "";
 
   try {

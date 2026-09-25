@@ -14,7 +14,7 @@ import { join } from "node:path";
 // exit/crash.
 test("ServerSupervisor surfaces a fatal [STARTUP] Fatal: boot diagnostic to the real console even when the child never exits (default, non --log mode)", async () => {
   const { ServerSupervisor } = await import("../../bin/cli/runtime/processSupervisor.mjs");
-  delete process.env.OMNIROUTE_SHOW_LOG;
+  delete process.env.NIYATNA_SHOW_LOG;
 
   const dir = mkdtempSync(join(tmpdir(), "omniroute-issue13314-"));
   const childScript = join(dir, "fake-server.mjs");

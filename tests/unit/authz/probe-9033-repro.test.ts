@@ -24,13 +24,13 @@ const core = await import("../../../src/lib/db/core.ts");
 const ipFilter = await import("../../../open-sse/services/ipFilter.ts");
 const pipeline = await import("../../../src/server/authz/pipeline.ts");
 
-const ORIGINAL_STAMP_TOKEN = process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+const ORIGINAL_STAMP_TOKEN = process.env.NIYATNA_PEER_STAMP_TOKEN;
 
 test.after(() => {
   core.resetDbInstance();
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
-  if (ORIGINAL_STAMP_TOKEN === undefined) delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
-  else process.env.OMNIROUTE_PEER_STAMP_TOKEN = ORIGINAL_STAMP_TOKEN;
+  if (ORIGINAL_STAMP_TOKEN === undefined) delete process.env.NIYATNA_PEER_STAMP_TOKEN;
+  else process.env.NIYATNA_PEER_STAMP_TOKEN = ORIGINAL_STAMP_TOKEN;
 });
 
 test.beforeEach(() => {
@@ -38,7 +38,7 @@ test.beforeEach(() => {
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
   ipFilter.resetIPFilter();
-  delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  delete process.env.NIYATNA_PEER_STAMP_TOKEN;
 });
 
 const BLOCKED = "203.0.113.99";
@@ -50,7 +50,7 @@ function makeRequest(extraHeaders: Record<string, string> = {}) {
 }
 
 test("D1: blacklisted IP is blocked on a DIRECT connection (trusted peer stamp, no XFF)", async () => {
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "stamp-tok";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "stamp-tok";
   ipFilter.configureIPFilter({ enabled: true, mode: "blacklist" });
   ipFilter.addToBlacklist(BLOCKED);
 
@@ -93,7 +93,7 @@ test("D2: persisted config written after first load is honored WITHOUT restart",
 });
 
 test("D3: behind reverse proxy (peer stamp=loopback + via-proxy marker + XFF=blacklisted IP) still blocks", async () => {
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "stamp-tok";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "stamp-tok";
   ipFilter.configureIPFilter({ enabled: true, mode: "blacklist" });
   ipFilter.addToBlacklist(BLOCKED);
 
@@ -116,7 +116,7 @@ test("D3: behind reverse proxy (peer stamp=loopback + via-proxy marker + XFF=bla
 });
 
 test("D4: behind Cloudflare (cf-connecting-ip + via-proxy marker, no XFF) blocks the client IP", async () => {
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "stamp-tok";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "stamp-tok";
   ipFilter.configureIPFilter({ enabled: true, mode: "blacklist" });
   ipFilter.addToBlacklist(BLOCKED);
 

@@ -116,7 +116,7 @@ export function resolveCodexTarget(opts = {}) {
   } else {
     let fromCtx;
     try {
-      fromCtx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl;
+      fromCtx = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl;
     } catch {
       /* no context */
     }
@@ -128,13 +128,13 @@ export function resolveCodexTarget(opts = {}) {
   let authToken = opts.apiKey ?? opts["api-key"];
   if (!authToken) {
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       authToken = ctx?.accessToken || ctx?.apiKey || undefined;
     } catch {
       /* no context auth */
     }
   }
-  if (!authToken) authToken = process.env.OMNIROUTE_API_KEY;
+  if (!authToken) authToken = process.env.NIYATNA_API_KEY;
   return { baseUrl, authToken };
 }
 
@@ -152,7 +152,7 @@ async function healthCheck(baseUrl, timeoutMs = 3000) {
 
 /**
  * Build the env for the Codex child: strip stale OpenAI/Codex creds, then set
- * OMNIROUTE_API_KEY (the provider env_key) to the resolved token or a sentinel.
+ * NIYATNA_API_KEY (the provider env_key) to the resolved token or a sentinel.
  * @param {Record<string,string>} baseEnv
  * @param {string|undefined} authToken
  * @returns {Record<string,string>}
@@ -160,7 +160,7 @@ async function healthCheck(baseUrl, timeoutMs = 3000) {
 export function buildCodexEnv(baseEnv, authToken) {
   const env = { ...baseEnv };
   for (const key of STRIPPED_CODEX_ENV_KEYS) delete env[key];
-  env.OMNIROUTE_API_KEY = (authToken && String(authToken).trim()) || NO_AUTH_SENTINEL;
+  env.NIYATNA_API_KEY = (authToken && String(authToken).trim()) || NO_AUTH_SENTINEL;
   return env;
 }
 
@@ -179,7 +179,7 @@ export function buildCodexProviderArgs(baseUrl, model) {
     "-c",
     tomlAssign("model_providers.omniroute.base_url", `${baseUrl}/v1`),
     "-c",
-    tomlAssign("model_providers.omniroute.env_key", "OMNIROUTE_API_KEY"),
+    tomlAssign("model_providers.omniroute.env_key", "NIYATNA_API_KEY"),
     "-c",
     tomlAssign("model_providers.omniroute.wire_api", "responses"),
     "-c",
@@ -286,7 +286,7 @@ export function registerLaunchCodex(program) {
     .option("-p, --p <name>", "Alias for --profile")
     .option(
       "--api-key <key>",
-      "OmniRoute API key (overrides OMNIROUTE_API_KEY env var for this invocation)"
+      "OmniRoute API key (overrides NIYATNA_API_KEY env var for this invocation)"
     )
     .allowUnknownOption(true)
     .allowExcessArguments(true)

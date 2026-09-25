@@ -57,7 +57,7 @@ async function runBoundedJson(path, opts, request = {}) {
     acceptNotOk: true,
   });
   const elapsed = Math.round(performance.now() - started);
-  if (process.env.OMNIROUTE_DEBUG === "1") {
+  if (process.env.NIYATNA_DEBUG === "1") {
     console.error(`[omniroute] ${request.method ?? "GET"} ${path} completed in ${elapsed}ms`);
   }
   const payload = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));

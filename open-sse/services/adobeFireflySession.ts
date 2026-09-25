@@ -140,7 +140,7 @@ const SESSION_DIR_NAME = "adobe-firefly-sessions";
 
 function dataDir(): string {
   return (
-    String(process.env.DATA_DIR || process.env.OMNIROUTE_DATA_DIR || "").trim() ||
+    String(process.env.DATA_DIR || process.env.NIYATNA_DATA_DIR || "").trim() ||
     join(process.cwd(), ".data")
   );
 }

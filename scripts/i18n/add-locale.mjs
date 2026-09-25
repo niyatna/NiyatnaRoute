@@ -32,7 +32,7 @@
  * planned write / command — including the computed docs core set — and touches
  * nothing: no files, no network, no child processes.
  *
- * The translating phases (ui, docs, cli, site) need OMNIROUTE_TRANSLATION_API_URL,
+ * The translating phases (ui, docs, cli, site) need NIYATNA_TRANSLATION_API_URL,
  * _API_KEY and _MODEL (docs/guides/I18N.md → "Translation pipeline"); `.env` is loaded
  * automatically. Child scripts run through execFileSync with an argument array —
  * nothing is ever interpolated into a shell.
@@ -108,7 +108,7 @@ const USAGE = `Usage: node scripts/i18n/add-locale.mjs --code=<code> --english=<
   --dry-run             print every planned write / command and touch nothing
 
 Phases, in order: ${PHASES.join(", ")}
-The translating phases (${PHASES_TRANSLATING.join(", ")}) need OMNIROUTE_TRANSLATION_API_URL / _API_KEY / _MODEL
+The translating phases (${PHASES_TRANSLATING.join(", ")}) need NIYATNA_TRANSLATION_API_URL / _API_KEY / _MODEL
 (docs/guides/I18N.md → "Translation pipeline"); .env is loaded automatically.`;
 
 // ----- .env loader ---------------------------------------------------------

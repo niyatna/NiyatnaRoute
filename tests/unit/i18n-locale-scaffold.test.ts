@@ -455,7 +455,7 @@ test("insertI18nGuideRow only touches the locale table, not other tables with ba
     "",
     "| Variable | Default |",
     "| --- | --- |",
-    "| `OMNIROUTE_LANG` | `en` |",
+    "| `NIYATNA_LANG` | `en` |",
     "| `zz` | `zz` |",
     "",
     "### Supported Locales",

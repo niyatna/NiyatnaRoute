@@ -149,14 +149,14 @@ test("env show returns 0", async () => {
 });
 
 test("env get returns 0 and prints env value", async () => {
-  process.env.__OMNIROUTE_TEST_KEY__ = "hello";
+  process.env.__NIYATNA_TEST_KEY__ = "hello";
   const { runEnvGetCommand } = await import("../../bin/cli/commands/env.mjs");
   const lines: string[] = [];
   const originalLog = console.log;
   console.log = (msg: string) => lines.push(msg);
-  const result = await runEnvGetCommand("__OMNIROUTE_TEST_KEY__");
+  const result = await runEnvGetCommand("__NIYATNA_TEST_KEY__");
   console.log = originalLog;
-  delete process.env.__OMNIROUTE_TEST_KEY__;
+  delete process.env.__NIYATNA_TEST_KEY__;
   assert.equal(result, 0);
   assert.ok(lines.join("").includes("hello"));
 });

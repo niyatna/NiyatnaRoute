@@ -14,7 +14,7 @@
  *  - Auto-route = header override -> model-prefix match -> deterministic strategy
  *    (`routingStrategies.ts`, M2/RIC-740). Every decision is explainable via the
  *    `x-omniroute-route-decision` response header — no predictive model.
- *  - The optional `OMNIROUTE_SELF_HOSTED_API_KEY` shared-secret check here is a
+ *  - The optional `NIYATNA_SELF_HOSTED_API_KEY` shared-secret check here is a
  *    scaffold reserved for the D5 quota-key system: when unset the route is open
  *    (loopback / trusted-network deployment), exactly like the existing
  *    self-hosted local providers; when set, it is compared with a constant-time
@@ -44,11 +44,11 @@ import {
 } from "./routingStrategies.ts";
 
 /** Env var holding the inline YAML provider config (runtime-only credentials). */
-export const CONFIG_ENV = "OMNIROUTE_SELF_HOSTED_PROVIDERS";
+export const CONFIG_ENV = "NIYATNA_SELF_HOSTED_PROVIDERS";
 /** Env var pointing at a YAML file with the provider config. */
-export const CONFIG_FILE_ENV = "OMNIROUTE_SELF_HOSTED_PROVIDERS_FILE";
+export const CONFIG_FILE_ENV = "NIYATNA_SELF_HOSTED_PROVIDERS_FILE";
 /** Optional shared API key for the unified entry (D5 reserved). */
-export const API_KEY_ENV = "OMNIROUTE_SELF_HOSTED_API_KEY";
+export const API_KEY_ENV = "NIYATNA_SELF_HOSTED_API_KEY";
 /** Provider-selector header recognized by the unified entry. */
 export const PROVIDER_SELECTOR_HEADER = "x-omniroute-provider";
 /** Marker header added to responses routed through the unified entry. */

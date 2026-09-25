@@ -133,8 +133,8 @@ export async function POST(request) {
   try {
     // One-line marker for diagnosing 413 / Server-Action interceptions.
     // Logs only when Content-Length is present so debug noise stays low for
-    // typical chat payloads. Opt-in via OMNIROUTE_LOG_REQUEST_SHAPE=1.
-    if (process.env.OMNIROUTE_LOG_REQUEST_SHAPE === "1") {
+    // typical chat payloads. Opt-in via NIYATNA_LOG_REQUEST_SHAPE=1.
+    if (process.env.NIYATNA_LOG_REQUEST_SHAPE === "1") {
       const ct = contentType;
       const cl = requestContentLengthHeader;
       if (cl && Number(cl) > 256 * 1024) {

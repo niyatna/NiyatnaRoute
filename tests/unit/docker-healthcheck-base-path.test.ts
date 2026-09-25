@@ -7,12 +7,12 @@ test("resolveHealthPath keeps the default lightweight /healthz route at the doma
   assert.equal(resolveHealthPath(undefined), "/healthz");
 });
 
-test("resolveHealthPath prefixes the health route with OMNIROUTE_BASE_PATH", () => {
+test("resolveHealthPath prefixes the health route with NIYATNA_BASE_PATH", () => {
   assert.equal(resolveHealthPath("/omniroute/"), "/omniroute/healthz");
   assert.equal(resolveHealthPath("/omniroute"), "/omniroute/healthz");
 });
 
-test("resolveHealthPath honors an explicit OMNIROUTE_HEALTHCHECK_PATH override", () => {
+test("resolveHealthPath honors an explicit NIYATNA_HEALTHCHECK_PATH override", () => {
   assert.equal(resolveHealthPath(undefined, "/api/monitoring/health"), "/api/monitoring/health");
   assert.equal(
     resolveHealthPath("/omniroute", "/api/monitoring/health"),
@@ -20,7 +20,7 @@ test("resolveHealthPath honors an explicit OMNIROUTE_HEALTHCHECK_PATH override",
   );
 });
 
-test("resolveHealthPath ignores an invalid/empty OMNIROUTE_HEALTHCHECK_PATH and falls back to /healthz", () => {
+test("resolveHealthPath ignores an invalid/empty NIYATNA_HEALTHCHECK_PATH and falls back to /healthz", () => {
   assert.equal(resolveHealthPath("", "  "), "/healthz");
   assert.equal(resolveHealthPath("", "/../etc/passwd"), "/healthz");
   assert.equal(resolveHealthPath("", "/health?utm=1"), "/healthz");

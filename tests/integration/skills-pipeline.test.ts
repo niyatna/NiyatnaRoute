@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME } from "../../open-sse/services/webSearchFallback.ts";
+import { NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME } from "../../open-sse/services/webSearchFallback.ts";
 import { decodeSkillToolName, encodeSkillToolName } from "../../src/lib/skills/injection.ts";
 
 import { createChatPipelineHarness } from "./_chatPipelineHarness.ts";
@@ -820,7 +820,7 @@ test("web_search fallback converts built-in tools for unsupported providers and 
 
     upstreamBodies.push(body);
     return buildOpenAIToolCallResponse({
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       toolCallId: "call_web_search",
       argumentsObject: {
         query: "latest omniroute release notes",
@@ -847,7 +847,7 @@ test("web_search fallback converts built-in tools for unsupported providers and 
   assert.equal(response.status, 200);
   assert.equal(upstreamBodies.length, 1);
   assert.equal(upstreamBodies[0].tools[0].type, "function");
-  assert.equal(upstreamBodies[0].tools[0].function.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(upstreamBodies[0].tools[0].function.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(searchCalls.length, 1);
   assert.equal(json.choices[0].finish_reason, "tool_calls");
   assert.equal(json.tool_results[0].tool_call_id, "call_web_search");
@@ -880,7 +880,7 @@ test("web_search fallback preserves Responses API output by appending function_c
     }
 
     return buildOpenAIToolCallResponse({
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       toolCallId: "call_responses_web_search",
       argumentsObject: {
         query: "latest omniroute roadmap",
@@ -918,7 +918,7 @@ test("web_search fallback preserves Responses API output by appending function_c
   assert.equal(response.status, 200);
   assert.ok(functionCall, "should include the original function_call item");
   assert.ok(functionCallOutput, "should append function_call_output");
-  assert.equal(functionCall.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(functionCall.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(functionCallOutput.call_id, "call_responses_web_search");
   const output =
     typeof functionCallOutput.output === "string"
@@ -951,7 +951,7 @@ test("web_search fallback emits a native web_search_call output item with source
     }
 
     return buildOpenAIToolCallResponse({
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       toolCallId: "call_responses_web_search_call",
       argumentsObject: {
         query: "latest omniroute release",
@@ -1030,7 +1030,7 @@ test("web_search fallback executes stream:true responses requests non-streaming 
     }
     upstreamBodies.push(body);
     return buildOpenAIToolCallResponse({
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       toolCallId: "call_responses_stream_search",
       argumentsObject: {
         query: "streaming fallback probe",
@@ -1110,7 +1110,7 @@ test("web_search fallback auto-selects a configured paid provider over duckduckg
       });
     }
     return buildOpenAIToolCallResponse({
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       toolCallId: "call_responses_auto_search",
       argumentsObject: {
         query: "paid provider auto-select test",
@@ -1149,7 +1149,7 @@ test("web_search fallback auto-selects a configured paid provider over duckduckg
   assert.equal(response.status, 200);
   assert.ok(functionCall, "should include the original function_call item");
   assert.ok(functionCallOutput, "should append function_call_output");
-  assert.equal(functionCall.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(functionCall.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(functionCallOutput.call_id, "call_responses_auto_search");
   assert.equal(output.provider, "serper-search");
   assert.equal(output.results[0].title, "Paid Provider Result");

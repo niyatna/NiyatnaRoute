@@ -5,7 +5,7 @@
  * ever sends `keyId` (never a raw `apiKey`). generateHermesAgentConfig()
  * used to never resolve `keyId` at all, so `providers.omniroute.api_key`,
  * `delegation.api_key`, and every `auxiliary.*.api_key` were written with
- * the hardcoded placeholder "YOUR_OMNIROUTE_API_KEY_HERE", yielding 401s
+ * the hardcoded placeholder "YOUR_NIYATNA_API_KEY_HERE", yielding 401s
  * against OmniRoute for every real user.
  */
 
@@ -39,7 +39,7 @@ test("#10711: generateHermesAgentConfig writes placeholder api_key when only key
   // in the route handler before calling it) -- confirms the fallthrough this
   // bug depends on still exists at this layer, and that an explicit apiKey
   // (as the resolved route now passes) overrides the placeholder.
-  assert.equal(parsed.providers.omniroute.api_key, "YOUR_OMNIROUTE_API_KEY_HERE");
+  assert.equal(parsed.providers.omniroute.api_key, "YOUR_NIYATNA_API_KEY_HERE");
 });
 
 test("#10711: an explicit apiKey (as resolved server-side from keyId) is written everywhere, never the placeholder", async () => {

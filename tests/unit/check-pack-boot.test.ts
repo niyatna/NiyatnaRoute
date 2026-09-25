@@ -177,7 +177,7 @@ test("source guard: the gate polls the real health endpoint of the INSTALLED bin
   assert.ok(postinstall.includes('["sql.js", "node-machine-id"]'));
   assert.ok(postinstall.includes('join(ROOT, "dist", "node_modules", packageName)'));
   assert.ok(
-    src.includes('OMNIROUTE_PACK_BOOT_FORCE_SQLJS: "1"'),
+    src.includes('NIYATNA_PACK_BOOT_FORCE_SQLJS: "1"'),
     "must force the packaged sql.js tier during this smoke"
   );
   assert.ok(src.includes("MAX_SERVER_OUTPUT_CHARS"));

@@ -39,8 +39,8 @@ test("#4055: the bootstrap spawn pins cwd to the package root so tsx + @/ aliase
   ]);
 
   // Bootstrap guard + auto-start suppression are still wired through the env.
-  assert.equal(spec.options.env.OMNIROUTE_LIVE_WS_BOOTSTRAPPED, "1");
-  assert.equal(spec.options.env.OMNIROUTE_ENABLE_LIVE_WS, "0");
+  assert.equal(spec.options.env.NIYATNA_LIVE_WS_BOOTSTRAPPED, "1");
+  assert.equal(spec.options.env.NIYATNA_ENABLE_LIVE_WS, "0");
   // Caller env is preserved.
   assert.equal(spec.options.env.PATH, "/usr/bin");
   assert.equal(spec.options.stdio, "inherit");

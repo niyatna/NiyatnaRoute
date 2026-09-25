@@ -60,7 +60,7 @@ test("JON-562 worker environment is an allowlist and drops credential-shaped var
     LANG: "C.UTF-8",
     LINEAR_API_KEY: "must-not-cross",
     OPENAI_API_KEY: "must-not-cross",
-    OMNIROUTE_MANAGEMENT_TOKEN: "must-not-cross",
+    NIYATNA_MANAGEMENT_TOKEN: "must-not-cross",
   });
 
   assert.deepEqual(env, {

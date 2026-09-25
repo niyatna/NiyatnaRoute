@@ -42,7 +42,7 @@ test("omniroute CLI --version fast-path prints ONLY the version, skipping bootst
     readFileSync(join(process.cwd(), "package.json"), "utf8")
   ) as { version: string };
 
-  const { stdout } = await execFileAsync(process.execPath, ["bin/omniroute.mjs", "--version"], {
+  const { stdout } = await execFileAsync(process.execPath, ["bin/niyatnaroute.mjs", "--version"], {
     cwd: process.cwd(),
     env: { ...process.env, DATA_DIR: "" },
   });

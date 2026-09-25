@@ -189,12 +189,12 @@ test('env-var: a var read via an env helper (envInt("X")) is NOT flagged', () =>
   const found = findingsFor({
     files: {
       "open-sse/config/constants.ts":
-        'const t = envInt("OMNIROUTE_CIRCUIT_BREAKER_OAUTH_THRESHOLD", 8);\n',
+        'const t = envInt("NIYATNA_CIRCUIT_BREAKER_OAUTH_THRESHOLD", 8);\n',
     },
-    docs: { "cfg.md": "Override with `OMNIROUTE_CIRCUIT_BREAKER_OAUTH_THRESHOLD`.\n" },
+    docs: { "cfg.md": "Override with `NIYATNA_CIRCUIT_BREAKER_OAUTH_THRESHOLD`.\n" },
   });
   assert.ok(
-    !found.has("env-var::OMNIROUTE_CIRCUIT_BREAKER_OAUTH_THRESHOLD"),
+    !found.has("env-var::NIYATNA_CIRCUIT_BREAKER_OAUTH_THRESHOLD"),
     'envInt("X", …) helper read must be indexed'
   );
 });

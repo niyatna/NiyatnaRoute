@@ -99,7 +99,7 @@ type CriticalTableSpec = {
 export const isCloud = typeof globalThis.caches === "object" && globalThis.caches !== null;
 
 // Next.js build workers sometimes drop NEXT_PHASE from their env, so
-// OMNIROUTE_BUILDING=1 (set by build-next-isolated.mjs and inherited by every
+// NIYATNA_BUILDING=1 (set by build-next-isolated.mjs and inherited by every
 // spawned build worker) is the reliable build signal. During build the native
 // better-sqlite3 addon must never load: its Statement destructor aborts with
 // SIGABRT when the worker thread exits (assertion in
@@ -840,7 +840,7 @@ function offloadLegacyCallLogDetails(db: SqliteDatabase) {
 }
 
 function shouldRunStartupDbHealthCheck(): boolean {
-  if (process.env.OMNIROUTE_FORCE_DB_HEALTHCHECK === "1") return true;
+  if (process.env.NIYATNA_FORCE_DB_HEALTHCHECK === "1") return true;
   return !isAutomatedTestProcess();
 }
 
@@ -905,7 +905,7 @@ function autoMigrateLegacyEncryptedConnections(db: SqliteDatabase): number {
 let dbHealthCheckTimer: NodeJS.Timeout | null = null;
 
 function getDbHealthCheckIntervalMs(): number {
-  const rawValue = process.env.OMNIROUTE_DB_HEALTHCHECK_INTERVAL_MS;
+  const rawValue = process.env.NIYATNA_DB_HEALTHCHECK_INTERVAL_MS;
   if (typeof rawValue === "string" && rawValue.trim().length > 0) {
     const parsed = Number(rawValue);
     if (Number.isFinite(parsed) && parsed >= 0) {
@@ -948,7 +948,7 @@ function startDbHealthCheckScheduler(db: SqliteDatabase) {
 const healthShutdown = new AbortController();
 const managedHealth = createDbHealthCoordinator(async (autoRepair, skipIntegrity) => {
   const db = getDbInstance();
-  const skipIntegrityCheck = skipIntegrity || process.env.OMNIROUTE_SKIP_DB_HEALTHCHECK === "1";
+  const skipIntegrityCheck = skipIntegrity || process.env.NIYATNA_SKIP_DB_HEALTHCHECK === "1";
   const backupDir = DB_BACKUPS_DIR || path.join(DATA_DIR, "db_backups");
   const result =
     db.driver === "sql.js" || db.name === ":memory:" || !db.name
@@ -1379,9 +1379,9 @@ export function getDbInstance(): SqliteDatabase {
         });
       });
     } else {
-      const skipIntegrityCheck = process.env.OMNIROUTE_SKIP_DB_HEALTHCHECK === "1";
+      const skipIntegrityCheck = process.env.NIYATNA_SKIP_DB_HEALTHCHECK === "1";
       if (skipIntegrityCheck) {
-        console.log("[DB] Health check skipped (OMNIROUTE_SKIP_DB_HEALTHCHECK=1)");
+        console.log("[DB] Health check skipped (NIYATNA_SKIP_DB_HEALTHCHECK=1)");
       }
       try {
         runDbHealthCheck(db, {

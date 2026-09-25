@@ -7,7 +7,7 @@
  *
  * getActiveSyncedCatalog now fails open once a connection's synced catalog
  * exceeds a staleness threshold (default 30 days; overridable via
- * OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS), instead of gating on a frozen
+ * NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS), instead of gating on a frozen
  * point-in-time snapshot forever.
  */
 import test from "node:test";
@@ -131,9 +131,9 @@ test("#12849: a connection never synced (no timestamp) is non-authoritative, not
   assert.equal(resolved.model, LIVE_MODEL);
 });
 
-test("#12849: OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS overrides the default threshold", async () => {
-  const previous = process.env.OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS;
-  process.env.OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS = String(60 * 60 * 1000); // 1 hour
+test("#12849: NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS overrides the default threshold", async () => {
+  const previous = process.env.NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS;
+  process.env.NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS = String(60 * 60 * 1000); // 1 hour
   try {
     ageConnectionSync(1); // 1 day old — stale under the 1-hour override, fresh under the 30-day default
 
@@ -141,7 +141,7 @@ test("#12849: OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS overrides the default thre
 
     assert.equal(resolved.provider, PROVIDER);
   } finally {
-    if (previous === undefined) delete process.env.OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS;
-    else process.env.OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS = previous;
+    if (previous === undefined) delete process.env.NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS;
+    else process.env.NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS = previous;
   }
 });

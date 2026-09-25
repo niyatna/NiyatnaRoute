@@ -354,20 +354,20 @@ function isBuildProcess(): boolean {
 
 function isRecoverySchedulerDisabled(): boolean {
   return (
-    isEnvFlagEnabled("OMNIROUTE_DISABLE_CONNECTION_RECOVERY") ||
-    isEnvFlagEnabled("OMNIROUTE_DISABLE_BACKGROUND_SERVICES") ||
+    isEnvFlagEnabled("NIYATNA_DISABLE_CONNECTION_RECOVERY") ||
+    isEnvFlagEnabled("NIYATNA_DISABLE_BACKGROUND_SERVICES") ||
     isBuildProcess() ||
     isAutomatedTestProcess()
   );
 }
 
 /**
- * Resolve the tick interval (ms) from OMNIROUTE_CONNECTION_RECOVERY_INTERVAL_MS,
+ * Resolve the tick interval (ms) from NIYATNA_CONNECTION_RECOVERY_INTERVAL_MS,
  * falling back to the 60s default and clamping to a small floor.
  */
 export function resolveConnectionRecoveryIntervalMs(
   rawValue: string | undefined = typeof process !== "undefined"
-    ? process.env.OMNIROUTE_CONNECTION_RECOVERY_INTERVAL_MS
+    ? process.env.NIYATNA_CONNECTION_RECOVERY_INTERVAL_MS
     : undefined
 ): number {
   if (!rawValue) return DEFAULT_TICK_MS;

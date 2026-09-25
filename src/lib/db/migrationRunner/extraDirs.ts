@@ -12,7 +12,7 @@
  * This module lets an operator register extra directories, each under its own
  * namespace:
  *
- *   OMNIROUTE_EXTRA_MIGRATIONS_DIRS="ee=/opt/app/enterprise/db/migrations"
+ *   NIYATNA_EXTRA_MIGRATIONS_DIRS="ee=/opt/app/enterprise/db/migrations"
  *
  * Entries are separated by `path.delimiter` (`:` on POSIX, `;` on Windows) and a
  * file `NNN_name.sql` found there is recorded as `<namespace>-NNN`, so it can
@@ -29,7 +29,7 @@ import fs from "fs";
 import path from "path";
 
 /** Env var holding `namespace=dir` entries separated by `path.delimiter`. */
-export const EXTRA_MIGRATIONS_DIRS_ENV = "OMNIROUTE_EXTRA_MIGRATIONS_DIRS";
+export const EXTRA_MIGRATIONS_DIRS_ENV = "NIYATNA_EXTRA_MIGRATIONS_DIRS";
 
 /**
  * Namespaces become a version prefix (`ee-134`), so they stay lowercase,

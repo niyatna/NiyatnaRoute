@@ -49,8 +49,8 @@ test("#12407: config set claude preserves existing settings and writes Claude Co
           ...process.env,
           HOME: home,
           USERPROFILE: home,
-          OMNIROUTE_API_KEY: "sk_test_12407",
-          OMNIROUTE_BASE_URL: "http://localhost:20128/v1",
+          NIYATNA_API_KEY: "sk_test_12407",
+          NIYATNA_BASE_URL: "http://localhost:20128/v1",
         },
         timeout: 30_000,
       }

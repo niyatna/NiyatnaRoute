@@ -68,7 +68,7 @@ function establishPersistedSalt(dataDir: string): string | null {
 let cachedActiveSalt: string | null = null;
 
 function getActiveSalt(): string {
-  const envSalt = process.env.OMNIROUTE_CLI_SALT;
+  const envSalt = process.env.NIYATNA_CLI_SALT;
   if (envSalt) return envSalt;
 
   if (cachedActiveSalt) return cachedActiveSalt;

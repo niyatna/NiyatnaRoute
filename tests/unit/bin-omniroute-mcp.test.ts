@@ -4,7 +4,7 @@ import { pathToFileURL } from "node:url";
 import { join } from "node:path";
 import { platform } from "node:os";
 
-describe("bin/omniroute.mjs MCP path handling", () => {
+describe("bin/niyatnaroute.mjs MCP path handling", () => {
   it("pathToFileURL converts Windows paths to valid file:// URLs", () => {
     if (platform() !== "win32") {
       // Skip on non-Windows platforms

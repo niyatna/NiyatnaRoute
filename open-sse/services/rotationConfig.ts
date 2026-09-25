@@ -12,11 +12,11 @@
  * `providerSpecificData.rotationOverrides`).
  *
  * Config surface (all optional — defaults preserve the pre-existing engine behavior):
- *   - master enable                            OMNIROUTE_ROTATION_ENABLED               (default true)
- *   - rate-limit reset/cooldown seconds        OMNIROUTE_ROTATION_RATE_LIMIT_RESET_SECONDS (0 => engine default)
- *   - per-status fallback enable               OMNIROUTE_ROTATE_ON_{429,500,502,400}    (429/500/502 default true, 400 default false)
- *   - per-status threshold (errors in window)  OMNIROUTE_ROTATE_{status}_THRESHOLD      (default 1 => immediate, current behavior)
- *   - per-status window seconds                OMNIROUTE_ROTATE_{status}_WINDOW_SECONDS (default 120)
+ *   - master enable                            NIYATNA_ROTATION_ENABLED               (default true)
+ *   - rate-limit reset/cooldown seconds        NIYATNA_ROTATION_RATE_LIMIT_RESET_SECONDS (0 => engine default)
+ *   - per-status fallback enable               NIYATNA_ROTATE_ON_{429,500,502,400}    (429/500/502 default true, 400 default false)
+ *   - per-status threshold (errors in window)  NIYATNA_ROTATE_{status}_THRESHOLD      (default 1 => immediate, current behavior)
+ *   - per-status window seconds                NIYATNA_ROTATE_{status}_WINDOW_SECONDS (default 120)
  *
  * Everything here is a pure function or a small in-memory sliding-window counter — no DB / IO on
  * the hot path — so it is cheap to consult per request and trivially unit-testable.
@@ -81,31 +81,31 @@ function buildClass(
 
 function buildFromEnv(): RotationConfig {
   return {
-    enabled: envBool("OMNIROUTE_ROTATION_ENABLED", true),
-    rateLimitResetMs: envInt("OMNIROUTE_ROTATION_RATE_LIMIT_RESET_SECONDS", 0, 0) * 1000,
-    disableTagWithoutReset: envBool("OMNIROUTE_ROTATION_DISABLE_TAG_WITHOUT_RESET", true),
+    enabled: envBool("NIYATNA_ROTATION_ENABLED", true),
+    rateLimitResetMs: envInt("NIYATNA_ROTATION_RATE_LIMIT_RESET_SECONDS", 0, 0) * 1000,
+    disableTagWithoutReset: envBool("NIYATNA_ROTATION_DISABLE_TAG_WITHOUT_RESET", true),
     rateLimit429: buildClass(
-      "OMNIROUTE_ROTATE_ON_429",
-      "OMNIROUTE_ROTATE_429_THRESHOLD",
-      "OMNIROUTE_ROTATE_429_WINDOW_SECONDS",
+      "NIYATNA_ROTATE_ON_429",
+      "NIYATNA_ROTATE_429_THRESHOLD",
+      "NIYATNA_ROTATE_429_WINDOW_SECONDS",
       true
     ),
     serverError500: buildClass(
-      "OMNIROUTE_ROTATE_ON_500",
-      "OMNIROUTE_ROTATE_500_THRESHOLD",
-      "OMNIROUTE_ROTATE_500_WINDOW_SECONDS",
+      "NIYATNA_ROTATE_ON_500",
+      "NIYATNA_ROTATE_500_THRESHOLD",
+      "NIYATNA_ROTATE_500_WINDOW_SECONDS",
       true
     ),
     badGateway502: buildClass(
-      "OMNIROUTE_ROTATE_ON_502",
-      "OMNIROUTE_ROTATE_502_THRESHOLD",
-      "OMNIROUTE_ROTATE_502_WINDOW_SECONDS",
+      "NIYATNA_ROTATE_ON_502",
+      "NIYATNA_ROTATE_502_THRESHOLD",
+      "NIYATNA_ROTATE_502_WINDOW_SECONDS",
       true
     ),
     badRequest400: buildClass(
-      "OMNIROUTE_ROTATE_ON_400",
-      "OMNIROUTE_ROTATE_400_THRESHOLD",
-      "OMNIROUTE_ROTATE_400_WINDOW_SECONDS",
+      "NIYATNA_ROTATE_ON_400",
+      "NIYATNA_ROTATE_400_THRESHOLD",
+      "NIYATNA_ROTATE_400_WINDOW_SECONDS",
       false
     ),
   };

@@ -7,7 +7,7 @@ import path from "node:path";
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-codex-ws-fingerprint-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.APP_LOG_TO_FILE = "false";
-process.env.OMNIROUTE_WS_BRIDGE_SECRET = "bridge-secret";
+process.env.NIYATNA_WS_BRIDGE_SECRET = "bridge-secret";
 
 const core = await import("../../src/lib/db/core.ts");
 const { createProviderConnection } = await import("../../src/lib/db/providers.ts");

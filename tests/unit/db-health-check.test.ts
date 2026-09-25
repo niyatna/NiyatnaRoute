@@ -293,8 +293,8 @@ test("getDbInstance runs the startup health check synchronously by default (DB_H
     warnings.push(args.map(String).join(" "));
   };
 
-  const previousForce = process.env.OMNIROUTE_FORCE_DB_HEALTHCHECK;
-  process.env.OMNIROUTE_FORCE_DB_HEALTHCHECK = "1";
+  const previousForce = process.env.NIYATNA_FORCE_DB_HEALTHCHECK;
+  process.env.NIYATNA_FORCE_DB_HEALTHCHECK = "1";
   try {
     // DB_HEALTHCHECK_STARTUP_DEFERRED_ENABLED is off (default, #13717): the
     // startup health check (and its backup-gated abort) has already run
@@ -307,9 +307,9 @@ test("getDbInstance runs the startup health check synchronously by default (DB_H
   } finally {
     console.warn = originalWarn;
     if (previousForce === undefined) {
-      delete process.env.OMNIROUTE_FORCE_DB_HEALTHCHECK;
+      delete process.env.NIYATNA_FORCE_DB_HEALTHCHECK;
     } else {
-      process.env.OMNIROUTE_FORCE_DB_HEALTHCHECK = previousForce;
+      process.env.NIYATNA_FORCE_DB_HEALTHCHECK = previousForce;
     }
   }
 

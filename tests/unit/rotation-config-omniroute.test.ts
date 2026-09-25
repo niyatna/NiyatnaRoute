@@ -9,21 +9,21 @@ const rc = await import("../../open-sse/services/rotationConfig.ts");
 const { checkFallbackError } = await import("../../open-sse/services/accountFallback.ts");
 
 const ROTATION_ENV_KEYS = [
-  "OMNIROUTE_ROTATION_ENABLED",
-  "OMNIROUTE_ROTATION_RATE_LIMIT_RESET_SECONDS",
-  "OMNIROUTE_ROTATION_DISABLE_TAG_WITHOUT_RESET",
-  "OMNIROUTE_ROTATE_ON_429",
-  "OMNIROUTE_ROTATE_429_THRESHOLD",
-  "OMNIROUTE_ROTATE_429_WINDOW_SECONDS",
-  "OMNIROUTE_ROTATE_ON_500",
-  "OMNIROUTE_ROTATE_500_THRESHOLD",
-  "OMNIROUTE_ROTATE_500_WINDOW_SECONDS",
-  "OMNIROUTE_ROTATE_ON_502",
-  "OMNIROUTE_ROTATE_502_THRESHOLD",
-  "OMNIROUTE_ROTATE_502_WINDOW_SECONDS",
-  "OMNIROUTE_ROTATE_ON_400",
-  "OMNIROUTE_ROTATE_400_THRESHOLD",
-  "OMNIROUTE_ROTATE_400_WINDOW_SECONDS",
+  "NIYATNA_ROTATION_ENABLED",
+  "NIYATNA_ROTATION_RATE_LIMIT_RESET_SECONDS",
+  "NIYATNA_ROTATION_DISABLE_TAG_WITHOUT_RESET",
+  "NIYATNA_ROTATE_ON_429",
+  "NIYATNA_ROTATE_429_THRESHOLD",
+  "NIYATNA_ROTATE_429_WINDOW_SECONDS",
+  "NIYATNA_ROTATE_ON_500",
+  "NIYATNA_ROTATE_500_THRESHOLD",
+  "NIYATNA_ROTATE_500_WINDOW_SECONDS",
+  "NIYATNA_ROTATE_ON_502",
+  "NIYATNA_ROTATE_502_THRESHOLD",
+  "NIYATNA_ROTATE_502_WINDOW_SECONDS",
+  "NIYATNA_ROTATE_ON_400",
+  "NIYATNA_ROTATE_400_THRESHOLD",
+  "NIYATNA_ROTATE_400_WINDOW_SECONDS",
 ];
 
 function clearEnv() {
@@ -46,11 +46,11 @@ test("defaults preserve historical behavior (no env set)", () => {
 
 test("env parse: disable 502, enable 400, set reset seconds + thresholds", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_ON_502 = "false";
-  process.env.OMNIROUTE_ROTATE_ON_400 = "true";
-  process.env.OMNIROUTE_ROTATION_RATE_LIMIT_RESET_SECONDS = "10";
-  process.env.OMNIROUTE_ROTATE_429_THRESHOLD = "6";
-  process.env.OMNIROUTE_ROTATE_429_WINDOW_SECONDS = "120";
+  process.env.NIYATNA_ROTATE_ON_502 = "false";
+  process.env.NIYATNA_ROTATE_ON_400 = "true";
+  process.env.NIYATNA_ROTATION_RATE_LIMIT_RESET_SECONDS = "10";
+  process.env.NIYATNA_ROTATE_429_THRESHOLD = "6";
+  process.env.NIYATNA_ROTATE_429_WINDOW_SECONDS = "120";
   rc.resetGlobalRotationConfigForTest();
 
   const cfg = rc.getGlobalRotationConfig();
@@ -64,7 +64,7 @@ test("env parse: disable 502, enable 400, set reset seconds + thresholds", () =>
 
 test("isFallbackBlockedForStatus: restrictive for 429/500/502, never for 400/ungated", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_ON_502 = "false";
+  process.env.NIYATNA_ROTATE_ON_502 = "false";
   rc.resetGlobalRotationConfigForTest();
   const cfg = rc.getGlobalRotationConfig();
 
@@ -81,7 +81,7 @@ test("shouldForceFallbackFor400 only when opted in", () => {
   let cfg = rc.getGlobalRotationConfig();
   assert.equal(rc.shouldForceFallbackFor400(400, cfg), false); // default off
 
-  process.env.OMNIROUTE_ROTATE_ON_400 = "true";
+  process.env.NIYATNA_ROTATE_ON_400 = "true";
   rc.resetGlobalRotationConfigForTest();
   cfg = rc.getGlobalRotationConfig();
   assert.equal(rc.shouldForceFallbackFor400(400, cfg), true);
@@ -91,7 +91,7 @@ test("shouldForceFallbackFor400 only when opted in", () => {
 
 test("resolveRotationConfig merges per-connection overrides over global", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_429_THRESHOLD = "6";
+  process.env.NIYATNA_ROTATE_429_THRESHOLD = "6";
   rc.resetGlobalRotationConfigForTest();
 
   const merged = rc.resolveRotationConfig({
@@ -108,8 +108,8 @@ test("resolveRotationConfig merges per-connection overrides over global", () => 
 
 test("recordErrorAndCheckThreshold: sliding window reaches threshold then resets", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_429_THRESHOLD = "3";
-  process.env.OMNIROUTE_ROTATE_429_WINDOW_SECONDS = "60";
+  process.env.NIYATNA_ROTATE_429_THRESHOLD = "3";
+  process.env.NIYATNA_ROTATE_429_WINDOW_SECONDS = "60";
   rc.resetGlobalRotationConfigForTest();
   const cfg = rc.getGlobalRotationConfig();
 
@@ -124,8 +124,8 @@ test("recordErrorAndCheckThreshold: sliding window reaches threshold then resets
 
 test("recordErrorAndCheckThreshold: errors outside the window do not accumulate", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_500_THRESHOLD = "3";
-  process.env.OMNIROUTE_ROTATE_500_WINDOW_SECONDS = "60";
+  process.env.NIYATNA_ROTATE_500_THRESHOLD = "3";
+  process.env.NIYATNA_ROTATE_500_WINDOW_SECONDS = "60";
   rc.resetGlobalRotationConfigForTest();
   const cfg = rc.getGlobalRotationConfig();
 
@@ -143,9 +143,9 @@ test("recordErrorAndCheckThreshold: threshold 1 (default) => immediate rotate", 
   clearEnv();
 });
 
-test("integration: OMNIROUTE_ROTATE_ON_502=false blocks 502 fallback in checkFallbackError", () => {
+test("integration: NIYATNA_ROTATE_ON_502=false blocks 502 fallback in checkFallbackError", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATE_ON_502 = "false";
+  process.env.NIYATNA_ROTATE_ON_502 = "false";
   rc.resetGlobalRotationConfigForTest();
 
   const blocked = checkFallbackError(502, "bad gateway", 0, null, "openai");
@@ -177,7 +177,7 @@ test("integration: plain 400 does not fall over by default, but does when opted 
   assert.equal(dflt.shouldFallback, false);
   clearEnv();
 
-  process.env.OMNIROUTE_ROTATE_ON_400 = "true";
+  process.env.NIYATNA_ROTATE_ON_400 = "true";
   rc.resetGlobalRotationConfigForTest();
   const opted = checkFallbackError(400, "Invalid JSON: unexpected token", 0, null, "openai");
   assert.equal(opted.shouldFallback, true);
@@ -186,7 +186,7 @@ test("integration: plain 400 does not fall over by default, but does when opted 
 
 test("integration: rate-limit cooldown override applies to a 429 with no upstream hint", () => {
   clearEnv();
-  process.env.OMNIROUTE_ROTATION_RATE_LIMIT_RESET_SECONDS = "10";
+  process.env.NIYATNA_ROTATION_RATE_LIMIT_RESET_SECONDS = "10";
   rc.resetGlobalRotationConfigForTest();
 
   const res = checkFallbackError(429, "rate limit", 0, null, "openai");

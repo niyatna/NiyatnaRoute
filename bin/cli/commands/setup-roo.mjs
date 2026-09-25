@@ -29,7 +29,7 @@ export function resolveRooTarget(opts = {}) {
   if (opts.remote) root = String(opts.remote).replace(/\/+$/, "");
   else {
     try {
-      root = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl;
+      root = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl;
     } catch {
       /* none */
     }
@@ -38,13 +38,13 @@ export function resolveRooTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* none */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { baseUrl: ensureV1(root), apiKey };
 }
 
@@ -176,7 +176,7 @@ export async function runSetupRooCommand(opts = {}) {
 
   printInfo("\nIn the Roo Code panel: Settings → Providers → OpenAI Compatible (guaranteed path):");
   printInfo(`  Base URL:  ${baseUrl}        (Roo expects /v1)`);
-  printInfo(`  API Key:   <your OMNIROUTE_API_KEY>`);
+  printInfo(`  API Key:   <your NIYATNA_API_KEY>`);
   printInfo(`  Model:     ${model}`);
   printInfo(`Or use Roo: “Import Settings” → select ${importPath}`);
   return 0;
@@ -190,7 +190,7 @@ export function registerSetupRoo(program) {
     )
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--model <id>", "Model id for Roo (required unless picked interactively)")
     .option(
       "--import-path <path>",

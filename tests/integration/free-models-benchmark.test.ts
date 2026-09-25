@@ -11,8 +11,8 @@
  * every model (the harness itself broken) fails the test.
  *
  * Environment:
- *   OMNIROUTE_API_KEY  — required (else test skips)
- *   OMNIROUTE_URL      — defaults to http://localhost:3000
+ *   NIYATNA_API_KEY  — required (else test skips)
+ *   NIYATNA_URL      — defaults to http://localhost:3000
  *
  * Models benchmarked are restricted to providers with an active connection
  * on this deployment (checked live via GET /api/providers) — see

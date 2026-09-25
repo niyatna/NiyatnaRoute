@@ -253,7 +253,7 @@ export async function POST(request: Request) {
     const effectiveWireApi = wireApi ?? "responses";
     const normalizedBaseUrl = normalizeCodexBaseUrl(baseUrl, effectiveWireApi);
 
-    // Always create a custom provider to reliably pass wire_api and use OMNIROUTE_API_KEY
+    // Always create a custom provider to reliably pass wire_api and use NIYATNA_API_KEY
     parsed._root.model_provider = "omniroute";
     parsed._sections["model_providers.omniroute"] = {
       name: "OmniRoute",

@@ -37,7 +37,7 @@ const credentialsRoute = await import("../../src/app/api/cloud/credentials/updat
 const aliasRoute = await import("../../src/app/api/cloud/models/alias/route.ts");
 
 async function resetStorage() {
-  delete process.env.OMNIROUTE_API_KEY;
+  delete process.env.NIYATNA_API_KEY;
   delete process.env.ROUTER_API_KEY;
   process.env.INITIAL_PASSWORD = "bootstrap-password";
   process.env.JWT_SECRET = "cloud-write-auth-jwt";

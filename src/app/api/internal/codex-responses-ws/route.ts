@@ -232,7 +232,7 @@ async function maybeInjectResponsesWsMemory(
 }
 
 function getBridgeSecret(): string {
-  return process.env.OMNIROUTE_WS_BRIDGE_SECRET || "";
+  return process.env.NIYATNA_WS_BRIDGE_SECRET || "";
 }
 
 function hashBridgeSecret(value: string): Buffer {
@@ -443,7 +443,7 @@ async function resolveCodexCredentials(
 async function resolveCodexRequestContext(
   body: JsonRecord
 ): Promise<CodexWsFailure | CodexWsRequestContext> {
-  if (!isFeatureFlagEnabled("OMNIROUTE_CODEX_WS_ENABLED")) {
+  if (!isFeatureFlagEnabled("NIYATNA_CODEX_WS_ENABLED")) {
     return {
       error: jsonError(503, "codex_ws_disabled", "Codex Responses WebSocket transport is disabled"),
     };

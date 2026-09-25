@@ -21,10 +21,10 @@ declare namespace NodeJS {
     PORT?: string;
     API_HOST?: string;
     DASHBOARD_PORT?: string;
-    OMNIROUTE_PUBLIC_BASE_URL?: string;
-    OMNIROUTE_BASE_URL?: string;
-    OMNIROUTE_DISABLE_BACKGROUND_SERVICES?: string;
-    OMNIROUTE_PORT?: string;
+    NIYATNA_PUBLIC_BASE_URL?: string;
+    NIYATNA_BASE_URL?: string;
+    NIYATNA_DISABLE_BACKGROUND_SERVICES?: string;
+    NIYATNA_PORT?: string;
     PRICING_SYNC_ENABLED?: string;
     NODE_ENV?: "development" | "production" | "test";
   }

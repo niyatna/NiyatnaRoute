@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 const {
   prepareWebSearchFallbackBody,
   supportsNativeWebSearchFallbackBypass,
-  OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+  NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
 } = await import("../../open-sse/services/webSearchFallback.ts");
 
 // Regression for #2390: when the target is a Responses-API provider, the injected
@@ -30,7 +30,7 @@ test("#2390 web_search fallback is FLAT for Responses API target", () => {
   assert.equal(fallback.enabled, true);
   const injected = body.tools[0] as Record<string, unknown>;
   assert.equal(injected.type, "function");
-  assert.equal(injected.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(injected.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(
     injected.function,
     undefined,
@@ -50,7 +50,7 @@ test("#2390 web_search fallback stays NESTED for Chat Completions target", () =>
   assert.equal(injected.type, "function");
   const fn = injected.function as Record<string, unknown> | undefined;
   assert.ok(fn, "Chat Completions tool must be nested under .function");
-  assert.equal(fn?.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(fn?.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(
     injected.name,
     undefined,
@@ -64,7 +64,7 @@ test("#2390 tool_choice matches the injected tool shape per target format", () =
     { targetFormat: "openai-responses", nativeCodexPassthrough: false }
   );
   const rChoice = responses.body.tool_choice as Record<string, unknown>;
-  assert.equal(rChoice.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(rChoice.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(rChoice.function, undefined);
 
   const chat = prepareWebSearchFallbackBody(
@@ -73,7 +73,7 @@ test("#2390 tool_choice matches the injected tool shape per target format", () =
   );
   const cChoice = chat.body.tool_choice as Record<string, unknown>;
   const cFn = cChoice.function as Record<string, unknown> | undefined;
-  assert.equal(cFn?.name, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(cFn?.name, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
 });
 
 // ── Native web-search bypass: predicate coverage for every native path ──
@@ -312,11 +312,11 @@ test("OpenAI -> Claude (non-passthrough): built-in web_search IS still converted
   });
 
   assert.equal(fallback.enabled, true);
-  assert.equal(fallback.toolName, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(fallback.toolName, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
   assert.equal(fallback.convertedToolCount, 1);
   const tools = (body.tools as Record<string, any>[]) || [];
   const toolNames = tools.map((t) => (t.function ? t.function.name : t.name));
-  assert.ok(toolNames.includes(OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME));
+  assert.ok(toolNames.includes(NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME));
 });
 
 // ── #3384: per-model interceptSearch override wins over every native-bypass default ──
@@ -374,5 +374,5 @@ test("#3384 end-to-end: interceptSearchOverride=true converts the tool on the Cl
   });
 
   assert.equal(fallback.enabled, true);
-  assert.equal(fallback.toolName, OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME);
+  assert.equal(fallback.toolName, NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME);
 });

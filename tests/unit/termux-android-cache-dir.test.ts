@@ -188,7 +188,7 @@ test("formatAndroidInstrumentationFailureHint: names the cache dir and TERMUX_GU
 });
 
 test("CLI entrypoint calls ensureAndroidCacheDir before Commander/Next load", () => {
-  const src = readFileSync(join(ROOT, "bin/omniroute.mjs"), "utf8");
+  const src = readFileSync(join(ROOT, "bin/niyatnaroute.mjs"), "utf8");
   assert.match(src, /ensureAndroidCacheDir\(\)/);
   // Real import is join(ROOT, "bin", "cli", "program.mjs") — not a contiguous path.
   // Header comments also mention program.mjs; compare call site vs last occurrence.

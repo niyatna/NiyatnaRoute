@@ -34,7 +34,7 @@ const TRANSLATIONS = {
     common: {
       error: "خطأ: {message}",
       serverOffline: "خادم OmniRoute غير متصل. ابدأ بالأمر: omniroute serve",
-      authRequired: "المصادقة مطلوبة. عيّن OMNIROUTE_API_KEY أو شغّل: omniroute setup",
+      authRequired: "المصادقة مطلوبة. عيّن NIYATNA_API_KEY أو شغّل: omniroute setup",
       rateLimited: "تم تجاوز حد الطلبات. أعد المحاولة بعد {seconds} ثانية.",
       timeout: "انتهت مهلة الطلب بعد {ms}ms.",
       success: "تم.",
@@ -56,7 +56,7 @@ const TRANSLATIONS = {
       api_key: "مفتاح API لخادم OmniRoute",
       base_url: "عنوان URL الأساسي لخادم OmniRoute",
       context: "سياق/ملف تعريف الخادم المستخدم في هذا الأمر",
-      lang: "تعيين لغة عرض CLI (يتجاوز OMNIROUTE_LANG)",
+      lang: "تعيين لغة عرض CLI (يتجاوز NIYATNA_LANG)",
     },
   },
   az: {
@@ -64,7 +64,7 @@ const TRANSLATIONS = {
       error: "Xəta: {message}",
       serverOffline: "OmniRoute serveri oflayndır. Başladın: omniroute serve",
       authRequired:
-        "Autentifikasiya tələb olunur. OMNIROUTE_API_KEY təyin edin və ya işə salın: omniroute setup",
+        "Autentifikasiya tələb olunur. NIYATNA_API_KEY təyin edin və ya işə salın: omniroute setup",
       rateLimited: "Sorğu limiti aşıldı. {seconds} saniyə sonra yenidən cəhd edin.",
       timeout: "Sorğunun vaxtı {ms}ms sonra bitdi.",
       success: "Tamamlandı.",
@@ -86,7 +86,7 @@ const TRANSLATIONS = {
       api_key: "OmniRoute serveri üçün API açarı",
       base_url: "OmniRoute server baza URL-i",
       context: "Bu əmr üçün server konteksti/profili",
-      lang: "CLI ekran dilini təyin edin (OMNIROUTE_LANG-ı keçir)",
+      lang: "CLI ekran dilini təyin edin (NIYATNA_LANG-ı keçir)",
     },
   },
   bg: {
@@ -94,7 +94,7 @@ const TRANSLATIONS = {
       error: "Грешка: {message}",
       serverOffline: "Сървърът OmniRoute е офлайн. Стартирайте с: omniroute serve",
       authRequired:
-        "Необходима е автентикация. Задайте OMNIROUTE_API_KEY или изпълнете: omniroute setup",
+        "Необходима е автентикация. Задайте NIYATNA_API_KEY или изпълнете: omniroute setup",
       rateLimited: "Превишен лимит на заявки. Опитайте след {seconds}с.",
       timeout: "Заявката изтече след {ms}ms.",
       success: "Готово.",
@@ -116,14 +116,14 @@ const TRANSLATIONS = {
       api_key: "API ключ за сървъра OmniRoute",
       base_url: "Базов URL на сървъра OmniRoute",
       context: "Контекст/профил на сървъра за тази команда",
-      lang: "Задай език на CLI (замества OMNIROUTE_LANG)",
+      lang: "Задай език на CLI (замества NIYATNA_LANG)",
     },
   },
   cs: {
     common: {
       error: "Chyba: {message}",
       serverOffline: "Server OmniRoute je offline. Spusťte: omniroute serve",
-      authRequired: "Vyžaduje se ověření. Nastavte OMNIROUTE_API_KEY nebo spusťte: omniroute setup",
+      authRequired: "Vyžaduje se ověření. Nastavte NIYATNA_API_KEY nebo spusťte: omniroute setup",
       rateLimited: "Překročen limit požadavků. Zkuste za {seconds}s.",
       timeout: "Požadavek vypršel po {ms}ms.",
       success: "Hotovo.",
@@ -145,14 +145,14 @@ const TRANSLATIONS = {
       api_key: "API klíč pro server OmniRoute",
       base_url: "Základní URL serveru OmniRoute",
       context: "Kontext/profil serveru pro tento příkaz",
-      lang: "Nastavit jazyk CLI (přepisuje OMNIROUTE_LANG)",
+      lang: "Nastavit jazyk CLI (přepisuje NIYATNA_LANG)",
     },
   },
   da: {
     common: {
       error: "Fejl: {message}",
       serverOffline: "OmniRoute-serveren er offline. Start med: omniroute serve",
-      authRequired: "Godkendelse kræves. Sæt OMNIROUTE_API_KEY eller kør: omniroute setup",
+      authRequired: "Godkendelse kræves. Sæt NIYATNA_API_KEY eller kør: omniroute setup",
       rateLimited: "Anmodningsgrænse overskredet. Prøv igen om {seconds}s.",
       timeout: "Anmodningen timed ud efter {ms}ms.",
       success: "Færdig.",
@@ -174,7 +174,7 @@ const TRANSLATIONS = {
       api_key: "API-nøgle til OmniRoute-serveren",
       base_url: "OmniRoute-serverens basis-URL",
       context: "Server-kontekst/profil til denne kommando",
-      lang: "Angiv CLI-visningssprog (tilsidesætter OMNIROUTE_LANG)",
+      lang: "Angiv CLI-visningssprog (tilsidesætter NIYATNA_LANG)",
     },
   },
   de: {
@@ -182,7 +182,7 @@ const TRANSLATIONS = {
       error: "Fehler: {message}",
       serverOffline: "OmniRoute-Server ist offline. Starten mit: omniroute serve",
       authRequired:
-        "Authentifizierung erforderlich. OMNIROUTE_API_KEY setzen oder ausführen: omniroute setup",
+        "Authentifizierung erforderlich. NIYATNA_API_KEY setzen oder ausführen: omniroute setup",
       rateLimited: "Anfragelimit überschritten. Erneut versuchen in {seconds}s.",
       timeout: "Anfrage-Timeout nach {ms}ms.",
       success: "Fertig.",
@@ -204,7 +204,7 @@ const TRANSLATIONS = {
       api_key: "API-Schlüssel für den OmniRoute-Server",
       base_url: "OmniRoute-Server-Basis-URL",
       context: "Server-Kontext/Profil für diesen Befehl",
-      lang: "CLI-Anzeigesprache festlegen (überschreibt OMNIROUTE_LANG)",
+      lang: "CLI-Anzeigesprache festlegen (überschreibt NIYATNA_LANG)",
     },
   },
   es: {
@@ -212,7 +212,7 @@ const TRANSLATIONS = {
       error: "Error: {message}",
       serverOffline: "El servidor OmniRoute está offline. Inícielo con: omniroute serve",
       authRequired:
-        "Autenticación requerida. Configure OMNIROUTE_API_KEY o ejecute: omniroute setup",
+        "Autenticación requerida. Configure NIYATNA_API_KEY o ejecute: omniroute setup",
       rateLimited: "Límite de solicitudes excedido. Reintente en {seconds}s.",
       timeout: "Solicitud expiró después de {ms}ms.",
       success: "Listo.",
@@ -234,7 +234,7 @@ const TRANSLATIONS = {
       api_key: "Clave de API para el servidor OmniRoute",
       base_url: "URL base del servidor OmniRoute",
       context: "Contexto/perfil del servidor para este comando",
-      lang: "Establecer idioma del CLI (reemplaza OMNIROUTE_LANG)",
+      lang: "Establecer idioma del CLI (reemplaza NIYATNA_LANG)",
     },
   },
   fa: {
@@ -242,7 +242,7 @@ const TRANSLATIONS = {
       error: "خطا: {message}",
       serverOffline: "سرور OmniRoute آفلاین است. با این دستور راه‌اندازی کنید: omniroute serve",
       authRequired:
-        "احراز هویت لازم است. OMNIROUTE_API_KEY را تنظیم کنید یا اجرا کنید: omniroute setup",
+        "احراز هویت لازم است. NIYATNA_API_KEY را تنظیم کنید یا اجرا کنید: omniroute setup",
       rateLimited: "محدودیت درخواست رسیده است. پس از {seconds} ثانیه دوباره تلاش کنید.",
       timeout: "درخواست پس از {ms}ms منقضی شد.",
       success: "انجام شد.",
@@ -264,14 +264,14 @@ const TRANSLATIONS = {
       api_key: "کلید API برای سرور OmniRoute",
       base_url: "URL پایه سرور OmniRoute",
       context: "زمینه/پروفایل سرور برای این دستور",
-      lang: "تنظیم زبان نمایش CLI (OMNIROUTE_LANG را نادیده می‌گیرد)",
+      lang: "تنظیم زبان نمایش CLI (NIYATNA_LANG را نادیده می‌گیرد)",
     },
   },
   fi: {
     common: {
       error: "Virhe: {message}",
       serverOffline: "OmniRoute-palvelin on offline. Käynnistä komennolla: omniroute serve",
-      authRequired: "Todennus vaaditaan. Aseta OMNIROUTE_API_KEY tai suorita: omniroute setup",
+      authRequired: "Todennus vaaditaan. Aseta NIYATNA_API_KEY tai suorita: omniroute setup",
       rateLimited: "Pyyntöraja ylitetty. Yritä uudelleen {seconds}s kuluttua.",
       timeout: "Pyyntö aikakatkaistiin {ms}ms jälkeen.",
       success: "Valmis.",
@@ -293,7 +293,7 @@ const TRANSLATIONS = {
       api_key: "API-avain OmniRoute-palvelimelle",
       base_url: "OmniRoute-palvelimen perus-URL",
       context: "Palvelimen konteksti/profiili tälle komennolle",
-      lang: "Aseta CLI-näyttökieli (ohittaa OMNIROUTE_LANG)",
+      lang: "Aseta CLI-näyttökieli (ohittaa NIYATNA_LANG)",
     },
   },
   fr: {
@@ -301,7 +301,7 @@ const TRANSLATIONS = {
       error: "Erreur : {message}",
       serverOffline: "Le serveur OmniRoute est hors ligne. Démarrez avec : omniroute serve",
       authRequired:
-        "Authentification requise. Définissez OMNIROUTE_API_KEY ou exécutez : omniroute setup",
+        "Authentification requise. Définissez NIYATNA_API_KEY ou exécutez : omniroute setup",
       rateLimited: "Limite de requêtes atteinte. Réessayez dans {seconds}s.",
       timeout: "La requête a expiré après {ms}ms.",
       success: "Terminé.",
@@ -323,14 +323,14 @@ const TRANSLATIONS = {
       api_key: "Clé API pour le serveur OmniRoute",
       base_url: "URL de base du serveur OmniRoute",
       context: "Contexte/profil du serveur pour cette commande",
-      lang: "Définir la langue d'affichage du CLI (remplace OMNIROUTE_LANG)",
+      lang: "Définir la langue d'affichage du CLI (remplace NIYATNA_LANG)",
     },
   },
   hi: {
     common: {
       error: "त्रुटि: {message}",
       serverOffline: "OmniRoute सर्वर ऑफलाइन है। शुरू करें: omniroute serve",
-      authRequired: "प्रमाणीकरण आवश्यक है। OMNIROUTE_API_KEY सेट करें या चलाएं: omniroute setup",
+      authRequired: "प्रमाणीकरण आवश्यक है। NIYATNA_API_KEY सेट करें या चलाएं: omniroute setup",
       rateLimited: "अनुरोध सीमा पार हो गई। {seconds}s बाद पुनः प्रयास करें।",
       timeout: "{ms}ms के बाद अनुरोध समय समाप्त हुआ।",
       success: "पूर्ण।",
@@ -352,7 +352,7 @@ const TRANSLATIONS = {
       api_key: "OmniRoute सर्वर के लिए API कुंजी",
       base_url: "OmniRoute सर्वर का बेस URL",
       context: "इस कमांड के लिए सर्वर संदर्भ/प्रोफ़ाइल",
-      lang: "CLI प्रदर्शन भाषा सेट करें (OMNIROUTE_LANG को ओवरराइड करता है)",
+      lang: "CLI प्रदर्शन भाषा सेट करें (NIYATNA_LANG को ओवरराइड करता है)",
     },
   },
   hu: {
@@ -360,7 +360,7 @@ const TRANSLATIONS = {
       error: "Hiba: {message}",
       serverOffline: "Az OmniRoute szerver offline. Indítsa el: omniroute serve",
       authRequired:
-        "Hitelesítés szükséges. Állítsa be az OMNIROUTE_API_KEY-t vagy futtassa: omniroute setup",
+        "Hitelesítés szükséges. Állítsa be az NIYATNA_API_KEY-t vagy futtassa: omniroute setup",
       rateLimited: "Kérési korlát túllépve. Próbálja újra {seconds}s múlva.",
       timeout: "A kérés {ms}ms után lejárt.",
       success: "Kész.",
@@ -382,7 +382,7 @@ const TRANSLATIONS = {
       api_key: "API kulcs az OmniRoute szerverhez",
       base_url: "Az OmniRoute szerver alap URL-je",
       context: "Szerverkontextus/profil ehhez a parancshoz",
-      lang: "CLI megjelenítési nyelv beállítása (felülírja az OMNIROUTE_LANG-ot)",
+      lang: "CLI megjelenítési nyelv beállítása (felülírja az NIYATNA_LANG-ot)",
     },
   },
   id: {
@@ -390,7 +390,7 @@ const TRANSLATIONS = {
       error: "Kesalahan: {message}",
       serverOffline: "Server OmniRoute sedang offline. Mulai dengan: omniroute serve",
       authRequired:
-        "Autentikasi diperlukan. Setel OMNIROUTE_API_KEY atau jalankan: omniroute setup",
+        "Autentikasi diperlukan. Setel NIYATNA_API_KEY atau jalankan: omniroute setup",
       rateLimited: "Batas permintaan terlampaui. Coba lagi dalam {seconds}d.",
       timeout: "Permintaan habis waktu setelah {ms}ms.",
       success: "Selesai.",
@@ -412,7 +412,7 @@ const TRANSLATIONS = {
       api_key: "Kunci API untuk server OmniRoute",
       base_url: "URL dasar server OmniRoute",
       context: "Konteks/profil server untuk perintah ini",
-      lang: "Atur bahasa tampilan CLI (menggantikan OMNIROUTE_LANG)",
+      lang: "Atur bahasa tampilan CLI (menggantikan NIYATNA_LANG)",
     },
   },
   it: {
@@ -420,7 +420,7 @@ const TRANSLATIONS = {
       error: "Errore: {message}",
       serverOffline: "Il server OmniRoute è offline. Avviarlo con: omniroute serve",
       authRequired:
-        "Autenticazione richiesta. Impostare OMNIROUTE_API_KEY o eseguire: omniroute setup",
+        "Autenticazione richiesta. Impostare NIYATNA_API_KEY o eseguire: omniroute setup",
       rateLimited: "Limite di richieste superato. Riprovare tra {seconds}s.",
       timeout: "La richiesta è scaduta dopo {ms}ms.",
       success: "Completato.",
@@ -442,7 +442,7 @@ const TRANSLATIONS = {
       api_key: "Chiave API per il server OmniRoute",
       base_url: "URL base del server OmniRoute",
       context: "Contesto/profilo del server per questo comando",
-      lang: "Imposta la lingua di visualizzazione della CLI (sovrascrive OMNIROUTE_LANG)",
+      lang: "Imposta la lingua di visualizzazione della CLI (sovrascrive NIYATNA_LANG)",
     },
   },
   ja: {
@@ -450,7 +450,7 @@ const TRANSLATIONS = {
       error: "エラー: {message}",
       serverOffline: "OmniRouteサーバーはオフラインです。起動: omniroute serve",
       authRequired:
-        "認証が必要です。OMNIROUTE_API_KEYを設定するか実行してください: omniroute setup",
+        "認証が必要です。NIYATNA_API_KEYを設定するか実行してください: omniroute setup",
       rateLimited: "リクエスト制限を超えました。{seconds}秒後に再試行してください。",
       timeout: "{ms}ms後にリクエストがタイムアウトしました。",
       success: "完了。",
@@ -472,14 +472,14 @@ const TRANSLATIONS = {
       api_key: "OmniRouteサーバーのAPIキー",
       base_url: "OmniRouteサーバーのベースURL",
       context: "このコマンドで使用するサーバーコンテキスト/プロファイル",
-      lang: "CLI表示言語を設定（OMNIROUTE_LANGを上書き）",
+      lang: "CLI表示言語を設定（NIYATNA_LANGを上書き）",
     },
   },
   ko: {
     common: {
       error: "오류: {message}",
       serverOffline: "OmniRoute 서버가 오프라인입니다. 시작: omniroute serve",
-      authRequired: "인증이 필요합니다. OMNIROUTE_API_KEY를 설정하거나 실행하세요: omniroute setup",
+      authRequired: "인증이 필요합니다. NIYATNA_API_KEY를 설정하거나 실행하세요: omniroute setup",
       rateLimited: "요청 제한 초과. {seconds}초 후 다시 시도하세요.",
       timeout: "{ms}ms 후 요청 시간 초과.",
       success: "완료.",
@@ -501,14 +501,14 @@ const TRANSLATIONS = {
       api_key: "OmniRoute 서버의 API 키",
       base_url: "OmniRoute 서버 기본 URL",
       context: "이 명령에 사용할 서버 컨텍스트/프로필",
-      lang: "CLI 표시 언어 설정 (OMNIROUTE_LANG 재정의)",
+      lang: "CLI 표시 언어 설정 (NIYATNA_LANG 재정의)",
     },
   },
   nl: {
     common: {
       error: "Fout: {message}",
       serverOffline: "OmniRoute-server is offline. Start met: omniroute serve",
-      authRequired: "Authenticatie vereist. Stel OMNIROUTE_API_KEY in of voer uit: omniroute setup",
+      authRequired: "Authenticatie vereist. Stel NIYATNA_API_KEY in of voer uit: omniroute setup",
       rateLimited: "Verzoeklimiet overschreden. Probeer opnieuw na {seconds}s.",
       timeout: "Verzoek verlopen na {ms}ms.",
       success: "Klaar.",
@@ -530,14 +530,14 @@ const TRANSLATIONS = {
       api_key: "API-sleutel voor de OmniRoute-server",
       base_url: "Basis-URL van de OmniRoute-server",
       context: "Servercontext/profiel voor dit commando",
-      lang: "CLI-weergavetaal instellen (overschrijft OMNIROUTE_LANG)",
+      lang: "CLI-weergavetaal instellen (overschrijft NIYATNA_LANG)",
     },
   },
   no: {
     common: {
       error: "Feil: {message}",
       serverOffline: "OmniRoute-serveren er offline. Start med: omniroute serve",
-      authRequired: "Autentisering kreves. Angi OMNIROUTE_API_KEY eller kjør: omniroute setup",
+      authRequired: "Autentisering kreves. Angi NIYATNA_API_KEY eller kjør: omniroute setup",
       rateLimited: "Forespørselgrense overskredet. Prøv igjen om {seconds}s.",
       timeout: "Forespørselen tidsavbrutt etter {ms}ms.",
       success: "Ferdig.",
@@ -559,7 +559,7 @@ const TRANSLATIONS = {
       api_key: "API-nøkkel for OmniRoute-serveren",
       base_url: "OmniRoute-serverens basis-URL",
       context: "Serverkontekst/profil for denne kommandoen",
-      lang: "Angi CLI-visningsspråk (overstyrer OMNIROUTE_LANG)",
+      lang: "Angi CLI-visningsspråk (overstyrer NIYATNA_LANG)",
     },
   },
   pl: {
@@ -567,7 +567,7 @@ const TRANSLATIONS = {
       error: "Błąd: {message}",
       serverOffline: "Serwer OmniRoute jest offline. Uruchom: omniroute serve",
       authRequired:
-        "Wymagane uwierzytelnienie. Ustaw OMNIROUTE_API_KEY lub uruchom: omniroute setup",
+        "Wymagane uwierzytelnienie. Ustaw NIYATNA_API_KEY lub uruchom: omniroute setup",
       rateLimited: "Przekroczono limit żądań. Spróbuj ponownie za {seconds}s.",
       timeout: "Żądanie przekroczyło czas po {ms}ms.",
       success: "Gotowe.",
@@ -589,14 +589,14 @@ const TRANSLATIONS = {
       api_key: "Klucz API dla serwera OmniRoute",
       base_url: "Bazowy URL serwera OmniRoute",
       context: "Kontekst/profil serwera dla tego polecenia",
-      lang: "Ustaw język wyświetlania CLI (nadpisuje OMNIROUTE_LANG)",
+      lang: "Ustaw język wyświetlania CLI (nadpisuje NIYATNA_LANG)",
     },
   },
   pt: {
     common: {
       error: "Erro: {message}",
       serverOffline: "O servidor OmniRoute está offline. Inicie com: omniroute serve",
-      authRequired: "Autenticação necessária. Defina OMNIROUTE_API_KEY ou execute: omniroute setup",
+      authRequired: "Autenticação necessária. Defina NIYATNA_API_KEY ou execute: omniroute setup",
       rateLimited: "Limite de pedidos atingido. Tente novamente em {seconds}s.",
       timeout: "O pedido expirou após {ms}ms.",
       success: "Concluído.",
@@ -618,14 +618,14 @@ const TRANSLATIONS = {
       api_key: "Chave de API para o servidor OmniRoute",
       base_url: "URL base do servidor OmniRoute",
       context: "Contexto/perfil do servidor para este comando",
-      lang: "Definir idioma de apresentação do CLI (substitui OMNIROUTE_LANG)",
+      lang: "Definir idioma de apresentação do CLI (substitui NIYATNA_LANG)",
     },
   },
   ro: {
     common: {
       error: "Eroare: {message}",
       serverOffline: "Serverul OmniRoute este offline. Porniți cu: omniroute serve",
-      authRequired: "Autentificare necesară. Setați OMNIROUTE_API_KEY sau rulați: omniroute setup",
+      authRequired: "Autentificare necesară. Setați NIYATNA_API_KEY sau rulați: omniroute setup",
       rateLimited: "Limita de cereri depășită. Încercați din nou după {seconds}s.",
       timeout: "Cererea a expirat după {ms}ms.",
       success: "Gata.",
@@ -647,7 +647,7 @@ const TRANSLATIONS = {
       api_key: "Cheie API pentru serverul OmniRoute",
       base_url: "URL de bază al serverului OmniRoute",
       context: "Contextul/profilul serverului pentru această comandă",
-      lang: "Setează limba de afișare CLI (suprascrie OMNIROUTE_LANG)",
+      lang: "Setează limba de afișare CLI (suprascrie NIYATNA_LANG)",
     },
   },
   ru: {
@@ -655,7 +655,7 @@ const TRANSLATIONS = {
       error: "Ошибка: {message}",
       serverOffline: "Сервер OmniRoute отключён. Запустите: omniroute serve",
       authRequired:
-        "Требуется аутентификация. Установите OMNIROUTE_API_KEY или выполните: omniroute setup",
+        "Требуется аутентификация. Установите NIYATNA_API_KEY или выполните: omniroute setup",
       rateLimited: "Превышен лимит запросов. Повторите через {seconds}с.",
       timeout: "Запрос истёк через {ms}мс.",
       success: "Готово.",
@@ -677,7 +677,7 @@ const TRANSLATIONS = {
       api_key: "API-ключ для сервера OmniRoute",
       base_url: "Базовый URL сервера OmniRoute",
       context: "Контекст/профиль сервера для этой команды",
-      lang: "Установить язык отображения CLI (переопределяет OMNIROUTE_LANG)",
+      lang: "Установить язык отображения CLI (переопределяет NIYATNA_LANG)",
     },
   },
   sk: {
@@ -685,7 +685,7 @@ const TRANSLATIONS = {
       error: "Chyba: {message}",
       serverOffline: "Server OmniRoute je offline. Spustite: omniroute serve",
       authRequired:
-        "Vyžaduje sa overenie. Nastavte OMNIROUTE_API_KEY alebo spustite: omniroute setup",
+        "Vyžaduje sa overenie. Nastavte NIYATNA_API_KEY alebo spustite: omniroute setup",
       rateLimited: "Prekročený limit požiadaviek. Skúste za {seconds}s.",
       timeout: "Požiadavka vypršala po {ms}ms.",
       success: "Hotovo.",
@@ -707,14 +707,14 @@ const TRANSLATIONS = {
       api_key: "API kľúč pre server OmniRoute",
       base_url: "Základná URL servera OmniRoute",
       context: "Kontext/profil servera pre tento príkaz",
-      lang: "Nastaviť jazyk zobrazenia CLI (prepíše OMNIROUTE_LANG)",
+      lang: "Nastaviť jazyk zobrazenia CLI (prepíše NIYATNA_LANG)",
     },
   },
   sv: {
     common: {
       error: "Fel: {message}",
       serverOffline: "OmniRoute-servern är offline. Starta med: omniroute serve",
-      authRequired: "Autentisering krävs. Ange OMNIROUTE_API_KEY eller kör: omniroute setup",
+      authRequired: "Autentisering krävs. Ange NIYATNA_API_KEY eller kör: omniroute setup",
       rateLimited: "Begäransgräns nådd. Försök igen om {seconds}s.",
       timeout: "Begäran tog slut efter {ms}ms.",
       success: "Klar.",
@@ -736,14 +736,14 @@ const TRANSLATIONS = {
       api_key: "API-nyckel för OmniRoute-servern",
       base_url: "OmniRoute-serverns bas-URL",
       context: "Serverkontext/profil för det här kommandot",
-      lang: "Ange CLI-visningsspråk (åsidosätter OMNIROUTE_LANG)",
+      lang: "Ange CLI-visningsspråk (åsidosätter NIYATNA_LANG)",
     },
   },
   th: {
     common: {
       error: "ข้อผิดพลาด: {message}",
       serverOffline: "เซิร์ฟเวอร์ OmniRoute ออฟไลน์ เริ่มด้วย: omniroute serve",
-      authRequired: "ต้องการการยืนยันตัวตน ตั้งค่า OMNIROUTE_API_KEY หรือรัน: omniroute setup",
+      authRequired: "ต้องการการยืนยันตัวตน ตั้งค่า NIYATNA_API_KEY หรือรัน: omniroute setup",
       rateLimited: "เกินขีดจำกัดคำขอ ลองใหม่หลังจาก {seconds}วินาที",
       timeout: "คำขอหมดเวลาหลังจาก {ms}ms",
       success: "เสร็จสิ้น",
@@ -765,7 +765,7 @@ const TRANSLATIONS = {
       api_key: "API Key สำหรับ OmniRoute server",
       base_url: "Base URL ของ OmniRoute server",
       context: "บริบท/โปรไฟล์ของเซิร์ฟเวอร์สำหรับคำสั่งนี้",
-      lang: "ตั้งค่าภาษาแสดงผล CLI (แทนที่ OMNIROUTE_LANG)",
+      lang: "ตั้งค่าภาษาแสดงผล CLI (แทนที่ NIYATNA_LANG)",
     },
   },
   tr: {
@@ -773,7 +773,7 @@ const TRANSLATIONS = {
       error: "Hata: {message}",
       serverOffline: "OmniRoute sunucusu çevrimdışı. Başlatın: omniroute serve",
       authRequired:
-        "Kimlik doğrulama gerekli. OMNIROUTE_API_KEY ayarlayın veya çalıştırın: omniroute setup",
+        "Kimlik doğrulama gerekli. NIYATNA_API_KEY ayarlayın veya çalıştırın: omniroute setup",
       rateLimited: "İstek limiti aşıldı. {seconds}s sonra tekrar deneyin.",
       timeout: "İstek {ms}ms sonra zaman aşımına uğradı.",
       success: "Tamamlandı.",
@@ -795,7 +795,7 @@ const TRANSLATIONS = {
       api_key: "OmniRoute sunucusu için API anahtarı",
       base_url: "OmniRoute sunucusu temel URL'si",
       context: "Bu komut için sunucu bağlamı/profili",
-      lang: "CLI görüntüleme dilini ayarla (OMNIROUTE_LANG'ı geçersiz kılar)",
+      lang: "CLI görüntüleme dilini ayarla (NIYATNA_LANG'ı geçersiz kılar)",
     },
   },
   "uk-UA": {
@@ -803,7 +803,7 @@ const TRANSLATIONS = {
       error: "Помилка: {message}",
       serverOffline: "Сервер OmniRoute відключено. Запустіть: omniroute serve",
       authRequired:
-        "Потрібна автентифікація. Встановіть OMNIROUTE_API_KEY або виконайте: omniroute setup",
+        "Потрібна автентифікація. Встановіть NIYATNA_API_KEY або виконайте: omniroute setup",
       rateLimited: "Перевищено ліміт запитів. Повторіть через {seconds}с.",
       timeout: "Запит завершився через {ms}мс.",
       success: "Готово.",
@@ -825,14 +825,14 @@ const TRANSLATIONS = {
       api_key: "API-ключ для сервера OmniRoute",
       base_url: "Базовий URL сервера OmniRoute",
       context: "Контекст/профіль сервера для цієї команди",
-      lang: "Встановити мову відображення CLI (замінює OMNIROUTE_LANG)",
+      lang: "Встановити мову відображення CLI (замінює NIYATNA_LANG)",
     },
   },
   vi: {
     common: {
       error: "Lỗi: {message}",
       serverOffline: "Máy chủ OmniRoute đang offline. Khởi động với: omniroute serve",
-      authRequired: "Cần xác thực. Đặt OMNIROUTE_API_KEY hoặc chạy: omniroute setup",
+      authRequired: "Cần xác thực. Đặt NIYATNA_API_KEY hoặc chạy: omniroute setup",
       rateLimited: "Đã vượt giới hạn yêu cầu. Thử lại sau {seconds}s.",
       timeout: "Yêu cầu hết thời gian sau {ms}ms.",
       success: "Xong.",
@@ -854,14 +854,14 @@ const TRANSLATIONS = {
       api_key: "Khóa API cho máy chủ OmniRoute",
       base_url: "URL cơ sở của máy chủ OmniRoute",
       context: "Bối cảnh/hồ sơ máy chủ cho lệnh này",
-      lang: "Đặt ngôn ngữ hiển thị CLI (ghi đè OMNIROUTE_LANG)",
+      lang: "Đặt ngôn ngữ hiển thị CLI (ghi đè NIYATNA_LANG)",
     },
   },
   "zh-CN": {
     common: {
       error: "错误：{message}",
       serverOffline: "OmniRoute 服务器已离线。请启动：omniroute serve",
-      authRequired: "需要认证。请设置 OMNIROUTE_API_KEY 或运行：omniroute setup",
+      authRequired: "需要认证。请设置 NIYATNA_API_KEY 或运行：omniroute setup",
       rateLimited: "请求超出限制。请在 {seconds}s 后重试。",
       timeout: "请求在 {ms}ms 后超时。",
       success: "完成。",
@@ -883,7 +883,7 @@ const TRANSLATIONS = {
       api_key: "OmniRoute 服务器的 API 密钥",
       base_url: "OmniRoute 服务器的基础 URL",
       context: "此命令使用的服务器上下文/配置文件",
-      lang: "设置 CLI 显示语言（覆盖 OMNIROUTE_LANG）",
+      lang: "设置 CLI 显示语言（覆盖 NIYATNA_LANG）",
     },
   },
 };

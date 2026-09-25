@@ -153,7 +153,7 @@ test("no public base URL configured keeps loopback even with custom credentials"
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      // No NEXT_PUBLIC_BASE_URL or OMNIROUTE_PUBLIC_BASE_URL
+      // No NEXT_PUBLIC_BASE_URL or NIYATNA_PUBLIC_BASE_URL
       ANTIGRAVITY_OAUTH_CLIENT_ID: "custom-id.apps.googleusercontent.com",
       ANTIGRAVITY_OAUTH_CLIENT_SECRET: "custom-secret",
     }
@@ -292,12 +292,12 @@ test("trailing slash on NEXT_PUBLIC_BASE_URL is stripped", () => {
   );
 });
 
-test("OMNIROUTE_PUBLIC_BASE_URL is used as fallback when NEXT_PUBLIC_BASE_URL is absent", () => {
+test("NIYATNA_PUBLIC_BASE_URL is used as fallback when NEXT_PUBLIC_BASE_URL is absent", () => {
   const redirectUri = resolveBrowserOAuthRedirectUri(
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://fallback.example.com",
+      NIYATNA_PUBLIC_BASE_URL: "https://fallback.example.com",
       ANTIGRAVITY_OAUTH_CLIENT_ID: "custom-id.apps.googleusercontent.com",
       ANTIGRAVITY_OAUTH_CLIENT_SECRET: "custom-secret",
     }
@@ -315,7 +315,7 @@ test("antigravity with client type 'web' and custom credentials switches loopbac
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://192.168.100.10:20128",
+      NIYATNA_PUBLIC_BASE_URL: "https://192.168.100.10:20128",
       ANTIGRAVITY_OAUTH_CLIENT_TYPE: "web",
       ANTIGRAVITY_OAUTH_CLIENT_ID: "custom-id.apps.googleusercontent.com",
       ANTIGRAVITY_OAUTH_CLIENT_SECRET: "custom-secret",
@@ -331,7 +331,7 @@ test("antigravity with client type 'web' and custom credentials switches loopbac
 
 test("agy with client type 'web' and custom credentials switches loopback to public URL", () => {
   const redirectUri = resolveBrowserOAuthRedirectUri("agy", "http://127.0.0.1:20128/callback", {
-    OMNIROUTE_PUBLIC_BASE_URL: "https://omniroute.example.com",
+    NIYATNA_PUBLIC_BASE_URL: "https://omniroute.example.com",
     ANTIGRAVITY_OAUTH_CLIENT_TYPE: "web",
     ANTIGRAVITY_OAUTH_CLIENT_ID: "custom-id.apps.googleusercontent.com",
     ANTIGRAVITY_OAUTH_CLIENT_SECRET: "custom-secret",
@@ -349,7 +349,7 @@ test("client type 'web' without custom credentials keeps loopback", () => {
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://omniroute.example.com",
+      NIYATNA_PUBLIC_BASE_URL: "https://omniroute.example.com",
       ANTIGRAVITY_OAUTH_CLIENT_TYPE: "web",
       ANTIGRAVITY_OAUTH_CLIENT_ID: DEFAULT_ANTIGRAVITY_CLIENT_ID,
       ANTIGRAVITY_OAUTH_CLIENT_SECRET: "GOCSPX-SomeDefaultSecret",
@@ -368,7 +368,7 @@ test("client type 'desktop' (default) keeps loopback even with public base URL",
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://omniroute.example.com",
+      NIYATNA_PUBLIC_BASE_URL: "https://omniroute.example.com",
       ANTIGRAVITY_OAUTH_CLIENT_TYPE: "desktop",
     }
   );
@@ -385,7 +385,7 @@ test("no client type set defaults to desktop (keeps loopback)", () => {
     "antigravity",
     "http://127.0.0.1:20128/callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://omniroute.example.com",
+      NIYATNA_PUBLIC_BASE_URL: "https://omniroute.example.com",
     }
   );
 
@@ -401,7 +401,7 @@ test("client type 'web' preserves custom callback path", () => {
     "antigravity",
     "http://127.0.0.1:20128/custom-callback",
     {
-      OMNIROUTE_PUBLIC_BASE_URL: "https://omniroute.example.com",
+      NIYATNA_PUBLIC_BASE_URL: "https://omniroute.example.com",
       ANTIGRAVITY_OAUTH_CLIENT_TYPE: "web",
       ANTIGRAVITY_OAUTH_CLIENT_ID: "custom-id.apps.googleusercontent.com",
       ANTIGRAVITY_OAUTH_CLIENT_SECRET: "custom-secret",

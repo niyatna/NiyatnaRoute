@@ -1369,7 +1369,7 @@ test(
   }
 );
 
-// ── #3416: OMNIROUTE_MAX_PENDING_MIGRATIONS env override ─────────────────────
+// ── #3416: NIYATNA_MAX_PENDING_MIGRATIONS env override ─────────────────────
 // The mass-migration safety threshold must be overridable at runtime so a user
 // restoring a backup can raise (or lower) the limit without code changes. The
 // resolver reads the env var at CALL TIME inside runMigrations(), so these tests
@@ -1394,16 +1394,16 @@ function seedExistingDbWithoutPhysicalBaseline(db) {
 }
 
 test(
-  "runMigrations aborts when OMNIROUTE_MAX_PENDING_MIGRATIONS lowers the threshold (#3416)",
+  "runMigrations aborts when NIYATNA_MAX_PENDING_MIGRATIONS lowers the threshold (#3416)",
   serial,
   async () => {
     const runner = await importFresh("src/lib/db/migrationRunner.ts");
     const db = createDb();
-    const original = process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+    const original = process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
 
     try {
       seedExistingDbWithoutPhysicalBaseline(db);
-      process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = "5";
+      process.env.NIYATNA_MAX_PENDING_MIGRATIONS = "5";
 
       // 1 applied (001) + files 001..011 → 10 actionable pending > threshold 5.
       assert.throws(
@@ -1416,24 +1416,24 @@ test(
         /threshold is 5/i
       );
     } finally {
-      if (original === undefined) delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
-      else process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = original;
+      if (original === undefined) delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
+      else process.env.NIYATNA_MAX_PENDING_MIGRATIONS = original;
       db.close();
     }
   }
 );
 
 test(
-  "runMigrations allows a large pending set when OMNIROUTE_MAX_PENDING_MIGRATIONS raises the threshold (#3416)",
+  "runMigrations allows a large pending set when NIYATNA_MAX_PENDING_MIGRATIONS raises the threshold (#3416)",
   serial,
   async () => {
     const runner = await importFresh("src/lib/db/migrationRunner.ts");
     const db = createDb();
-    const original = process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+    const original = process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
 
     try {
       seedExistingDbWithoutPhysicalBaseline(db);
-      process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = "500";
+      process.env.NIYATNA_MAX_PENDING_MIGRATIONS = "500";
 
       // 1 applied (001) + 60 plain pending files at versions 100..159 (chosen to
       // avoid the special-cased migration versions 032/041/042). All 60 exceed the
@@ -1450,23 +1450,23 @@ test(
 
       assert.equal(count, 60);
     } finally {
-      if (original === undefined) delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
-      else process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = original;
+      if (original === undefined) delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
+      else process.env.NIYATNA_MAX_PENDING_MIGRATIONS = original;
       db.close();
     }
   }
 );
 
 test(
-  "runMigrations keeps the default 50 threshold when OMNIROUTE_MAX_PENDING_MIGRATIONS is unset or invalid (#3416)",
+  "runMigrations keeps the default 50 threshold when NIYATNA_MAX_PENDING_MIGRATIONS is unset or invalid (#3416)",
   serial,
   async () => {
     const runner = await importFresh("src/lib/db/migrationRunner.ts");
-    const original = process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+    const original = process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
 
     try {
       // Case 1: env unset → default 50 abort message.
-      delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+      delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
       const dbUnset = createDb();
       try {
         seedExistingDbWithoutPhysicalBaseline(dbUnset);
@@ -1484,7 +1484,7 @@ test(
       }
 
       // Case 2: invalid (non-numeric) → fall back to default 50.
-      process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = "abc";
+      process.env.NIYATNA_MAX_PENDING_MIGRATIONS = "abc";
       const dbInvalid = createDb();
       try {
         seedExistingDbWithoutPhysicalBaseline(dbInvalid);
@@ -1501,8 +1501,8 @@ test(
         dbInvalid.close();
       }
     } finally {
-      if (original === undefined) delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
-      else process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = original;
+      if (original === undefined) delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
+      else process.env.NIYATNA_MAX_PENDING_MIGRATIONS = original;
     }
   }
 );

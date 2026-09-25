@@ -20,7 +20,7 @@ export const CONTAINER_WRITE_EXIT_CODE = 2;
 
 function envAllowsContainerWrite(env = process.env) {
   return TRUE_VALUES.has(
-    String(env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE ?? "")
+    String(env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE ?? "")
       .trim()
       .toLowerCase()
   );

@@ -90,20 +90,20 @@ test("isRunningInContainer returns false when every probe throws", () => {
   assert.equal(isRunningInContainer({ ...throwingFs, env: {} }), false);
 });
 
-test("OMNIROUTE_CONTAINER=1 forces detection on even without container markers", () => {
-  assert.equal(isRunningInContainer({ ...hostDeps, env: { OMNIROUTE_CONTAINER: "1" } }), true);
-  assert.equal(isRunningInContainer({ ...hostDeps, env: { OMNIROUTE_CONTAINER: "true" } }), true);
+test("NIYATNA_CONTAINER=1 forces detection on even without container markers", () => {
+  assert.equal(isRunningInContainer({ ...hostDeps, env: { NIYATNA_CONTAINER: "1" } }), true);
+  assert.equal(isRunningInContainer({ ...hostDeps, env: { NIYATNA_CONTAINER: "true" } }), true);
 });
 
-test("OMNIROUTE_CONTAINER=0 forces detection off even inside a container", () => {
+test("NIYATNA_CONTAINER=0 forces detection off even inside a container", () => {
   const inContainer = {
     existsSync: (p: string) => p === "/.dockerenv",
     readFileSync: (_p: string, _enc: string) => "12:cpuset:/docker/abc\n",
-    env: { OMNIROUTE_CONTAINER: "0" } as NodeJS.ProcessEnv,
+    env: { NIYATNA_CONTAINER: "0" } as NodeJS.ProcessEnv,
   };
   assert.equal(isRunningInContainer(inContainer), false);
   assert.equal(
-    isRunningInContainer({ ...inContainer, env: { OMNIROUTE_CONTAINER: "false" } }),
+    isRunningInContainer({ ...inContainer, env: { NIYATNA_CONTAINER: "false" } }),
     false
   );
 });

@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-const API_KEY = process.env.OMNIROUTE_API_KEY;
-const BASE_URL = process.env.OMNIROUTE_URL || "http://localhost:20128";
+const API_KEY = process.env.NIYATNA_API_KEY;
+const BASE_URL = process.env.NIYATNA_URL || "http://localhost:20128";
 const MODEL = "default";
 
-const skip = !API_KEY ? "OMNIROUTE_API_KEY not set — skipping live test" : undefined;
+const skip = !API_KEY ? "NIYATNA_API_KEY not set — skipping live test" : undefined;
 
 // Simple SSE reader (compatible with streamed chat completions)
 async function readSSEStream(response: Response, onChunk?: (chunk: string) => void) {
@@ -57,8 +57,8 @@ test("live request returns streamChunks", { skip }, async () => {
   console.log(
     "[TEST] BASE_URL=",
     BASE_URL,
-    "OMNIROUTE_URL=",
-    process.env.OMNIROUTE_URL,
+    "NIYATNA_URL=",
+    process.env.NIYATNA_URL,
     "API_KEY set=",
     !!API_KEY
   );

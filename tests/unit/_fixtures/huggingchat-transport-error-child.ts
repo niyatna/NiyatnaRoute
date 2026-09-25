@@ -18,7 +18,7 @@ mkdirSync(testDataDir, { recursive: true });
 mkdirSync(testPluginsDir, { recursive: true });
 mkdirSync(testConfigDir, { recursive: true });
 process.env.DATA_DIR = testDataDir;
-process.env.OMNIROUTE_PLUGINS_DIR = testPluginsDir;
+process.env.NIYATNA_PLUGINS_DIR = testPluginsDir;
 process.env.XDG_CONFIG_HOME = testConfigDir;
 process.env.APP_LOG_TO_FILE = "false";
 process.env.API_KEY_SECRET = "synthetic-huggingchat-transport-test-key";

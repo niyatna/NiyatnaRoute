@@ -24,8 +24,8 @@
  * cooldown, then succeeds"), which proves the exact behavior deterministically.
  *
  * Env vars:
- *   OMNIROUTE_URL       — base URL (default http://localhost:20128)
- *   OMNIROUTE_API_KEY   — API key for auth (REQUIRED)
+ *   NIYATNA_URL       — base URL (default http://localhost:20128)
+ *   NIYATNA_API_KEY   — API key for auth (REQUIRED)
  *   GEMINI_API_KEY      — used by liveGeminiShared to provision a gemini
  *                         connection if one doesn't already exist
  */

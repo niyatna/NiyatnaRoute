@@ -6,7 +6,7 @@ function trimTrailingSlash(value: string): string {
 }
 
 export function resolveProviderPluginManifestUrl(origin?: string | null): string {
-  const configured = process.env.OMNIROUTE_PROVIDER_MANIFEST_URL?.trim();
+  const configured = process.env.NIYATNA_PROVIDER_MANIFEST_URL?.trim();
   if (configured) return configured;
 
   if (origin) {
@@ -15,7 +15,7 @@ export function resolveProviderPluginManifestUrl(origin?: string | null): string
 
   const host = process.env.HOST || "127.0.0.1";
   const port = process.env.PORT || process.env.DASHBOARD_PORT || process.env.API_PORT || "9999";
-  const protocol = process.env.OMNIROUTE_PUBLIC_PROTOCOL || "http";
+  const protocol = process.env.NIYATNA_PUBLIC_PROTOCOL || "http";
   return `${protocol}://${host}:${port}${PROVIDER_PLUGIN_MANIFEST_PATH}`;
 }
 

@@ -12,7 +12,7 @@ import {
   buildOmniRouteResponseMetaHeaders,
   buildOmniRouteSseMetadataComment,
 } from "../../src/domain/omnirouteResponseMeta.ts";
-import { OMNIROUTE_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
+import { NIYATNA_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
 
 test("#12616 tok/s excludes TTFT (200 tokens over 2s generation after 3s TTFT)", () => {
   const generationMs = generationDurationMs(5000, 3000);
@@ -51,7 +51,7 @@ test("#12616 headers omit tok/s without ttftMs and emit it when TTFT is known", 
     latencyMs: 5000,
     usage: { prompt_tokens: 11, completion_tokens: 200 },
   });
-  assert.equal(without[OMNIROUTE_RESPONSE_HEADERS.tokensPerSecond], undefined);
+  assert.equal(without[NIYATNA_RESPONSE_HEADERS.tokensPerSecond], undefined);
 
   const withTtft = buildOmniRouteResponseMetaHeaders({
     provider: "openai",
@@ -60,7 +60,7 @@ test("#12616 headers omit tok/s without ttftMs and emit it when TTFT is known", 
     ttftMs: 3000,
     usage: { prompt_tokens: 11, completion_tokens: 200 },
   });
-  assert.equal(withTtft[OMNIROUTE_RESPONSE_HEADERS.tokensPerSecond], "100.000");
+  assert.equal(withTtft[NIYATNA_RESPONSE_HEADERS.tokensPerSecond], "100.000");
 });
 
 test("#12616 SSE comment carries tok/s from usage.tokens_per_second when TTFT is unknown", () => {

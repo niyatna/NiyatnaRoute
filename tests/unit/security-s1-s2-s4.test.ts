@@ -15,21 +15,21 @@ import type { NextRequest } from "next/server";
 // ── S2: agent-card route tests (no heavy mocking needed) ──────────────
 
 describe("S2 — agent-card topology sanitisation", () => {
-  const BASE_URL_SAVED = process.env.OMNIROUTE_BASE_URL;
+  const BASE_URL_SAVED = process.env.NIYATNA_BASE_URL;
 
   beforeEach(() => {
-    delete process.env.OMNIROUTE_BASE_URL;
+    delete process.env.NIYATNA_BASE_URL;
   });
 
   after(() => {
     if (BASE_URL_SAVED !== undefined) {
-      process.env.OMNIROUTE_BASE_URL = BASE_URL_SAVED;
+      process.env.NIYATNA_BASE_URL = BASE_URL_SAVED;
     } else {
-      delete process.env.OMNIROUTE_BASE_URL;
+      delete process.env.NIYATNA_BASE_URL;
     }
   });
 
-  it("agent-card.json derives URL from request.nextUrl.origin when OMNIROUTE_BASE_URL is unset", async () => {
+  it("agent-card.json derives URL from request.nextUrl.origin when NIYATNA_BASE_URL is unset", async () => {
     const mod = await import("../../src/app/.well-known/agent-card.json/route.ts");
     const request = new Request(
       "https://gateway.example.com/.well-known/agent-card.json"
@@ -58,8 +58,8 @@ describe("S2 — agent-card topology sanitisation", () => {
     }
   });
 
-  it("agent-card.json uses OMNIROUTE_BASE_URL when set", async () => {
-    process.env.OMNIROUTE_BASE_URL = "https://custom.example.com";
+  it("agent-card.json uses NIYATNA_BASE_URL when set", async () => {
+    process.env.NIYATNA_BASE_URL = "https://custom.example.com";
     const mod = await import("../../src/app/.well-known/agent-card.json/route.ts");
     const request = new Request(
       "http://localhost:20128/.well-known/agent-card.json"
@@ -80,7 +80,7 @@ describe("S2 — agent-card topology sanitisation", () => {
     );
   });
 
-  it("agent.json derives URL from request.nextUrl.origin when OMNIROUTE_BASE_URL is unset", async () => {
+  it("agent.json derives URL from request.nextUrl.origin when NIYATNA_BASE_URL is unset", async () => {
     const mod = await import("../../src/app/.well-known/agent.json/route.ts");
     const request = new Request(
       "https://gateway.example.com/.well-known/agent.json"
@@ -195,8 +195,8 @@ describe("S1 — login rate-limit key uses anti-spoofed peer IP", () => {
     // Use a bcrypt hash of "test-password" as the initial password so the
     // login route already has a valid hash in the DB settings.
     process.env.INITIAL_PASSWORD = "test-password";
-    delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
-    delete process.env.OMNIROUTE_BASE_URL;
+    delete process.env.NIYATNA_PEER_STAMP_TOKEN;
+    delete process.env.NIYATNA_BASE_URL;
 
     // Create data dir
     fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
@@ -235,10 +235,10 @@ describe("S1 — login rate-limit key uses anti-spoofed peer IP", () => {
     // We make multiple requests with the same trusted peer IP but different
     // forged XFF headers to verify they share the same rate-limit bucket.
     //
-    // The route only trusts the header when OMNIROUTE_PEER_STAMP_TOKEN is set.
+    // The route only trusts the header when NIYATNA_PEER_STAMP_TOKEN is set.
     // Without the token, spoofed headers are rejected (tested separately below).
 
-    process.env.OMNIROUTE_PEER_STAMP_TOKEN = "test-stamp-token";
+    process.env.NIYATNA_PEER_STAMP_TOKEN = "test-stamp-token";
 
     const TRUSTED_IP = "203.0.113.42";
     const FORGED_XFF = "192.168.1.1, 10.0.0.1";
@@ -278,17 +278,17 @@ describe("S1 — login rate-limit key uses anti-spoofed peer IP", () => {
     );
   });
 
-  it("ignores spoofed x-omniroute-trusted-peer-ip when OMNIROUTE_PEER_STAMP_TOKEN is not set", async () => {
+  it("ignores spoofed x-omniroute-trusted-peer-ip when NIYATNA_PEER_STAMP_TOKEN is not set", async () => {
     loginGuardModRef.resetLoginGuardForTests();
 
-    // OMNIROUTE_PEER_STAMP_TOKEN is already deleted in beforeEach.
+    // NIYATNA_PEER_STAMP_TOKEN is already deleted in beforeEach.
     // The route should NOT trust the spoofed header and fall back to
     // auditContext.ipAddress (derived from X-Forwarded-For).
     //
     // TDD: each iteration uses a DIFFERENT spoofed IP. With the bug
     // (unconditional trust), each request goes to a different rate-limit
     // bucket — no bucket reaches the threshold → test FAILS (RED).
-    // With the fix (gate on OMNIROUTE_PEER_STAMP_TOKEN), all requests
+    // With the fix (gate on NIYATNA_PEER_STAMP_TOKEN), all requests
     // share the REAL_IP bucket → threshold hit → test PASSES (GREEN).
 
     const REAL_IP = "10.0.0.200";

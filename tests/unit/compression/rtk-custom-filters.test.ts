@@ -37,7 +37,7 @@ afterEach(() => {
   process.chdir(originalCwd);
   if (originalDataDir === undefined) delete process.env.DATA_DIR;
   else process.env.DATA_DIR = originalDataDir;
-  delete process.env.OMNIROUTE_RTK_TRUST_PROJECT_FILTERS;
+  delete process.env.NIYATNA_RTK_TRUST_PROJECT_FILTERS;
   loadRtkFilters({ refresh: true, customFiltersEnabled: false });
 });
 

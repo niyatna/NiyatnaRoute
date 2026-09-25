@@ -43,11 +43,11 @@ export function getModelSyncInternalBaseUrl(): string {
 
 export function resolveModelSyncInternalBaseUrl(_candidate?: string): string {
   const { dashboardPort } = getRuntimePorts();
-  const nativeTls = process.env.OMNIROUTE_INTERNAL_SCHEME === "https";
+  const nativeTls = process.env.NIYATNA_INTERNAL_SCHEME === "https";
   const origin = nativeTls
     ? `https://localhost:${dashboardPort}`
     : `http://127.0.0.1:${dashboardPort}`;
-  return `${origin}${normalizeInternalBasePath(process.env.OMNIROUTE_BASE_PATH)}`;
+  return `${origin}${normalizeInternalBasePath(process.env.NIYATNA_BASE_PATH)}`;
 }
 
 export function createPinnedModelSyncTlsConnector(

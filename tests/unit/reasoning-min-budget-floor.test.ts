@@ -1,5 +1,5 @@
 /**
- * Opt-in reasoning budget floor (`OMNIROUTE_REASONING_MIN_BUDGET`).
+ * Opt-in reasoning budget floor (`NIYATNA_REASONING_MIN_BUDGET`).
  *
  * - Env unset/invalid: budgets pass through verbatim — #9507 no-enlargement
  *   contract unchanged.

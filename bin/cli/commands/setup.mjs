@@ -85,7 +85,7 @@ async function resolveProviderInput(opts, prompt, nonInteractive) {
   }
 
   if (!apiKey) {
-    throw new Error("Provider API key is required. Pass --api-key or OMNIROUTE_API_KEY.");
+    throw new Error("Provider API key is required. Pass --api-key or NIYATNA_API_KEY.");
   }
 
   if (!name) {
@@ -141,7 +141,7 @@ async function setupProvider(db, opts, prompt, nonInteractive) {
  * key). Commander binds the value to the program-level option, so the
  * subcommand's `opts.apiKey` is always `undefined` and `--add-provider` failed
  * with "Provider API key is required" even when `--api-key` was passed. Falling
- * back to the global value also makes `OMNIROUTE_API_KEY` work, which the error
+ * back to the global value also makes `NIYATNA_API_KEY` work, which the error
  * message already told users to use.
  *
  * @param {Record<string, unknown>} opts Subcommand options.

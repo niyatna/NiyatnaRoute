@@ -301,7 +301,7 @@ export async function syncCodexProfilesFromModels(models, opts = {}) {
 export async function runSetupCodexCommand(opts = {}) {
   const port = Number(opts.port ?? process.env.PORT ?? 9999) || 9999;
   const baseUrl = (opts.remote ?? `http://localhost:${port}`).replace(/\/v1$/, "");
-  const apiKey = opts.apiKey ?? opts["api-key"] ?? process.env.OMNIROUTE_API_KEY ?? "";
+  const apiKey = opts.apiKey ?? opts["api-key"] ?? process.env.NIYATNA_API_KEY ?? "";
   const codexHome = opts.codexHome ?? opts["codex-home"] ?? join(os.homedir(), ".codex");
   const dryRun = Boolean(opts.dryRun ?? opts["dry-run"]);
   const onlyFilter = opts.only ? opts.only.split(",").map((s) => s.trim()) : null;
@@ -381,7 +381,7 @@ export function registerSetupCodex(program) {
     )
     .option(
       "--api-key <key>",
-      "OmniRoute API key for the remote instance (defaults to OMNIROUTE_API_KEY env var)"
+      "OmniRoute API key for the remote instance (defaults to NIYATNA_API_KEY env var)"
     )
     .option("--codex-home <dir>", "Directory where profile files are written (default: ~/.codex)")
     .option(

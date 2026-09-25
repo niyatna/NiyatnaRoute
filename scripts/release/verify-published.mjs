@@ -49,7 +49,7 @@ export const CONTAINER_SCRIPT = `
 set -euo pipefail
 echo "[verify-published] npm i -g omniroute@\${VERIFY_VERSION} (public registry)"
 npm install -g "omniroute@\${VERIFY_VERSION}"
-export DATA_DIR=/tmp/omniroute-data JWT_SECRET=verify-published-secret-with-sufficient-length API_KEY_SECRET=verify-published-api-key-secret DISABLE_SQLITE_AUTO_BACKUP=true OMNIROUTE_SKIP_SYSTEM_TRUST=1
+export DATA_DIR=/tmp/omniroute-data JWT_SECRET=verify-published-secret-with-sufficient-length API_KEY_SECRET=verify-published-api-key-secret DISABLE_SQLITE_AUTO_BACKUP=true NIYATNA_SKIP_SYSTEM_TRUST=1
 mkdir -p "\$DATA_DIR"
 omniroute serve --port "\$VERIFY_PORT" &
 node -e '

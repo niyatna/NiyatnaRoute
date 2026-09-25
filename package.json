@@ -1,16 +1,15 @@
 {
   "name": "niyatnaroute",
   "version": "3.8.51",
-  "description": "Unified AI router with 360 providers, RTK+Caveman compression, auto fallback, MCP/A2A, and OpenAI-compatible APIs.",
+  "description": "NiyatnaRoute \u2014 unified AI proxy/router. One endpoint, many providers, auto-fallback.",
   "type": "module",
   "bin": {
-    "omniroute": "bin/omniroute.mjs",
-    "omniroute-reset-password": "bin/reset-password.mjs"
+    "niyatnaroute": "bin/niyatnaroute.mjs",
+    "niyatnaroute-reset-password": "bin/reset-password.mjs"
   },
   "files": [
     "bin/",
     "dist/",
-    "@omniroute/",
     "open-sse/",
     "src/domain/",
     "src/lib/",
@@ -61,8 +60,7 @@
     "!**/*.nft.json"
   ],
   "workspaces": [
-    "open-sse",
-    "packages/browser-pool"
+    "open-sse"
   ],
   "engines": {
     "node": ">=22.22.2 <23 || >=24.0.0 <27"
@@ -86,9 +84,9 @@
   "author": "diegosouzapw",
   "repository": {
     "type": "git",
-    "url": "https://github.com/diegosouzapw/OmniRoute"
+    "url": "https://github.com/niyatna/NiyatnaRoute"
   },
-  "homepage": "https://omniroute.online",
+  "homepage": "https://niyatnaroute.com",
   "scripts": {
     "dev": "node --max-old-space-size=8192 scripts/dev/run-next.mjs dev",
     "prebuild:docs": "node scripts/docs/gen-openapi-module.mjs",
@@ -112,7 +110,6 @@
     "build:backend": "cross-env OMNIROUTE_BUILD_BACKEND_ONLY=1 node scripts/build/build-next-isolated.mjs",
     "build:contributor": "cross-env OMNIROUTE_BUILD_PROFILE=contributor OMNIROUTE_USE_TURBOPACK=0 node scripts/build/build-next-isolated.mjs",
     "build:cli": "node --import tsx scripts/build/prepublish.ts",
-    "omniroute:verify": "node scripts/check/omniroute-verify.mjs",
     "build:release": "rm -rf .build dist && OMNIROUTE_BUILD_SHA=$(git rev-parse --short HEAD) npm run build && npm run build:cli && node scripts/build/write-build-sha.mjs",
     "build:native:tproxy": "cd src/mitm/tproxy/native && npx --yes node-gyp rebuild",
     "start": "node scripts/dev/run-next.mjs start",
@@ -286,7 +283,8 @@
     "i18n:check-new-keys": "node scripts/i18n/check-new-key-coverage.mjs",
     "i18n:translate-new-keys": "bash scripts/i18n/translate-new-keys.sh",
     "i18n:check-keys": "node scripts/i18n/check-key-completeness.mjs",
-    "i18n:check-keys:cli": "node scripts/i18n/check-key-completeness.mjs --catalog=cli"
+    "i18n:check-keys:cli": "node scripts/i18n/check-key-completeness.mjs --catalog=cli",
+    "niyatnaroute:verify": "node scripts/check/omniroute-verify.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.1120.0",

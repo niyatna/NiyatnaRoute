@@ -10,7 +10,7 @@ process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.API_KEY_SECRET = process.env.API_KEY_SECRET || "media-cost-h-test-api-key-secret";
 
 const core = await import("../../src/lib/db/core.ts");
-const { OMNIROUTE_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
+const { NIYATNA_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
 const { saveSyncedPricing } = await import("../../src/lib/pricingSync.ts");
 const rerankHandler = await import("../../open-sse/handlers/rerank.ts");
 const moderationHandler = await import("../../open-sse/handlers/moderations.ts");
@@ -69,7 +69,7 @@ test("v1 video generation failure preserves provider status and error payload", 
 function assertCostTelemetryHeaders(response: Response) {
   assert.equal(response.status, 200);
 
-  const cost = response.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost);
+  const cost = response.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost);
   assert.ok(cost, "response cost header must be present");
   assert.match(
     cost as string,
@@ -77,10 +77,10 @@ function assertCostTelemetryHeaders(response: Response) {
     `cost header must be a fixed-10-decimal number, got: ${cost}`
   );
 
-  const version = response.headers.get(OMNIROUTE_RESPONSE_HEADERS.version);
+  const version = response.headers.get(NIYATNA_RESPONSE_HEADERS.version);
   assert.ok(version && version.trim().length > 0, "version header must be non-empty");
 
-  const provider = response.headers.get(OMNIROUTE_RESPONSE_HEADERS.provider);
+  const provider = response.headers.get(NIYATNA_RESPONSE_HEADERS.provider);
   assert.ok(provider && provider.trim().length > 0, "provider header must be present");
 }
 
@@ -112,7 +112,7 @@ test("rerank handler success Response carries cost telemetry headers", async () 
 
   assertCostTelemetryHeaders(response);
   assert.equal(
-    response.headers.get(OMNIROUTE_RESPONSE_HEADERS.provider),
+    response.headers.get(NIYATNA_RESPONSE_HEADERS.provider),
     "cohere",
     "provider header must reflect the resolved rerank provider"
   );
@@ -164,14 +164,14 @@ test("rerank NVIDIA-format success Response reflects synthesized search unit in 
 
   assertCostTelemetryHeaders(response);
   assert.equal(
-    response.headers.get(OMNIROUTE_RESPONSE_HEADERS.provider),
+    response.headers.get(NIYATNA_RESPONSE_HEADERS.provider),
     "nvidia",
     "provider header must reflect the resolved rerank provider"
   );
   // 1 synthesized search unit × $0.002 = $0.002. With the OLD `data?.meta…`
   // read this would be "0.0000000000" (raw NVIDIA data carries no meta).
   assert.equal(
-    response.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost),
+    response.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost),
     "0.0020000000",
     "NVIDIA rerank cost must reflect the synthesized 1 search unit read from result"
   );
@@ -200,7 +200,7 @@ test("moderation handler success Response carries cost telemetry headers (cost 0
 
   assertCostTelemetryHeaders(response);
   assert.equal(
-    response.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost),
+    response.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost),
     "0.0000000000",
     "moderation is free → cost must be exactly 0"
   );
@@ -263,7 +263,7 @@ test("v1 audio transcription success Response carries cost telemetry headers (co
 
   assertCostTelemetryHeaders(response);
   assert.equal(
-    response.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost),
+    response.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost),
     "0.0000000000",
     "transcription duration unavailable → cost must be 0"
   );

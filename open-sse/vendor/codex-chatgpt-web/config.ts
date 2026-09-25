@@ -121,7 +121,7 @@ export function expandUserPath(value: string): string {
 export function getConfigDir(): string {
   const dedicated = process.env.CODEX_CHATGPT_WEB_HOME?.trim();
   if (dedicated) return resolve(expandUserPath(dedicated));
-  const dataDir = process.env.DATA_DIR?.trim() || process.env.OMNIROUTE_DATA_DIR?.trim();
+  const dataDir = process.env.DATA_DIR?.trim() || process.env.NIYATNA_DATA_DIR?.trim();
   return resolve(expandUserPath(dataDir || join(homedir(), ".omniroute")), "chatgpt-web-codex");
 }
 

@@ -1,6 +1,6 @@
 import { FORMATS } from "../translator/formats.ts";
 
-export const OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME = "omniroute_web_search";
+export const NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME = "omniroute_web_search";
 // Prefix match — Anthropic sends date-suffixed variants (web_search_20250305, …).
 // The other two detectors (openai-responses/helpers.ts, webSearchRouting.ts) already
 // use /^web_search/ prefix matching; this aligns the fallback detector with them.
@@ -117,7 +117,7 @@ function buildFallbackParameters(tool: JsonRecord): JsonRecord {
 }
 
 function buildFallbackTool(tool: JsonRecord, targetFormat?: string | null): JsonRecord {
-  const name = OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME;
+  const name = NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME;
   const description = buildFallbackDescription(tool);
   const parameters = buildFallbackParameters(tool);
 
@@ -239,7 +239,7 @@ export function prepareWebSearchFallbackBody<T extends WebSearchFallbackBody>(
 
   const isResponsesTarget = options.targetFormat === FORMATS.OPENAI_RESPONSES;
 
-  if (!toolNames.has(OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME)) {
+  if (!toolNames.has(NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME)) {
     preservedTools.unshift(
       buildFallbackTool(toRecord(builtInSearchTools[0]), options.targetFormat)
     );
@@ -254,8 +254,8 @@ export function prepareWebSearchFallbackBody<T extends WebSearchFallbackBody>(
     // Match the injected tool shape: flat for Responses API, nested for Chat Completions.
     nextBody.tool_choice = (
       isResponsesTarget
-        ? { type: "function", name: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME }
-        : { type: "function", function: { name: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME } }
+        ? { type: "function", name: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME }
+        : { type: "function", function: { name: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME } }
     ) as T["tool_choice"];
   }
 
@@ -263,7 +263,7 @@ export function prepareWebSearchFallbackBody<T extends WebSearchFallbackBody>(
     body: nextBody,
     fallback: {
       enabled: true,
-      toolName: OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME,
+      toolName: NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME,
       convertedToolCount: builtInSearchTools.length,
     },
   };

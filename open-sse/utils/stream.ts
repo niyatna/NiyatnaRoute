@@ -1196,7 +1196,7 @@ export function createSSEStream(options: StreamOptions = {}) {
     controller: TransformStreamDefaultController,
     finalUsage: UsageTokenRecord | Record<string, unknown> | null | undefined
   ) => {
-    // Skip SSE metadata comment lines when OMNIROUTE_SSE_COMMENTS is disabled
+    // Skip SSE metadata comment lines when NIYATNA_SSE_COMMENTS is disabled
     // (e.g., "off", "false", "0", "no"). Strict OpenAI-compatible clients that
     // JSON.parse every SSE line will crash on `: x-omniroute-*` comment lines.
     if (!sseCommentsEnabled()) return;

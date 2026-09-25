@@ -108,7 +108,7 @@ Intelligent circuit breaker with progressive degradation:
 Background scheduler that validates credentials every 5 minutes:
 - Cache elimination: stale credentials skipped in <1ms
 - Configurable via CREDENTIAL_HEALTH_CHECK_INTERVAL env var
-- Disable via OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK
+- Disable via NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK
 
 ### 3.5 Pre-request Middleware Hooks (NEW)
 Execute JS hooks before routing:
@@ -148,7 +148,7 @@ Cache, compression, 1proxy, memory, skills tools
 | REQUIRE_API_KEY | Force API key auth | false |
 | CREDENTIAL_HEALTH_CHECK_INTERVAL | Health check interval (ms) | 300000 |
 | CREDENTIAL_HEALTH_CACHE_TTL | Credential cache TTL (ms) | 300000 |
-| OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK | Disable health check | off |
+| NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK | Disable health check | off |
 
 ---
 

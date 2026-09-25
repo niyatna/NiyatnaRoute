@@ -55,14 +55,14 @@ test("setup-qwen writes current V4 settings and only its dedicated env key", asy
     assert.deepEqual(settings.modelProviders.openai[1], {
       id: "qwen/qwen3.8-max-preview",
       name: "qwen/qwen3.8-max-preview (OmniRoute)",
-      envKey: "OMNIROUTE_API_KEY",
+      envKey: "NIYATNA_API_KEY",
       baseUrl: "http://router:20128/v1",
     });
     assert.equal(JSON.stringify(settings).includes("sk-qwen-dedicated"), false);
 
     const env = await fs.readFile(envPath, "utf8");
     assert.match(env, /^OPENAI_API_KEY=keep-me$/m);
-    assert.match(env, /^OMNIROUTE_API_KEY="sk-qwen-dedicated"$/m);
+    assert.match(env, /^NIYATNA_API_KEY="sk-qwen-dedicated"$/m);
   } finally {
     await fs.rm(tempDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   }

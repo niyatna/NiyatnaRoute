@@ -4,7 +4,7 @@
 // invocations (package.json test scripts, stryker.conf.json tap.nodeArgs, the
 // quality.yml TIA step, and the CI test jobs) — NEVER from production. It MUST stay
 // out of open-sse/utils/setupPolyfill.ts, which is also imported by production
-// (bin/omniroute.mjs, proxyFetch.ts, proxyDispatcher.ts) where redirecting DATA_DIR
+// (bin/niyatnaroute.mjs, proxyFetch.ts, proxyDispatcher.ts) where redirecting DATA_DIR
 // would point the live SQLite DB at a throwaway temp dir.
 //
 // Why: node:test spawns a process per test file and Stryker spawns one per sandbox,
@@ -45,7 +45,7 @@ if (!process.env.DATA_DIR) {
 // 105-byte PEM into /usr/local/share/ca-certificates and update-ca-certificates
 // baked it into the bundle, breaking ALL system TLS on the VM (2026-07-05).
 // installCert/uninstallCert/installTproxyCa/uninstallTproxyCa no-op under this.
-process.env.OMNIROUTE_SKIP_SYSTEM_TRUST = "1";
+process.env.NIYATNA_SKIP_SYSTEM_TRUST = "1";
 
 // Browser-spawn guard: the Adobe Firefly session warm (adobeFireflySession.ts)
 // spawns the SYSTEM Chrome with --remote-debugging-port whenever a test reaches it
@@ -57,4 +57,4 @@ process.env.ADOBE_FIREFLY_BROWSER_REFRESH ||= "0";
 
 // DNS-write guard: the suite must NEVER mutate /etc/hosts. Tests that exercise
 // the real MITM path call addDNSEntries(); this env var makes it a no-op.
-process.env.OMNIROUTE_SKIP_DNS_WRITE = "1";
+process.env.NIYATNA_SKIP_DNS_WRITE = "1";

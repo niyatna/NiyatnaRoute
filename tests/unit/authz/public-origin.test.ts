@@ -11,11 +11,11 @@ import {
 } from "@/server/origin/publicOrigin";
 
 const ORIGINAL_ENV = {
-  OMNIROUTE_PUBLIC_BASE_URL: process.env.OMNIROUTE_PUBLIC_BASE_URL,
+  NIYATNA_PUBLIC_BASE_URL: process.env.NIYATNA_PUBLIC_BASE_URL,
   NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  OMNIROUTE_TRUST_PROXY: process.env.OMNIROUTE_TRUST_PROXY,
-  OMNIROUTE_PEER_STAMP_TOKEN: process.env.OMNIROUTE_PEER_STAMP_TOKEN,
+  NIYATNA_TRUST_PROXY: process.env.NIYATNA_TRUST_PROXY,
+  NIYATNA_PEER_STAMP_TOKEN: process.env.NIYATNA_PEER_STAMP_TOKEN,
 };
 
 function restoreEnv() {
@@ -26,16 +26,16 @@ function restoreEnv() {
 }
 
 function clearPublicOriginEnv() {
-  delete process.env.OMNIROUTE_PUBLIC_BASE_URL;
+  delete process.env.NIYATNA_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_APP_URL;
-  delete process.env.OMNIROUTE_TRUST_PROXY;
-  delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  delete process.env.NIYATNA_TRUST_PROXY;
+  delete process.env.NIYATNA_PEER_STAMP_TOKEN;
 }
 
 function stampedPeer(ip: string): Record<string, string> {
   const token = randomUUID();
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = token;
+  process.env.NIYATNA_PEER_STAMP_TOKEN = token;
   return { [PEER_IP_HEADER]: `${token}|${ip}` };
 }
 
@@ -78,7 +78,7 @@ describe("public origin resolution", () => {
   });
 
   it("accepts all configured public origins while resolving the highest-priority one", () => {
-    process.env.OMNIROUTE_PUBLIC_BASE_URL = "https://assets.example.test/images";
+    process.env.NIYATNA_PUBLIC_BASE_URL = "https://assets.example.test/images";
     process.env.NEXT_PUBLIC_BASE_URL = "https://gateway.example.test/app";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: { origin: "https://gateway.example.test" },
@@ -120,7 +120,7 @@ describe("public origin resolution", () => {
   });
 
   it("fails closed for unknown proxy trust mode values", () => {
-    process.env.OMNIROUTE_TRUST_PROXY = "flase";
+    process.env.NIYATNA_TRUST_PROXY = "flase";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: {
         ...stampedPeer("127.0.0.1"),
@@ -135,7 +135,7 @@ describe("public origin resolution", () => {
   });
 
   it("can trust forwarded headers from a token-stamped loopback proxy when explicitly enabled", () => {
-    process.env.OMNIROUTE_TRUST_PROXY = "true";
+    process.env.NIYATNA_TRUST_PROXY = "true";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: {
         ...stampedPeer("127.0.0.1"),
@@ -151,7 +151,7 @@ describe("public origin resolution", () => {
 
   it("does not allow trusted forwarded headers to widen a configured public origin", () => {
     process.env.NEXT_PUBLIC_BASE_URL = "https://gateway.example.test";
-    process.env.OMNIROUTE_TRUST_PROXY = "true";
+    process.env.NIYATNA_TRUST_PROXY = "true";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: {
         ...stampedPeer("127.0.0.1"),
@@ -171,7 +171,7 @@ describe("public origin resolution", () => {
   });
 
   it("does not derive trusted forwarded origin from the raw host header", () => {
-    process.env.OMNIROUTE_TRUST_PROXY = "true";
+    process.env.NIYATNA_TRUST_PROXY = "true";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: {
         ...stampedPeer("127.0.0.1"),
@@ -191,7 +191,7 @@ describe("public origin resolution", () => {
   });
 
   it("rejects malformed forwarded origins even when proxy trust is enabled", () => {
-    process.env.OMNIROUTE_TRUST_PROXY = "true";
+    process.env.NIYATNA_TRUST_PROXY = "true";
     const request = new Request("http://omniroute:20128/api/providers/health-autopilot/actions", {
       headers: {
         ...stampedPeer("127.0.0.1"),

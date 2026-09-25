@@ -34,14 +34,14 @@ async function seedOpenAiConnection() {
 
 test.beforeEach(async () => {
   globalThis.fetch = originalFetch;
-  process.env.OMNIROUTE_ISSUE_AGENT_ENABLED = "true";
+  process.env.NIYATNA_ISSUE_AGENT_ENABLED = "true";
   await resetStorage();
   await core.ensureDbInitialized();
 });
 
 test.afterEach(() => {
   globalThis.fetch = originalFetch;
-  delete process.env.OMNIROUTE_ISSUE_AGENT_ENABLED;
+  delete process.env.NIYATNA_ISSUE_AGENT_ENABLED;
 });
 
 // Close the SQLite handle the route opened. Without this the connection stays

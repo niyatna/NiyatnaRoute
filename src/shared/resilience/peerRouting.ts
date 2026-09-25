@@ -2,13 +2,13 @@ const DEFAULT_MAX_PEER_HOPS = 4;
 const MAX_TRACE_HEADER_LENGTH = 2048;
 const INSTANCE_ID_PATTERN = /^[A-Za-z0-9._:-]{1,64}$/;
 
-export const OMNIROUTE_PEER_TRACE_HEADER = "X-OmniRoute-Peer-Trace";
+export const NIYATNA_PEER_TRACE_HEADER = "X-OmniRoute-Peer-Trace";
 
 type HeaderSource = Headers | Record<string, unknown> | null | undefined;
 type PeerEnvironment = {
-  OMNIROUTE_INSTANCE_ID?: string;
-  OMNIROUTE_PEER_URLS?: string;
-  OMNIROUTE_PEER_MAX_HOPS?: string;
+  NIYATNA_INSTANCE_ID?: string;
+  NIYATNA_PEER_URLS?: string;
+  NIYATNA_PEER_MAX_HOPS?: string;
 };
 
 export type PeerRequestRejection = {
@@ -28,12 +28,12 @@ function readHeader(headers: HeaderSource, name: string): string | null {
 }
 
 function getInstanceId(env: PeerEnvironment): string | null {
-  const value = env.OMNIROUTE_INSTANCE_ID?.trim() ?? "";
+  const value = env.NIYATNA_INSTANCE_ID?.trim() ?? "";
   return INSTANCE_ID_PATTERN.test(value) ? value : null;
 }
 
 function getMaxPeerHops(env: PeerEnvironment): number {
-  const parsed = Number.parseInt(env.OMNIROUTE_PEER_MAX_HOPS ?? "", 10);
+  const parsed = Number.parseInt(env.NIYATNA_PEER_MAX_HOPS ?? "", 10);
   return Number.isInteger(parsed) && parsed > 0 && parsed <= 32 ? parsed : DEFAULT_MAX_PEER_HOPS;
 }
 
@@ -62,7 +62,7 @@ export function isConfiguredOmniRoutePeer(
   const target = normalizePeerUrl(targetUrl);
   if (!target) return false;
 
-  return (env.OMNIROUTE_PEER_URLS ?? "")
+  return (env.NIYATNA_PEER_URLS ?? "")
     .split(",")
     .map(normalizePeerUrl)
     .some((peer) => {
@@ -81,7 +81,7 @@ export function inspectPeerRequest(
   const instanceId = getInstanceId(env);
   if (!instanceId) return null;
 
-  const trace = parsePeerTrace(readHeader(headers, OMNIROUTE_PEER_TRACE_HEADER));
+  const trace = parsePeerTrace(readHeader(headers, NIYATNA_PEER_TRACE_HEADER));
   if (trace.includes(instanceId)) {
     return {
       code: "peer_loop_detected",
@@ -122,12 +122,12 @@ export function applyPeerTraceHeader(
   const instanceId = getInstanceId(env);
   if (!instanceId || !isConfiguredOmniRoutePeer(targetUrl, env)) return false;
 
-  const trace = parsePeerTrace(readHeader(clientHeaders, OMNIROUTE_PEER_TRACE_HEADER));
+  const trace = parsePeerTrace(readHeader(clientHeaders, NIYATNA_PEER_TRACE_HEADER));
   if (!trace.includes(instanceId)) trace.push(instanceId);
-  const traceHeaderLower = OMNIROUTE_PEER_TRACE_HEADER.toLowerCase();
+  const traceHeaderLower = NIYATNA_PEER_TRACE_HEADER.toLowerCase();
   for (const key of Object.keys(outgoingHeaders)) {
     if (key.toLowerCase() === traceHeaderLower) delete outgoingHeaders[key];
   }
-  outgoingHeaders[OMNIROUTE_PEER_TRACE_HEADER] = trace.join(",");
+  outgoingHeaders[NIYATNA_PEER_TRACE_HEADER] = trace.join(",");
   return true;
 }

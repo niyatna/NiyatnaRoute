@@ -16,8 +16,8 @@ import path from "node:path";
 import Database from "better-sqlite3";
 
 const migrationsDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-job-migration-"));
-const originalMigrationsDir = process.env.OMNIROUTE_MIGRATIONS_DIR;
-process.env.OMNIROUTE_MIGRATIONS_DIR = migrationsDir;
+const originalMigrationsDir = process.env.NIYATNA_MIGRATIONS_DIR;
+process.env.NIYATNA_MIGRATIONS_DIR = migrationsDir;
 
 fs.writeFileSync(
   path.join(migrationsDir, "139_ccr_blocks.sql"),
@@ -36,8 +36,8 @@ const { runMigrations } = await import("../../src/lib/db/migrationRunner.ts");
 
 test.after(() => {
   fs.rmSync(migrationsDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
-  if (originalMigrationsDir === undefined) delete process.env.OMNIROUTE_MIGRATIONS_DIR;
-  else process.env.OMNIROUTE_MIGRATIONS_DIR = originalMigrationsDir;
+  if (originalMigrationsDir === undefined) delete process.env.NIYATNA_MIGRATIONS_DIR;
+  else process.env.NIYATNA_MIGRATIONS_DIR = originalMigrationsDir;
 });
 
 test("job registry previously applied on 139 is rehomed so CCR can claim that slot", () => {

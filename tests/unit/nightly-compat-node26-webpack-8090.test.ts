@@ -13,7 +13,7 @@
  * --max-old-space-size and peaks far higher than webpack on OmniRoute's large module
  * graph (#6409), heavier still under Node 26. The codebase's own documented escape
  * hatch for RAM-constrained environments is the webpack fallback
- * (OMNIROUTE_USE_TURBOPACK=0; see docs/reference/ENVIRONMENT.md). The fix wires that
+ * (NIYATNA_USE_TURBOPACK=0; see docs/reference/ENVIRONMENT.md). The fix wires that
  * fallback into the Node 26 compat build so it still validates the app *builds* on
  * Node 26 without OOMing the runner.
  *
@@ -43,7 +43,7 @@ function extractJobBlock(yaml: string, jobName: string): string {
   return block.join("\n");
 }
 
-test("#8090 compat-build-26 uses the webpack fallback (OMNIROUTE_USE_TURBOPACK=0) to avoid Node 26 OOM", () => {
+test("#8090 compat-build-26 uses the webpack fallback (NIYATNA_USE_TURBOPACK=0) to avoid Node 26 OOM", () => {
   const wf = fs.readFileSync(
     path.join(repoRoot, ".github/workflows/nightly-compat.yml"),
     "utf-8"
@@ -57,8 +57,8 @@ test("#8090 compat-build-26 uses the webpack fallback (OMNIROUTE_USE_TURBOPACK=0
   );
   assert.match(
     jobBlock,
-    /OMNIROUTE_USE_TURBOPACK:\s*["']0["']/,
-    "compat-build-26 must set OMNIROUTE_USE_TURBOPACK=0 (webpack fallback) so the sole " +
+    /NIYATNA_USE_TURBOPACK:\s*["']0["']/,
+    "compat-build-26 must set NIYATNA_USE_TURBOPACK=0 (webpack fallback) so the sole " +
       "Node 26 build does not OOM the runner on Turbopack's unbounded native memory (#8090/#6409)"
   );
 });

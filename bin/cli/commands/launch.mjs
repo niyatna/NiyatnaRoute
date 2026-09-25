@@ -68,7 +68,7 @@ export function resolveLaunchTarget(opts = {}) {
   } else {
     let fromCtx;
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       fromCtx = ctx?.baseUrl;
     } catch {
       /* no context */
@@ -81,13 +81,13 @@ export function resolveLaunchTarget(opts = {}) {
   let authToken = opts.token ?? opts.apiKey ?? opts["api-key"];
   if (!authToken) {
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       authToken = ctx?.accessToken || ctx?.apiKey || undefined;
     } catch {
       /* no context auth */
     }
   }
-  if (!authToken) authToken = process.env.ANTHROPIC_AUTH_TOKEN ?? process.env.OMNIROUTE_API_KEY;
+  if (!authToken) authToken = process.env.ANTHROPIC_AUTH_TOKEN ?? process.env.NIYATNA_API_KEY;
   return { baseUrl, authToken };
 }
 

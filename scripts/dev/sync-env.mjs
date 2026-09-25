@@ -42,7 +42,7 @@ function resolveRootDir(rootDir) {
 // JWT_SECRET, API_KEY_SECRET and STORAGE_ENCRYPTION_KEY are deliberately NOT
 // here: the server owns them. It restores each one from its durable store, or
 // generates and persists it there on first use — STORAGE_ENCRYPTION_KEY in
-// bin/omniroute.mjs (guarded by bin/cli/utils/storageKeyProvision.mjs), the
+// bin/niyatnaroute.mjs (guarded by bin/cli/utils/storageKeyProvision.mjs), the
 // other two in src/instrumentation-node.ts::ensureSecrets(), which persists to
 // the `secrets` namespace of the database under DATA_DIR.
 //
@@ -62,7 +62,7 @@ const CRYPTO_SECRETS = {
  * Generating a new key would make all previously-encrypted credentials unrecoverable.
  *
  * Note: STORAGE_ENCRYPTION_KEY is no longer auto-generated in postinstall.
- * It's generated at server startup in bin/omniroute.mjs and persisted to
+ * It's generated at server startup in bin/niyatnaroute.mjs and persisted to
  * ~/.omniroute/.env to survive across upgrades.
  * @see https://github.com/diegosouzapw/OmniRoute/issues/1622
  */

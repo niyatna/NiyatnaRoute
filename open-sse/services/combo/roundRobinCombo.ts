@@ -686,7 +686,7 @@ export async function handleRoundRobinCombo({
           // dispatch (opt-in, same env gate as the pre-request check). Best-effort
           // and non-blocking — recording must never break the request path.
           if (
-            process.env.OMNIROUTE_QUOTA_AWARE_ROUTING === "1" &&
+            process.env.NIYATNA_QUOTA_AWARE_ROUTING === "1" &&
             target.connectionId &&
             attemptBody &&
             typeof attemptBody === "object"

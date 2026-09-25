@@ -81,7 +81,7 @@ function isBuildProcess(): boolean {
 
 function isCredentialHealthCheckDisabled(): boolean {
   if (isBuildProcess() || isAutomatedTestProcess()) return true;
-  const val = process.env.OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK;
+  const val = process.env.NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK;
   return val ? TRUE_ENV_VALUES.has(val.trim().toLowerCase()) : false;
 }
 
@@ -446,7 +446,7 @@ function scheduleSweep(): void {
 /**
  * Start the credential health check scheduler (idempotent).
  * Returns whether the sweep is armed. False when
- * OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK is set (#11016).
+ * NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK is set (#11016).
  */
 export function initCredentialHealthCheck(): boolean {
   const state = getSchedulerState();

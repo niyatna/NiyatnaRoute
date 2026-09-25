@@ -263,7 +263,7 @@ export async function runRedisUpCommand(opts = {}) {
   try {
     await execFile(runtime, args);
     success(`Container '${name}' is now running on redis://${bind}:${port}`);
-    info(`Set OMNIROUTE_REDIS_URL=redis://${bind}:${port} in your .env to wire OmniRoute to it.`);
+    info(`Set NIYATNA_REDIS_URL=redis://${bind}:${port} in your .env to wire OmniRoute to it.`);
     if (bind !== DEFAULT_BIND && !opts.password) {
       info(
         `Warning: '${bind}' publishes Redis beyond loopback without AUTH. Re-run with --password <secret>.`

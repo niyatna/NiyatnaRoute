@@ -543,7 +543,7 @@ export async function handleChatCore({
       comboName: comboName || undefined,
     });
   });
-  const traceEnabled = process.env.OMNIROUTE_TRACE === "true" || process.env.DEBUG === "true";
+  const traceEnabled = process.env.NIYATNA_TRACE === "true" || process.env.DEBUG === "true";
   // Stage trace extracted to chatCore/stageTrace.ts (#3501); bind the per-request inputs once so the
   // call sites stay byte-identical.
   const trace = (label: string, extra?: Record<string, unknown>) =>

@@ -1,5 +1,5 @@
 import { getProviderAlias } from "@/shared/constants/providers";
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { APP_CONFIG } from "@/shared/constants/appConfig";
 import {
   generationDurationMs,
@@ -159,42 +159,42 @@ export function buildOmniRouteResponseMetaHeaders({
 }): Record<string, string> {
   const tokens = getOmniRouteTokenCounts(usage);
   const headers: Record<string, string> = {
-    [OMNIROUTE_RESPONSE_HEADERS.cacheHit]: toHeaderValue(String(cacheHit)),
-    [OMNIROUTE_RESPONSE_HEADERS.latencyMs]: toHeaderValue(String(toNonNegativeInteger(latencyMs))),
-    [OMNIROUTE_RESPONSE_HEADERS.responseCost]: toHeaderValue(formatOmniRouteCost(costUsd)),
-    [OMNIROUTE_RESPONSE_HEADERS.tokensIn]: toHeaderValue(String(tokens.input)),
-    [OMNIROUTE_RESPONSE_HEADERS.tokensOut]: toHeaderValue(String(tokens.output)),
-    [OMNIROUTE_RESPONSE_HEADERS.version]: toHeaderValue(APP_CONFIG.version),
+    [NIYATNA_RESPONSE_HEADERS.cacheHit]: toHeaderValue(String(cacheHit)),
+    [NIYATNA_RESPONSE_HEADERS.latencyMs]: toHeaderValue(String(toNonNegativeInteger(latencyMs))),
+    [NIYATNA_RESPONSE_HEADERS.responseCost]: toHeaderValue(formatOmniRouteCost(costUsd)),
+    [NIYATNA_RESPONSE_HEADERS.tokensIn]: toHeaderValue(String(tokens.input)),
+    [NIYATNA_RESPONSE_HEADERS.tokensOut]: toHeaderValue(String(tokens.output)),
+    [NIYATNA_RESPONSE_HEADERS.version]: toHeaderValue(APP_CONFIG.version),
   };
 
   if (typeof model === "string" && model.trim().length > 0) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.model] = toHeaderValue(model);
+    headers[NIYATNA_RESPONSE_HEADERS.model] = toHeaderValue(model);
   }
 
   if (typeof requestId === "string" && requestId.trim().length > 0) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.requestId] = toHeaderValue(requestId);
+    headers[NIYATNA_RESPONSE_HEADERS.requestId] = toHeaderValue(requestId);
   }
 
   if (typeof provider === "string" && provider.trim().length > 0) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.provider] = toHeaderValue(getProviderAlias(provider));
+    headers[NIYATNA_RESPONSE_HEADERS.provider] = toHeaderValue(getProviderAlias(provider));
   }
 
   // Cache-saved cost: emitted only when the caller passes a value (cache HITs), so
   // non-cache responses keep their existing header shape. `0` is a valid saved cost.
   if (costSavedUsd != null) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.costSaved] = toHeaderValue(
+    headers[NIYATNA_RESPONSE_HEADERS.costSaved] = toHeaderValue(
       formatOmniRouteCost(costSavedUsd)
     );
   }
 
   const attempts = toNonNegativeInteger(fallbackAttempts);
   if (attempts > 0) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.fallbackAttempts] = toHeaderValue(String(attempts));
+    headers[NIYATNA_RESPONSE_HEADERS.fallbackAttempts] = toHeaderValue(String(attempts));
   }
 
   const decisionValue = buildOmniRouteDecisionHeaderValue({ strategy, provider, latencyMs });
   if (decisionValue !== null) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.decision] = decisionValue;
+    headers[NIYATNA_RESPONSE_HEADERS.decision] = decisionValue;
   }
 
   let tps = tokensPerSecond(tokens.output, generationDurationMs(toFiniteNumber(latencyMs), ttftMs));
@@ -203,7 +203,7 @@ export function buildOmniRouteResponseMetaHeaders({
     if (fromUsage > 0) tps = fromUsage;
   }
   if (tps != null) {
-    headers[OMNIROUTE_RESPONSE_HEADERS.tokensPerSecond] = toHeaderValue(tps.toFixed(3));
+    headers[NIYATNA_RESPONSE_HEADERS.tokensPerSecond] = toHeaderValue(tps.toFixed(3));
   }
 
   return headers;

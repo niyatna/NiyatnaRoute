@@ -6,7 +6,7 @@ import { execSync } from "child_process";
 const args = process.argv.slice(2);
 const fullUninstall = args.includes("--full");
 const uninstallAlreadyInProgress =
-  process.env.OMNIROUTE_SKIP_UNINSTALL_HOOK === "1" ||
+  process.env.NIYATNA_SKIP_UNINSTALL_HOOK === "1" ||
   process.env.npm_lifecycle_event === "uninstall";
 
 console.log("🛑 OmniRoute Uninstaller");
@@ -49,7 +49,7 @@ if (uninstallAlreadyInProgress) {
       stdio: "inherit",
       env: {
         ...process.env,
-        OMNIROUTE_SKIP_UNINSTALL_HOOK: "1",
+        NIYATNA_SKIP_UNINSTALL_HOOK: "1",
       },
     });
     console.log("\n✅ OmniRoute has been successfully uninstalled from your system.");

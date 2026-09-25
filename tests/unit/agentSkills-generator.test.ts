@@ -232,7 +232,7 @@ test("generic API skill GET and mutation examples use standalone Bearer auth", a
     assert.equal(report.errors.length, 0, `Errors: ${JSON.stringify(report.errors)}`);
     for (const id of ["omni-providers", "omni-settings"]) {
       const content = fs.readFileSync(path.join(tmpDir, id, "SKILL.md"), "utf-8");
-      assert.ok(content.includes('  -H "Authorization: Bearer $OMNIROUTE_TOKEN"'));
+      assert.ok(content.includes('  -H "Authorization: Bearer $NIYATNA_TOKEN"'));
       assert.ok(!content.includes("cookie.jar"), `${id} must not assume a session cookie`);
       assert.ok(!content.includes("CSRF_TOKEN"), `${id} must not assume a CSRF token`);
     }
@@ -246,8 +246,8 @@ test("generic API skill GET and mutation examples use standalone Bearer auth", a
       providers.indexOf("### POST /api/providers"),
       providers.indexOf("### GET /api/providers/{id}")
     );
-    assert.ok(providersGet.includes('  -H "Authorization: Bearer $OMNIROUTE_TOKEN"'));
-    assert.ok(providersPost.includes('  -H "Authorization: Bearer $OMNIROUTE_TOKEN" \\\n'));
+    assert.ok(providersGet.includes('  -H "Authorization: Bearer $NIYATNA_TOKEN"'));
+    assert.ok(providersPost.includes('  -H "Authorization: Bearer $NIYATNA_TOKEN" \\\n'));
     assert.ok(providersPost.includes('  -H "Content-Type: application/json" \\\n'));
 
     const settings = fs.readFileSync(path.join(tmpDir, "omni-settings", "SKILL.md"), "utf-8");
@@ -255,7 +255,7 @@ test("generic API skill GET and mutation examples use standalone Bearer auth", a
       settings.indexOf("### PATCH /api/settings"),
       settings.indexOf("### POST /api/settings/purge-request-history")
     );
-    assert.ok(settingsPatch.includes('  -H "Authorization: Bearer $OMNIROUTE_TOKEN" \\\n'));
+    assert.ok(settingsPatch.includes('  -H "Authorization: Bearer $NIYATNA_TOKEN" \\\n'));
     assert.ok(settingsPatch.includes('  -H "Content-Type: application/json" \\\n'));
   } finally {
     rmTmpDir(tmpDir);

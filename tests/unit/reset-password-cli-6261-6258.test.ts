@@ -19,7 +19,7 @@ import bcrypt from "bcryptjs";
 import Database from "better-sqlite3";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
-const OMNIROUTE_BIN = path.join(ROOT, "bin", "omniroute.mjs");
+const NIYATNA_BIN = path.join(ROOT, "bin", "omniroute.mjs");
 const RESET_BIN = path.join(ROOT, "bin", "reset-password.mjs");
 
 // Isolate every spawn from the development repo's .env and the machine's real
@@ -30,12 +30,12 @@ function baseEnv(dataDir: string, isolatedHome: string): NodeJS.ProcessEnv {
     ...env,
     DATA_DIR: dataDir,
     HOME: isolatedHome,
-    // Give the CLI a key so bin/omniroute.mjs never warns/provisions.
+    // Give the CLI a key so bin/niyatnaroute.mjs never warns/provisions.
     STORAGE_ENCRYPTION_KEY: "0".repeat(64),
     CI: "1",
     NO_UPDATE_NOTIFIER: "1",
-    OMNIROUTE_NO_UPDATE_NOTIFIER: "1",
-    OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
+    NIYATNA_NO_UPDATE_NOTIFIER: "1",
+    NIYATNA_CLI_SKIP_REPO_ENV: "1",
   };
 }
 
@@ -91,7 +91,7 @@ test("omniroute reset-password subcommand applies the reset over piped stdin (#6
   const home = mkHome();
   try {
     const dbPath = seedDb(dataDir);
-    const res = spawnSync("node", [OMNIROUTE_BIN, "reset-password"], {
+    const res = spawnSync("node", [NIYATNA_BIN, "reset-password"], {
       env: baseEnv(dataDir, home),
       input: "ChangeMe\nChangeMe\n",
       timeout: 60_000,

@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 import Database from "better-sqlite3";
 
-const isIsolatedChild = process.env.OMNIROUTE_DB_MIGRATION_SAFETY_CHILD === "1";
+const isIsolatedChild = process.env.NIYATNA_DB_MIGRATION_SAFETY_CHILD === "1";
 
 if (!isIsolatedChild) {
   test("historical migration repair scenarios pass in an isolated process", () => {
@@ -25,9 +25,9 @@ if (!isIsolatedChild) {
       const childEnv = {
         ...process.env,
         DATA_DIR: dataDir,
-        OMNIROUTE_DB_MIGRATION_SAFETY_CHILD: "1",
-        OMNIROUTE_MAX_PENDING_MIGRATIONS: "",
-        OMNIROUTE_MIGRATIONS_DIR: migrationsDir,
+        NIYATNA_DB_MIGRATION_SAFETY_CHILD: "1",
+        NIYATNA_MAX_PENDING_MIGRATIONS: "",
+        NIYATNA_MIGRATIONS_DIR: migrationsDir,
       };
       // Node's test runner exports this only to the current test worker. Passing it into
       // another `node --test` process makes Node classify the nested file as recursive and
@@ -58,7 +58,7 @@ if (!isIsolatedChild) {
   });
 } else {
   const dataDir = process.env.DATA_DIR;
-  const migrationsDir = process.env.OMNIROUTE_MIGRATIONS_DIR;
+  const migrationsDir = process.env.NIYATNA_MIGRATIONS_DIR;
   assert.ok(dataDir, "isolated child requires an explicit DATA_DIR");
   assert.ok(migrationsDir, "isolated child requires an explicit migrations directory");
   const discoveryMigrationSql = fs.readFileSync(
@@ -529,11 +529,11 @@ if (!isIsolatedChild) {
     const sqlitePath = path.join(dataDir, "only-marker-mass-safety.sqlite");
     const db = new Database(sqlitePath);
     const previousDisableBackup = process.env.DISABLE_SQLITE_AUTO_BACKUP;
-    const previousMaxPending = process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+    const previousMaxPending = process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
 
     try {
       process.env.DISABLE_SQLITE_AUTO_BACKUP = "true";
-      process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = "1";
+      process.env.NIYATNA_MAX_PENDING_MIGRATIONS = "1";
       db.exec(`
       CREATE TABLE provider_connections (id TEXT PRIMARY KEY);
       CREATE TABLE inspector_custom_hosts (
@@ -579,8 +579,8 @@ if (!isIsolatedChild) {
       db.close();
       if (previousDisableBackup === undefined) delete process.env.DISABLE_SQLITE_AUTO_BACKUP;
       else process.env.DISABLE_SQLITE_AUTO_BACKUP = previousDisableBackup;
-      if (previousMaxPending === undefined) delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
-      else process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = previousMaxPending;
+      if (previousMaxPending === undefined) delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
+      else process.env.NIYATNA_MAX_PENDING_MIGRATIONS = previousMaxPending;
     }
   });
 
@@ -645,11 +645,11 @@ if (!isIsolatedChild) {
     const sqlitePath = path.join(dataDir, "sqljs-mass-safety.sqlite");
     const { createSqlJsAdapter } = await import("../../src/lib/db/adapters/sqljsAdapter.ts");
     const db = await createSqlJsAdapter(sqlitePath);
-    const previousMaxPending = process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
+    const previousMaxPending = process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
     const backupsBefore = listPreMigrationBackups();
 
     try {
-      process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = "1";
+      process.env.NIYATNA_MAX_PENDING_MIGRATIONS = "1";
       db.exec(`
         CREATE TABLE provider_connections (id TEXT PRIMARY KEY);
         CREATE TABLE inspector_custom_hosts (
@@ -694,8 +694,8 @@ if (!isIsolatedChild) {
       );
     } finally {
       db.close();
-      if (previousMaxPending === undefined) delete process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS;
-      else process.env.OMNIROUTE_MAX_PENDING_MIGRATIONS = previousMaxPending;
+      if (previousMaxPending === undefined) delete process.env.NIYATNA_MAX_PENDING_MIGRATIONS;
+      else process.env.NIYATNA_MAX_PENDING_MIGRATIONS = previousMaxPending;
     }
   });
 

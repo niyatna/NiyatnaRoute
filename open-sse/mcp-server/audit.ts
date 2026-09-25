@@ -380,7 +380,7 @@ export async function logToolCall(
 
     const inputHash = await hashInput(input);
     const outputSummary = summarizeOutput(output);
-    const apiKeyId = process.env.OMNIROUTE_API_KEY_ID || null;
+    const apiKeyId = process.env.NIYATNA_API_KEY_ID || null;
 
     database
       .prepare(

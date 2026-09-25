@@ -262,9 +262,9 @@ test("doctor gives connect guidance when the server rejects a machine token", as
 });
 
 test("doctor reports explicitly disabled machine-token auth without probing", async () => {
-  const previous = process.env.OMNIROUTE_DISABLE_CLI_TOKEN;
+  const previous = process.env.NIYATNA_DISABLE_CLI_TOKEN;
   const originalFetch = globalThis.fetch;
-  process.env.OMNIROUTE_DISABLE_CLI_TOKEN = "true";
+  process.env.NIYATNA_DISABLE_CLI_TOKEN = "true";
   globalThis.fetch = (async () => {
     throw new Error("fetch should not run");
   }) as typeof fetch;
@@ -276,7 +276,7 @@ test("doctor reports explicitly disabled machine-token auth without probing", as
     assert.match(check.message || "", /disabled/i);
   } finally {
     globalThis.fetch = originalFetch;
-    if (previous === undefined) delete process.env.OMNIROUTE_DISABLE_CLI_TOKEN;
-    else process.env.OMNIROUTE_DISABLE_CLI_TOKEN = previous;
+    if (previous === undefined) delete process.env.NIYATNA_DISABLE_CLI_TOKEN;
+    else process.env.NIYATNA_DISABLE_CLI_TOKEN = previous;
   }
 });

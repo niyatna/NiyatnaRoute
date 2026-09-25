@@ -23,9 +23,9 @@
  *   --dry-run    print the plan and the remote steps, change nothing
  *
  * Env:
- *   OMNIROUTE_RELEASE_REF        ref to check ancestry against (default origin/main)
- *   OMNIROUTE_ALLOW_CANARY_BUILD set to 1 to deploy an artifact that is not on the release line
- *   OMNIROUTE_SMOKE_API_KEY      sent as Authorization: Bearer when the gateway requires auth
+ *   NIYATNA_RELEASE_REF        ref to check ancestry against (default origin/main)
+ *   NIYATNA_ALLOW_CANARY_BUILD set to 1 to deploy an artifact that is not on the release line
+ *   NIYATNA_SMOKE_API_KEY      sent as Authorization: Bearer when the gateway requires auth
  */
 
 import { execFileSync, spawnSync } from "node:child_process";
@@ -135,10 +135,10 @@ const localBuildSha = readBuildSha(repoRoot);
 const plan = planCanaryDeploy({
   buildSha: localBuildSha,
   isAncestorOfRelease: makeGitAncestryProbe(
-    process.env.OMNIROUTE_RELEASE_REF || "origin/main",
+    process.env.NIYATNA_RELEASE_REF || "origin/main",
     repoRoot
   ),
-  allowCanary: process.env.OMNIROUTE_ALLOW_CANARY_BUILD === "1",
+  allowCanary: process.env.NIYATNA_ALLOW_CANARY_BUILD === "1",
 });
 
 console.log(`[provenance] ${plan.reason}`);
@@ -197,7 +197,7 @@ try {
   const health = await probeHealth(args.baseUrl);
   const completions = [];
   for (const model of args.models) {
-    const probe = await probeCompletion(args.baseUrl, model, process.env.OMNIROUTE_SMOKE_API_KEY);
+    const probe = await probeCompletion(args.baseUrl, model, process.env.NIYATNA_SMOKE_API_KEY);
     console.log(`   probe ${probe.model}: ${probe.ok ? "ok" : `FAILED (${probe.status})`}`);
     completions.push(probe);
   }

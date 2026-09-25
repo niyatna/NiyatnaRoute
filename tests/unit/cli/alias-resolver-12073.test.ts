@@ -31,7 +31,7 @@ function runChild(script: string, cwd = REPO_ROOT) {
     env: {
       ...process.env,
       DATA_DIR: mkdtempSync(join(tmpdir(), "alias-resolver-12073-")),
-      OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
+      NIYATNA_CLI_SKIP_REPO_ENV: "1",
     },
     encoding: "utf8",
   });

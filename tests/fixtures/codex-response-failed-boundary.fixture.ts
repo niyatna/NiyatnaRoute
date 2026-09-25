@@ -14,7 +14,7 @@ const TEST_PLUGINS_DIR = fs.mkdtempSync(
   path.join(os.tmpdir(), "omniroute-codex-boundary-plugins-")
 );
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_PLUGINS_DIR = TEST_PLUGINS_DIR;
+process.env.NIYATNA_PLUGINS_DIR = TEST_PLUGINS_DIR;
 process.env.APP_LOG_TO_FILE = "false";
 
 const { CodexExecutor, __setCodexWebSocketTransportForTesting, encodeResponseSseEvent } =

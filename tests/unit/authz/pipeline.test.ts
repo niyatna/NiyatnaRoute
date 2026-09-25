@@ -21,11 +21,11 @@ const ORIGINAL_JWT = process.env.JWT_SECRET;
 const ORIGINAL_INITIAL = process.env.INITIAL_PASSWORD;
 const ORIGINAL_AUTH_COOKIE_SECURE = process.env.AUTH_COOKIE_SECURE;
 const ORIGINAL_REQUIRE_API_KEY = process.env.REQUIRE_API_KEY;
-const ORIGINAL_OMNIROUTE_PUBLIC_BASE_URL = process.env.OMNIROUTE_PUBLIC_BASE_URL;
+const ORIGINAL_NIYATNA_PUBLIC_BASE_URL = process.env.NIYATNA_PUBLIC_BASE_URL;
 const ORIGINAL_NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const ORIGINAL_NEXT_PUBLIC_APP_URL = process.env.NEXT_PUBLIC_APP_URL;
-const ORIGINAL_OMNIROUTE_TRUST_PROXY = process.env.OMNIROUTE_TRUST_PROXY;
-const ORIGINAL_OMNIROUTE_PEER_STAMP_TOKEN = process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+const ORIGINAL_NIYATNA_TRUST_PROXY = process.env.NIYATNA_TRUST_PROXY;
+const ORIGINAL_NIYATNA_PEER_STAMP_TOKEN = process.env.NIYATNA_PEER_STAMP_TOKEN;
 
 function resetEnvironment() {
   core.resetDbInstance();
@@ -36,11 +36,11 @@ function resetEnvironment() {
   process.env.INITIAL_PASSWORD = "pipeline-initial-password";
   process.env.REQUIRE_API_KEY = "true";
   delete process.env.AUTH_COOKIE_SECURE;
-  delete process.env.OMNIROUTE_PUBLIC_BASE_URL;
+  delete process.env.NIYATNA_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_APP_URL;
-  delete process.env.OMNIROUTE_TRUST_PROXY;
-  delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  delete process.env.NIYATNA_TRUST_PROXY;
+  delete process.env.NIYATNA_PEER_STAMP_TOKEN;
   globalThis.__omnirouteShutdown = { init: false, shuttingDown: false, activeRequests: 0 };
 }
 
@@ -76,19 +76,19 @@ test.after(() => {
   else process.env.AUTH_COOKIE_SECURE = ORIGINAL_AUTH_COOKIE_SECURE;
   if (ORIGINAL_REQUIRE_API_KEY === undefined) delete process.env.REQUIRE_API_KEY;
   else process.env.REQUIRE_API_KEY = ORIGINAL_REQUIRE_API_KEY;
-  if (ORIGINAL_OMNIROUTE_PUBLIC_BASE_URL === undefined)
-    delete process.env.OMNIROUTE_PUBLIC_BASE_URL;
-  else process.env.OMNIROUTE_PUBLIC_BASE_URL = ORIGINAL_OMNIROUTE_PUBLIC_BASE_URL;
+  if (ORIGINAL_NIYATNA_PUBLIC_BASE_URL === undefined)
+    delete process.env.NIYATNA_PUBLIC_BASE_URL;
+  else process.env.NIYATNA_PUBLIC_BASE_URL = ORIGINAL_NIYATNA_PUBLIC_BASE_URL;
   if (ORIGINAL_NEXT_PUBLIC_BASE_URL === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
   else process.env.NEXT_PUBLIC_BASE_URL = ORIGINAL_NEXT_PUBLIC_BASE_URL;
   if (ORIGINAL_NEXT_PUBLIC_APP_URL === undefined) delete process.env.NEXT_PUBLIC_APP_URL;
   else process.env.NEXT_PUBLIC_APP_URL = ORIGINAL_NEXT_PUBLIC_APP_URL;
-  if (ORIGINAL_OMNIROUTE_TRUST_PROXY === undefined) delete process.env.OMNIROUTE_TRUST_PROXY;
-  else process.env.OMNIROUTE_TRUST_PROXY = ORIGINAL_OMNIROUTE_TRUST_PROXY;
-  if (ORIGINAL_OMNIROUTE_PEER_STAMP_TOKEN === undefined) {
-    delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  if (ORIGINAL_NIYATNA_TRUST_PROXY === undefined) delete process.env.NIYATNA_TRUST_PROXY;
+  else process.env.NIYATNA_TRUST_PROXY = ORIGINAL_NIYATNA_TRUST_PROXY;
+  if (ORIGINAL_NIYATNA_PEER_STAMP_TOKEN === undefined) {
+    delete process.env.NIYATNA_PEER_STAMP_TOKEN;
   } else {
-    process.env.OMNIROUTE_PEER_STAMP_TOKEN = ORIGINAL_OMNIROUTE_PEER_STAMP_TOKEN;
+    process.env.NIYATNA_PEER_STAMP_TOKEN = ORIGINAL_NIYATNA_PEER_STAMP_TOKEN;
   }
   globalThis.__omnirouteShutdown = { init: false, shuttingDown: false, activeRequests: 0 };
 });
@@ -166,7 +166,7 @@ test("runAuthzPipeline redirects unauthenticated /home/* nested paths to login (
 });
 
 // PR #1810 (upstream 9router): reverse-proxy subpath deployment via
-// OMNIROUTE_BASE_PATH. Next.js strips the basePath from nextUrl.pathname
+// NIYATNA_BASE_PATH. Next.js strips the basePath from nextUrl.pathname
 // before route classification, so the redirect targets must re-add it via
 // request.nextUrl.basePath to stay inside the deployed subpath.
 test("runAuthzPipeline prefixes the root-to-dashboard redirect with basePath when set", async () => {
@@ -236,7 +236,7 @@ test("runAuthzPipeline allows first password writes when login is required but n
 
   // The local operator (real TCP peer 127.0.0.1, stamped by the custom server)
   // keeps the first-password flow, whatever hostname they typed.
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "pipeline-test-peer-stamp-token";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "pipeline-test-peer-stamp-token";
   const local = await pipeline.runAuthzPipeline(
     request("https://example.com/api/settings/require-login", {
       method: "POST",
@@ -269,7 +269,7 @@ test("runAuthzPipeline allows first password writes when login is required but n
   assert.equal((await spoofed.json()).error.code, "AUTH_001");
 
   // No stamp at all (nothing trustworthy about the peer) → fail closed.
-  delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  delete process.env.NIYATNA_PEER_STAMP_TOKEN;
   const unstamped = await pipeline.runAuthzPipeline(
     request("https://example.com/api/settings/require-login", { method: "POST" }),
     { enforce: true }
@@ -415,7 +415,7 @@ test("runAuthzPipeline gates the DB health API on loopback, not on the session a
 
   // The local operator — real TCP peer 127.0.0.1, stamped by the custom server —
   // still reaches it with their session.
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "pipeline-test-peer-stamp-token";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "pipeline-test-peer-stamp-token";
   const loopback = await pipeline.runAuthzPipeline(
     request("http://localhost/api/db/health", {
       headers: {
@@ -566,7 +566,7 @@ test("runAuthzPipeline rejects dashboard mutations from invalid browser origin",
   assert.equal(response.status, 403);
   assert.equal(body.error.code, "INVALID_ORIGIN");
   assert.match(body.error.message, /^Invalid request origin\./);
-  assert.match(body.error.message, /OMNIROUTE_PUBLIC_BASE_URL/);
+  assert.match(body.error.message, /NIYATNA_PUBLIC_BASE_URL/);
 });
 
 test("runAuthzPipeline answers OPTIONS /v1/models preflight with Allow-Origin (#5242)", async () => {

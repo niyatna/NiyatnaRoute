@@ -27,7 +27,7 @@ export function resolveAiderTarget(opts = {}) {
   else {
     try {
       root = stripToRoot(
-        resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl
+        resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl
       );
     } catch {
       /* none */
@@ -37,13 +37,13 @@ export function resolveAiderTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* none */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { apiBase: root, apiKey };
 }
 
@@ -59,7 +59,7 @@ export function buildAiderConfig(existing, { apiBase, model }) {
 export function buildAiderRecipe({ apiBase, model }) {
   return [
     `export OPENAI_API_BASE=${apiBase}`,
-    "export OPENAI_API_KEY=$OMNIROUTE_API_KEY",
+    "export OPENAI_API_KEY=$NIYATNA_API_KEY",
     `aider --model openai/${model}`,
     `# headless:  aider --model openai/${model} --message "reply OK" --yes`,
   ].join("\n");
@@ -148,7 +148,7 @@ export function registerSetupAider(program) {
     .description("Configure Aider for OmniRoute: write ~/.aider.conf.yml + print the env recipe")
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--model <id>", "Model id (the openai/ prefix is added automatically)")
     .option("--config-path <path>", ".aider.conf.yml path (default: ~/.aider.conf.yml)")
     .option("--yes", "Non-interactive: do not prompt (requires --model)")

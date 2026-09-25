@@ -479,12 +479,12 @@ if (existsSync(cliSrcFile)) {
         "--platform=node",
         "--packages=external",
         "--format=esm",
-        "--outfile=bin/omniroute.mjs",
+        "--outfile=bin/niyatnaroute.mjs",
       ],
       { cwd: ROOT, stdio: "inherit" }
     );
     chmodSync(cliDestFile, 0o755);
-    console.log("  ✅ CLI Entrypoint bundled to bin/omniroute.mjs");
+    console.log("  ✅ CLI Entrypoint bundled to bin/niyatnaroute.mjs");
   } catch (err: any) {
     console.warn("  ⚠️  CLI bundle error:", err.message);
   }

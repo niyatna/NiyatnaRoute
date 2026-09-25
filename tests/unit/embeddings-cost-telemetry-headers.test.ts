@@ -11,7 +11,7 @@ process.env.DATA_DIR = TEST_DATA_DIR;
 const core = await import("../../src/lib/db/core.ts");
 const providersDb = await import("../../src/lib/db/providers.ts");
 const { createEmbeddingResponse } = await import("../../src/lib/embeddings/service.ts");
-const { OMNIROUTE_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
+const { NIYATNA_RESPONSE_HEADERS } = await import("../../src/shared/constants/headers.ts");
 
 test.after(() => {
   core.resetDbInstance();
@@ -47,7 +47,7 @@ test("createEmbeddingResponse emits X-OmniRoute-* cost telemetry headers on succ
 
     assert.equal(res.status, 200, "embedding success path should return 200");
 
-    const cost = res.headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost);
+    const cost = res.headers.get(NIYATNA_RESPONSE_HEADERS.responseCost);
     assert.ok(cost, "X-OmniRoute-Response-Cost header must be present");
     assert.match(
       cost,
@@ -56,12 +56,12 @@ test("createEmbeddingResponse emits X-OmniRoute-* cost telemetry headers on succ
     );
 
     assert.equal(
-      res.headers.get(OMNIROUTE_RESPONSE_HEADERS.tokensIn),
+      res.headers.get(NIYATNA_RESPONSE_HEADERS.tokensIn),
       String(PROMPT_TOKENS),
       "X-OmniRoute-Tokens-In must equal the upstream prompt_tokens"
     );
 
-    const version = res.headers.get(OMNIROUTE_RESPONSE_HEADERS.version);
+    const version = res.headers.get(NIYATNA_RESPONSE_HEADERS.version);
     assert.ok(
       version && version.length > 0,
       "X-OmniRoute-Version header must be present and non-empty"

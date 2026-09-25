@@ -17,7 +17,7 @@ import https from "node:https";
 /**
  * Resolve TLS options from environment variables.
  *
- * Reads `OMNIROUTE_TLS_CERT` and `OMNIROUTE_TLS_KEY` (filesystem paths). Returns
+ * Reads `NIYATNA_TLS_CERT` and `NIYATNA_TLS_KEY` (filesystem paths). Returns
  * `{ cert, key }` (file contents) only when BOTH are provided and readable.
  * Otherwise returns `null` so the caller serves plain HTTP — never throwing.
  *
@@ -29,8 +29,8 @@ export function resolveTlsOptions(
   env = process.env,
   { readFileSync = fs.readFileSync, warn = (m) => console.warn(m) } = {}
 ) {
-  const certPath = typeof env?.OMNIROUTE_TLS_CERT === "string" ? env.OMNIROUTE_TLS_CERT.trim() : "";
-  const keyPath = typeof env?.OMNIROUTE_TLS_KEY === "string" ? env.OMNIROUTE_TLS_KEY.trim() : "";
+  const certPath = typeof env?.NIYATNA_TLS_CERT === "string" ? env.NIYATNA_TLS_CERT.trim() : "";
+  const keyPath = typeof env?.NIYATNA_TLS_KEY === "string" ? env.NIYATNA_TLS_KEY.trim() : "";
 
   // Neither provided → plain HTTP, no warning (the common, default case).
   if (!certPath && !keyPath) return null;
@@ -38,7 +38,7 @@ export function resolveTlsOptions(
   // Only one of the pair → never half-enable TLS. Warn + fall back to HTTP.
   if (!certPath || !keyPath) {
     warn(
-      `[omniroute][tls] HTTPS not enabled: both OMNIROUTE_TLS_CERT and OMNIROUTE_TLS_KEY ` +
+      `[omniroute][tls] HTTPS not enabled: both NIYATNA_TLS_CERT and NIYATNA_TLS_KEY ` +
         `are required (only ${certPath ? "cert" : "key"} provided). Serving HTTP.`
     );
     return null;

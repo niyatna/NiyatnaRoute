@@ -203,7 +203,7 @@ export function bootstrapEnv({ dataDirOverride, quiet = false } = {}) {
   let persisted = parseEnvFile(serverEnvPath);
 
   // ── Layer 2: Load the same preferred .env that the CLI wrapper uses ───────
-  // This keeps run-next / run-standalone consistent with `bin/omniroute.mjs`.
+  // This keeps run-next / run-standalone consistent with `bin/niyatnaroute.mjs`.
   //
   // We strip empty values from preferredEnv so an empty placeholder
   // (e.g. `STORAGE_ENCRYPTION_KEY=` in the project .env template) does not
@@ -273,7 +273,7 @@ export function bootstrapEnv({ dataDirOverride, quiet = false } = {}) {
 
   // ── Mark as bootstrapped ───────────────────────────────────────────────────
   if (needsPersist) {
-    merged.OMNIROUTE_BOOTSTRAPPED = "true";
+    merged.NIYATNA_BOOTSTRAPPED = "true";
   }
 
   // ── Warn about missing optional OAuth secrets ──────────────────────────────

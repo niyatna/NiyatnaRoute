@@ -13,13 +13,13 @@ const revalidation = await import("../../src/shared/services/codexCatalogRevalid
 
 const originalFetch = globalThis.fetch;
 const originalEnv = {
-  OMNIROUTE_PORT: process.env.OMNIROUTE_PORT,
+  NIYATNA_PORT: process.env.NIYATNA_PORT,
   PORT: process.env.PORT,
   DASHBOARD_PORT: process.env.DASHBOARD_PORT,
   BASE_URL: process.env.BASE_URL,
   NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  OMNIROUTE_INTERNAL_SCHEME: process.env.OMNIROUTE_INTERNAL_SCHEME,
+  NIYATNA_INTERNAL_SCHEME: process.env.NIYATNA_INTERNAL_SCHEME,
 };
 
 async function resetStorage() {
@@ -31,13 +31,13 @@ async function resetStorage() {
 
 test.beforeEach(async () => {
   await resetStorage();
-  process.env.OMNIROUTE_PORT = "20128";
+  process.env.NIYATNA_PORT = "20128";
   process.env.PORT = "22128";
   process.env.DASHBOARD_PORT = "22128";
   process.env.BASE_URL = "https://attacker.example";
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_APP_URL;
-  delete process.env.OMNIROUTE_INTERNAL_SCHEME;
+  delete process.env.NIYATNA_INTERNAL_SCHEME;
 });
 
 test.after(() => {

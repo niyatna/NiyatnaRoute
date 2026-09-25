@@ -8,15 +8,15 @@ function requiredEnv(name: string): string {
   return value;
 }
 
-const testRoot = requiredEnv("OMNIROUTE_HUGGINGCHAT_TEST_ROOT");
-const fixtureRunId = requiredEnv("OMNIROUTE_HUGGINGCHAT_TEST_RUN_ID");
+const testRoot = requiredEnv("NIYATNA_HUGGINGCHAT_TEST_ROOT");
+const fixtureRunId = requiredEnv("NIYATNA_HUGGINGCHAT_TEST_RUN_ID");
 const testDataDir = requiredEnv("DATA_DIR");
-const testPluginsDir = requiredEnv("OMNIROUTE_PLUGINS_DIR");
+const testPluginsDir = requiredEnv("NIYATNA_PLUGINS_DIR");
 const xdgConfigDir = requiredEnv("XDG_CONFIG_HOME");
 
 for (const [name, candidate] of [
   ["DATA_DIR", testDataDir],
-  ["OMNIROUTE_PLUGINS_DIR", testPluginsDir],
+  ["NIYATNA_PLUGINS_DIR", testPluginsDir],
   ["XDG_CONFIG_HOME", xdgConfigDir],
 ] as const) {
   const fromRoot = relative(testRoot, candidate);

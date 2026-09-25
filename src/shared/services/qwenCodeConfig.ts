@@ -1,6 +1,6 @@
 type JsonRecord = Record<string, unknown>;
 
-export const QWEN_CODE_ENV_KEY = "OMNIROUTE_API_KEY";
+export const QWEN_CODE_ENV_KEY = "NIYATNA_API_KEY";
 
 const LEGACY_ENV_KEYS = new Set(["OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY"]);
 
@@ -231,7 +231,7 @@ export const removeQwenCodeSettings = (existing: unknown): JsonRecord => {
   return next;
 };
 
-const OWNED_ENV_LINE = /^\s*(?:export\s+)?OMNIROUTE_API_KEY\s*=/;
+const OWNED_ENV_LINE = /^\s*(?:export\s+)?NIYATNA_API_KEY\s*=/;
 
 export const mergeQwenCodeEnv = (existing: unknown, apiKey: unknown): string => {
   const lines = String(existing || "")

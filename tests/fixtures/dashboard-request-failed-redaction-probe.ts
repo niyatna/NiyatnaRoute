@@ -6,7 +6,7 @@ const RESULT_PREFIX = "DASHBOARD_FAILURE_PROBE_RESULT=";
 
 async function main(): Promise<void> {
   assert.ok(process.env.DATA_DIR, "probe requires an isolated DATA_DIR");
-  assert.ok(process.env.OMNIROUTE_PLUGINS_DIR, "probe requires an isolated plugins directory");
+  assert.ok(process.env.NIYATNA_PLUGINS_DIR, "probe requires an isolated plugins directory");
   assert.ok(process.env.API_KEY_SECRET, "probe requires a synthetic API_KEY_SECRET");
 
   const { persistAttemptLogs } = await import("../../open-sse/handlers/chatCore/attemptLogging.ts");

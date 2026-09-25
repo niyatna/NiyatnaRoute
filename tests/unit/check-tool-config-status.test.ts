@@ -183,7 +183,7 @@ test("qwen: returns 'configured' only for an OmniRoute-managed model entry", asy
         openai: [
           {
             id: "model-id",
-            envKey: "OMNIROUTE_API_KEY",
+            envKey: "NIYATNA_API_KEY",
             baseUrl: "http://localhost:20128/v1",
           },
         ],

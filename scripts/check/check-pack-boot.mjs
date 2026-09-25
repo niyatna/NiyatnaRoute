@@ -88,7 +88,7 @@ export function evaluateMachineTokenAuth({
   unauthenticatedStatus,
   invalidStatus,
   authenticatedStatus,
-  salt = process.env.OMNIROUTE_CLI_SALT || DEFAULT_CLI_SALT,
+  salt = process.env.NIYATNA_CLI_SALT || DEFAULT_CLI_SALT,
 }) {
   const failures = [];
   if (!/^[0-9a-f]{64}$/.test(cliToken || "")) {
@@ -288,9 +288,9 @@ function spawnServer(binPath, port, dataDir) {
       JWT_SECRET: "pack-boot-smoke-secret-with-sufficient-length-000",
       API_KEY_SECRET: "pack-boot-smoke-api-key-secret-long",
       DISABLE_SQLITE_AUTO_BACKUP: "true",
-      OMNIROUTE_SKIP_SYSTEM_TRUST: "1",
-      OMNIROUTE_PACK_BOOT_SMOKE: "1",
-      OMNIROUTE_PACK_BOOT_FORCE_SQLJS: "1",
+      NIYATNA_SKIP_SYSTEM_TRUST: "1",
+      NIYATNA_PACK_BOOT_SMOKE: "1",
+      NIYATNA_PACK_BOOT_FORCE_SQLJS: "1",
       INITIAL_PASSWORD: "pack-boot-machine-token-auth-required",
     },
     stdio: ["ignore", "pipe", "pipe"],

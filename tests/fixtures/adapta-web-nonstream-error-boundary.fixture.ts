@@ -10,7 +10,7 @@ const TEST_DATA_DIR = mkdtempSync(join(tmpdir(), "omniroute-adapta-nonstream-err
 const TEST_PLUGINS_DIR = join(TEST_DATA_DIR, "plugins");
 mkdirSync(TEST_PLUGINS_DIR, { recursive: true });
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_PLUGINS_DIR = TEST_PLUGINS_DIR;
+process.env.NIYATNA_PLUGINS_DIR = TEST_PLUGINS_DIR;
 
 const originalFetch = globalThis.fetch;
 const { AdaptaWebExecutor } = await import("../../open-sse/executors/adapta-web.ts");

@@ -63,7 +63,7 @@ export function execFileText(command: string, args: string[]): Promise<string> {
 }
 
 /**
- * Truthy-env check for `OMNIROUTE_NO_SUDO`. Inlined (not imported from
+ * Truthy-env check for `NIYATNA_NO_SUDO`. Inlined (not imported from
  * `src/lib/db/apiKeys/modelPermissions.ts`) because that module pulls in the DB
  * read-cache graph and importing it here — into a low-level MITM primitive that
  * is loaded during cert bootstrap — would create a module cycle. The same tiny
@@ -72,7 +72,7 @@ export function execFileText(command: string, args: string[]): Promise<string> {
  * (`1|true|yes|on`, case-insensitive, trimmed).
  */
 export function isNoSudoEnv(): boolean {
-  const value = process.env.OMNIROUTE_NO_SUDO;
+  const value = process.env.NIYATNA_NO_SUDO;
   return typeof value === "string" && /^(1|true|yes|on)$/i.test(value.trim());
 }
 
@@ -88,11 +88,11 @@ export interface ResolvedSpawn {
  * the resulting argv (and whether a password is written to stdin) WITHOUT
  * spawning a real `sudo`. `root`/`sudoAvailable` default to the live probes and
  * can be injected for deterministic tests; `noSudo` defaults to the
- * `OMNIROUTE_NO_SUDO` env flag.
+ * `NIYATNA_NO_SUDO` env flag.
  *
  * Strips the leading `sudo -S` (running the underlying command directly, same
  * user, no elevation) when running as root, when `sudo` is unavailable, OR when
- * the operator opts into root-less mode via `OMNIROUTE_NO_SUDO` (#6122). No
+ * the operator opts into root-less mode via `NIYATNA_NO_SUDO` (#6122). No
  * runtime value is ever interpolated into a shell — the argv array is preserved
  * and only the leading `sudo`/`-S` tokens are dropped (Hard Rule #13).
  */
@@ -128,7 +128,7 @@ export function execFileWithPassword(
 ): Promise<string> {
   // When running as root, when `sudo` is not installed on the host (slim
   // Docker images / containerized non-root runtime), OR when the operator sets
-  // `OMNIROUTE_NO_SUDO` (root-less / user-namespace deployments — #6122), skip
+  // `NIYATNA_NO_SUDO` (root-less / user-namespace deployments — #6122), skip
   // `sudo -S` and run the underlying command directly — same user, no
   // elevation. This lets MITM operations triggered from inside `node:*-slim`
   // containers succeed for any command that does not actually require root

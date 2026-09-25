@@ -87,7 +87,7 @@ test("next config declares Turbopack aliases, runtime assets and server external
     [];
 
   assert.equal(nextConfig.turbopack.root, process.cwd());
-  // #6344: the @/mitm/manager stub alias is OPT-IN (OMNIROUTE_MITM_STUB=1, Docker only).
+  // #6344: the @/mitm/manager stub alias is OPT-IN (NIYATNA_MITM_STUB=1, Docker only).
   // A default production build must NOT alias it, or the stub ships to npm/Electron/VPS
   // artifacts and breaks Agent Bridge start. See the dedicated env-matrix test below.
   assert.equal(nextConfig.turbopack.resolveAlias["@/mitm/manager"], undefined);
@@ -140,41 +140,41 @@ test("next config declares Turbopack aliases, runtime assets and server external
   }
 });
 
-test("Turbopack aliases better-sqlite3 to the stub ONLY when OMNIROUTE_BETTER_SQLITE3_STUB=1 (#11343)", async () => {
-  const original = process.env.OMNIROUTE_BETTER_SQLITE3_STUB;
+test("Turbopack aliases better-sqlite3 to the stub ONLY when NIYATNA_BETTER_SQLITE3_STUB=1 (#11343)", async () => {
+  const original = process.env.NIYATNA_BETTER_SQLITE3_STUB;
   try {
-    delete process.env.OMNIROUTE_BETTER_SQLITE3_STUB;
+    delete process.env.NIYATNA_BETTER_SQLITE3_STUB;
     const { default: def } = await loadNextConfig("bettersqlite-default");
     assert.equal(def.turbopack.resolveAlias["better-sqlite3"], undefined);
     // The default build must keep the real package reachable as an external, which
     // is exactly what the alias silently defeated.
     assert.ok(new Set(def.serverExternalPackages).has("better-sqlite3"));
 
-    process.env.OMNIROUTE_BETTER_SQLITE3_STUB = "1";
+    process.env.NIYATNA_BETTER_SQLITE3_STUB = "1";
     const { default: stubbed } = await loadNextConfig("bettersqlite-optin");
     assert.equal(
       stubbed.turbopack.resolveAlias["better-sqlite3"],
       "./src/lib/db/better-sqlite3.stub.js"
     );
   } finally {
-    if (original === undefined) delete process.env.OMNIROUTE_BETTER_SQLITE3_STUB;
-    else process.env.OMNIROUTE_BETTER_SQLITE3_STUB = original;
+    if (original === undefined) delete process.env.NIYATNA_BETTER_SQLITE3_STUB;
+    else process.env.NIYATNA_BETTER_SQLITE3_STUB = original;
   }
 });
 
-test("Turbopack aliases @/mitm/manager to the stub ONLY when OMNIROUTE_MITM_STUB=1 (#6344)", async () => {
-  const original = process.env.OMNIROUTE_MITM_STUB;
+test("Turbopack aliases @/mitm/manager to the stub ONLY when NIYATNA_MITM_STUB=1 (#6344)", async () => {
+  const original = process.env.NIYATNA_MITM_STUB;
   try {
-    delete process.env.OMNIROUTE_MITM_STUB;
+    delete process.env.NIYATNA_MITM_STUB;
     const { default: def } = await loadNextConfig("mitm-default");
     assert.equal(def.turbopack.resolveAlias["@/mitm/manager"], undefined);
 
-    process.env.OMNIROUTE_MITM_STUB = "1";
+    process.env.NIYATNA_MITM_STUB = "1";
     const { default: docker } = await loadNextConfig("mitm-docker");
     assert.equal(docker.turbopack.resolveAlias["@/mitm/manager"], "./src/mitm/manager.stub.ts");
   } finally {
-    if (original === undefined) delete process.env.OMNIROUTE_MITM_STUB;
-    else process.env.OMNIROUTE_MITM_STUB = original;
+    if (original === undefined) delete process.env.NIYATNA_MITM_STUB;
+    else process.env.NIYATNA_MITM_STUB = original;
   }
 });
 

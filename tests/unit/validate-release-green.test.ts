@@ -227,9 +227,9 @@ test("pre-flight --hermetic scrubs the live-test trigger vars (2026-07-05 false-
     new URL("../../scripts/quality/validate-release-green.mjs", import.meta.url),
     "utf8"
   );
-  // A dev machine with OMNIROUTE_API_KEY set runs 17+ live tests that CI skips —
+  // A dev machine with NIYATNA_API_KEY set runs 17+ live tests that CI skips —
   // the pre-flight must be able to reproduce the CI env exactly.
-  assert.match(src, /HERMETIC_SCRUB\s*=\s*\["OMNIROUTE_API_KEY",\s*"OMNIROUTE_URL"\]/);
+  assert.match(src, /HERMETIC_SCRUB\s*=\s*\["NIYATNA_API_KEY",\s*"NIYATNA_URL"\]/);
   assert.match(src, /args\.has\("--hermetic"\)/, "--hermetic flag must be parsed");
   // Per-gate logs: a red must be diagnosable from _artifacts/release-green/<gate>.log
   // without re-running the gate.
@@ -297,7 +297,7 @@ test("pack gate builds, stamps dist/BUILD_SHA, then validates against the tree u
     /env: PACK_GATE_ENV/,
     "a release-branch tip is never an ancestor of origin/main mid-cycle"
   );
-  assert.match(src, /const PACK_GATE_ENV = \{ OMNIROUTE_RELEASE_REF: "HEAD" \}/);
+  assert.match(src, /const PACK_GATE_ENV = \{ NIYATNA_RELEASE_REF: "HEAD" \}/);
   // Both entry points (the parallel wave and --with-build --quick) must use it.
   assert.equal(src.match(/runPackArtifactGate\b/g)?.length, 3);
   assert.doesNotMatch(src, /runAsync\(npmCmd, \["run", "check:pack-artifact"\]/);

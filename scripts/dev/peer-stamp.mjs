@@ -11,7 +11,7 @@ import { randomUUID } from "node:crypto";
  *
  * Our custom servers DO have the real `req.socket.remoteAddress`. They stamp it
  * into PEER_IP_HEADER as `<token>|<ip>`, where <token> is a per-process secret
- * (OMNIROUTE_PEER_STAMP_TOKEN). Any client-supplied value of PEER_IP_HEADER is
+ * (NIYATNA_PEER_STAMP_TOKEN). Any client-supplied value of PEER_IP_HEADER is
  * deleted first, so a remote caller cannot pre-populate it. The middleware
  * (src/server/authz/policies/management.ts → resolveStampedPeer) trusts the IP
  * ONLY when the token matches this process's secret; otherwise it fails closed.
@@ -92,8 +92,8 @@ const CLOUDFLARE_IPV6_CIDRS = [
 /** Generate (once) and return the per-process stamp token, persisting it in env
  *  so the middleware running in the same process reads the identical value. */
 export function ensurePeerStampToken() {
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN ||= randomUUID();
-  return process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  process.env.NIYATNA_PEER_STAMP_TOKEN ||= randomUUID();
+  return process.env.NIYATNA_PEER_STAMP_TOKEN;
 }
 
 /** Convert an IPv4 address string to an unsigned 32-bit integer. */

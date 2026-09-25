@@ -18,8 +18,8 @@
  * Hard-Rule-15/17 process-spawning and proxy surfaces and never need framing.
  *
  * Build-time by design: Next.js resolves `headers()` when the config loads, matching the
- * existing env-driven knobs in `next.config.mjs` (`OMNIROUTE_BASE_PATH`,
- * `OMNIROUTE_BUILD_PROFILE`, …). Changing the value requires a rebuild.
+ * existing env-driven knobs in `next.config.mjs` (`NIYATNA_BASE_PATH`,
+ * `NIYATNA_BUILD_PROFILE`, …). Changing the value requires a rebuild.
  */
 
 export const DASHBOARD_EMBED_ENV = "DASHBOARD_ALLOW_EMBED";

@@ -10,7 +10,7 @@ import { finalizePendingScope, type PendingRequestScope } from "@/lib/usage/pend
 import { synthesizeOpenAiSseFromJson } from "../../utils/jsonToSse.ts";
 import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
 import { extractUsageFromResponse } from "../usageExtractor.ts";
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { getSemanticCacheManager } from "../../services/cache/semanticCacheManager.ts";
 
 export async function checkSemanticCache({
@@ -157,15 +157,15 @@ export async function checkSemanticCache({
         // Keep the legacy `HIT` value verbatim: consumers match it exactly
         // (tests/unit/chatcore-semantic-cache.test.ts and the chat-route suites).
         // A similarity hit is distinguished by X-OmniRoute-Cache-Similarity below.
-        [OMNIROUTE_RESPONSE_HEADERS.cache]: "HIT",
+        [NIYATNA_RESPONSE_HEADERS.cache]: "HIT",
         // Marker for latency measurement tools: this response served from cache
         // has synthetic (near-zero) latency, not real upstream latency.
-        [OMNIROUTE_RESPONSE_HEADERS.cacheLatency]: "synthetic",
-        [OMNIROUTE_RESPONSE_HEADERS.savingsTokens]: String(tokensSaved),
+        [NIYATNA_RESPONSE_HEADERS.cacheLatency]: "synthetic",
+        [NIYATNA_RESPONSE_HEADERS.savingsTokens]: String(tokensSaved),
       };
 
       if (hitType === "semantic" && typeof similarity === "number") {
-        headers[OMNIROUTE_RESPONSE_HEADERS.cacheSimilarity] = similarity.toFixed(4);
+        headers[NIYATNA_RESPONSE_HEADERS.cacheSimilarity] = similarity.toFixed(4);
       }
 
       // A cache HIT serves WITHOUT an upstream call, so the incremental cost billed to

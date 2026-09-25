@@ -147,11 +147,11 @@ test("computeFingerprintHash: identical apiKeyId/model/toolNames produce the sam
 test("resolveConversationId: disabled tracking skips database access and message parsing", async () => {
   const { getDbInstance } = await import("../../src/lib/db/core.ts");
   const db = getDbInstance();
-  const previous = process.env.OMNIROUTE_DISABLE_CONVERSATION_TRACKING;
+  const previous = process.env.NIYATNA_DISABLE_CONVERSATION_TRACKING;
   const prepare = test.mock.method(db, "prepare", () => {
     throw new Error("disabled tracking must not access SQLite");
   });
-  process.env.OMNIROUTE_DISABLE_CONVERSATION_TRACKING = "1";
+  process.env.NIYATNA_DISABLE_CONVERSATION_TRACKING = "1";
   try {
     for (const clientSessionIdHeader of [null, "explicit-session"]) {
       const result = await resolveConversationId({
@@ -170,8 +170,8 @@ test("resolveConversationId: disabled tracking skips database access and message
     assert.equal(prepare.mock.callCount(), 0);
   } finally {
     prepare.mock.restore();
-    if (previous === undefined) delete process.env.OMNIROUTE_DISABLE_CONVERSATION_TRACKING;
-    else process.env.OMNIROUTE_DISABLE_CONVERSATION_TRACKING = previous;
+    if (previous === undefined) delete process.env.NIYATNA_DISABLE_CONVERSATION_TRACKING;
+    else process.env.NIYATNA_DISABLE_CONVERSATION_TRACKING = previous;
   }
 });
 

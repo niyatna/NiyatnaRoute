@@ -4,13 +4,13 @@ import test from "node:test";
 
 assert.ok(process.env.DATA_DIR, "the parent wrapper must provide a synthetic DATA_DIR");
 assert.ok(
-  process.env.OMNIROUTE_PLUGINS_DIR,
+  process.env.NIYATNA_PLUGINS_DIR,
   "the parent wrapper must provide a synthetic plugin directory"
 );
 assert.ok(process.env.API_KEY_SECRET, "the parent wrapper must provide a synthetic API secret");
 
 fs.mkdirSync(process.env.DATA_DIR, { recursive: true });
-fs.mkdirSync(process.env.OMNIROUTE_PLUGINS_DIR, { recursive: true });
+fs.mkdirSync(process.env.NIYATNA_PLUGINS_DIR, { recursive: true });
 
 const [
   { buildZaiStreamingBody },

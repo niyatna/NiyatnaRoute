@@ -9,7 +9,7 @@ import { join } from "node:path";
 // coletava tests/unit/docs/) e apodreceu — filtrava dirs `omniroute*`, mas os skills
 // foram renomeados para `cli-*`; com 0 dirs o segundo teste passava VACUOSAMENTE.
 // Atualizado para o estado real: todo dir de skills/ com SKILL.md é validado, e o
-// invariante de uso é "referencia as env vars ($OMNIROUTE_URL/OMNIROUTE_KEY) OU
+// invariante de uso é "referencia as env vars ($NIYATNA_URL/NIYATNA_KEY) OU
 // comandos da CLI (`omniroute …`)" — 3 skills (health/keys/batches) usam só a CLI.
 const SKILLS_DIR = join(process.cwd(), "skills");
 const REQUIRED_FRONTMATTER = ["name:", "description:"];
@@ -46,8 +46,8 @@ test("each skill dir has SKILL.md with frontmatter", async () => {
     // do OmniRoute, então também fica fora do invariante.
     if (!dir.startsWith("omni-") && dir !== "ponytail") {
       assert.ok(
-        content.includes("OMNIROUTE_") || content.includes("omniroute "),
-        `${dir}: missing usage references (OMNIROUTE_* env vars or omniroute CLI commands)`
+        content.includes("NIYATNA_") || content.includes("omniroute "),
+        `${dir}: missing usage references (NIYATNA_* env vars or omniroute CLI commands)`
       );
     }
   }

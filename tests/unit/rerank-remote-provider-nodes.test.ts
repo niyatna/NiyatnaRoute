@@ -65,8 +65,8 @@ const PUBLIC_NODE = {
 
 const ENV_KEYS = [
   RERANK_REMOTE_NODES_FLAG,
-  "OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS",
-  "OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS",
+  "NIYATNA_ALLOW_LOCAL_PROVIDER_URLS",
+  "NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS",
   "OUTBOUND_SSRF_GUARD_ENABLED",
 ] as const;
 const savedEnv: Record<string, string | undefined> = {};
@@ -101,8 +101,8 @@ test.describe("remote node policy", () => {
   test.afterEach(() => resetEnv());
 
   test("local-first default (block-metadata): LAN allowed, cloud-metadata blocked", () => {
-    delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
-    delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
     assert.equal(isRemoteNodeHostAllowedByPolicy(LAN_NODE.baseUrl), true);
     assert.equal(isRemoteNodeHostAllowedByPolicy(PUBLIC_NODE.baseUrl), true);
     assert.equal(isRemoteNodeHostAllowedByPolicy(METADATA_NODE.baseUrl), false);
@@ -111,21 +111,21 @@ test.describe("remote node policy", () => {
   });
 
   test("strict public-only: private hosts blocked, public allowed", () => {
-    process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS = "false";
-    delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
+    process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS = "false";
+    delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
     assert.equal(isRemoteNodeHostAllowedByPolicy(LAN_NODE.baseUrl), false);
     assert.equal(isRemoteNodeHostAllowedByPolicy(PUBLIC_NODE.baseUrl), true);
     assert.equal(isRemoteNodeHostAllowedByPolicy(METADATA_NODE.baseUrl), false);
   });
 
   test("full opt-in (none): protocol/credential checks only", () => {
-    process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS = "true";
+    process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS = "true";
     assert.equal(isRemoteNodeHostAllowedByPolicy(LAN_NODE.baseUrl), true);
     assert.equal(isRemoteNodeHostAllowedByPolicy("http://user:pw@10.10.50.19/v1"), false);
   });
 
   test("isEligibleProviderNodeHost: loopback always, remote only with allowRemote", () => {
-    delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
     assert.equal(isEligibleProviderNodeHost(LOOPBACK_NODE.baseUrl, { allowRemote: false }), true);
     assert.equal(isEligibleProviderNodeHost(LAN_NODE.baseUrl, { allowRemote: false }), false);
     assert.equal(isEligibleProviderNodeHost(LAN_NODE.baseUrl, { allowRemote: true }), true);
@@ -150,7 +150,7 @@ test.describe("selectRerankProviderNodes", () => {
   });
 
   test("flag on: LAN and public nodes join; cloud-metadata never does", () => {
-    delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
     const selected = selectRerankProviderNodes(
       [LOOPBACK_NODE, DOCKER_NODE, LAN_NODE, METADATA_NODE, PUBLIC_NODE],
       { allowRemote: true }
@@ -164,7 +164,7 @@ test.describe("selectRerankProviderNodes", () => {
   });
 
   test("flag on under strict public-only policy: LAN node still excluded", () => {
-    process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS = "false";
+    process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS = "false";
     const selected = selectRerankProviderNodes([LOOPBACK_NODE, LAN_NODE, PUBLIC_NODE], {
       allowRemote: true,
     });
@@ -257,7 +257,7 @@ test.describe("POST /v1/rerank routes to a LAN provider node only when opted in"
 
   test("flag on: request is forwarded to the LAN node's /v1/rerank with the node credential", async () => {
     process.env[RERANK_REMOTE_NODES_FLAG] = "true";
-    delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
     const calls: Array<{ url: string; auth: string | null; body: Record<string, unknown> }> = [];
     globalThis.fetch = async (url: string | URL | Request, init?: RequestInit) => {
       const headers = new Headers(init?.headers);
@@ -294,7 +294,7 @@ test.describe("POST /v1/rerank routes to a LAN provider node only when opted in"
 
   test("flag on but strict public-only policy: LAN node stays excluded", async () => {
     process.env[RERANK_REMOTE_NODES_FLAG] = "true";
-    process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS = "false";
+    process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS = "false";
     let upstreamCalled = false;
     globalThis.fetch = async () => {
       upstreamCalled = true;

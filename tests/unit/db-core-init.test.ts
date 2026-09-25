@@ -484,7 +484,7 @@ test(
           // would otherwise redirect this DATA_DIR-less process to a temp dir — correct for
           // real test runs, but it would turn this assertion into a test of the guard rather
           // than of the home-dir fallback. `fakeHome` already keeps the real DB out of reach.
-          OMNIROUTE_ALLOW_DEFAULT_DATA_DIR: "1",
+          NIYATNA_ALLOW_DEFAULT_DATA_DIR: "1",
         },
         async () => {
           const core = await importFresh("src/lib/db/core.ts");

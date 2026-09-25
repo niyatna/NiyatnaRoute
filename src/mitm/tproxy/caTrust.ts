@@ -78,8 +78,8 @@ export async function installTproxyCa(
   sudoPassword = "",
   deps: Partial<CaTrustDeps> = {}
 ): Promise<void> {
-  if (process.env.OMNIROUTE_SKIP_SYSTEM_TRUST === "1" && deps.run === undefined) {
-    console.log("[tproxy-ca] OMNIROUTE_SKIP_SYSTEM_TRUST=1 — skipping OS trust-store mutation");
+  if (process.env.NIYATNA_SKIP_SYSTEM_TRUST === "1" && deps.run === undefined) {
+    console.log("[tproxy-ca] NIYATNA_SKIP_SYSTEM_TRUST=1 — skipping OS trust-store mutation");
     return;
   }
   const d = { ...realDeps, ...deps };
@@ -107,8 +107,8 @@ export async function uninstallTproxyCa(
   sudoPassword = "",
   deps: Partial<CaTrustDeps> = {}
 ): Promise<void> {
-  if (process.env.OMNIROUTE_SKIP_SYSTEM_TRUST === "1" && deps.run === undefined) {
-    console.log("[tproxy-ca] OMNIROUTE_SKIP_SYSTEM_TRUST=1 — skipping OS trust-store mutation");
+  if (process.env.NIYATNA_SKIP_SYSTEM_TRUST === "1" && deps.run === undefined) {
+    console.log("[tproxy-ca] NIYATNA_SKIP_SYSTEM_TRUST=1 — skipping OS trust-store mutation");
     return;
   }
   const d = { ...realDeps, ...deps };

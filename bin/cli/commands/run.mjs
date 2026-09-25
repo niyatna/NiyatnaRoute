@@ -42,13 +42,13 @@ function toAuthSource(targetOpts) {
   }
 
   try {
-    const context = resolveActiveContext(targetOpts.context || process.env.OMNIROUTE_CONTEXT);
+    const context = resolveActiveContext(targetOpts.context || process.env.NIYATNA_CONTEXT);
     if (context && (context.accessToken || context.apiKey)) return "context";
   } catch {
     // no active context
   }
 
-  if (!isBlank(process.env.OMNIROUTE_API_KEY)) return "env";
+  if (!isBlank(process.env.NIYATNA_API_KEY)) return "env";
   if (!isBlank(process.env.ANTHROPIC_AUTH_TOKEN)) return "env";
   return "none";
 }
@@ -221,7 +221,7 @@ function genericEnv(baseEnv, kind, baseUrl, authToken, model) {
       delete env[key];
     }
     if (kind === "opencode" && key === "OPENCODE_CONFIG_CONTENT") delete env[key];
-    if (kind === "qwen" && (key === "QWEN_HOME" || key === "OMNIROUTE_API_KEY")) {
+    if (kind === "qwen" && (key === "QWEN_HOME" || key === "NIYATNA_API_KEY")) {
       delete env[key];
     }
     if (
@@ -244,7 +244,7 @@ function genericEnv(baseEnv, kind, baseUrl, authToken, model) {
     env.OPENAI_API_KEY = token;
     if (model) env.GOOSE_MODEL = model;
   } else if (kind === "opencode") {
-    env.OMNIROUTE_API_KEY = token;
+    env.NIYATNA_API_KEY = token;
     env.OPENCODE_CONFIG_CONTENT = JSON.stringify({
       $schema: "https://opencode.ai/config.json",
       provider: {
@@ -253,14 +253,14 @@ function genericEnv(baseEnv, kind, baseUrl, authToken, model) {
           name: "OmniRoute",
           options: {
             baseURL: ensureV1BaseUrl(baseUrl),
-            apiKey: "{env:OMNIROUTE_API_KEY}",
+            apiKey: "{env:NIYATNA_API_KEY}",
           },
           ...(model ? { models: { [model]: { name: model } } } : {}),
         },
       },
     });
   } else if (kind === "qwen") {
-    env.OMNIROUTE_API_KEY = token;
+    env.NIYATNA_API_KEY = token;
   } else if (kind === "gemini") {
     // Verified against @google/gemini-cli 0.50.0: the SDK appends
     // /v1beta/models/<model>:generateContent to this base URL, which is
@@ -298,7 +298,7 @@ function buildQwenSettings(baseUrl, model) {
           {
             id: model,
             name: `${model} (OmniRoute)`,
-            envKey: "OMNIROUTE_API_KEY",
+            envKey: "NIYATNA_API_KEY",
             baseUrl: qwenBaseUrl,
           },
         ],

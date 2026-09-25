@@ -7,7 +7,7 @@
  *
  * Everything is guarded: without a NOTIFY_SOCKET (plain terminal, Docker,
  * Electron, Windows) the notifier is a no-op and costs nothing. Set
- * OMNIROUTE_DISABLE_SD_NOTIFY=1 to force-disable even under systemd.
+ * NIYATNA_DISABLE_SD_NOTIFY=1 to force-disable even under systemd.
  *
  * A watchdog keep-alive interval lives in the main event loop of the process
  * that runs it: if that loop is ever blocked (frozen server, cf. the cold
@@ -19,7 +19,7 @@ import { spawn } from "node:child_process";
 
 export const SD_NOTIFY_BINARY = "systemd-notify";
 export const SD_NOTIFY_SOCKET_ENV = "NOTIFY_SOCKET";
-export const SD_NOTIFY_DISABLE_ENV = "OMNIROUTE_DISABLE_SD_NOTIFY";
+export const SD_NOTIFY_DISABLE_ENV = "NIYATNA_DISABLE_SD_NOTIFY";
 // Ping every 60s — satisfies any systemd WatchdogSec= >= 120s (systemd
 // requires keep-alive pings at most every WatchdogSec/2).
 export const SD_NOTIFY_WATCHDOG_INTERVAL_MS = 60_000;

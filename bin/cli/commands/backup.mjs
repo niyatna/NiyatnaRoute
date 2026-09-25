@@ -285,9 +285,9 @@ async function _uploadBackupToCloud(backupPath, info) {
       accept: "application/json",
       "content-type": `multipart/form-data; boundary=${boundary}`,
     });
-    const apiKey = process.env.OMNIROUTE_API_KEY;
+    const apiKey = process.env.NIYATNA_API_KEY;
     if (apiKey) headers.set("authorization", `Bearer ${apiKey}`);
-    const cliToken = process.env.OMNIROUTE_CLI_TOKEN ?? (await getCliToken());
+    const cliToken = process.env.NIYATNA_CLI_TOKEN ?? (await getCliToken());
     if (cliToken) headers.set(CLI_TOKEN_HEADER, cliToken);
 
     const controller = new AbortController();

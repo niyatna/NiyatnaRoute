@@ -83,7 +83,7 @@ function checkConfig(dataDir) {
 }
 
 function resolveMigrationsDir(rootDir) {
-  const configured = process.env.OMNIROUTE_MIGRATIONS_DIR;
+  const configured = process.env.NIYATNA_MIGRATIONS_DIR;
   const candidates = [
     configured,
     path.join(rootDir, "src", "lib", "db", "migrations"),
@@ -353,10 +353,10 @@ async function checkNativeBinary(rootDir) {
 }
 
 function checkMemory() {
-  const configured = process.env.OMNIROUTE_MEMORY_MB || "512";
+  const configured = process.env.NIYATNA_MEMORY_MB || "512";
   const memoryMb = Number.parseInt(configured, 10);
   if (!Number.isFinite(memoryMb) || memoryMb < 64 || memoryMb > 16384) {
-    return fail("Memory", `Invalid OMNIROUTE_MEMORY_MB: ${configured}`, { configured });
+    return fail("Memory", `Invalid NIYATNA_MEMORY_MB: ${configured}`, { configured });
   }
 
   const total = os.totalmem();
@@ -423,12 +423,12 @@ function formatHostForUrl(host) {
 }
 
 function resolveLivenessUrl(options = {}) {
-  const explicitUrl = options.livenessUrl || process.env.OMNIROUTE_DOCTOR_LIVENESS_URL;
+  const explicitUrl = options.livenessUrl || process.env.NIYATNA_DOCTOR_LIVENESS_URL;
   if (explicitUrl) return explicitUrl;
 
   const port = parsePort(process.env.PORT || "9999", 9999);
   const dashboardPort = parsePort(process.env.DASHBOARD_PORT || String(port), port);
-  const host = String(options.livenessHost || process.env.OMNIROUTE_DOCTOR_HOST || "127.0.0.1")
+  const host = String(options.livenessHost || process.env.NIYATNA_DOCTOR_HOST || "127.0.0.1")
     .trim()
     .replace(/^https?:\/\//, "")
     .replace(/\/.*$/, "");
@@ -473,7 +473,7 @@ async function checkServerLiveness(options = {}) {
   } catch {
     const port = parsePort(process.env.PORT || "9999", 9999);
     const dashboardPort = parsePort(process.env.DASHBOARD_PORT || String(port), port);
-    const host = String(options.livenessHost || process.env.OMNIROUTE_DOCTOR_HOST || "127.0.0.1")
+    const host = String(options.livenessHost || process.env.NIYATNA_DOCTOR_HOST || "127.0.0.1")
       .trim()
       .replace(/^https?:\/\//, "")
       .replace(/\/.*$/, "");
@@ -502,7 +502,7 @@ async function checkServerLiveness(options = {}) {
 }
 
 export async function checkMachineTokenAuth(options = {}) {
-  if (process.env.OMNIROUTE_DISABLE_CLI_TOKEN === "true") {
+  if (process.env.NIYATNA_DISABLE_CLI_TOKEN === "true") {
     return warn("CLI machine token", "CLI machine-token authentication is disabled", {
       derived: false,
       accepted: false,

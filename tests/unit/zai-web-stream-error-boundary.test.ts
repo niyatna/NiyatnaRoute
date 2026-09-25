@@ -15,7 +15,7 @@ test("Z.ai stream error boundaries pass in a process-isolated fixture", () => {
   const childEnv: NodeJS.ProcessEnv = {
     API_KEY_SECRET: "zai-stream-boundary-test-only-secret",
     DATA_DIR: path.join(testRoot, "data"),
-    OMNIROUTE_PLUGINS_DIR: path.join(testRoot, "plugins"),
+    NIYATNA_PLUGINS_DIR: path.join(testRoot, "plugins"),
   };
 
   // The parent itself is a node:test process. Never forward its runner identity to the child;

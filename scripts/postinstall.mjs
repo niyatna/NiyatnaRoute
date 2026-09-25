@@ -10,7 +10,7 @@
  */
 
 if (
-  process.env.OMNIROUTE_SKIP_POSTINSTALL === "1" ||
+  process.env.NIYATNA_SKIP_POSTINSTALL === "1" ||
   process.env.CI === "true" ||
   process.env.CI === "1"
 ) {

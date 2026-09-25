@@ -12,7 +12,7 @@
  *  - `record()` only enqueues into a bounded buffer (O(1), never I/O). A single
  *    background flush timer drains the buffer asynchronously. Under overload the
  *    oldest events are dropped (never backpressure the data plane).
- *  - Disabled unless `OMNIROUTE_OTEL_ENDPOINT` (or `OTEL_EXPORTER_OTLP_ENDPOINT`)
+ *  - Disabled unless `NIYATNA_OTEL_ENDPOINT` (or `OTEL_EXPORTER_OTLP_ENDPOINT`)
  *    is set — normal lightweight deployments run with zero OTel code executing.
  *  - No secrets/prompts are ever serialized; only RoutingEvent metadata.
  */
@@ -28,7 +28,7 @@ export interface OtlpHttpsExporterConfig {
 
 /** Resolve whether OTLP export is configured. */
 export function isRoutingOtelEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
-  const endpoint = (env.OMNIROUTE_OTEL_ENDPOINT ?? env.OTEL_EXPORTER_OTLP_ENDPOINT ?? "").trim();
+  const endpoint = (env.NIYATNA_OTEL_ENDPOINT ?? env.OTEL_EXPORTER_OTLP_ENDPOINT ?? "").trim();
   return endpoint.length > 0;
 }
 

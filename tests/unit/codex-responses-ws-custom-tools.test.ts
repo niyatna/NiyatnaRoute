@@ -9,7 +9,7 @@ import { once } from "node:events";
 const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-ws-custom-tools-"));
 process.env.DATA_DIR = dataDir;
 process.env.APP_LOG_TO_FILE = "false";
-process.env.OMNIROUTE_WS_BRIDGE_SECRET = "test-custom-tools-bridge";
+process.env.NIYATNA_WS_BRIDGE_SECRET = "test-custom-tools-bridge";
 
 const core = await import("../../src/lib/db/core.ts");
 const { createProviderConnection } = await import("../../src/lib/db/providers.ts");
@@ -189,7 +189,7 @@ test("a reused WebSocket preserves a custom tool through call, result and final 
   assert.ok(address && typeof address === "object");
   const proxyOptions = {
     baseUrl: `http://127.0.0.1:${address.port}`,
-    bridgeSecret: process.env.OMNIROUTE_WS_BRIDGE_SECRET,
+    bridgeSecret: process.env.NIYATNA_WS_BRIDGE_SECRET,
     // Exercise real auth/preparation and the executor; provider responses and
     // unrelated asynchronous history persistence are deterministic test doubles.
     fetchImpl: (url: Parameters<typeof fetch>[0], init?: RequestInit) => {

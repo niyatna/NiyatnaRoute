@@ -20,16 +20,16 @@ import assert from "node:assert/strict";
 
 // A precondição deste teste é que NÃO exista um principal de API key resolvível: ele
 // prova que o `extra` chega ao handler comparando o principal derivado de `clientId`. Com
-// `OMNIROUTE_API_KEY` no shell, `resolveMcpCallerApiKeyId()` resolve primeiro e mascara
+// `NIYATNA_API_KEY` no shell, `resolveMcpCallerApiKeyId()` resolve primeiro e mascara
 // exatamente o que o teste mede — red fantasma local que não reproduz no CI.
-const ORIGINAL_OMNIROUTE_API_KEY = process.env.OMNIROUTE_API_KEY;
+const ORIGINAL_NIYATNA_API_KEY = process.env.NIYATNA_API_KEY;
 const ORIGINAL_ROUTER_API_KEY = process.env.ROUTER_API_KEY;
-delete process.env.OMNIROUTE_API_KEY;
+delete process.env.NIYATNA_API_KEY;
 delete process.env.ROUTER_API_KEY;
 
 test.after(() => {
-  if (ORIGINAL_OMNIROUTE_API_KEY === undefined) delete process.env.OMNIROUTE_API_KEY;
-  else process.env.OMNIROUTE_API_KEY = ORIGINAL_OMNIROUTE_API_KEY;
+  if (ORIGINAL_NIYATNA_API_KEY === undefined) delete process.env.NIYATNA_API_KEY;
+  else process.env.NIYATNA_API_KEY = ORIGINAL_NIYATNA_API_KEY;
   if (ORIGINAL_ROUTER_API_KEY === undefined) delete process.env.ROUTER_API_KEY;
   else process.env.ROUTER_API_KEY = ORIGINAL_ROUTER_API_KEY;
 });

@@ -132,27 +132,27 @@ test("modelSyncScheduler: internal auth headers validate only for scheduler requ
 
 test("modelSyncScheduler resolves only loopback origins and uses the dashboard port", async () => {
   const previous = {
-    OMNIROUTE_PORT: process.env.OMNIROUTE_PORT,
+    NIYATNA_PORT: process.env.NIYATNA_PORT,
     PORT: process.env.PORT,
     DASHBOARD_PORT: process.env.DASHBOARD_PORT,
     BASE_URL: process.env.BASE_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-    OMNIROUTE_BASE_PATH: process.env.OMNIROUTE_BASE_PATH,
-    OMNIROUTE_INTERNAL_SCHEME: process.env.OMNIROUTE_INTERNAL_SCHEME,
-    OMNIROUTE_TLS_CERT: process.env.OMNIROUTE_TLS_CERT,
-    OMNIROUTE_TLS_KEY: process.env.OMNIROUTE_TLS_KEY,
+    NIYATNA_BASE_PATH: process.env.NIYATNA_BASE_PATH,
+    NIYATNA_INTERNAL_SCHEME: process.env.NIYATNA_INTERNAL_SCHEME,
+    NIYATNA_TLS_CERT: process.env.NIYATNA_TLS_CERT,
+    NIYATNA_TLS_KEY: process.env.NIYATNA_TLS_KEY,
   };
-  process.env.OMNIROUTE_PORT = "20128";
+  process.env.NIYATNA_PORT = "20128";
   process.env.PORT = "22128";
   process.env.DASHBOARD_PORT = "22128";
   process.env.BASE_URL = "https://attacker.example";
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_APP_URL;
-  process.env.OMNIROUTE_BASE_PATH = "/omniroute/";
-  delete process.env.OMNIROUTE_INTERNAL_SCHEME;
-  delete process.env.OMNIROUTE_TLS_CERT;
-  delete process.env.OMNIROUTE_TLS_KEY;
+  process.env.NIYATNA_BASE_PATH = "/omniroute/";
+  delete process.env.NIYATNA_INTERNAL_SCHEME;
+  delete process.env.NIYATNA_TLS_CERT;
+  delete process.env.NIYATNA_TLS_KEY;
 
   try {
     const scheduler = await loadScheduler("trusted-loopback-origin");
@@ -187,17 +187,17 @@ test("modelSyncScheduler does not infer the internal listener scheme from public
     BASE_URL: process.env.BASE_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-    OMNIROUTE_INTERNAL_SCHEME: process.env.OMNIROUTE_INTERNAL_SCHEME,
-    OMNIROUTE_TLS_CERT: process.env.OMNIROUTE_TLS_CERT,
-    OMNIROUTE_TLS_KEY: process.env.OMNIROUTE_TLS_KEY,
+    NIYATNA_INTERNAL_SCHEME: process.env.NIYATNA_INTERNAL_SCHEME,
+    NIYATNA_TLS_CERT: process.env.NIYATNA_TLS_CERT,
+    NIYATNA_TLS_KEY: process.env.NIYATNA_TLS_KEY,
   };
   process.env.DASHBOARD_PORT = "22128";
   process.env.BASE_URL = "https://attacker.example";
   process.env.NEXT_PUBLIC_BASE_URL = "file:///tmp/not-http";
   process.env.NEXT_PUBLIC_APP_URL = "https://localhost:7777/ignored";
-  delete process.env.OMNIROUTE_INTERNAL_SCHEME;
-  delete process.env.OMNIROUTE_TLS_CERT;
-  delete process.env.OMNIROUTE_TLS_KEY;
+  delete process.env.NIYATNA_INTERNAL_SCHEME;
+  delete process.env.NIYATNA_TLS_CERT;
+  delete process.env.NIYATNA_TLS_KEY;
 
   try {
     const scheduler = await loadScheduler("safe-loopback-fallback");
@@ -216,19 +216,19 @@ test("modelSyncScheduler uses the listener-declared TLS scheme without trusting 
     BASE_URL: process.env.BASE_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-    OMNIROUTE_BASE_PATH: process.env.OMNIROUTE_BASE_PATH,
-    OMNIROUTE_INTERNAL_SCHEME: process.env.OMNIROUTE_INTERNAL_SCHEME,
-    OMNIROUTE_TLS_CERT: process.env.OMNIROUTE_TLS_CERT,
-    OMNIROUTE_TLS_KEY: process.env.OMNIROUTE_TLS_KEY,
+    NIYATNA_BASE_PATH: process.env.NIYATNA_BASE_PATH,
+    NIYATNA_INTERNAL_SCHEME: process.env.NIYATNA_INTERNAL_SCHEME,
+    NIYATNA_TLS_CERT: process.env.NIYATNA_TLS_CERT,
+    NIYATNA_TLS_KEY: process.env.NIYATNA_TLS_KEY,
   };
   process.env.DASHBOARD_PORT = "22128";
   process.env.BASE_URL = "https://attacker.example";
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.NEXT_PUBLIC_APP_URL;
-  process.env.OMNIROUTE_BASE_PATH = "/omniroute";
-  process.env.OMNIROUTE_INTERNAL_SCHEME = "https";
-  delete process.env.OMNIROUTE_TLS_CERT;
-  delete process.env.OMNIROUTE_TLS_KEY;
+  process.env.NIYATNA_BASE_PATH = "/omniroute";
+  process.env.NIYATNA_INTERNAL_SCHEME = "https";
+  delete process.env.NIYATNA_TLS_CERT;
+  delete process.env.NIYATNA_TLS_KEY;
 
   try {
     const scheduler = await loadScheduler("trusted-native-tls");
@@ -277,8 +277,8 @@ test("runtime launchers publish the actual internal listener scheme", () => {
     "utf8"
   );
 
-  assert.match(runNext, /OMNIROUTE_INTERNAL_SCHEME\s*=\s*["']http["']/);
-  assert.match(standalone, /OMNIROUTE_INTERNAL_SCHEME\s*=\s*tlsOptions\s*\?\s*["']https["']/);
+  assert.match(runNext, /NIYATNA_INTERNAL_SCHEME\s*=\s*["']http["']/);
+  assert.match(standalone, /NIYATNA_INTERNAL_SCHEME\s*=\s*tlsOptions\s*\?\s*["']https["']/);
 });
 
 test("initCloudSync: startup initialization also starts model sync scheduler", () => {
@@ -314,7 +314,7 @@ test("initCloudSync skips auto initialization during build and test processes un
     initCloudSync.shouldSkipCloudSyncInitialization(
       {
         NODE_ENV: "test",
-        OMNIROUTE_ENABLE_RUNTIME_BACKGROUND_TASKS: "1",
+        NIYATNA_ENABLE_RUNTIME_BACKGROUND_TASKS: "1",
       },
       ["node", "--test"]
     ),

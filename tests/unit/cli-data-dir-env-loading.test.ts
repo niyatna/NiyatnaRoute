@@ -110,26 +110,26 @@ test("CLI startup loads later non-conflicting .env files without overriding earl
 
     fs.writeFileSync(
       path.join(dataDir, ".env"),
-      "OMNIROUTE_BASE_URL=https://data.example/v1\n",
+      "NIYATNA_BASE_URL=https://data.example/v1\n",
       "utf-8"
     );
     fs.writeFileSync(
       path.join(appDataDir, ".env"),
-      ["OMNIROUTE_BASE_URL=https://appdata.example/v1", "OMNIROUTE_HTTP_TIMEOUT_MS=1234", ""].join(
+      ["NIYATNA_BASE_URL=https://appdata.example/v1", "NIYATNA_HTTP_TIMEOUT_MS=1234", ""].join(
         "\n"
       ),
       "utf-8"
     );
     fs.writeFileSync(
       path.join(cwd, ".env"),
-      ["OMNIROUTE_BASE_URL=https://cwd.example/v1", "PORT=34567", ""].join("\n"),
+      ["NIYATNA_BASE_URL=https://cwd.example/v1", "PORT=34567", ""].join("\n"),
       "utf-8"
     );
 
     const cleanEnv = { ...process.env };
     for (const key of [
-      "OMNIROUTE_BASE_URL",
-      "OMNIROUTE_HTTP_TIMEOUT_MS",
+      "NIYATNA_BASE_URL",
+      "NIYATNA_HTTP_TIMEOUT_MS",
       "PORT",
       "STORAGE_ENCRYPTION_KEY",
     ]) {
@@ -143,13 +143,13 @@ test("CLI startup loads later non-conflicting .env files without overriding earl
       USERPROFILE: home,
       APPDATA: path.join(tmp, "appdata"),
       CI: "1",
-      OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
-      OMNIROUTE_NO_UPDATE_NOTIFIER: "1",
+      NIYATNA_CLI_SKIP_REPO_ENV: "1",
+      NIYATNA_NO_UPDATE_NOTIFIER: "1",
     };
 
     const current = readCliEnvShow(env, cwd);
-    assert.equal(current.OMNIROUTE_BASE_URL, "https://data.example/v1");
-    assert.equal(current.OMNIROUTE_HTTP_TIMEOUT_MS, "1234");
+    assert.equal(current.NIYATNA_BASE_URL, "https://data.example/v1");
+    assert.equal(current.NIYATNA_HTTP_TIMEOUT_MS, "1234");
     assert.equal(current.PORT, "34567");
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });

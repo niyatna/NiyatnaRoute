@@ -30,7 +30,7 @@ function runCli(dataDir: string): { code: number | null; stdout: string; stderr:
         HOME: isolatedHome,
         USERPROFILE: isolatedHome,
         NO_UPDATE_NOTIFIER: "1",
-        OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
+        NIYATNA_CLI_SKIP_REPO_ENV: "1",
       },
       timeout: 60_000,
       encoding: "utf-8",
@@ -42,7 +42,7 @@ function runCli(dataDir: string): { code: number | null; stdout: string; stderr:
 }
 
 // #7302: Electron persists secrets to <DATA_DIR>/server.env (electron/main.js), but the CLI
-// (bin/omniroute.mjs) only ever loaded <DATA_DIR>/.env — so migrating storage.sqlite +
+// (bin/niyatnaroute.mjs) only ever loaded <DATA_DIR>/.env — so migrating storage.sqlite +
 // server.env from the desktop app to the CLI silently lost STORAGE_ENCRYPTION_KEY and
 // permanently corrupted every encrypted credential. The CLI must recognize server.env as a
 // legacy/migration fallback source when .env is absent, without letting it override an

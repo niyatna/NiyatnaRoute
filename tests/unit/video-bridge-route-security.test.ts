@@ -159,8 +159,8 @@ test("broker route accepts finite focus bounds and forwards them to the isolated
 });
 
 test("configured base path preserves the exact self-hop without widening broker authentication", async () => {
-  const previousBasePath = process.env.OMNIROUTE_BASE_PATH;
-  process.env.OMNIROUTE_BASE_PATH = "/omniroute";
+  const previousBasePath = process.env.NIYATNA_BASE_PATH;
+  process.env.NIYATNA_BASE_PATH = "/omniroute";
   try {
     const headers = new Headers({
       ...buildVideoBridgeBrokerHeaders(),
@@ -202,8 +202,8 @@ test("configured base path preserves the exact self-hop without widening broker 
     } as unknown as Parameters<typeof managementPolicy.evaluate>[0]);
     assert.equal(policyOutcome.allow, true);
   } finally {
-    if (previousBasePath === undefined) delete process.env.OMNIROUTE_BASE_PATH;
-    else process.env.OMNIROUTE_BASE_PATH = previousBasePath;
+    if (previousBasePath === undefined) delete process.env.NIYATNA_BASE_PATH;
+    else process.env.NIYATNA_BASE_PATH = previousBasePath;
   }
 });
 

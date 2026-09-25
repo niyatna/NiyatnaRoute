@@ -20,12 +20,12 @@ test("single-target default is drop when nothing is configured", () => {
   assert.equal(action, "drop");
 });
 
-test("env OMNIROUTE_SINGLE_TARGET_REASONING_FALLBACK=reject enforces rejection", () => {
+test("env NIYATNA_SINGLE_TARGET_REASONING_FALLBACK=reject enforces rejection", () => {
   const action = resolveIncompatibleReasoningAction({
     reasoningTransportFallback: "skip",
     isComboStep: false,
     headers: null,
-    env: { OMNIROUTE_SINGLE_TARGET_REASONING_FALLBACK: "reject" },
+    env: { NIYATNA_SINGLE_TARGET_REASONING_FALLBACK: "reject" },
   });
   assert.equal(action, "reject");
 });
@@ -43,7 +43,7 @@ test("x-omniroute-reasoning-fallback header overrides env and default", () => {
     reasoningTransportFallback: "skip",
     isComboStep: false,
     headers: new Headers({ "X-OmniRoute-Reasoning-Fallback": "drop" }),
-    env: { OMNIROUTE_SINGLE_TARGET_REASONING_FALLBACK: "reject" },
+    env: { NIYATNA_SINGLE_TARGET_REASONING_FALLBACK: "reject" },
   });
   assert.equal(dropOverridesEnv, "drop");
 });

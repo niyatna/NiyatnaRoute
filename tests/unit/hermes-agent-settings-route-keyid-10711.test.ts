@@ -6,7 +6,7 @@
  * real key from a stored keyId is expected to happen server-side, mirroring
  * claude-settings/route.ts and codex-settings/route.ts. The POST handler for
  * hermes-agent-settings never resolved `keyId` before this fix, so it always
- * fell through to the literal placeholder "YOUR_OMNIROUTE_API_KEY_HERE" in
+ * fell through to the literal placeholder "YOUR_NIYATNA_API_KEY_HERE" in
  * providers.omniroute.api_key, delegation.api_key, and every auxiliary.*.api_key.
  *
  * This test drives the real POST handler end-to-end (real DB-backed API key,
@@ -87,7 +87,7 @@ test("#10711: POST hermes-agent-settings resolves keyId server-side instead of w
   const parsed = yaml.load(body.yaml) as HermesAgentParsedConfig;
   assert.notEqual(
     parsed.providers.omniroute.api_key,
-    "YOUR_OMNIROUTE_API_KEY_HERE",
+    "YOUR_NIYATNA_API_KEY_HERE",
     "providers.omniroute.api_key must not be the unresolved placeholder"
   );
   assert.equal(parsed.providers.omniroute.api_key, realKey);

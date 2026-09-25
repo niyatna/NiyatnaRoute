@@ -40,11 +40,11 @@ function event(partial: Partial<RoutingEvent> = {}): RoutingEvent {
 
 test("isRoutingOtelEnabled is false without an endpoint", () => {
   assert.equal(isRoutingOtelEnabled({}), false);
-  assert.equal(isRoutingOtelEnabled({ OMNIROUTE_OTEL_ENDPOINT: "   " }), false);
+  assert.equal(isRoutingOtelEnabled({ NIYATNA_OTEL_ENDPOINT: "   " }), false);
 });
 
-test("isRoutingOtelEnabled honors OMNIROUTE_OTEL_ENDPOINT and OTLP env", () => {
-  assert.equal(isRoutingOtelEnabled({ OMNIROUTE_OTEL_ENDPOINT: "http://collector:4318" }), true);
+test("isRoutingOtelEnabled honors NIYATNA_OTEL_ENDPOINT and OTLP env", () => {
+  assert.equal(isRoutingOtelEnabled({ NIYATNA_OTEL_ENDPOINT: "http://collector:4318" }), true);
   assert.equal(
     isRoutingOtelEnabled({ OTEL_EXPORTER_OTLP_ENDPOINT: "https://collector:4318" }),
     true

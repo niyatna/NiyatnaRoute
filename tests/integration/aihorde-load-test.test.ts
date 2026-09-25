@@ -25,8 +25,8 @@
  * slow is data for the "is this viable" question, not a regression.
  *
  * Environment:
- *   OMNIROUTE_API_KEY  — required (else test skips)
- *   OMNIROUTE_URL      — defaults to http://localhost:3000
+ *   NIYATNA_API_KEY  — required (else test skips)
+ *   NIYATNA_URL      — defaults to http://localhost:3000
  */
 import test from "node:test";
 import assert from "node:assert/strict";

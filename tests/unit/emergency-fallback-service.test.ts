@@ -31,7 +31,7 @@ function resetTestState() {
   core.resetDbInstance();
   fs.rmSync(tmpDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   fs.mkdirSync(tmpDir, { recursive: true });
-  delete process.env.OMNIROUTE_EMERGENCY_FALLBACK;
+  delete process.env.NIYATNA_EMERGENCY_FALLBACK;
   resetEmergencyFallbackEnvCache();
 }
 
@@ -40,7 +40,7 @@ test.beforeEach(() => {
 });
 
 test.afterEach(() => {
-  delete process.env.OMNIROUTE_EMERGENCY_FALLBACK;
+  delete process.env.NIYATNA_EMERGENCY_FALLBACK;
   resetEmergencyFallbackEnvCache();
 });
 

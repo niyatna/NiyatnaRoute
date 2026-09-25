@@ -136,7 +136,7 @@ still refusing unmounted ones.
 
 When the CLIs genuinely live inside the container (the `cli` profile), the write
 is intentional. Pass `--allow-container-write` to any `setup-*` command, or set
-`OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE=true` for the server. The write proceeds
+`NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE=true` for the server. The write proceeds
 with a warning that it will not survive the container.
 
 > **Security warning — `cli` profile + `docker.sock` mount.**
@@ -247,15 +247,15 @@ docker build --target runner-cli  -t omniroute:cli  .
 ### Build-time resources
 
 Three build args control what the `builder` stage costs. They are build-time only —
-`OMNIROUTE_MEMORY_MB` (below) is a separate, runtime knob.
+`NIYATNA_MEMORY_MB` (below) is a separate, runtime knob.
 
 | Build arg                   | Default | Effect                                                                              |
 | --------------------------- | ------- | ----------------------------------------------------------------------------------- |
-| `OMNIROUTE_USE_TURBOPACK`   | `1`     | `0` builds with webpack instead. Lower peak memory, slower.                         |
-| `OMNIROUTE_BUILD_MEMORY_MB` | `6144`  | V8 heap ceiling (`--max-old-space-size`) for the spawned `next build`.              |
-| `OMNIROUTE_BUILD_WORKERS`   | `2`     | Feeds `CIRCLE_NODE_TOTAL`; Next derives `workers = N - 1` for page-data collection. |
+| `NIYATNA_USE_TURBOPACK`   | `1`     | `0` builds with webpack instead. Lower peak memory, slower.                         |
+| `NIYATNA_BUILD_MEMORY_MB` | `6144`  | V8 heap ceiling (`--max-old-space-size`) for the spawned `next build`.              |
+| `NIYATNA_BUILD_WORKERS`   | `2`     | Feeds `CIRCLE_NODE_TOTAL`; Next derives `workers = N - 1` for page-data collection. |
 
-`OMNIROUTE_BUILD_WORKERS` is the one to raise on a big builder and the one to
+`NIYATNA_BUILD_WORKERS` is the one to raise on a big builder and the one to
 suspect when a constrained build dies **after** `✓ Compiled successfully`. Each
 page-data worker is its own process, and so is the parent `next build` itself;
 a live VPS reproduction (issue #7518) measured each process's peak RSS at
@@ -270,22 +270,22 @@ does the arithmetic against the measured figure and fails if either knob
 outgrows the runner.
 
 Turbopack compiles in native Rust memory that lives **outside** the V8 heap, so
-`OMNIROUTE_BUILD_MEMORY_MB` does not bound it. On a host with a memory ceiling the
+`NIYATNA_BUILD_MEMORY_MB` does not bound it. On a host with a memory ceiling the
 build is then SIGKILLed by the OOM killer with no error text at all — it simply
 stops mid-`Creating an optimized production build`, which reads like a hang rather
 than an out-of-memory. If the build host is constrained, switch bundlers:
 
 ```bash
 docker build --target runner-base \
-  --build-arg OMNIROUTE_USE_TURBOPACK=0 \
+  --build-arg NIYATNA_USE_TURBOPACK=0 \
   -t omniroute:base .
 ```
 
 `webpackBuildWorker` is enabled, so `next build` runs a parent **and** a worker
-process and each honours `OMNIROUTE_BUILD_MEMORY_MB` separately. Size the container
+process and each honours `NIYATNA_BUILD_MEMORY_MB` separately. Size the container
 ceiling above roughly twice that value, not once.
 
-Measured on this tree (`--target runner-base`, `OMNIROUTE_BUILD_MEMORY_MB=6144`):
+Measured on this tree (`--target runner-base`, `NIYATNA_BUILD_MEMORY_MB=6144`):
 
 | Bundler   | Container ceiling | Result                        |
 | --------- | ----------------- | ----------------------------- |
@@ -295,13 +295,13 @@ Measured on this tree (`--target runner-base`, `OMNIROUTE_BUILD_MEMORY_MB=6144`)
 
 ### Runtime defaults
 
-Defaults exported by `runner-base`: `PORT=20128`, `HOSTNAME=0.0.0.0`, `OMNIROUTE_MEMORY_MB=1024`, `NODE_OPTIONS=--max-old-space-size=1024`, `DATA_DIR=/app/data`, `OMNIROUTE_MIGRATIONS_DIR=/app/migrations`.
+Defaults exported by `runner-base`: `PORT=20128`, `HOSTNAME=0.0.0.0`, `NIYATNA_MEMORY_MB=1024`, `NODE_OPTIONS=--max-old-space-size=1024`, `DATA_DIR=/app/data`, `NIYATNA_MIGRATIONS_DIR=/app/migrations`.
 
 Memory behavior in Docker:
 
-- The image sets `OMNIROUTE_MEMORY_MB=1024` and derives `NODE_OPTIONS=--max-old-space-size=1024` from it.
-- The actual server process is started by the standalone launcher, which reads `OMNIROUTE_MEMORY_MB` and appends `--max-old-space-size=<OMNIROUTE_MEMORY_MB>`.
-- Node uses the last repeated `--max-old-space-size` value, so setting `OMNIROUTE_MEMORY_MB` controls the effective Docker heap limit.
+- The image sets `NIYATNA_MEMORY_MB=1024` and derives `NODE_OPTIONS=--max-old-space-size=1024` from it.
+- The actual server process is started by the standalone launcher, which reads `NIYATNA_MEMORY_MB` and appends `--max-old-space-size=<NIYATNA_MEMORY_MB>`.
+- Node uses the last repeated `--max-old-space-size` value, so setting `NIYATNA_MEMORY_MB` controls the effective Docker heap limit.
 - Because the image always sets it, the launcher's own RAM-calibrated fallback never applies under Docker. Raise it explicitly for the workload (table below). `2048` is still too small for coding-agent `/v1/responses`.
 
 ### Runtime RAM for coding agents
@@ -310,18 +310,18 @@ The 1 GiB Docker default is a dashboard/light-chat floor, not a production siz
 
 Size **cgroup `--memory` above the heap** — native buffers, SQLite, and compression intermediates sit outside V8.
 
-| Workload                             | `OMNIROUTE_MEMORY_MB`  | Container / cgroup   | Notes                                                                                       |
+| Workload                             | `NIYATNA_MEMORY_MB`  | Container / cgroup   | Notes                                                                                       |
 | ------------------------------------ | ---------------------- | -------------------- | ------------------------------------------------------------------------------------------- |
 | Dashboard, one light chat            | `1024` (image default) | ≥2 GiB               |                                                                                             |
 | One coding agent (Claude/Codex/Grok) | `8192`                 | ≥10 GiB              | Typical single-session `/v1/responses`                                                      |
 | Two concurrent long `/v1/responses`  | `10240`–`12288`        | ≥12–16 GiB           | Measured V8 abort at ~12 GiB heap                                                           |
 | Three+ concurrent long contexts      | do not on one process  | serialize / more RAM | Default heavyweight admission is 1 in-flight; raising it without RAM reintroduces the abort |
 
-`omniroute serve` on bare metal calibrates ~35% of RAM (clamped `[512, 4096]`) when `OMNIROUTE_MEMORY_MB` is **unset**. Docker always sets `1024`, so that calibration never runs in the official image.
+`omniroute serve` on bare metal calibrates ~35% of RAM (clamped `[512, 4096]`) when `NIYATNA_MEMORY_MB` is **unset**. Docker always sets `1024`, so that calibration never runs in the official image.
 
 ```bash
 docker run -d --name omniroute --restart unless-stopped --stop-timeout 40 \
-  -e OMNIROUTE_MEMORY_MB=8192 --memory=10g \
+  -e NIYATNA_MEMORY_MB=8192 --memory=10g \
   -p 127.0.0.1:20128:20128 -v omniroute-data:/app/data diegosouzapw/omniroute:latest
 ```
 
@@ -331,15 +331,15 @@ Beyond the defaults documented in [ENVIRONMENT.md](../reference/ENVIRONMENT.md),
 
 | Variable                      | Purpose                                                                                                                                                                    | Default                  |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `OMNIROUTE_WS_BRIDGE_SECRET`  | Shared secret for the WebSocket bridge. **Required in production** — set to a strong random string.                                                                        | unset (must be provided) |
+| `NIYATNA_WS_BRIDGE_SECRET`  | Shared secret for the WebSocket bridge. **Required in production** — set to a strong random string.                                                                        | unset (must be provided) |
 | `REDIS_URL`                   | Connection string for the rate limiter / cache backend                                                                                                                     | `redis://redis:6379`     |
 | `REDIS_PORT`                  | Host-side port for the bundled Redis container                                                                                                                             | `6379`                   |
 | `REDIS_BIND_HOST`             | Host interface the bundled Redis port is published on (loopback unless you add AUTH)                                                                                       | `127.0.0.1`              |
 | `AUTO_UPDATE_HOST_REPO_DIR`   | Host path mounted into `cli` profile at `/workspace/omniroute` for self-update workflows                                                                                   | `.` (current directory)  |
-| `OMNIROUTE_MEMORY_MB`         | Runtime Node heap ceiling for the Docker standalone server; overrides the image default above. Coding agents: `8192`+ (see [runtime RAM](#runtime-ram-for-coding-agents)). | `1024`                   |
+| `NIYATNA_MEMORY_MB`         | Runtime Node heap ceiling for the Docker standalone server; overrides the image default above. Coding agents: `8192`+ (see [runtime RAM](#runtime-ram-for-coding-agents)). | `1024`                   |
 | `DASHBOARD_PORT` / `API_PORT` | Override exposed ports for dashboard (20128) and API (20129)                                                                                                               | `20128` / `20129`        |
-| `OMNIROUTE_PLUGINS_DIR`       | Directory the runtime plugin scanner reads and installs into. Set it when plugins are bind-mounted: the default follows `HOME`, which an image need not export.            | `~/.omniroute/plugins`   |
-| `OMNIROUTE_BASE_PATH`         | URL subpath when the app is published behind a reverse proxy (e.g. `/omniroute`)                                                                                           | _(empty = root)_         |
+| `NIYATNA_PLUGINS_DIR`       | Directory the runtime plugin scanner reads and installs into. Set it when plugins are bind-mounted: the default follows `HOME`, which an image need not export.            | `~/.omniroute/plugins`   |
+| `NIYATNA_BASE_PATH`         | URL subpath when the app is published behind a reverse proxy (e.g. `/omniroute`)                                                                                           | _(empty = root)_         |
 | `NEXT_PUBLIC_BASE_URL`        | Public browser origin including the subpath (e.g. `https://host/omniroute`)                                                                                                | unset                    |
 | `PROD_DASHBOARD_PORT`         | Host-side dashboard port for `docker-compose.prod.yml`                                                                                                                     | `20130`                  |
 | `CLIPROXYAPI_PORT`            | Host-side port for the `cliproxyapi` sidecar                                                                                                                               | `8317`                   |
@@ -349,7 +349,7 @@ Beyond the defaults documented in [ENVIRONMENT.md](../reference/ENVIRONMENT.md),
 Next.js `basePath` is compiled into the standalone bundle. OmniRoute records the baked
 value in a sentinel file at the app root (written during `npm run build`; read by
 `scripts/docker/ensure-docker-base-path.mjs`) and compares it with
-`OMNIROUTE_BASE_PATH` when the container starts. When they differ and the image was
+`NIYATNA_BASE_PATH` when the container starts. When they differ and the image was
 built for the domain root, the entrypoint rewrites the standalone manifests, the
 embedded `basePath`/`assetPrefix` literals (Next 16 renders SSR asset URLs from
 `assetPrefix` alone — the patcher mirrors the subpath into it), the baked
@@ -363,7 +363,7 @@ Set both variables in `.env`, then rebuild so the image and runtime agree:
 
 ```bash
 # .env
-OMNIROUTE_BASE_PATH=/omniroute
+NIYATNA_BASE_PATH=/omniroute
 NEXT_PUBLIC_BASE_URL=https://myhostname.example.com/omniroute
 ```
 
@@ -371,13 +371,13 @@ NEXT_PUBLIC_BASE_URL=https://myhostname.example.com/omniroute
 docker compose --profile base up -d --build
 ```
 
-`docker-compose.yml` forwards `OMNIROUTE_BASE_PATH` as a Docker build-arg and as a
+`docker-compose.yml` forwards `NIYATNA_BASE_PATH` as a Docker build-arg and as a
 runtime environment variable.
 
 ### Pre-built root image + runtime subpath
 
 Published `diegosouzapw/omniroute:*` images are built for the domain root. You can still
-set `OMNIROUTE_BASE_PATH` at runtime; the container patches the bundle once on startup.
+set `NIYATNA_BASE_PATH` at runtime; the container patches the bundle once on startup.
 Pair it with the matching public origin:
 
 ```yaml
@@ -385,7 +385,7 @@ services:
   omniroute:
     image: diegosouzapw/omniroute:latest
     environment:
-      OMNIROUTE_BASE_PATH: /omniroute
+      NIYATNA_BASE_PATH: /omniroute
       NEXT_PUBLIC_BASE_URL: https://myhostname.example.com/omniroute
 ```
 
@@ -395,9 +395,9 @@ prefix). Traefik should route `PathPrefix(`/omniroute`)` to the container withou
 `/omniroute/_next/...`.
 
 The Docker healthcheck probes the lightweight `/healthz` lifecycle endpoint prefixed
-with the active `OMNIROUTE_BASE_PATH`. `/api/monitoring/health` remains available for
+with the active `NIYATNA_BASE_PATH`. `/api/monitoring/health` remains available for
 human/dashboard diagnostics; to point the container HEALTHCHECK back at it (for example
-for deep health enforcement), set `OMNIROUTE_HEALTHCHECK_PATH=/api/monitoring/health`.
+for deep health enforcement), set `NIYATNA_HEALTHCHECK_PATH=/api/monitoring/health`.
 That path is a **deep** check (DB + monitoring summary) — appropriate for Docker's
 infrequent `HEALTHCHECK` if you opt back in, but **not** for Kubernetes `livenessProbe`
 intervals.
@@ -453,7 +453,7 @@ volumes:
 Caddy sets the standard forwarding headers for the upstream container. OmniRoute uses
 `NEXT_PUBLIC_BASE_URL` as the canonical public origin for OAuth callbacks and generated public
 links; authenticated dashboard writes use same-origin requests plus session-bound CSRF
-protection. Only enable `OMNIROUTE_TRUST_PROXY` for advanced deployments where you intentionally
+protection. Only enable `NIYATNA_TRUST_PROXY` for advanced deployments where you intentionally
 want OmniRoute to derive the public origin from trusted forwarded headers instead of explicit
 configuration.
 
@@ -594,11 +594,11 @@ External Postgres / multi-writer HA is **not** a documented stock path. If you n
 
 ## Scale-out: N independent processes
 
-One Node process is **one V8 heap**. Two overlapping ~3 MiB / ~750k-token coding-agent `POST /v1/responses` (RTK + Caveman) abort that heap at ~12 Gi (`FATAL ERROR: Reached heap limit`) and can OOM a 16 Gi cgroup. See [#7849](https://github.com/diegosouzapw/OmniRoute/issues/7849). That measurement is a **memory-budget** warning, not a product hard-max of two concurrent long `/v1/responses`. Heavyweight chat admission is gated by an auto-derived ingest byte budget (`OMNIROUTE_CHAT_MAX_INFLIGHT_BYTES`, `src/shared/middleware/admissionBudget.ts`) sized from that same V8/cgroup ceiling — overriding it upward (or setting the legacy `OMNIROUTE_CHAT_MAX_HEAVY_IN_FLIGHT` request-count cap) on an already-sized process reintroduces the abort. Small chats, `/healthz`, `/v1/models`, and MCP are **not** in that cap.
+One Node process is **one V8 heap**. Two overlapping ~3 MiB / ~750k-token coding-agent `POST /v1/responses` (RTK + Caveman) abort that heap at ~12 Gi (`FATAL ERROR: Reached heap limit`) and can OOM a 16 Gi cgroup. See [#7849](https://github.com/diegosouzapw/OmniRoute/issues/7849). That measurement is a **memory-budget** warning, not a product hard-max of two concurrent long `/v1/responses`. Heavyweight chat admission is gated by an auto-derived ingest byte budget (`NIYATNA_CHAT_MAX_INFLIGHT_BYTES`, `src/shared/middleware/admissionBudget.ts`) sized from that same V8/cgroup ceiling — overriding it upward (or setting the legacy `NIYATNA_CHAT_MAX_HEAVY_IN_FLIGHT` request-count cap) on an already-sized process reintroduces the abort. Small chats, `/healthz`, `/v1/models`, and MCP are **not** in that cap.
 
 ### One-process: more than two long `/v1/responses`
 
-A **healthy** process (heap below `OMNIROUTE_CHAT_ADMISSION_HEAP_SHED_RATIO`, default `0.75`) **may** run more than two concurrent long `POST /v1/responses` when the process-wide inflight-byte budget (`OMNIROUTE_CHAT_MAX_INFLIGHT_BYTES` / #10110) still has room. Bodies at or above `OMNIROUTE_CHAT_LARGE_BODY_BYTES` (default 256 KiB) take the same heavyweight lease as structure-heavy requests and use the same [#10437](https://github.com/diegosouzapw/OmniRoute/pull/10437) `tryAcquireHealthyHeadroom` escape (`OMNIROUTE_CHAT_ADMISSION_HEALTHY_HEADROOM`). Tens of concurrent long SSE clients (operators often need 40–50) is a **memory-budget** question — size heap + primary/headroom slots + `OMNIROUTE_CHAT_MAX_INFLIGHT_BYTES` — not a hard “max 2” product limit. A pressured heap still sheds with retryable `503` so #7849 does not return.
+A **healthy** process (heap below `NIYATNA_CHAT_ADMISSION_HEAP_SHED_RATIO`, default `0.75`) **may** run more than two concurrent long `POST /v1/responses` when the process-wide inflight-byte budget (`NIYATNA_CHAT_MAX_INFLIGHT_BYTES` / #10110) still has room. Bodies at or above `NIYATNA_CHAT_LARGE_BODY_BYTES` (default 256 KiB) take the same heavyweight lease as structure-heavy requests and use the same [#10437](https://github.com/diegosouzapw/OmniRoute/pull/10437) `tryAcquireHealthyHeadroom` escape (`NIYATNA_CHAT_ADMISSION_HEALTHY_HEADROOM`). Tens of concurrent long SSE clients (operators often need 40–50) is a **memory-budget** question — size heap + primary/headroom slots + `NIYATNA_CHAT_MAX_INFLIGHT_BYTES` — not a hard “max 2” product limit. A pressured heap still sheds with retryable `503` so #7849 does not return.
 
 To **multiply heaps** (independent V8 old-spaces) **today**:
 
@@ -620,7 +620,7 @@ services:
     image: diegosouzapw/omniroute:3.8.49
     environment:
       DATA_DIR: /app/data
-      OMNIROUTE_MEMORY_MB: "12288"
+      NIYATNA_MEMORY_MB: "12288"
       QUOTA_STORE_DRIVER: redis
       QUOTA_STORE_REDIS_URL: redis://redis:6379
     volumes: [omniroute-a-data:/app/data]
@@ -629,7 +629,7 @@ services:
     image: diegosouzapw/omniroute:3.8.49
     environment:
       DATA_DIR: /app/data
-      OMNIROUTE_MEMORY_MB: "12288"
+      NIYATNA_MEMORY_MB: "12288"
       QUOTA_STORE_DRIVER: redis
       QUOTA_STORE_REDIS_URL: redis://redis:6379
     volumes: [omniroute-b-data:/app/data]

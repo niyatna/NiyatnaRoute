@@ -23,7 +23,7 @@ import {
 
 export { API_KEY, BASE_URL };
 
-export const skip = !API_KEY ? "OMNIROUTE_API_KEY not set — skipping live test" : undefined;
+export const skip = !API_KEY ? "NIYATNA_API_KEY not set — skipping live test" : undefined;
 
 export interface ComboModelTarget {
   model: string;

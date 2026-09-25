@@ -21,7 +21,7 @@ test("nodes add with --base-url correctly parses and sends baseUrl in body", asy
   const program = new Command();
   program
     .name("omniroute")
-    .addOption(new Option("--base-url <url>", "Server base url").env("OMNIROUTE_BASE_URL"));
+    .addOption(new Option("--base-url <url>", "Server base url").env("NIYATNA_BASE_URL"));
 
   mod.registerNodes(program);
 
@@ -56,16 +56,16 @@ test("nodes add with --base-url correctly parses and sends baseUrl in body", asy
   assert.equal(capturedBody?.baseUrl, "http://127.0.0.1:11434");
 });
 
-test("nodes add without endpoint or base-url exits with error even if OMNIROUTE_BASE_URL is set in environment", async () => {
+test("nodes add without endpoint or base-url exits with error even if NIYATNA_BASE_URL is set in environment", async () => {
   const mod = await import("../../bin/cli/commands/nodes.mjs");
   const program = new Command();
   program
     .name("omniroute")
-    .addOption(new Option("--base-url <url>", "Server base url").env("OMNIROUTE_BASE_URL"));
+    .addOption(new Option("--base-url <url>", "Server base url").env("NIYATNA_BASE_URL"));
 
   mod.registerNodes(program);
 
-  process.env.OMNIROUTE_BASE_URL = "http://localhost:20128";
+  process.env.NIYATNA_BASE_URL = "http://localhost:20128";
   let exitCode: number | null = null;
   const origExit = process.exit;
   const origStderr = process.stderr.write;
@@ -94,7 +94,7 @@ test("nodes add without endpoint or base-url exits with error even if OMNIROUTE_
   } finally {
     process.exit = origExit;
     process.stderr.write = origStderr;
-    delete process.env.OMNIROUTE_BASE_URL;
+    delete process.env.NIYATNA_BASE_URL;
   }
 
   assert.equal(exitCode, 1, "should exit with code 1 when node URL is missing");
@@ -106,7 +106,7 @@ test("nodes add with --name matching subcommand name correctly parses --base-url
   const program = new Command();
   program
     .name("omniroute")
-    .addOption(new Option("--base-url <url>", "Server base url").env("OMNIROUTE_BASE_URL"));
+    .addOption(new Option("--base-url <url>", "Server base url").env("NIYATNA_BASE_URL"));
 
   mod.registerNodes(program);
 
@@ -150,7 +150,7 @@ test("nodes update with --base-url correctly parses and sends baseUrl in body wi
   const program = new Command();
   program
     .name("omniroute")
-    .addOption(new Option("--base-url <url>", "Server base url").env("OMNIROUTE_BASE_URL"));
+    .addOption(new Option("--base-url <url>", "Server base url").env("NIYATNA_BASE_URL"));
 
   mod.registerNodes(program);
 
@@ -188,7 +188,7 @@ test("nodes validate with --base-url correctly parses and sends baseUrl in body"
   const program = new Command();
   program
     .name("omniroute")
-    .addOption(new Option("--base-url <url>", "Server base url").env("OMNIROUTE_BASE_URL"));
+    .addOption(new Option("--base-url <url>", "Server base url").env("NIYATNA_BASE_URL"));
 
   mod.registerNodes(program);
 
