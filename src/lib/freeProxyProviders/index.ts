@@ -1,11 +1,9 @@
 import type { FreeProxyProvider, FreeProxySourceId } from "./types";
-import { OneproxyProvider } from "./oneproxy";
 import { ProxiflyProvider } from "./proxifly";
 import { IplocateProvider } from "./iplocate";
 import { WebshareProvider } from "./webshare";
 
 const ALL_PROVIDERS: FreeProxyProvider[] = [
-  new OneproxyProvider(),
   new ProxiflyProvider(),
   new IplocateProvider(),
   new WebshareProvider(),
