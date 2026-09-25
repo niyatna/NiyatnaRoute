@@ -1024,7 +1024,7 @@ export function runMigrations(
     );
     console.error(
       `[Migration] The version-only tracking will skip these (version already applied), ` +
-        `but please report this to the OmniRoute maintainers.`
+        `but please report this to the NiyatnaRoute maintainers.`
     );
   }
 

@@ -219,7 +219,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "Smelt OmniRoute settings removed" });
+    return NextResponse.json({ success: true, message: "Smelt NiyatnaRoute settings removed" });
   } catch (err) {
     return NextResponse.json(
       { error: { message: sanitizeErrorMessage(err) } },

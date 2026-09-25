@@ -178,7 +178,7 @@ function resolveAdobeFireflyDataRoot(): string {
   const dataRoot =
     String(process.env.DATA_DIR || process.env.NIYATNA_DATA_DIR || "").trim() ||
     (process.env.LOCALAPPDATA
-      ? join(process.env.LOCALAPPDATA, "OmniRoute")
+      ? join(process.env.LOCALAPPDATA, "NiyatnaRoute")
       : join(process.cwd(), ".data"));
   mkdirSync(dataRoot, { recursive: true });
   return dataRoot;

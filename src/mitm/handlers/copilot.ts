@@ -30,7 +30,7 @@ export class CopilotHandler extends MitmHandlerBase {
 
       if (!upstream.ok) {
         const errText = await upstream.text().catch(() => "");
-        throw new Error(`OmniRoute ${upstream.status}: ${errText}`);
+        throw new Error(`NiyatnaRoute ${upstream.status}: ${errText}`);
       }
 
       const sink = createBoundedCollector();

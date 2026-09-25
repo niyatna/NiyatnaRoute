@@ -40,7 +40,7 @@ const getPrimaryConfigDir = () => path.dirname(getPrimaryConfigPath());
  */
 function renderCodewhaleConfig(baseUrl: string, apiKey: string, model: string): string {
   return [
-    "# CodeWhale config — managed by OmniRoute (plan 14)",
+    "# CodeWhale config — managed by NiyatnaRoute (plan 14)",
     "",
     "[openai]",
     `base_url = "${baseUrl}"`,
@@ -55,7 +55,7 @@ function renderCodewhaleConfig(baseUrl: string, apiKey: string, model: string): 
  */
 const hasNiyatnaRouteConfig = (content: string | null): boolean => {
   if (!content) return false;
-  return content.includes("managed by OmniRoute");
+  return content.includes("managed by NiyatnaRoute");
 };
 
 // Read current config.toml — prefers the primary ~/.codewhale path, falling

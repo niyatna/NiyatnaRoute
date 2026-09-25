@@ -384,7 +384,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "OmniRoute settings removed successfully",
+      message: "NiyatnaRoute settings removed successfully",
     });
   } catch (error) {
     console.log("Error resetting codex settings:", error);
