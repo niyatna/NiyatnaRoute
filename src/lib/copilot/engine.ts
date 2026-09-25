@@ -78,7 +78,7 @@ Combos chain multiple targets (provider+model) with a strategy:
 - \`context-relay\`: Relay context between models
 - \`lkgp\`: Last Known Good Provider
 
-Use \`createCombo\` tool or \`runOmniRouteCli\` to create them.`;
+Use \`createCombo\` tool or \`runNiyatnaRouteCli\` to create them.`;
   }
 
   // Provider questions
@@ -212,14 +212,14 @@ const INTENT_PATTERNS: Array<{
   // ── CLI executor ──
   {
     pattern: /^(?:cli|terminal|ejecuta|run|exec)\s+(.+)/i,
-    tool: "runOmniRouteCli",
+    tool: "runNiyatnaRouteCli",
     extractArgs: (m) => ({ command: m[1].trim() }),
   },
 
   // ── Health / status ──
   {
     pattern: /^(?:health|status|salud|estado)$/i,
-    tool: "runOmniRouteCli",
+    tool: "runNiyatnaRouteCli",
     extractArgs: () => ({ command: "health" }),
   },
 
@@ -346,14 +346,14 @@ Puedes decirme algo como:
   }
 
   // Handle CLI executor — pass the full command
-  if (intent.tool === "runOmniRouteCli") {
-    const tool = getCopilotTool("runOmniRouteCli");
+  if (intent.tool === "runNiyatnaRouteCli") {
+    const tool = getCopilotTool("runNiyatnaRouteCli");
     if (!tool) return { message: "Error: CLI executor not found." };
 
     const result = await tool.handler(intent.args);
     return {
       message: result,
-      toolCalls: [{ name: "runOmniRouteCli", args: intent.args, result }],
+      toolCalls: [{ name: "runNiyatnaRouteCli", args: intent.args, result }],
     };
   }
 

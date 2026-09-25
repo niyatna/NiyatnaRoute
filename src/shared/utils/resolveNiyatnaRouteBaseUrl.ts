@@ -15,7 +15,7 @@ function normalizeBaseUrl(value?: string): string | null {
   return trimmed.replace(/\/+$/, "");
 }
 
-export function resolveOmniRouteBaseUrl(env: OmniRouteBaseUrlEnv = process.env): string {
+export function resolveNiyatnaRouteBaseUrl(env: OmniRouteBaseUrlEnv = process.env): string {
   const port = env.PORT || env.API_PORT || env.DASHBOARD_PORT;
   const fallback = port ? `http://localhost:${port}` : DEFAULT_NIYATNA_BASE_URL;
 

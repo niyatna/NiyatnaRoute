@@ -72,7 +72,7 @@ const readAuthFile = async () => {
 };
 
 // ── Check if a base_url points to OmniRoute ──────────────────────────────
-const isOmniRouteUrl = (baseUrl) => {
+const isNiyatnaRouteUrl = (baseUrl) => {
   if (!baseUrl) return false;
   const port = process.env.PORT || process.env.DASHBOARD_PORT;
   return (
@@ -84,11 +84,11 @@ const isOmniRouteUrl = (baseUrl) => {
 };
 
 // ── Check if OmniRoute is configured ─────────────────────────────────────
-const hasOmniRouteConfig = (authFile) => {
+const hasNiyatnaRouteConfig = (authFile) => {
   if (!authFile?.providers) return false;
   const provider = authFile.providers[PROVIDER_NAME];
   if (!provider) return false;
-  return isOmniRouteUrl(provider.base_url);
+  return isNiyatnaRouteUrl(provider.base_url);
 };
 
 // ── GET - Check Letta CLI and read current settings ────────────────────
@@ -112,14 +112,14 @@ export async function GET(request: Request) {
 
     // Detect if lmstudio is already configured for a non-OmniRoute endpoint
     let lmstudioConflict = false;
-    if (provider && !isOmniRouteUrl(provider.base_url)) {
+    if (provider && !isNiyatnaRouteUrl(provider.base_url)) {
       lmstudioConflict = true;
     }
 
     return NextResponse.json({
       installed: true,
       config: authFile,
-      hasOmniRoute: hasOmniRouteConfig(authFile),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(authFile),
       lmstudioConflict,
       configPath: getProviderAuthPath(),
       letta: {
@@ -158,7 +158,7 @@ async function prepareLettaAuthFile(
   }
 
   const existingProvider = authFile.providers?.[PROVIDER_NAME];
-  if (existingProvider && !isOmniRouteUrl(existingProvider.base_url) && !overwrite) {
+  if (existingProvider && !isNiyatnaRouteUrl(existingProvider.base_url) && !overwrite) {
     // User has lmstudio configured for actual LM Studio — refuse to overwrite
     return {
       conflictResponse: NextResponse.json(
@@ -173,7 +173,7 @@ async function prepareLettaAuthFile(
   }
 
   // Back up existing lmstudio provider before overwriting
-  if (existingProvider && !isOmniRouteUrl(existingProvider.base_url)) {
+  if (existingProvider && !isNiyatnaRouteUrl(existingProvider.base_url)) {
     const backupPath = getBackupPath();
     await fs.writeFile(backupPath, JSON.stringify(existingProvider, null, 2));
   }

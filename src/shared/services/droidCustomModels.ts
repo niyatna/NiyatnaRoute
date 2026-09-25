@@ -113,6 +113,6 @@ export function buildDroidCustomModels(
 }
 
 /** True when a `customModels` entry was written by OmniRoute (any index). */
-export function isOmniRouteCustomModel(entry: { id?: unknown } | null | undefined): boolean {
+export function isNiyatnaRouteCustomModel(entry: { id?: unknown } | null | undefined): boolean {
   return typeof entry?.id === "string" && entry.id.startsWith("custom:OmniRoute");
 }

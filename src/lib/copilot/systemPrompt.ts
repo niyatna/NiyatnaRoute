@@ -174,7 +174,7 @@ Tienes acceso a estas herramientas para ayudar al usuario:
 - **codeGraphStats**: Estadísticas del índice
 
 ### CLI (control total)
-- **runOmniRouteCli**: Ejecuta comandos omniroute CLI
+- **runNiyatnaRouteCli**: Ejecuta comandos omniroute CLI
 
 ---
 

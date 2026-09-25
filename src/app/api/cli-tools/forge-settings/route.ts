@@ -45,7 +45,7 @@ function renderForgeConfig(baseUrl: string, apiKey: string, model: string): stri
  * Check if the config file contains OmniRoute settings.
  * Looks for the managed-by-OmniRoute marker comment.
  */
-const hasOmniRouteConfig = (content: string | null): boolean => {
+const hasNiyatnaRouteConfig = (content: string | null): boolean => {
   if (!content) return false;
   return content.includes("managed by OmniRoute");
 };
@@ -94,7 +94,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasOmniRoute: hasOmniRouteConfig(config),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(config),
       configPath: getForgeConfigPath(),
     });
   } catch (err) {

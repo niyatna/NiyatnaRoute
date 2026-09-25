@@ -47,7 +47,7 @@ const ensureV1 = (url: string): string => {
   return s.endsWith("/v1") ? s : `${s}/v1`;
 };
 
-const hasOmniRouteConfig = (settings: Record<string, unknown> | null): boolean => {
+const hasNiyatnaRouteConfig = (settings: Record<string, unknown> | null): boolean => {
   if (!settings) return false;
   const providers = settings.providers as Record<string, unknown> | undefined;
   const omniroute = providers?.omniroute as Record<string, unknown> | undefined;
@@ -104,7 +104,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasOmniRoute: hasOmniRouteConfig(config),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(config),
       configPath: getCrushConfigPath(),
     });
   } catch (err) {

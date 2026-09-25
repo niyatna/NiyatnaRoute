@@ -33,7 +33,7 @@ import {
   type LocalSyncedEndpointRoute,
 } from "@/lib/providerModels/syncedEndpointRouting";
 import { runWithProxyContext } from "@niyatna/open-sse/utils/proxyFetch.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { getSpecialtyModelsResponse } from "@/app/api/v1/_shared/specialtyCatalog";
@@ -369,7 +369,7 @@ async function postHandler(request, context) {
     );
     const costUsd = await calculateModalCost("image", provider, body.model, { n });
     const headers = new Headers({ "Content-Type": "application/json" });
-    attachOmniRouteMetaHeaders(headers, {
+    attachNiyatnaRouteMetaHeaders(headers, {
       provider,
       model: body.model,
       costUsd,

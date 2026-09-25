@@ -126,7 +126,7 @@ const readConfig = async () => {
 };
 
 // Check if config has OmniRoute settings
-const hasOmniRouteConfig = (config: string | null) => {
+const hasNiyatnaRouteConfig = (config: string | null) => {
   if (!config) return false;
   return (
     config.includes("openai_base_url") ||
@@ -169,7 +169,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasOmniRoute: hasOmniRouteConfig(config),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(config),
       configPath: getCodexConfigPath(),
     });
   } catch (error) {

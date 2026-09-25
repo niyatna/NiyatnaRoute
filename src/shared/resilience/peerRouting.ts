@@ -55,7 +55,7 @@ function normalizePeerUrl(value: string): URL | null {
   }
 }
 
-export function isConfiguredOmniRoutePeer(
+export function isConfiguredNiyatnaRoutePeer(
   targetUrl: string,
   env: PeerEnvironment = process.env as PeerEnvironment
 ): boolean {
@@ -120,7 +120,7 @@ export function applyPeerTraceHeader(
   env: PeerEnvironment = process.env as PeerEnvironment
 ): boolean {
   const instanceId = getInstanceId(env);
-  if (!instanceId || !isConfiguredOmniRoutePeer(targetUrl, env)) return false;
+  if (!instanceId || !isConfiguredNiyatnaRoutePeer(targetUrl, env)) return false;
 
   const trace = parsePeerTrace(readHeader(clientHeaders, NIYATNA_PEER_TRACE_HEADER));
   if (!trace.includes(instanceId)) trace.push(instanceId);

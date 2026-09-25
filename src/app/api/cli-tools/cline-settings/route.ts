@@ -27,7 +27,7 @@ const readGlobalState = async () => readJsoncConfig(GLOBAL_STATE_PATH);
 const readSecrets = async () => readJsoncConfig<Record<string, unknown>>(SECRETS_PATH, {});
 
 // Check if OmniRoute is configured as OpenAI-compatible provider
-const hasOmniRouteConfig = (globalState: any) => {
+const hasNiyatnaRouteConfig = (globalState: any) => {
   if (!globalState) return false;
   const isOpenAi =
     globalState.actModeApiProvider === "openai" || globalState.planModeApiProvider === "openai";
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
         openAiModelId: globalState?.openAiModelId,
         planModeOpenAiModelId: globalState?.planModeOpenAiModelId,
       },
-      hasOmniRoute: hasOmniRouteConfig(globalState),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(globalState),
       globalStatePath: GLOBAL_STATE_PATH,
       secretsPath: SECRETS_PATH,
     });

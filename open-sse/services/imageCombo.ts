@@ -17,7 +17,7 @@ import {
 } from "@/sse/services/auth";
 import { isAllRateLimitedCredentials } from "@/app/api/v1/_shared/rateLimit";
 import { handleImageGeneration } from "@niyatna/open-sse/handlers/imageGeneration.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
@@ -252,7 +252,7 @@ export async function executeImageCombo(
     const costUsd = await calculateModalCost("image", selectedProvider, selectedModel, { n });
 
     const headers = new Headers({ "Content-Type": "application/json" });
-    attachOmniRouteMetaHeaders(headers, {
+    attachNiyatnaRouteMetaHeaders(headers, {
       provider: selectedProvider,
       model: selectedModel,
       costUsd,

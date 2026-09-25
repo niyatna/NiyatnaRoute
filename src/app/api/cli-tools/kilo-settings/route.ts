@@ -24,7 +24,7 @@ const KILO_CONFIG_DIR = path.join(os.homedir(), ".config", "kilo");
 const readAuth = async () => readJsoncConfig(AUTH_PATH);
 
 // Check if OmniRoute OpenAI-compatible provider is configured
-const hasOmniRouteConfig = (auth) => {
+const hasNiyatnaRouteConfig = (auth) => {
   if (!auth) return false;
   const routerEntry = auth["openai-compatible"] || auth["omniroute"];
   if (!routerEntry) return false;
@@ -98,7 +98,7 @@ export async function GET(request: Request) {
         auth: auth ? Object.keys(auth) : [],
         extensionSettings,
       },
-      hasOmniRoute: hasOmniRouteConfig(auth),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(auth),
       authPath: AUTH_PATH,
     });
   } catch (error) {

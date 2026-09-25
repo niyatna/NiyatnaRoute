@@ -8,7 +8,7 @@ import {
 import { calculateCost } from "@/lib/usage/costCalculator";
 import { finalizePendingScope, type PendingRequestScope } from "@/lib/usage/pendingRequestScope";
 import { synthesizeOpenAiSseFromJson } from "../../utils/jsonToSse.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { extractUsageFromResponse } from "../usageExtractor.ts";
 import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { getSemanticCacheManager } from "../../services/cache/semanticCacheManager.ts";
@@ -171,7 +171,7 @@ export async function checkSemanticCache({
       // A cache HIT serves WITHOUT an upstream call, so the incremental cost billed to
       // the client is 0 (consumers that sum X-OmniRoute-Response-Cost must not charge for
       // hits). The original/would-have-been cost is surfaced via X-OmniRoute-Cost-Saved.
-      attachOmniRouteMetaHeaders(headers, {
+      attachNiyatnaRouteMetaHeaders(headers, {
         provider,
         model,
         cacheHit: true,

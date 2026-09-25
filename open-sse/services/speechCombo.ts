@@ -21,7 +21,7 @@ import {
 } from "@/sse/services/auth";
 import { isAllRateLimitedCredentials } from "@/app/api/v1/_shared/rateLimit";
 import { handleAudioSpeech } from "@niyatna/open-sse/handlers/audioSpeech.ts";
-import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaToResponse } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
@@ -134,7 +134,7 @@ export async function executeSpeechCombo(
         resolvedModel || target.modelStr,
         { characters }
       );
-      return attachOmniRouteMetaToResponse(response, {
+      return attachNiyatnaRouteMetaToResponse(response, {
         provider: targetProvider,
         model: resolvedModel || target.modelStr,
         costUsd,

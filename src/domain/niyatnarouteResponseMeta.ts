@@ -55,7 +55,7 @@ function toHeaderValue(value: string): string {
   return encodeURIComponent(toWellFormedUnicode(withoutControls));
 }
 
-export function getOmniRouteTokenCounts(usage: UsageLike): { input: number; output: number } {
+export function getNiyatnaRouteTokenCounts(usage: UsageLike): { input: number; output: number } {
   if (!usage || typeof usage !== "object") {
     return { input: 0, output: 0 };
   }
@@ -95,7 +95,7 @@ export function formatOmniRouteCost(costUsd: unknown): string {
  * header only ever carries a routing strategy name, the already-public provider
  * alias, and a latency integer; never an error message, stack trace, or secret).
  */
-export function buildOmniRouteDecisionHeaderValue({
+export function buildNiyatnaRouteDecisionHeaderValue({
   strategy = null,
   provider = null,
   latencyMs = 0,
@@ -116,7 +116,7 @@ export function buildOmniRouteDecisionHeaderValue({
   return toHeaderValue(parts.join("; "));
 }
 
-export function buildOmniRouteResponseMetaHeaders({
+export function buildNiyatnaRouteResponseMetaHeaders({
   cacheHit = false,
   costUsd = 0,
   costSavedUsd = undefined,
@@ -157,7 +157,7 @@ export function buildOmniRouteResponseMetaHeaders({
    */
   ttftMs?: number | null;
 }): Record<string, string> {
-  const tokens = getOmniRouteTokenCounts(usage);
+  const tokens = getNiyatnaRouteTokenCounts(usage);
   const headers: Record<string, string> = {
     [NIYATNA_RESPONSE_HEADERS.cacheHit]: toHeaderValue(String(cacheHit)),
     [NIYATNA_RESPONSE_HEADERS.latencyMs]: toHeaderValue(String(toNonNegativeInteger(latencyMs))),
@@ -192,7 +192,7 @@ export function buildOmniRouteResponseMetaHeaders({
     headers[NIYATNA_RESPONSE_HEADERS.fallbackAttempts] = toHeaderValue(String(attempts));
   }
 
-  const decisionValue = buildOmniRouteDecisionHeaderValue({ strategy, provider, latencyMs });
+  const decisionValue = buildNiyatnaRouteDecisionHeaderValue({ strategy, provider, latencyMs });
   if (decisionValue !== null) {
     headers[NIYATNA_RESPONSE_HEADERS.decision] = decisionValue;
   }
@@ -209,10 +209,10 @@ export function buildOmniRouteResponseMetaHeaders({
   return headers;
 }
 
-export function buildOmniRouteSseMetadataComment(
-  options: Parameters<typeof buildOmniRouteResponseMetaHeaders>[0]
+export function buildNiyatnaRouteSseMetadataComment(
+  options: Parameters<typeof buildNiyatnaRouteResponseMetaHeaders>[0]
 ): string {
-  const headers = buildOmniRouteResponseMetaHeaders(options);
+  const headers = buildNiyatnaRouteResponseMetaHeaders(options);
   const lines = Object.entries(headers)
     .filter(([, value]) => typeof value === "string" && value.trim().length > 0)
     .map(([name, value]) => `: ${name.toLowerCase()}=${value}`);
@@ -225,11 +225,11 @@ export function buildOmniRouteSseMetadataComment(
  * Mutates `headers` in place (accepts a Headers instance OR a plain Record).
  * Use at EVERY non-streaming success return so no route forgets the telemetry.
  */
-export function attachOmniRouteMetaHeaders(
+export function attachNiyatnaRouteMetaHeaders(
   headers: Headers | Record<string, string>,
-  meta: Parameters<typeof buildOmniRouteResponseMetaHeaders>[0]
+  meta: Parameters<typeof buildNiyatnaRouteResponseMetaHeaders>[0]
 ): void {
-  const built = buildOmniRouteResponseMetaHeaders(meta);
+  const built = buildNiyatnaRouteResponseMetaHeaders(meta);
   if (headers instanceof Headers) {
     for (const [name, value] of Object.entries(built)) headers.set(name, value);
   } else {
@@ -245,14 +245,14 @@ export function attachOmniRouteMetaHeaders(
  * `chatHelpers.ts::withSessionHeader`). Use for opaque handler-built Responses
  * (audio streams, passthrough proxies) where the body cannot be re-serialized.
  */
-export function attachOmniRouteMetaToResponse(
+export function attachNiyatnaRouteMetaToResponse(
   response: Response,
-  meta: Parameters<typeof buildOmniRouteResponseMetaHeaders>[0]
+  meta: Parameters<typeof buildNiyatnaRouteResponseMetaHeaders>[0]
 ): Response {
   if (!response) return response;
 
   try {
-    attachOmniRouteMetaHeaders(response.headers, meta);
+    attachNiyatnaRouteMetaHeaders(response.headers, meta);
     return response;
   } catch {
     const cloned = new Response(response.body, {
@@ -260,7 +260,7 @@ export function attachOmniRouteMetaToResponse(
       statusText: response.statusText,
       headers: response.headers,
     });
-    attachOmniRouteMetaHeaders(cloned.headers, meta);
+    attachNiyatnaRouteMetaHeaders(cloned.headers, meta);
     return cloned;
   }
 }

@@ -19,7 +19,7 @@ import {
   toggleExpandedSection,
 } from "@/shared/utils/sidebarExpansionState";
 import { APP_CONFIG } from "@/shared/constants/appConfig";
-import OmniRouteLogo from "./OmniRouteLogo";
+import NiyatnaRouteLogo from "./NiyatnaRouteLogo";
 import Button from "./Button";
 import Input from "./Input";
 import { ConfirmModal } from "./Modal";
@@ -702,7 +702,7 @@ export default function Sidebar({
                   className="size-5 object-contain"
                 />
               ) : (
-                <OmniRouteLogo size={18} className="text-white" />
+                <NiyatnaRouteLogo size={18} className="text-white" />
               )}
             </div>
             {!collapsed && (

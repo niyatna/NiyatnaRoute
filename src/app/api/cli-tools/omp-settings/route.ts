@@ -82,7 +82,7 @@ export async function GET(request: Request) {
           },
         },
       },
-      hasOmniRoute: !!(ymlProvider || creds.hasOmniRoute),
+      hasNiyatnaRoute: !!(ymlProvider || creds.hasNiyatnaRoute),
       configPath: getOmpModelsYmlPath(),
     });
   } catch (error) {

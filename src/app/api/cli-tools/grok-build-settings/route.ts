@@ -142,7 +142,7 @@ const omitApiKeys = (settings: ReturnType<typeof parseGrokBuildConfig>) => ({
   >,
 });
 
-const hasOmniRouteConfig = (settings: GrokBuildSettings): boolean =>
+const hasNiyatnaRouteConfig = (settings: GrokBuildSettings): boolean =>
   settings.default === "omniroute" &&
   settings.model?.base_url !== null &&
   settings.model?.api_backend === "chat_completions";
@@ -169,7 +169,7 @@ export async function GET(request: Request): Promise<Response> {
       ...runtime,
       config: publicSettings,
       settings: publicSettings,
-      hasOmniRoute: hasOmniRouteConfig(settings),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(settings),
       apiKeyConfigured,
       configPath,
     });
