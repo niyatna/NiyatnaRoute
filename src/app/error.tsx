@@ -62,7 +62,7 @@ export default function Error({ error, reset }: ErrorProps) {
           {tc("goToDashboard")}
         </a>
         <a
-          href="/status"
+          href="/dashboard/health"
           className="px-6 py-2.5 rounded-lg text-[var(--color-text-main)] text-sm font-semibold cursor-pointer transition-all duration-200 motion-reduce:transition-none border border-[var(--color-border)] hover:bg-[var(--color-bg-alt)] no-underline focus:outline-2 focus:outline-offset-2 focus:outline-[var(--color-accent)]"
           aria-label={t("error.statusAriaLabel")}
         >

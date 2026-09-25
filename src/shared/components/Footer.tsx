@@ -16,8 +16,6 @@ const footerLinks = {
     },
   ],
   resources: [
-    { key: "documentation", href: "/docs" },
-    { key: "apiReference", href: "/docs#api-reference" },
     {
       key: "helpCenter",
       href: "https://github.com/diegosouzapw/NiyatnaRoute/discussions",
@@ -32,8 +30,6 @@ const footerLinks = {
       href: "https://github.com/diegosouzapw/NiyatnaRoute/issues/new/choose",
       external: true,
     },
-    { key: "terms", href: "/terms" },
-    { key: "privacy", href: "/privacy" },
   ],
 };
 
@@ -142,15 +138,6 @@ export default function Footer() {
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <div className="flex gap-6 text-sm text-text-muted">
-            <Link href="/docs" className="hover:text-primary transition-colors">
-              {t("documentation")}
-            </Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">
-              {t("terms")}
-            </Link>
-            <Link href="/privacy" className="hover:text-primary transition-colors">
-              {t("privacy")}
-            </Link>
             <a
               href="https://github.com/diegosouzapw/NiyatnaRoute/blob/main/LICENSE"
               target="_blank"

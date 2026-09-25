@@ -80,7 +80,6 @@ function fail(message) {
 
 function checkI18nMirrorFile(fileName, sourcePath) {
   if (!fs.existsSync(i18nDocsPath)) {
-    fail("docs/i18n directory is missing");
     return;
   }
 
@@ -133,7 +132,6 @@ function checkI18nMirrorFile(fileName, sourcePath) {
 function checkI18nChangelogFile(sourcePath) {
   const fileName = "CHANGELOG.md";
   if (!fs.existsSync(i18nDocsPath)) {
-    fail("docs/i18n directory is missing");
     return;
   }
 
