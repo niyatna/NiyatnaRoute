@@ -66,7 +66,7 @@ export async function probeEndpoint(
   try {
     const res = await fetch(url, {
       method: "GET",
-      headers: { "User-Agent": "OmniRoute-Discovery/1.0" },
+      headers: { "User-Agent": "NiyatnaRoute-Discovery/1.0" },
       signal,
     });
     return {
