@@ -274,7 +274,7 @@ export async function warmAdaptiveVirtualLanesIntoRuntime(): Promise<void> {
 export async function registerQuotaFetchers(): Promise<void> {
   // Side-effect registrations for agentrouter, freeModel, grokCli, xaiOauth,
   // firecrawl (same ordering as the legacy chat.ts path).
-  await import("@omniroute/open-sse/services/quotaTrackersBatch.ts");
+  await import("@niyatna/open-sse/services/quotaTrackersBatch.ts");
 
   const [
     { registerCodexQuotaFetcher },
@@ -288,16 +288,16 @@ export async function registerQuotaFetchers(): Promise<void> {
     { registerGrokWebQuotaFetcher },
     { registerGenericQuotaFetchers },
   ] = await Promise.all([
-    import("@omniroute/open-sse/services/codexQuotaFetcher"),
-    import("@omniroute/open-sse/services/bailianQuotaFetcher"),
-    import("@omniroute/open-sse/services/qwenTokenPlanQuotaFetcher"),
-    import("@omniroute/open-sse/services/crofUsageFetcher"),
-    import("@omniroute/open-sse/services/deepseekQuotaFetcher"),
-    import("@omniroute/open-sse/services/moonshotQuotaFetcher"),
-    import("@omniroute/open-sse/services/openrouterQuotaFetcher"),
-    import("@omniroute/open-sse/services/opencodeQuotaFetcher"),
-    import("@omniroute/open-sse/services/grokQuotaFetcher"),
-    import("@omniroute/open-sse/services/genericQuotaFetcher"),
+    import("@niyatna/open-sse/services/codexQuotaFetcher"),
+    import("@niyatna/open-sse/services/bailianQuotaFetcher"),
+    import("@niyatna/open-sse/services/qwenTokenPlanQuotaFetcher"),
+    import("@niyatna/open-sse/services/crofUsageFetcher"),
+    import("@niyatna/open-sse/services/deepseekQuotaFetcher"),
+    import("@niyatna/open-sse/services/moonshotQuotaFetcher"),
+    import("@niyatna/open-sse/services/openrouterQuotaFetcher"),
+    import("@niyatna/open-sse/services/opencodeQuotaFetcher"),
+    import("@niyatna/open-sse/services/grokQuotaFetcher"),
+    import("@niyatna/open-sse/services/genericQuotaFetcher"),
   ]);
 
   registerCodexQuotaFetcher();
@@ -343,7 +343,7 @@ export async function registerNodejs(): Promise<void> {
   (await import("@/lib/startup/nonLoopbackApiKeyGuard")).warnIfInferenceServerExposed();
 
   // Initialize proxy fetch patch FIRST (before any HTTP requests)
-  await import("@omniroute/open-sse/utils/proxyFetch.ts");
+  await import("@niyatna/open-sse/utils/proxyFetch.ts");
   console.log("[STARTUP] Global fetch proxy patch initialized");
 
   // Register quota fetchers early so combo routing can use real quota-aware
@@ -484,7 +484,7 @@ export async function registerNodejs(): Promise<void> {
     // Restore Global System Prompt into in-memory config (#2468/#2470)
     if (settings.systemPrompt) {
       const { setSystemPromptConfig } =
-        await import("@omniroute/open-sse/services/systemPrompt.ts");
+        await import("@niyatna/open-sse/services/systemPrompt.ts");
       setSystemPromptConfig(settings.systemPrompt);
       console.log("[STARTUP] Global System Prompt restored from settings");
     }
@@ -495,7 +495,7 @@ export async function registerNodejs(): Promise<void> {
     // the passthrough default on every restart. Previously this was only wired into
     // the unused `server-init.ts`, so it never ran in production.
     const { hydrateThinkingBudgetConfig } =
-      await import("@omniroute/open-sse/services/thinkingBudget.ts");
+      await import("@niyatna/open-sse/services/thinkingBudget.ts");
     if (hydrateThinkingBudgetConfig(settings)) {
       console.log("[STARTUP] Thinking-Budget config restored from settings");
     }
@@ -506,7 +506,7 @@ export async function registerNodejs(): Promise<void> {
     // reverts to disabled + the default model map on every restart. Same shape as the
     // Thinking-Budget restore above; must live here, not in the unused server-init.ts.
     const { hydrateTaskRoutingConfig } =
-      await import("@omniroute/open-sse/services/taskAwareRouter.ts");
+      await import("@niyatna/open-sse/services/taskAwareRouter.ts");
     if (hydrateTaskRoutingConfig(settings)) {
       console.log("[STARTUP] Task-Aware Routing config restored from settings");
     }
@@ -627,7 +627,7 @@ export async function registerNodejs(): Promise<void> {
           console.warn("[STARTUP] Embed WS proxy failed to start (non-fatal):", msg);
         }),
 
-      import("@omniroute/open-sse/services/autoRefreshDaemon")
+      import("@niyatna/open-sse/services/autoRefreshDaemon")
         .then((m) => m.autoRefreshDaemon.start())
         .catch((err: unknown) => {
           const msg = err instanceof Error ? err.message : String(err);

@@ -13,15 +13,15 @@ import {
   releaseChatAdmissionWhenDone,
   resolveSessionId,
 } from "@/shared/middleware/chatBodyAdmission";
-import { SSE_HEARTBEAT_INTERVAL_MS } from "@omniroute/open-sse/config/constants";
-import { resolveStreamFlag } from "@omniroute/open-sse/utils/aiSdkCompat";
-import { errorResponse } from "@omniroute/open-sse/utils/error";
+import { SSE_HEARTBEAT_INTERVAL_MS } from "@niyatna/open-sse/config/constants";
+import { resolveStreamFlag } from "@niyatna/open-sse/utils/aiSdkCompat";
+import { errorResponse } from "@niyatna/open-sse/utils/error";
 import {
   withEarlyStreamKeepalive,
   OPENAI_RESPONSES_ERROR_FRAME,
-} from "@omniroute/open-sse/utils/earlyStreamKeepalive";
-import { resolveKeepaliveThreshold } from "@omniroute/open-sse/utils/keepaliveThreshold";
-import { OPENAI_RESPONSES_IN_PROGRESS_FRAME } from "@omniroute/open-sse/utils/sseHeartbeat";
+} from "@niyatna/open-sse/utils/earlyStreamKeepalive";
+import { resolveKeepaliveThreshold } from "@niyatna/open-sse/utils/keepaliveThreshold";
+import { OPENAI_RESPONSES_IN_PROGRESS_FRAME } from "@niyatna/open-sse/utils/sseHeartbeat";
 
 // NOTE: We do NOT call initTranslators() here — the translator registry is
 // bootstrapped at module level inside open-sse/translator/index.ts when it

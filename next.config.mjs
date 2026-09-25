@@ -255,7 +255,7 @@ const nextConfig = {
     // or the full date-fns surface when only one helper is used.
     //
     // NOTE: this list must only contain EXTERNAL barrel libraries. Do NOT add
-    // the internal `@omniroute/open-sse` workspace here: optimizePackageImports
+    // the internal `@niyatna/open-sse` workspace here: optimizePackageImports
     // makes Next.js resolve every export of the package's barrel at build time,
     // and open-sse's `index.ts` re-exports the entire streaming engine
     // (executors/translators/services/handlers/mcp-server — thousands of
@@ -386,7 +386,7 @@ const nextConfig = {
     "util",
     "process",
   ],
-  transpilePackages: ["@omniroute/open-sse", "@lobehub/icons", "fumadocs-ui", "fumadocs-core"],
+  transpilePackages: ["@niyatna/open-sse", "@lobehub/icons", "fumadocs-ui", "fumadocs-core"],
   allowedDevOrigins: ["localhost", "127.0.0.1", "192.168.0.250"],
   typescript: {
     // TODO: Re-enable after fixing all sub-component useTranslations scope issues

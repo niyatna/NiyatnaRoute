@@ -20,8 +20,8 @@ import {
   mintCursorCliSessionToken,
   normalizeCursorCliPath,
   type CursorCliProxyDeps,
-} from "@omniroute/open-sse/handlers/cursorCliProxy.ts";
-import { CursorApiKeyExchangeError } from "@omniroute/open-sse/services/cursorApiKeyAuth.ts";
+} from "@niyatna/open-sse/handlers/cursorCliProxy.ts";
+import { CursorApiKeyExchangeError } from "@niyatna/open-sse/services/cursorApiKeyAuth.ts";
 
 const SECRET = "unit-test-jwt-secret-with-enough-entropy-0123456789";
 const OMNI_KEY = "sk-omniroute-unit-key";

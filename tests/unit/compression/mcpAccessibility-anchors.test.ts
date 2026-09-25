@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { smartFilterText } from "@omniroute/open-sse/services/compression/engines/mcpAccessibility/index.ts";
-import { DEFAULT_MCP_ACCESSIBILITY_CONFIG } from "@omniroute/open-sse/services/compression/engines/mcpAccessibility/constants.ts";
+import { smartFilterText } from "@niyatna/open-sse/services/compression/engines/mcpAccessibility/index.ts";
+import { DEFAULT_MCP_ACCESSIBILITY_CONFIG } from "@niyatna/open-sse/services/compression/engines/mcpAccessibility/constants.ts";
 
 /** Regex-extract every [ref=eNN] anchor from a blob, as a sorted unique list. */
 function extractRefs(s: string): string[] {

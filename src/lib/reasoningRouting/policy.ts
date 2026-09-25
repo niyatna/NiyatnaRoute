@@ -11,7 +11,7 @@ import { normalizeRoutingTags } from "@/domain/tagRouter";
 import {
   splitClaudeEffortSuffix,
   getProviderModels,
-} from "@omniroute/open-sse/config/providerModels.ts";
+} from "@niyatna/open-sse/config/providerModels.ts";
 
 type JsonRecord = Record<string, unknown>;
 const EFFORTS = new Set<ReasoningEffort>([

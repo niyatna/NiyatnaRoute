@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
-import { normalizeClaudeHaikuConstraints } from "@omniroute/open-sse/services/claudeHaikuConstraints.ts";
+import { normalizeClaudeHaikuConstraints } from "@niyatna/open-sse/services/claudeHaikuConstraints.ts";
 
 // Claude Haiku 4.5 (and other haiku-tier models) reject:
 //   1. `thinking.type:"adaptive"` (only Sonnet/Opus support adaptive thinking)

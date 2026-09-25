@@ -13,7 +13,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCliRuntimeStatus, CLI_TOOL_IDS } from "@/shared/services/cliRuntime";
 import { searchGitHubSkills, type GitHubSkillRepo } from "@/lib/skills/githubCollector";
-import { buildErrorBody } from "@omniroute/open-sse/utils/error";
+import { buildErrorBody } from "@niyatna/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
 export const dynamic = "force-dynamic";

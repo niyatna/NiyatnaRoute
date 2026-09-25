@@ -6,7 +6,7 @@ import {
   isLocalProvider,
   isSelfHostedChatProvider,
 } from "@/shared/constants/providers";
-import { DefaultExecutor } from "@omniroute/open-sse/executors/default.ts";
+import { DefaultExecutor } from "@niyatna/open-sse/executors/default.ts";
 
 // #5578: Ollama is the most popular local runtime, yet OmniRoute only shipped
 // `ollama-cloud` (api-key, cloud) and `ollama-search` (web search). There was no

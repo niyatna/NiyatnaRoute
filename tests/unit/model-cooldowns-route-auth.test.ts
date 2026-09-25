@@ -16,7 +16,7 @@ const core = await import("../../src/lib/db/core.ts");
 const settingsDb = await import("../../src/lib/db/settings.ts");
 const route = await import("../../src/app/api/resilience/model-cooldowns/route.ts");
 const modelAvailability = await import("../../src/domain/modelAvailability.ts");
-const accountFallback = await import("@omniroute/open-sse/services/accountFallback");
+const accountFallback = await import("@niyatna/open-sse/services/accountFallback");
 
 const { getAvailabilityReport } = modelAvailability;
 const { clearModelLock, lockModel } = accountFallback;

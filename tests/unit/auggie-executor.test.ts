@@ -15,7 +15,7 @@ import os from "node:os";
 import path from "node:path";
 
 const { AuggieExecutor, buildAuggiePrompt, resolveAuggieBin, resolveAuggieModel } =
-  await import("@omniroute/open-sse/executors/auggie");
+  await import("@niyatna/open-sse/executors/auggie");
 
 const TMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-auggie-test-"));
 
@@ -451,7 +451,7 @@ test("buildUrl/buildHeaders/transformRequest match the CLI-passthrough shape", (
 
 test("initAuggieModels discovers models from `auggie model list` output", async () => {
   const { initAuggieModels, resolveAuggieModel, __resetAuggieModels } =
-    await import("@omniroute/open-sse/executors/auggie");
+    await import("@niyatna/open-sse/executors/auggie");
   __resetAuggieModels(); // wipe stale cache from previous tests
   const bin = writeFakeBin(
     "fake-auggie-list.sh",
@@ -471,7 +471,7 @@ test("initAuggieModels discovers models from `auggie model list` output", async 
 });
 
 test("execute() spawns a model discovered via auto-fetch", async () => {
-  const { __resetAuggieModels } = await import("@omniroute/open-sse/executors/auggie");
+  const { __resetAuggieModels } = await import("@niyatna/open-sse/executors/auggie");
   __resetAuggieModels();
   const bin = writeFakeBin(
     "fake-auggie-autofetch.sh",
@@ -508,7 +508,7 @@ test("execute() spawns a model discovered via auto-fetch", async () => {
 });
 
 test("initAuggieModels failure does not block execute() for a known model", async () => {
-  const { __resetAuggieModels } = await import("@omniroute/open-sse/executors/auggie");
+  const { __resetAuggieModels } = await import("@niyatna/open-sse/executors/auggie");
   __resetAuggieModels();
   const bin = writeFakeBin(
     "fake-auggie-crash.sh",

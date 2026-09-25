@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { FREE_CATALOG_CURATED_AT } from "@omniroute/open-sse/config/freeModelCatalog.data.ts";
+import { FREE_CATALOG_CURATED_AT } from "@niyatna/open-sse/config/freeModelCatalog.data.ts";
 
 process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "omniroute-freetier-route-"));
 

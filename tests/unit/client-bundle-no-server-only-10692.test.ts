@@ -111,8 +111,8 @@ function resolveSpecifier(fromFile: string, specifier: string): string | null {
   let base: string;
   if (specifier.startsWith(".")) {
     base = path.resolve(path.dirname(path.join(REPO_ROOT, fromFile)), specifier);
-  } else if (specifier.startsWith("@omniroute/open-sse")) {
-    const rest = specifier.slice("@omniroute/open-sse".length).replace(/^\//, "");
+  } else if (specifier.startsWith("@niyatna/open-sse")) {
+    const rest = specifier.slice("@niyatna/open-sse".length).replace(/^\//, "");
     base = path.join(REPO_ROOT, "open-sse", rest);
   } else if (specifier.startsWith("@omniroute/browser-pool")) {
     const rest = specifier.slice("@omniroute/browser-pool".length).replace(/^\//, "");

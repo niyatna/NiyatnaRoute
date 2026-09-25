@@ -33,7 +33,7 @@ import {
   createProxyDispatcher,
   clearDispatcherCache,
   proxyConfigToUrl,
-} from "@omniroute/open-sse/utils/proxyDispatcher";
+} from "@niyatna/open-sse/utils/proxyDispatcher";
 import { fetch as undiciFetch } from "undici";
 import {
   classifyProbeStatus,

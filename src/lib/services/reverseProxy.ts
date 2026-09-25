@@ -23,7 +23,7 @@ import { getOrCreateApiKey } from "@/lib/services/apiKey";
 import { rewriteHtml } from "@/lib/services/htmlRewriter";
 import { toUpstreamPath } from "@/lib/services/embedPath";
 import { createErrorResponse } from "@/lib/api/errorResponse";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 // ─── constants ────────────────────────────────────────────────────────────────
 

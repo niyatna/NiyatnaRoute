@@ -7,7 +7,7 @@
 
 import { execFile, execSync } from "node:child_process";
 import { promisify } from "node:util";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 const execFileAsync = promisify(execFile);
 import { classifyCommand } from "./commandClassification";

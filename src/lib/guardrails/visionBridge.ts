@@ -31,7 +31,7 @@ import {
   isProviderConnectionUsable,
   hasUsableCredentialsForModel,
 } from "./visionBridgeCredentials";
-import { MAX_COMBO_DEPTH } from "@omniroute/open-sse/services/combo/comboPredicates.ts";
+import { MAX_COMBO_DEPTH } from "@niyatna/open-sse/services/combo/comboPredicates.ts";
 
 export { isProviderConnectionUsable, hasUsableCredentialsForModel };
 

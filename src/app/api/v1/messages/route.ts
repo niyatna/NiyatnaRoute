@@ -1,14 +1,14 @@
 import { handleChat } from "@/sse/handlers/chat";
-import { initTranslators } from "@omniroute/open-sse/translator/index.ts";
+import { initTranslators } from "@niyatna/open-sse/translator/index.ts";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 import { requireJsonContentType } from "@/shared/middleware/requireJsonContentType";
 import {
   withEarlyStreamKeepalive,
   ANTHROPIC_PING_FRAME,
-} from "@omniroute/open-sse/utils/earlyStreamKeepalive";
-import { resolveKeepaliveThreshold } from "@omniroute/open-sse/utils/keepaliveThreshold";
-import { resolveStreamFlag } from "@omniroute/open-sse/utils/aiSdkCompat";
+} from "@niyatna/open-sse/utils/earlyStreamKeepalive";
+import { resolveKeepaliveThreshold } from "@niyatna/open-sse/utils/keepaliveThreshold";
+import { resolveStreamFlag } from "@niyatna/open-sse/utils/aiSdkCompat";
 
 let initialized = false;
 

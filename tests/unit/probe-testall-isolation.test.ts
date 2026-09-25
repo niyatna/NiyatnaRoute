@@ -13,7 +13,7 @@ const { runSingleModelTest } = await import("../../src/lib/api/modelTestRunner.t
 const { resetAllCircuitBreakers } = await import("../../src/shared/utils/circuitBreaker.ts");
 const { invalidateDbCache } = await import("../../src/lib/db/readCache.ts");
 const { refreshConnectionRateLimits, enableRateLimitProtection } =
-  await import("@omniroute/open-sse/services/rateLimitManager.ts");
+  await import("@niyatna/open-sse/services/rateLimitManager.ts");
 
 const originalFetch = globalThis.fetch;
 

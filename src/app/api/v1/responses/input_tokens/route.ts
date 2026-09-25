@@ -8,8 +8,8 @@ import {
   type TokenizerContext,
 } from "@/shared/utils/tiktokenCounter";
 import { extractApiKey, isValidApiKey } from "@/sse/services/auth";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 import { z } from "zod";
 
 const inputTokensBodySchema = z.record(z.string(), z.unknown());

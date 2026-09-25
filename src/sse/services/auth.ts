@@ -53,14 +53,14 @@ import { isClaudeExtraUsageAllowed } from "@/lib/providers/claudeExtraUsage";
 import {
   getQuotaScopeLabelForProvider,
   isAntigravityQuotaProvider,
-} from "@omniroute/open-sse/services/antigravityQuotaFamily.ts";
+} from "@niyatna/open-sse/services/antigravityQuotaFamily.ts";
 import {
   rehydrateAntigravityFamilyLocksForConnections,
   persistAntigravityFamilyCooldownIfQuota,
-} from "@omniroute/open-sse/services/antigravityFamilyCooldown.ts";
+} from "@niyatna/open-sse/services/antigravityFamilyCooldown.ts";
 import { markQuotaPreflightAccountUnavailable } from "./quotaPreflightUnavailable.ts";
-import { getCreditsMode } from "@omniroute/open-sse/services/antigravityCredits.ts";
-import { preferAntigravityConnectionsWithStoredProject } from "@omniroute/open-sse/services/antigravityProjectPersistence.ts";
+import { getCreditsMode } from "@niyatna/open-sse/services/antigravityCredits.ts";
+import { preferAntigravityConnectionsWithStoredProject } from "@niyatna/open-sse/services/antigravityProjectPersistence.ts";
 import {
   isAccountUnavailable,
   getUnavailableUntil,
@@ -77,32 +77,32 @@ import {
   recordModelLockoutFailure,
   retryHintBypassesMaxCooldownMs,
   isProviderModelUnsupported400,
-} from "@omniroute/open-sse/services/accountFallback.ts";
-import { isSharedWalletCredits402 } from "@omniroute/open-sse/services/accountFallback/sharedWalletCredits.ts";
-import { isOpencodeFreeTierRefusalForProvider } from "@omniroute/open-sse/executors/opencodeGeoBlock.ts";
-import { isLocalProvider } from "@omniroute/open-sse/config/providerRegistry.ts";
-import { COOLDOWN_MS, RateLimitReason } from "@omniroute/open-sse/config/constants.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/errorSanitization.ts";
+} from "@niyatna/open-sse/services/accountFallback.ts";
+import { isSharedWalletCredits402 } from "@niyatna/open-sse/services/accountFallback/sharedWalletCredits.ts";
+import { isOpencodeFreeTierRefusalForProvider } from "@niyatna/open-sse/executors/opencodeGeoBlock.ts";
+import { isLocalProvider } from "@niyatna/open-sse/config/providerRegistry.ts";
+import { COOLDOWN_MS, RateLimitReason } from "@niyatna/open-sse/config/constants.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/errorSanitization.ts";
 import {
   honorsRuleLockScope,
   isEgressBucketedLockScope,
   egressBucketedLockProviders,
-} from "@omniroute/open-sse/config/providerErrorRules.ts";
+} from "@niyatna/open-sse/config/providerErrorRules.ts";
 import {
   preflightQuota,
   isQuotaPreflightEnabled,
-} from "@omniroute/open-sse/services/quotaPreflight.ts";
+} from "@niyatna/open-sse/services/quotaPreflight.ts";
 import { resolveResilienceSettings } from "@/lib/resilience/settings";
 import { resolveModelLockoutSettings } from "@/lib/resilience/modelLockoutSettings";
 import {
   buildMixedAvailabilityError,
   isTransportCooldownErrorCode,
 } from "../services/sameAccountTransportRetry";
-import { syncHealthFromDB, type KeyHealth } from "@omniroute/open-sse/services/apiKeyRotator.ts";
+import { syncHealthFromDB, type KeyHealth } from "@niyatna/open-sse/services/apiKeyRotator.ts";
 import {
   classifyProviderError,
   PROVIDER_ERROR_TYPES,
-} from "@omniroute/open-sse/services/errorClassifier.ts";
+} from "@niyatna/open-sse/services/errorClassifier.ts";
 import { resolveTerminalConnectionStatus } from "./authTerminalStatus.ts";
 import {
   ALIBABA_FREE_DRAINED_LOCK_MS,
@@ -112,20 +112,20 @@ import {
   isAlibabaModelStudioProvider,
   mergeAlibabaFreeDrainedModels,
   rehydrateAlibabaFreeDrainedModelLocks,
-} from "@omniroute/open-sse/services/alibabaFreeTier.ts";
+} from "@niyatna/open-sse/services/alibabaFreeTier.ts";
 
 import {
   getCodexModelScope,
   getCodexQuotaWindowFilterForModel,
   toCodexBaseQuotaWindowName,
   toCodexScopedQuotaWindowName,
-} from "@omniroute/open-sse/config/codexQuotaScopes.ts";
-import { formatQuotaUsageReason } from "@omniroute/open-sse/services/quotaWindowLabel.ts";
+} from "@niyatna/open-sse/config/codexQuotaScopes.ts";
+import { formatQuotaUsageReason } from "@niyatna/open-sse/services/quotaWindowLabel.ts";
 import {
   getCodexChildCooldown,
   isCodexChildUnavailable,
   persistCodexChildCooldown,
-} from "@omniroute/open-sse/services/codexAccount/index.ts";
+} from "@niyatna/open-sse/services/codexAccount/index.ts";
 import {
   getProviderById,
   getProviderAlias,
@@ -193,7 +193,7 @@ import { readHeaderValue, type AuthRequestHeaders } from "./headerReader.ts";
 import {
   getOAuthSessionAvailability,
   reserveOAuthSession,
-} from "@omniroute/open-sse/services/oauthSessionOccupancy.ts";
+} from "@niyatna/open-sse/services/oauthSessionOccupancy.ts";
 
 type JsonRecord = Record<string, unknown>;
 interface RecoverableConnectionState {
@@ -2685,7 +2685,7 @@ export async function markAccountUnavailable(
     // worst case is one extra background refresh.
     if (provider) {
       const { invalidateFreeAccessState } =
-        await import("@omniroute/open-sse/services/autoCombo/freeAccessQuota.ts");
+        await import("@niyatna/open-sse/services/autoCombo/freeAccessQuota.ts");
       invalidateFreeAccessState(provider, connectionId);
     }
 

@@ -20,7 +20,7 @@ fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
 
 const core = await import("@/lib/db/core.ts");
 const { createCombo } = await import("@/lib/db/combos");
-const { executeVideoCombo } = await import("@omniroute/open-sse/services/videoCombo");
+const { executeVideoCombo } = await import("@niyatna/open-sse/services/videoCombo");
 
 type LogEntry = { level: string; tag: unknown; msg: unknown };
 

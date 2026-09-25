@@ -1,4 +1,4 @@
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
 
 import {
   assertCommonChatGptWebProviderAvailable,

@@ -14,12 +14,12 @@ import { syncToCloud } from "@/lib/cloudSync";
 import { getConsistentMachineId } from "@/shared/utils/machineId";
 import { KiroService } from "@/lib/oauth/services/kiro";
 import { findKiroConnectionByIdentity } from "@/lib/oauth/kiroConnectionIdentity";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@niyatna/open-sse/utils/proxyFetch.ts";
 import {
   emailFromExternalIdpToken,
   isExternalIdpAuthMethod,
   normalizeScope,
-} from "@omniroute/open-sse/services/kiroExternalIdp.ts";
+} from "@niyatna/open-sse/services/kiroExternalIdp.ts";
 
 /**
  * GET /api/oauth/kiro/auto-import

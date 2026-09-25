@@ -9,9 +9,9 @@ import assert from "node:assert/strict";
 import {
   aggressivenessOf,
   expectedReductionFactor,
-} from "@omniroute/open-sse/services/compression/adaptiveCompression/ladder.ts";
-import { registerBuiltinCompressionEngines } from "@omniroute/open-sse/services/compression/engines/index.ts";
-import { listCompressionEngines } from "@omniroute/open-sse/services/compression/engines/registry.ts";
+} from "@niyatna/open-sse/services/compression/adaptiveCompression/ladder.ts";
+import { registerBuiltinCompressionEngines } from "@niyatna/open-sse/services/compression/engines/index.ts";
+import { listCompressionEngines } from "@niyatna/open-sse/services/compression/engines/registry.ts";
 
 registerBuiltinCompressionEngines();
 

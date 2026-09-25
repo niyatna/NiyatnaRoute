@@ -32,7 +32,7 @@ import {
   isOverageSafe,
   type BillableConnection,
 } from "./connectionBilling";
-import type { ConnectionBillingEntry } from "@omniroute/open-sse/config/connectionBillingCatalog.ts";
+import type { ConnectionBillingEntry } from "@niyatna/open-sse/config/connectionBillingCatalog.ts";
 import type { FreeAccessState } from "./strictZeroCostFilter";
 
 /**

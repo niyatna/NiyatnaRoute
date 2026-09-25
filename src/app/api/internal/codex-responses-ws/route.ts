@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
-import { CodexExecutor } from "@omniroute/open-sse/executors/codex.ts";
+import { CodexExecutor } from "@niyatna/open-sse/executors/codex.ts";
 import { getApiKeyMetadata } from "@/lib/db/apiKeys";
 import { authorizeWebSocketHandshake, extractWsTokenFromRequest } from "@/lib/ws/handshake";
 import { getModelInfo } from "@/sse/services/model";
@@ -12,12 +12,12 @@ import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { checkAndRefreshToken } from "@/sse/services/tokenRefresh";
 import { resolveCodexWsModelInfo } from "./modelResolution";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
-import { logger } from "@omniroute/open-sse/utils/logger.ts";
-import { resolveProxy } from "@omniroute/open-sse/utils/networkProxy.ts";
-import { withCodexFingerprintCredentials } from "@omniroute/open-sse/config/codexIdentity.ts";
-import { withReasoningRuleContext } from "@omniroute/open-sse/utils/reasoningRuleContext.ts";
-import { proxyConfigToUrl } from "@omniroute/open-sse/utils/proxyDispatcher.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error.ts";
+import { logger } from "@niyatna/open-sse/utils/logger.ts";
+import { resolveProxy } from "@niyatna/open-sse/utils/networkProxy.ts";
+import { withCodexFingerprintCredentials } from "@niyatna/open-sse/config/codexIdentity.ts";
+import { withReasoningRuleContext } from "@niyatna/open-sse/utils/reasoningRuleContext.ts";
+import { proxyConfigToUrl } from "@niyatna/open-sse/utils/proxyDispatcher.ts";
 import {
   attachReasoningRuleDirective,
   applyReasoningRuleDirective,

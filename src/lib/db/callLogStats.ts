@@ -1,9 +1,9 @@
 import { getDbInstance } from "./core";
-import { ERROR_TYPE_CONTRACT } from "@omniroute/open-sse/services/errorClassifier.ts";
+import { ERROR_TYPE_CONTRACT } from "@niyatna/open-sse/services/errorClassifier.ts";
 import {
   SEARCH_CREDENTIAL_FALLBACKS,
   SEARCH_PROVIDERS,
-} from "@omniroute/open-sse/config/searchRegistry.ts";
+} from "@niyatna/open-sse/config/searchRegistry.ts";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 
 /**

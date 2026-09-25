@@ -8,7 +8,7 @@ import {
   applyAdaptiveEffort,
   isAdaptiveEffort,
   hasExplicitReasoningField,
-} from "@omniroute/open-sse/services/adaptiveEffort.ts";
+} from "@niyatna/open-sse/services/adaptiveEffort.ts";
 
 function msg(
   role: string,

@@ -304,7 +304,7 @@ test("static registry vocabulary outranks the operator override so the gate matc
   const { setModelCapabilityOverride } =
     await import("../../src/lib/db/modelCapabilityOverrides.ts");
   const { getProviderModels, PROVIDER_ID_TO_ALIAS } =
-    await import("@omniroute/open-sse/config/providerModels.ts");
+    await import("@niyatna/open-sse/config/providerModels.ts");
 
   // Case 1: registry-declared model, operator override WIDENS. The
   // dispatch-time sanitizer ignores DB overrides for registry-declared

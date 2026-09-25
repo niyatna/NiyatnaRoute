@@ -13,8 +13,8 @@ import {
 } from "@/lib/db/backup";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
 import { getSettings } from "@/lib/db/settings";
-import { setSystemPromptConfig } from "@omniroute/open-sse/services/systemPrompt.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { setSystemPromptConfig } from "@niyatna/open-sse/services/systemPrompt.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 const DEFAULT_MAX_UPLOAD_MB = 100;
 // Hard ceiling so a misconfigured/hostile value can't ask the route to buffer an

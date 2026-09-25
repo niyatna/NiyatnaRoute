@@ -38,7 +38,7 @@ import { getOrInitSupervisor } from "../../_lib";
 import { getProviderConnections, getProviderConnectionById } from "@/lib/db/providers";
 import { getDarioHomeDir } from "@/lib/services/installers/dario";
 import { createErrorResponse } from "@/lib/api/errorResponse";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 const ImportBodySchema = z.object({
   connectionId: z.string().trim().min(1).optional(),

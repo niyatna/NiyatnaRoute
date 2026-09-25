@@ -15,7 +15,7 @@
  * `open-sse/translator/request/gemini-to-openai.ts`.
  */
 
-import { createGeminiToolCallIdPairing } from "@omniroute/open-sse/translator/helpers/geminiToolCallIds.ts";
+import { createGeminiToolCallIdPairing } from "@niyatna/open-sse/translator/helpers/geminiToolCallIds.ts";
 
 interface GeminiFunctionCall {
   name?: string;

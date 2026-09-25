@@ -10,7 +10,7 @@
  * `POST /v1/chat/completions` is the authenticated route, so a single probe there is the
  * correct auth check — the same remedy already applied to dify (#11002) and bytez (#5422).
  */
-import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts";
+import { getRegistryEntry } from "@niyatna/open-sse/config/providerRegistry.ts";
 import { normalizeBaseUrl } from "./urlHelpers";
 import { buildBearerHeaders } from "./headers";
 import { validateDirectChatProvider } from "./directChatProbe";

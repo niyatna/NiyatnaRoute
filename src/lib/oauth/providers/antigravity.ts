@@ -5,12 +5,12 @@ import {
   getAntigravityIdeNodeHeaders,
   getAntigravityLoadCodeAssistMetadata,
   getAntigravityOAuthUserAgent,
-} from "@omniroute/open-sse/services/antigravityHeaders.ts";
-import { extractCodeAssistOnboardTierId } from "@omniroute/open-sse/services/codeAssistSubscription.ts";
+} from "@niyatna/open-sse/services/antigravityHeaders.ts";
+import { extractCodeAssistOnboardTierId } from "@niyatna/open-sse/services/codeAssistSubscription.ts";
 import {
   BUILTIN_ANTIGRAVITY_CLIENT,
   type GoogleOauthClientMarker,
-} from "@omniroute/open-sse/services/tokenRefresh/googleClientBinding.ts";
+} from "@niyatna/open-sse/services/tokenRefresh/googleClientBinding.ts";
 
 const POSTEXCHANGE_TIMEOUT_MS = 8_000;
 

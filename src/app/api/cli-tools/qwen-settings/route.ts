@@ -5,7 +5,7 @@ import path from "node:path";
 import pino from "pino";
 import { NextResponse } from "next/server";
 
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getApiKeyById } from "@/lib/db/apiKeys";

@@ -41,7 +41,7 @@ import {
   checkResourcePressureGuard,
   getResourcePressureObservation,
   type PressureSeverity,
-} from "@omniroute/open-sse/utils/resourcePressure.ts";
+} from "@niyatna/open-sse/utils/resourcePressure.ts";
 
 function parsePositiveInt(value: string | undefined, fallback: number): number {
   const parsed = Number.parseInt(String(value), 10);

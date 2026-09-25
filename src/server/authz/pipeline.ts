@@ -14,7 +14,7 @@ import {
   resolveStampedPeer,
   resolveStampedViaProxy,
 } from "./peerStamp";
-import { checkRequestIP } from "@omniroute/open-sse/services/ipFilter.ts";
+import { checkRequestIP } from "@niyatna/open-sse/services/ipFilter.ts";
 import { clientApiPolicy } from "./policies/clientApi";
 import { managementPolicy } from "./policies/management";
 import { publicPolicy } from "./policies/public";

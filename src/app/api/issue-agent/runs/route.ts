@@ -9,7 +9,7 @@ import { normalizeGitHubIssueExport } from "@/lib/issueAgent/githubExport";
 import { createRecordedTriageRun } from "@/lib/issueAgent/recordedTriage";
 import { POST as postChatCompletion } from "@/app/api/v1/chat/completions/route";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 const issueAgentRunRequestSchema = z.object({
   mode: z.string().optional(),

@@ -18,19 +18,19 @@ import { clearRecoveredProviderState } from "@/sse/services/auth";
 import { getMachineId } from "@/shared/utils/machine";
 import { supportsProviderQuota } from "@/shared/utils/providerQuotaVisibility";
 import { mergeProviderLimitsCacheEntry, toProviderLimitsCacheEntry } from "./providerLimitsCache";
-import { getCredentialRefreshExecutor } from "@omniroute/open-sse/executors/credential.ts";
-import { getUsageForProvider } from "@omniroute/open-sse/services/usage.ts";
-import { cooldownUntilMs } from "@omniroute/open-sse/services/accountFallback.ts";
-import { rotationGroupFor } from "@omniroute/open-sse/services/refreshSerializer.ts";
+import { getCredentialRefreshExecutor } from "@niyatna/open-sse/executors/credential.ts";
+import { getUsageForProvider } from "@niyatna/open-sse/services/usage.ts";
+import { cooldownUntilMs } from "@niyatna/open-sse/services/accountFallback.ts";
+import { rotationGroupFor } from "@niyatna/open-sse/services/refreshSerializer.ts";
 import {
   extractCodeAssistOnboardTierId,
   extractCodeAssistSubscriptionTier,
-} from "@omniroute/open-sse/services/codeAssistSubscription.ts";
+} from "@niyatna/open-sse/services/codeAssistSubscription.ts";
 import {
   extractAntigravityProjectIdFromPayload,
   getStoredAntigravityProjectId,
-} from "@omniroute/open-sse/services/antigravityProjectPersistence.ts";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+} from "@niyatna/open-sse/services/antigravityProjectPersistence.ts";
+import { runWithProxyContext } from "@niyatna/open-sse/utils/proxyFetch.ts";
 import { onUsageRecorded } from "./usageEvents";
 import {
   isRecord,

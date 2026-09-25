@@ -3,7 +3,7 @@ import {
   buildOmniRouteResponseMetaHeaders,
 } from "@/domain/omnirouteResponseMeta";
 import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
-import { defaultLogger } from "@omniroute/open-sse/utils/logger";
+import { defaultLogger } from "@niyatna/open-sse/utils/logger";
 
 const STREAMING_RESPONSE_HEADER_DENYLIST = new Set([
   "content-type",

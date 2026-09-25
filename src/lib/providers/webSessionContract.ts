@@ -1,7 +1,7 @@
 import {
   listExtractionConfigs,
   type TokenSource,
-} from "@omniroute/open-sse/services/tokenExtractionConfig.ts";
+} from "@niyatna/open-sse/services/tokenExtractionConfig.ts";
 import { getWebSessionCredentialRequirement } from "@/shared/providers/webSessionCredentials";
 
 export const WEB_SESSION_CONTRACT_VERSION = 1;

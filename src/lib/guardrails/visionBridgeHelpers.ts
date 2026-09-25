@@ -1,13 +1,13 @@
 /**
  * Vision Bridge helper functions for image processing.
  */
-import { detectMediaParts, type MediaPart } from "@omniroute/open-sse/utils/mediaParts";
-import { normalizeDataUri } from "@omniroute/open-sse/utils/imageNormalize";
+import { detectMediaParts, type MediaPart } from "@niyatna/open-sse/utils/mediaParts";
+import { normalizeDataUri } from "@niyatna/open-sse/utils/imageNormalize";
 import { fetchRemoteImage } from "@/shared/network/remoteImageFetch";
 import { getRuntimePorts } from "@/lib/runtime/ports";
 import { resolveSelfLoopBearer } from "@/shared/middleware/chatBodyAdmission";
 import { getBestVisionModel, getFallbackModels, recordLatency } from "./visionBridgeRouter";
-import { REGISTRY } from "@omniroute/open-sse/config/providers";
+import { REGISTRY } from "@niyatna/open-sse/config/providers";
 import { fetch as undiciFetch } from "undici";
 /**
  * Provider to environment variable mapping for API key resolution.

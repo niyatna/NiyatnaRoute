@@ -26,7 +26,7 @@ for (const path of ROUTES) {
       /import\s*\{[^}]*\bsanitizeErrorMessage\b[^}]*\}\s*from\s*["']@omniroute\/open-sse\/utils\/error["']/.test(
         source
       ),
-      `expected ${path} to import sanitizeErrorMessage from "@omniroute/open-sse/utils/error"`
+      `expected ${path} to import sanitizeErrorMessage from "@niyatna/open-sse/utils/error"`
     );
   });
 

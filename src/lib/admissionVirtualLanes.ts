@@ -79,7 +79,7 @@ export async function warmAdaptiveVirtualLanesIntoRuntime(
 
   const reload =
     deps.reload ??
-    (await import("@omniroute/open-sse/services/admission/runtime.ts"))
+    (await import("@niyatna/open-sse/services/admission/runtime.ts"))
       .reloadAdaptiveAdmissionRuntime;
   reload({
     env: {

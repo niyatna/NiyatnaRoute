@@ -1,5 +1,5 @@
 import { LEASE_OWNER_PATTERN } from "@/lib/db/exclusiveConnectionLeases";
-import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
+import { buildErrorBody } from "@niyatna/open-sse/utils/error.ts";
 
 export const LEASE_EXCLUSIVE_SCOPE = "lease:exclusive",
   LEASE_OWNER_HEADER = "X-OmniRoute-Lease-Owner",

@@ -6,7 +6,7 @@ import {
 } from "@/lib/headroom/detect";
 import { startHeadroomProxy, HeadroomError } from "@/lib/headroom/process";
 import { createErrorResponse } from "@/lib/api/errorResponse";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 export const dynamic = "force-dynamic";
 

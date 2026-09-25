@@ -15,7 +15,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
-import { sanitizeErrorMessage, buildErrorBody } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage, buildErrorBody } from "@niyatna/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
 const installSchema = z.object({

@@ -11,7 +11,7 @@
  */
 import { NextResponse } from "next/server";
 
-import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
+import { buildErrorBody } from "@niyatna/open-sse/utils/error.ts";
 import { getJobRegistry } from "@/lib/jobRegistry";
 
 export const dynamic = "force-dynamic";

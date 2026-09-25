@@ -14,8 +14,8 @@
  * performed — a rate-limited/failing explicit provider surfaces its own error.
  */
 
-import { errorResponse, unavailableResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { errorResponse, unavailableResponse } from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 import {
   handleWebFetch,
   type WebFetchCredentials,
@@ -24,7 +24,7 @@ import {
   EXPLICIT_ONLY_WEB_FETCH_PROVIDERS,
   ANONYMOUS_CAPABLE_WEB_FETCH_PROVIDERS,
   type WebFetchProviderId,
-} from "@omniroute/open-sse/handlers/webFetch.ts";
+} from "@niyatna/open-sse/handlers/webFetch.ts";
 import * as log from "@/sse/utils/logger";
 import {
   extractApiKey,

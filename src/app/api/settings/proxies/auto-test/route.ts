@@ -2,7 +2,7 @@ import { z } from "zod";
 import { deleteProxyById, listProxies, updateProxy } from "@/lib/db/proxies";
 import { createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
-import { createProxyDispatcher, proxyConfigToUrl } from "@omniroute/open-sse/utils/proxyDispatcher";
+import { createProxyDispatcher, proxyConfigToUrl } from "@niyatna/open-sse/utils/proxyDispatcher";
 import { fetch as undiciFetch } from "undici";
 import { classifyProbeStatus } from "@/lib/proxyHealth/decision";
 import { resolveHealthCheckStatusWrite } from "@/lib/proxyHealth/statusPolicy";

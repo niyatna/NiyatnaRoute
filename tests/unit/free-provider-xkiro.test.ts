@@ -4,8 +4,8 @@ import test from "node:test";
 import {
   FREE_MODEL_BUDGETS,
   computeFreeModelTotals,
-} from "@omniroute/open-sse/config/freeModelCatalog.ts";
-import { REGISTRY } from "@omniroute/open-sse/config/providerRegistry.ts";
+} from "@niyatna/open-sse/config/freeModelCatalog.ts";
+import { REGISTRY } from "@niyatna/open-sse/config/providerRegistry.ts";
 import { AI_PROVIDERS, AGGREGATOR_PROVIDER_IDS } from "@/shared/constants/providers.ts";
 
 /**
