@@ -29,15 +29,15 @@
  */
 
 import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
-import { stripSensitiveResponseHeaders } from "@omniroute/open-sse/utils/upstreamResponseHeaders";
+import { stripSensitiveResponseHeaders } from "@niyatna/open-sse/utils/upstreamResponseHeaders";
 import { createInjectionGuard } from "@/middleware/promptInjectionGuard";
 import { getRelayTokenByHash, checkRateLimit, recordRelayUsage } from "@/lib/db/relayProxies";
 import {
   buildErrorBody,
   parseUpstreamError,
   sanitizeErrorMessage,
-} from "@omniroute/open-sse/utils/error";
-import { getProviderPluginManifestHeader } from "@omniroute/open-sse/config/providerPluginManifestUrl.ts";
+} from "@niyatna/open-sse/utils/error";
+import { getProviderPluginManifestHeader } from "@niyatna/open-sse/config/providerPluginManifestUrl.ts";
 import { z } from "zod";
 import {
   checkIpRateLimit,
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
   try {
     // 1. Auth + rate limit — duplicated from the TS route so this route is
     //    standalone (we don't import the relay handler to keep the import
-    //    graph from pulling in 30MB of @omniroute/open-sse when the user
+    //    graph from pulling in 30MB of @niyatna/open-sse when the user
     //    is only using the sidecar path).
     const rawToken = extractToken(request);
     if (!rawToken) {

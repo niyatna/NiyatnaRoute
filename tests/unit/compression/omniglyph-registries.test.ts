@@ -19,7 +19,7 @@ const core = await import("../../../src/lib/db/core.ts");
 const { getCompressionSettings, updateCompressionSettings, normalizeStackedPipeline } =
   await import("../../../src/lib/db/compression.ts");
 const { deriveDefaultPlan } =
-  await import("@omniroute/open-sse/services/compression/deriveDefaultPlan.ts");
+  await import("@niyatna/open-sse/services/compression/deriveDefaultPlan.ts");
 const { compressionModeSchema } = await import("../../../src/shared/validation/schemas/combo.ts");
 const { compressionConfigureInput } = await import("../../../open-sse/mcp-server/schemas/tools.ts");
 

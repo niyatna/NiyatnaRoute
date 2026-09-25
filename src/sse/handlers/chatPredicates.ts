@@ -4,7 +4,7 @@ import {
   isModelCapacityOverloadError,
 } from "../../shared/utils/circuitBreaker";
 import { isRequestScopedUpstreamFailure } from "./comboFailureLogging";
-import { getTrustedLocalRateLimitResponse } from "@omniroute/open-sse/services/rateLimitManager/errors";
+import { getTrustedLocalRateLimitResponse } from "@niyatna/open-sse/services/rateLimitManager/errors";
 
 export const PROVIDER_BREAKER_FAILURE_STATUSES = new Set([408, 500, 502, 503, 504]);
 

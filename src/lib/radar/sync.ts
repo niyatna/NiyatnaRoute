@@ -13,7 +13,7 @@
 
 import { RadarFeedSchema, RadarTierSchema, type RadarFeed, type RadarTier } from "./feedSchema";
 import { verifyFeedBytes } from "./verify";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 
 // ---------------------------------------------------------------------------

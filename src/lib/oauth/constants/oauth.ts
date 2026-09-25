@@ -2,14 +2,14 @@ import {
   ANTIGRAVITY_BOOTSTRAP_BASE_URLS,
   ANTIGRAVITY_RUNTIME_BASE_URLS,
   getAntigravityFetchAvailableModelsUrls,
-} from "@omniroute/open-sse/config/antigravityUpstream.ts";
+} from "@niyatna/open-sse/config/antigravityUpstream.ts";
 import {
   CODEBUDDY_CN_USER_AGENT,
   GITHUB_COPILOT_API_VERSION,
   GITHUB_COPILOT_CHAT_PLUGIN_VERSION,
   GITHUB_COPILOT_CHAT_USER_AGENT,
   GITHUB_COPILOT_EDITOR_VERSION,
-} from "@omniroute/open-sse/config/providerHeaderProfiles.ts";
+} from "@niyatna/open-sse/config/providerHeaderProfiles.ts";
 // userAgent / editorVersion on GITHUB_CONFIG are captured-pin snapshots for
 // lockstep tests. Request construction must call getGitHubCopilotChatUserAgent()
 // (#12417) — see providers/github.ts and providers/ghe-copilot.ts.
@@ -18,9 +18,9 @@ import {
   GROK_BUILD_OAUTH_ISSUER,
   GROK_BUILD_OAUTH_SCOPES,
   GROK_BUILD_TOKEN_URL,
-} from "@omniroute/open-sse/config/grokBuild.ts";
-import { resolvePublicCred } from "@omniroute/open-sse/utils/publicCreds.ts";
-import { CURSOR_AGENT_CLI_VERSION } from "@omniroute/open-sse/utils/cursorAgentCliVersionPin.ts";
+} from "@niyatna/open-sse/config/grokBuild.ts";
+import { resolvePublicCred } from "@niyatna/open-sse/utils/publicCreds.ts";
+import { CURSOR_AGENT_CLI_VERSION } from "@niyatna/open-sse/utils/cursorAgentCliVersionPin.ts";
 import { buildGitLabOAuthEndpoints, GITLAB_DUO_DEFAULT_BASE_URL } from "../gitlab";
 
 /**

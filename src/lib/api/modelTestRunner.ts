@@ -12,14 +12,14 @@ import {
 } from "@/lib/combos/testHealth";
 import { getCustomModels } from "@/lib/db/models";
 import { getProviderNodeById } from "@/lib/db/providers";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
-import { withRateLimit } from "@omniroute/open-sse/services/rateLimitManager";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
+import { withRateLimit } from "@niyatna/open-sse/services/rateLimitManager";
 import {
   isCreditsExhausted,
   isDailyQuotaExhausted,
-} from "@omniroute/open-sse/services/accountFallback";
+} from "@niyatna/open-sse/services/accountFallback";
 import { looksLikeQuotaExhausted } from "@/shared/utils/classify429";
-import { getTrustedLocalRateLimitError } from "@omniroute/open-sse/services/rateLimitManager/errors";
+import { getTrustedLocalRateLimitError } from "@niyatna/open-sse/services/rateLimitManager/errors";
 import { runAsProbe } from "@/shared/utils/probeOrigin";
 import { isConnectionUnavailableToAuxiliaryActivity } from "@/lib/exclusiveLeaseIsolation";
 

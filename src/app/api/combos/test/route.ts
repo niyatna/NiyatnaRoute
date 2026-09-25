@@ -4,12 +4,12 @@ import { buildComboTestRequestBody, extractComboTestResponseText } from "@/lib/c
 import { getComboByName, getCombos } from "@/lib/db/combos";
 import { pickApiKeyForInternalUse } from "@/lib/db/apiKeys";
 import { getRuntimePorts } from "@/lib/runtime/ports";
-import { resolveNestedComboTargets } from "@omniroute/open-sse/services/combo.ts";
-import type { ResolvedComboTarget } from "@omniroute/open-sse/services/combo/types.ts";
+import { resolveNestedComboTargets } from "@niyatna/open-sse/services/combo.ts";
+import type { ResolvedComboTarget } from "@niyatna/open-sse/services/combo/types.ts";
 import { testComboSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 export const COMBO_TEST_TIMEOUT_MS = 60_000;
 export const COMBO_TEST_TOTAL_TIMEOUT_MS = 180_000;

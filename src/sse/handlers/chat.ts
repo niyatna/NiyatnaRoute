@@ -6,8 +6,8 @@ export { buildClientRawRequest, resolveDispatchClientRawRequest };
 import { normalizeReasoningRequest } from "@/shared/reasoning/effortStandardization";
 import { isDetailedLoggingEnabled } from "@/lib/db/detailedLogs";
 import { resolvePreviousResponseState } from "@/lib/db/responsesContinuationStore";
-import { normalizeResponsesPreviousResponseIdMode } from "@omniroute/open-sse/utils/responsesStatePolicy.ts";
-import { FORMATS } from "@omniroute/open-sse/translator/formats.ts";
+import { normalizeResponsesPreviousResponseIdMode } from "@niyatna/open-sse/utils/responsesStatePolicy.ts";
+import { FORMATS } from "@niyatna/open-sse/translator/formats.ts";
 import { resolveRoutingModel, RoutingModelOps } from "./resolveRoutingModel";
 import {
   getProviderCredentialsWithQuotaPreflight,
@@ -24,45 +24,45 @@ import {
   lockModel,
   recordModelLockoutFailure,
   isDailyQuotaExhausted,
-} from "@omniroute/open-sse/services/accountFallback.ts";
+} from "@niyatna/open-sse/services/accountFallback.ts";
 import { getCombo, getComboForModel, getModelInfo } from "../services/model";
-import { stripContextWindowSuffix } from "@omniroute/open-sse/services/model.ts";
-import { resolveBareModelToConnectionDefault } from "@omniroute/open-sse/services/model.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { getImageModelEntry } from "@omniroute/open-sse/config/imageRegistry.ts";
-import { acceptHeaderForcesStream } from "@omniroute/open-sse/utils/aiSdkCompat.ts";
-import { applyNoThinkingAlias } from "@omniroute/open-sse/utils/noThinkingAlias.ts";
+import { stripContextWindowSuffix } from "@niyatna/open-sse/services/model.ts";
+import { resolveBareModelToConnectionDefault } from "@niyatna/open-sse/services/model.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
+import { getImageModelEntry } from "@niyatna/open-sse/config/imageRegistry.ts";
+import { acceptHeaderForcesStream } from "@niyatna/open-sse/utils/aiSdkCompat.ts";
+import { applyNoThinkingAlias } from "@niyatna/open-sse/utils/noThinkingAlias.ts";
 import { resolveCcDiscoveryAliasStrip } from "@/lib/ccDiscoveryAliasResolve";
 import {
   handleComboChat,
   resolveComboTargets,
   shouldSkipConnDisable,
-} from "@omniroute/open-sse/services/combo.ts";
-import type { ComboLike, SingleModelTarget } from "@omniroute/open-sse/services/combo/types.ts";
-import { mergeAbortSignals } from "@omniroute/open-sse/executors/base.ts";
-import { resolveRequestAutoControls } from "@omniroute/open-sse/services/autoCombo/requestControls.ts";
-import { isVerifiedNativeCodexRequest } from "@omniroute/open-sse/config/codexIdentity.ts";
-import { resolveCompressionSettings } from "@omniroute/open-sse/handlers/chatCore/compressionSettings.ts";
-import type { CompressionExclusions } from "@omniroute/open-sse/services/compression/exclusions.ts";
-import { resolveComboConfig } from "@omniroute/open-sse/services/comboConfig.ts";
+} from "@niyatna/open-sse/services/combo.ts";
+import type { ComboLike, SingleModelTarget } from "@niyatna/open-sse/services/combo/types.ts";
+import { mergeAbortSignals } from "@niyatna/open-sse/executors/base.ts";
+import { resolveRequestAutoControls } from "@niyatna/open-sse/services/autoCombo/requestControls.ts";
+import { isVerifiedNativeCodexRequest } from "@niyatna/open-sse/config/codexIdentity.ts";
+import { resolveCompressionSettings } from "@niyatna/open-sse/handlers/chatCore/compressionSettings.ts";
+import type { CompressionExclusions } from "@niyatna/open-sse/services/compression/exclusions.ts";
+import { resolveComboConfig } from "@niyatna/open-sse/services/comboConfig.ts";
 import { comboPinAllowlist } from "@/lib/combos/steps.ts";
-import { injectHandoffIntoBody } from "@omniroute/open-sse/services/contextHandoff.ts";
-import { runWithTransientBackendRetry } from "@omniroute/open-sse/services/transientBackendRetry.ts";
+import { injectHandoffIntoBody } from "@niyatna/open-sse/services/contextHandoff.ts";
+import { runWithTransientBackendRetry } from "@niyatna/open-sse/services/transientBackendRetry.ts";
 import {
   HTTP_STATUS,
   ANTIGRAVITY_PRE_RESPONSE_TIMEOUT_CODE,
-} from "@omniroute/open-sse/config/constants.ts";
+} from "@niyatna/open-sse/config/constants.ts";
 import {
   getTargetFormat,
   detectFormatFromEndpoint,
   detectFormatFromUrl,
-} from "@omniroute/open-sse/services/provider.ts";
+} from "@niyatna/open-sse/services/provider.ts";
 import {
   getModelsByProviderId,
   getModelTargetFormat,
   PROVIDER_ID_TO_ALIAS,
-} from "@omniroute/open-sse/config/providerModels.ts";
-import { getPassthroughProviders } from "@omniroute/open-sse/config/providerRegistry.ts";
+} from "@niyatna/open-sse/config/providerModels.ts";
+import { getPassthroughProviders } from "@niyatna/open-sse/config/providerRegistry.ts";
 import * as log from "../utils/logger";
 import { checkAndRefreshToken } from "../services/tokenRefresh";
 import { createHookContext, runHooks, initPreRequestRegistry } from "@/lib/middleware/registry";
@@ -111,16 +111,16 @@ import {
 import { buildModalityBridgeHeader } from "@/lib/guardrails/modalityBridge/bridgeStats";
 import type { VideoBridgeLogRedactionEntry } from "@/lib/guardrails/videoBridge";
 import { reanchorVideoBridgeRedaction } from "@/lib/guardrails/videoBridge";
-import { resolveConversationId } from "@omniroute/open-sse/services/conversationTracker.ts";
+import { resolveConversationId } from "@niyatna/open-sse/services/conversationTracker.ts";
 import {
   classifyProviderBreakerResult,
   isAntigravityMissingProjectError,
   isProviderBreakerFailureStatus,
   resolveStreamReadinessClassificationError,
 } from "./chatPredicates";
-import { markAntigravityMissingCloudCodeProject } from "@omniroute/open-sse/services/antigravityProjectPersistence.ts";
-import { connectionHasExtraKeys } from "@omniroute/open-sse/services/apiKeyRotator.ts";
-import { wrapResponseWithOAuthSessionRelease } from "@omniroute/open-sse/services/oauthSessionOccupancy.ts";
+import { markAntigravityMissingCloudCodeProject } from "@niyatna/open-sse/services/antigravityProjectPersistence.ts";
+import { connectionHasExtraKeys } from "@niyatna/open-sse/services/apiKeyRotator.ts";
+import { wrapResponseWithOAuthSessionRelease } from "@niyatna/open-sse/services/oauthSessionOccupancy.ts";
 import {
   extractReasoningIntent,
   type ExtractedReasoningIntent,
@@ -136,7 +136,7 @@ import { getComboFailureLogError } from "./comboFailureLogging";
 
 // Pipeline integration — wired modules
 import { classify429FromError, type FailureKind } from "@/shared/utils/classify429";
-import { isSubscriptionQuotaText } from "@omniroute/open-sse/services/quotaTextCooldowns.ts";
+import { isSubscriptionQuotaText } from "@niyatna/open-sse/services/quotaTextCooldowns.ts";
 import { resolveUseUpstream429BreakerHints } from "@/shared/utils/providerHints";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 import * as agyLease from "../services/antigravityLeaseLifecycle";
@@ -150,16 +150,16 @@ import { logAuditEvent } from "../../lib/compliance/index";
 import { enforceApiKeyPolicy } from "../../shared/utils/apiKeyPolicy";
 import { hasProviderQuotaBypassScope } from "../../shared/constants/apiKeyPolicyScopes";
 import { isMicrosoftDesignerWebProviderRetiredError } from "../../shared/constants/designerWebRetirement";
-import { cloneBoundedForLog } from "@omniroute/open-sse/utils/requestLogger.ts";
+import { cloneBoundedForLog } from "@niyatna/open-sse/utils/requestLogger.ts";
 import { handleInternalUsageCommand } from "@/lib/usage/internalUsageCommand";
 import {
   applyTaskAwareRouting,
   getTaskRoutingConfig,
-} from "@omniroute/open-sse/services/taskAwareRouter.ts";
+} from "@niyatna/open-sse/services/taskAwareRouter.ts";
 import {
   hasNativeWebSearchTool,
   resolveWebSearchRouteOverride,
-} from "@omniroute/open-sse/services/webSearchRouting.ts";
+} from "@niyatna/open-sse/services/webSearchRouting.ts";
 import {
   generateSessionId as generateStableSessionId,
   touchSession,
@@ -167,29 +167,29 @@ import {
   checkSessionLimit,
   registerKeySession,
   isSessionRegisteredForKey,
-} from "@omniroute/open-sse/services/sessionManager.ts";
-import { startQuotaMonitor } from "@omniroute/open-sse/services/quotaMonitor.ts";
+} from "@niyatna/open-sse/services/sessionManager.ts";
+import { startQuotaMonitor } from "@niyatna/open-sse/services/quotaMonitor.ts";
 import {
   isFallbackDecision,
   shouldUseFallback,
-} from "@omniroute/open-sse/services/emergencyFallback.ts";
+} from "@niyatna/open-sse/services/emergencyFallback.ts";
 import {
   registerCodexConnection,
   registerCodexQuotaFetcher,
-} from "@omniroute/open-sse/services/codexQuotaFetcher.ts";
-import { registerBailianCodingPlanQuotaFetcher } from "@omniroute/open-sse/services/bailianQuotaFetcher.ts";
-import { registerQwenTokenPlanQuotaFetcher } from "@omniroute/open-sse/services/qwenTokenPlanQuotaFetcher.ts";
-import { registerCrofUsageFetcher } from "@omniroute/open-sse/services/crofUsageFetcher.ts";
-import { registerDeepseekQuotaFetcher } from "@omniroute/open-sse/services/deepseekQuotaFetcher.ts";
+} from "@niyatna/open-sse/services/codexQuotaFetcher.ts";
+import { registerBailianCodingPlanQuotaFetcher } from "@niyatna/open-sse/services/bailianQuotaFetcher.ts";
+import { registerQwenTokenPlanQuotaFetcher } from "@niyatna/open-sse/services/qwenTokenPlanQuotaFetcher.ts";
+import { registerCrofUsageFetcher } from "@niyatna/open-sse/services/crofUsageFetcher.ts";
+import { registerDeepseekQuotaFetcher } from "@niyatna/open-sse/services/deepseekQuotaFetcher.ts";
 import {
   registerMoonshotQuotaFetcher,
   registerMoonshotFetchersForNodes,
-} from "@omniroute/open-sse/services/moonshotQuotaFetcher.ts";
-import { registerOpenrouterQuotaFetcher } from "@omniroute/open-sse/services/openrouterQuotaFetcher.ts";
-import { registerOpencodeQuotaFetcher } from "@omniroute/open-sse/services/opencodeQuotaFetcher.ts";
-import { registerGrokWebQuotaFetcher } from "@omniroute/open-sse/services/grokQuotaFetcher.ts";
-import { registerGenericQuotaFetchers } from "@omniroute/open-sse/services/genericQuotaFetcher.ts";
-import "@omniroute/open-sse/services/quotaTrackersBatch.ts";
+} from "@niyatna/open-sse/services/moonshotQuotaFetcher.ts";
+import { registerOpenrouterQuotaFetcher } from "@niyatna/open-sse/services/openrouterQuotaFetcher.ts";
+import { registerOpencodeQuotaFetcher } from "@niyatna/open-sse/services/opencodeQuotaFetcher.ts";
+import { registerGrokWebQuotaFetcher } from "@niyatna/open-sse/services/grokQuotaFetcher.ts";
+import { registerGenericQuotaFetchers } from "@niyatna/open-sse/services/genericQuotaFetcher.ts";
+import "@niyatna/open-sse/services/quotaTrackersBatch.ts";
 import {
   disableCooldownAwareRetry,
   getCooldownAwareRetryDecision,

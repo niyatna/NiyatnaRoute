@@ -4,7 +4,7 @@ import { APP_CONFIG } from "@/shared/constants/appConfig";
 import {
   generationDurationMs,
   tokensPerSecond,
-} from "@omniroute/open-sse/utils/generationThroughput";
+} from "@niyatna/open-sse/utils/generationThroughput";
 
 type UsageLike = Record<string, unknown> | null | undefined;
 

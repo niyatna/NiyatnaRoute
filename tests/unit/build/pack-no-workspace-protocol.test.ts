@@ -26,7 +26,7 @@ function readJson(filePath: string): Record<string, unknown> {
 
 test("resolvePackageJsonWorkspaceProtocols replaces workspace:*, workspace:^, workspace:~", () => {
   const versions = new Map([
-    ["@omniroute/open-sse", "3.8.51"],
+    ["@niyatna/open-sse", "3.8.51"],
     ["@omniroute/shared", "1.2.3"],
   ]);
 
@@ -35,33 +35,33 @@ test("resolvePackageJsonWorkspaceProtocols replaces workspace:*, workspace:^, wo
       name: "omniroute",
       version: "3.8.51",
       dependencies: {
-        "@omniroute/open-sse": "workspace:^",
+        "@niyatna/open-sse": "workspace:^",
         "@omniroute/shared": "workspace:*",
         lodash: "^4.17.0",
       },
       devDependencies: {
-        "@omniroute/open-sse": "workspace:~",
+        "@niyatna/open-sse": "workspace:~",
       },
       peerDependencies: {
         "@omniroute/shared": "workspace:1.2.3",
       },
       optionalDependencies: {
-        "@omniroute/open-sse": "workspace:>=3.0.0",
+        "@niyatna/open-sse": "workspace:>=3.0.0",
       },
     },
     versions
   );
 
-  assert.equal((resolved.dependencies as Record<string, string>)["@omniroute/open-sse"], "^3.8.51");
+  assert.equal((resolved.dependencies as Record<string, string>)["@niyatna/open-sse"], "^3.8.51");
   assert.equal((resolved.dependencies as Record<string, string>)["@omniroute/shared"], "1.2.3");
   assert.equal((resolved.dependencies as Record<string, string>).lodash, "^4.17.0");
   assert.equal(
-    (resolved.devDependencies as Record<string, string>)["@omniroute/open-sse"],
+    (resolved.devDependencies as Record<string, string>)["@niyatna/open-sse"],
     "~3.8.51"
   );
   assert.equal((resolved.peerDependencies as Record<string, string>)["@omniroute/shared"], "1.2.3");
   assert.equal(
-    (resolved.optionalDependencies as Record<string, string>)["@omniroute/open-sse"],
+    (resolved.optionalDependencies as Record<string, string>)["@niyatna/open-sse"],
     ">=3.0.0"
   );
 });

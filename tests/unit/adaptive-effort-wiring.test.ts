@@ -13,8 +13,8 @@
 //   - the whole wiring is scoped to OpenAI Chat-Completions dispatch.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { wireAdaptiveEffort } from "@omniroute/open-sse/handlers/chatCore/adaptiveEffortWiring.ts";
-import { FORMATS } from "@omniroute/open-sse/translator/formats.ts";
+import { wireAdaptiveEffort } from "@niyatna/open-sse/handlers/chatCore/adaptiveEffortWiring.ts";
+import { FORMATS } from "@niyatna/open-sse/translator/formats.ts";
 
 const HEAVY = "x".repeat(20000);
 const trivialMsgs = [{ role: "user", content: "list the files" }];

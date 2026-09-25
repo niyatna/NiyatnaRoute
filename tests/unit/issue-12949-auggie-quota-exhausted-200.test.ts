@@ -8,7 +8,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const { AuggieExecutor } = await import("@omniroute/open-sse/executors/auggie");
+const { AuggieExecutor } = await import("@niyatna/open-sse/executors/auggie");
 
 const TMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-auggie-quota-test-"));
 

@@ -3,7 +3,7 @@
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { cliMitmStartSchema, cliMitmStopSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";

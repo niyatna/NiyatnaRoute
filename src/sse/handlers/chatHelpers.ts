@@ -9,27 +9,27 @@ import {
   buildExhaustionOptions,
 } from "../services/auth";
 import { maybeReactivateAfterExplicitProbe } from "../services/explicitInactiveProbe";
-import { connectionHasExtraKeys } from "@omniroute/open-sse/services/apiKeyRotator.ts";
-import { clearRequestRejectedStreak } from "@omniroute/open-sse/services/requestRejectedStreak.ts";
-import { createBuiltinAutoCombo } from "@omniroute/open-sse/services/autoCombo/builtinCatalog.ts";
+import { connectionHasExtraKeys } from "@niyatna/open-sse/services/apiKeyRotator.ts";
+import { clearRequestRejectedStreak } from "@niyatna/open-sse/services/requestRejectedStreak.ts";
+import { createBuiltinAutoCombo } from "@niyatna/open-sse/services/autoCombo/builtinCatalog.ts";
 import * as log from "../utils/logger";
 import { updateProviderCredentials } from "../services/tokenRefresh";
-import { detectFormatFromEndpoint } from "@omniroute/open-sse/services/provider.ts";
-import { resolveChatCoreTargetFormat } from "@omniroute/open-sse/handlers/chatCore/targetFormat.ts";
-import { handleChatCore } from "@omniroute/open-sse/handlers/chatCore.ts";
+import { detectFormatFromEndpoint } from "@niyatna/open-sse/services/provider.ts";
+import { resolveChatCoreTargetFormat } from "@niyatna/open-sse/handlers/chatCore/targetFormat.ts";
+import { handleChatCore } from "@niyatna/open-sse/handlers/chatCore.ts";
 import {
   checkResourcePressureGuard,
   type ResourcePressureGuardResult,
-} from "@omniroute/open-sse/utils/resourcePressure.ts";
+} from "@niyatna/open-sse/utils/resourcePressure.ts";
 import {
   errorResponse,
   modelCooldownResponse,
   providerCircuitOpenResponse,
   unavailableResponse,
-} from "@omniroute/open-sse/utils/error.ts";
-import { inheritTrustedLocalRateLimitResponse } from "@omniroute/open-sse/services/rateLimitManager/errors.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
-import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts";
+} from "@niyatna/open-sse/utils/error.ts";
+import { inheritTrustedLocalRateLimitResponse } from "@niyatna/open-sse/services/rateLimitManager/errors.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
+import { getRegistryEntry } from "@niyatna/open-sse/config/providerRegistry.ts";
 import { getCachedProviderNodes } from "@/lib/db/readCache";
 import {
   runWithProxyContext,
@@ -37,7 +37,7 @@ import {
   runWithTlsTracking,
   isTlsFingerprintActive,
   type AppliedProxySink,
-} from "@omniroute/open-sse/utils/proxyFetch.ts";
+} from "@niyatna/open-sse/utils/proxyFetch.ts";
 import { resolveProxyForConnection } from "@/lib/db/settings";
 import { hasBlockingProxyAssignment } from "@/lib/db/proxies";
 import {
@@ -52,7 +52,7 @@ import { isFeatureFlagEnabled } from "../../shared/utils/featureFlags";
 import { logProxyEvent } from "../../lib/proxyLogger";
 import { noteProxyOutcome } from "./proxyOutcomeMemory";
 import { logTranslationEvent } from "../../lib/translatorEvents";
-import { getRuntimeProviderProfile } from "@omniroute/open-sse/services/accountFallback.ts";
+import { getRuntimeProviderProfile } from "@niyatna/open-sse/services/accountFallback.ts";
 
 // Models that explicitly cannot run on the codex/ChatGPT-Pro OAuth pool — when
 // a caller writes `codex/deepseek-v4-pro` we transparently reroute to the
@@ -1108,7 +1108,7 @@ export async function safeLogEvents({
     let egressIp: string | null = null;
     try {
       const { getCachedEgressIp, warmEgressIp } = await import("../../lib/proxyEgress");
-      const { proxyConfigToUrl } = await import("@omniroute/open-sse/utils/proxyDispatcher.ts");
+      const { proxyConfigToUrl } = await import("@niyatna/open-sse/utils/proxyDispatcher.ts");
       const proxyUrl = proxyInfo?.proxy ? proxyConfigToUrl(proxyInfo.proxy) : null;
       egressIp = getCachedEgressIp(proxyUrl);
       warmEgressIp(proxyUrl);

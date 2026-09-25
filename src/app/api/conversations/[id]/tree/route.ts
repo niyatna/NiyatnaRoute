@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getConversationTurnPage } from "@/lib/db/agenticConversations";
-import { resolveTurnDisplayContent } from "@omniroute/open-sse/services/conversationTurnContent.ts";
+import { resolveTurnDisplayContent } from "@niyatna/open-sse/services/conversationTurnContent.ts";
 
 export const dynamic = "force-dynamic";
 

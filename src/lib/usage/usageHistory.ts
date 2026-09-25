@@ -10,7 +10,7 @@
 import { getDbInstance } from "../db/core";
 import { resolveProviderId } from "@/shared/constants/providers";
 import { protectPayloadForLog } from "../logPayloads";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/errorSanitization.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/errorSanitization.ts";
 import {
   resolveOrphanedUsageAccountIdentity,
   resolveUsageAccountIdentity,

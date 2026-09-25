@@ -1,24 +1,24 @@
-import { handleImageUpscale } from "@omniroute/open-sse/handlers/imageUpscale.ts";
+import { handleImageUpscale } from "@niyatna/open-sse/handlers/imageUpscale.ts";
 import {
   getUpscaleProvider,
   getAllUpscaleModels,
   parseUpscaleModel,
-} from "@omniroute/open-sse/config/upscaleRegistry.ts";
-import { extractUpscaleSourceImage } from "@omniroute/open-sse/handlers/imageUpscale/shared.ts";
+} from "@niyatna/open-sse/config/upscaleRegistry.ts";
+import { extractUpscaleSourceImage } from "@niyatna/open-sse/handlers/imageUpscale/shared.ts";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
 import {
   getProviderCredentialsWithQuotaPreflight,
   clearRecoveredProviderState,
 } from "@/sse/services/auth";
-import { errorResponse, unavailableResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { errorResponse, unavailableResponse } from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 import * as log from "@/sse/utils/logger";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
 import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { v1ImageUpscaleSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveProxyForConnection } from "@/lib/db/settings";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@niyatna/open-sse/utils/proxyFetch.ts";
 import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";

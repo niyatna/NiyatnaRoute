@@ -10,13 +10,13 @@
  */
 
 import { createConnection } from "node:net";
-import { stripIpv6Brackets } from "@omniroute/open-sse/utils/proxyFamily";
+import { stripIpv6Brackets } from "@niyatna/open-sse/utils/proxyFamily";
 import {
   hasProxyRefusals,
   noteProxyRecovered,
   noteProxyRefusal,
   proxyEgressKey,
-} from "@omniroute/open-sse/utils/proxyRefusalMemory";
+} from "@niyatna/open-sse/utils/proxyRefusalMemory";
 import { isProxySkipRecentlyFailedEnabled } from "@/shared/utils/featureFlags";
 
 // Configurable via env vars

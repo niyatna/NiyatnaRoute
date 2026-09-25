@@ -3,7 +3,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error.ts";
 import { NextResponse } from "next/server";
 import pino from "pino";
 import { z } from "zod";

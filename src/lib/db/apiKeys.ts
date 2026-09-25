@@ -16,7 +16,7 @@ import {
   parseApiKeyUsageLimitFields,
 } from "./apiKeyUsageLimitFields";
 import { setNoLog } from "../compliance/noLog";
-import { resolveModelAlias } from "@omniroute/open-sse/services/modelDeprecation.ts";
+import { resolveModelAlias } from "@niyatna/open-sse/services/modelDeprecation.ts";
 import { getProviderAlias, resolveProviderId } from "@/shared/constants/providers";
 import { getSyncedAvailableModelsByConnection, getCustomModels, getModelIsHidden } from "./models";
 import {

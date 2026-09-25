@@ -21,7 +21,7 @@ const providersDb = await import("../../src/lib/db/providers.ts");
 const modelDiscovery = await import("../../src/lib/providerModels/modelDiscovery.ts");
 const { getModelInfo } = await import("../../src/sse/services/model.ts");
 const { recordLearnedReasoningEffort, __test_resetLearnedReasoningEffortCaps } =
-  await import("@omniroute/open-sse/services/learnedReasoningEffortCaps.ts");
+  await import("@niyatna/open-sse/services/learnedReasoningEffortCaps.ts");
 
 async function resetStorage() {
   core.resetDbInstance();

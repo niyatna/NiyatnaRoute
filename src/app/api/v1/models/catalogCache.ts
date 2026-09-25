@@ -18,7 +18,7 @@ import { after } from "next/server";
 
 import { getModelCatalogCacheVersion } from "@/lib/db/readCache";
 import { extractApiKey } from "@/sse/services/auth";
-import { buildErrorBody } from "@omniroute/open-sse/utils/error";
+import { buildErrorBody } from "@niyatna/open-sse/utils/error";
 
 import { catalogPageCacheKey, catalogStringResponse, parseCatalogPage } from "./catalogPagination";
 import { isCodexModelCatalogClient } from "./catalogRequest";

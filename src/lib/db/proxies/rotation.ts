@@ -13,7 +13,7 @@ import {
   hasProxyRefusals,
   isProxyAvoided,
   proxyEgressKey,
-} from "@omniroute/open-sse/utils/proxyRefusalMemory.ts";
+} from "@niyatna/open-sse/utils/proxyRefusalMemory.ts";
 import { isProxySkipRecentlyFailedEnabled } from "@/shared/utils/featureFlags";
 import type { JsonRecord, ProxyScope, ProxyRotationStrategy } from "./types";
 import { PROXY_ROTATION_STRATEGIES, DEFAULT_PROXY_ROTATION_STRATEGY } from "./types";

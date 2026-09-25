@@ -11,7 +11,7 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { cliAuthOnlyConfigSchema } from "@/shared/validation/schemas/cli";
 import { getOmpCredentials, saveOmpCredentials, deleteOmpCredentials } from "@/lib/db/omp";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 const execAsync = promisify(exec);
 

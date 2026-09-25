@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { getAuditStats, queryAuditEntries } from "@omniroute/open-sse/mcp-server/audit";
+import { getAuditStats, queryAuditEntries } from "@niyatna/open-sse/mcp-server/audit";
 import {
   isMcpHeartbeatOnline,
   isProcessAlive,
   readMcpHeartbeat,
   resolveMcpHeartbeatPath,
-} from "@omniroute/open-sse/mcp-server/runtimeHeartbeat";
+} from "@niyatna/open-sse/mcp-server/runtimeHeartbeat";
 import {
   getMcpHttpStatus,
   isMcpHttpTransportReady,

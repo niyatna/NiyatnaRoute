@@ -23,7 +23,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import type { AgentId } from "../types";
 import type { InterceptedRequest } from "../inspector/types";
 import { MitmHandlerBase, createBoundedCollector } from "./base";
-import { TOOL_RENAME_MAP } from "@omniroute/open-sse/services/claudeCodeToolRemapper";
+import { TOOL_RENAME_MAP } from "@niyatna/open-sse/services/claudeCodeToolRemapper";
 
 interface GeminiPart {
   text?: string;

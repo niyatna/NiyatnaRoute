@@ -36,7 +36,7 @@ import {
   CURSOR_TOKEN_LIFETIME_S,
 } from "@/lib/cursor/renewal";
 import { createKeyedMutex } from "@/shared/utils/keyedMutex";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 function deferred<T = void>(): { promise: Promise<T>; resolve: (v: T) => void } {
   let resolve!: (v: T) => void;

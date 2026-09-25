@@ -11,7 +11,7 @@ import {
 } from "@/lib/cli-helper/config-generator/hermes-agent";
 import { getHermesConfigPath } from "@/lib/cli-helper/config-generator/hermesHome";
 import { getApiKeyById } from "@/lib/db/apiKeys";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error.ts";
 
 const hermesAgentSettingsSchema = z.object({
   baseUrl: z.string().min(1, "baseUrl is required"),

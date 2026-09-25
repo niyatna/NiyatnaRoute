@@ -9,20 +9,20 @@
  * #9239
  */
 import { getComboByName, getCombos } from "@/lib/db/combos";
-import { resolveComboTargets } from "@omniroute/open-sse/services/combo.ts";
-import { getImageModelEntry, parseImageModel } from "@omniroute/open-sse/config/imageRegistry.ts";
+import { resolveComboTargets } from "@niyatna/open-sse/services/combo.ts";
+import { getImageModelEntry, parseImageModel } from "@niyatna/open-sse/config/imageRegistry.ts";
 import {
   getProviderCredentialsWithQuotaPreflight,
   clearRecoveredProviderState,
 } from "@/sse/services/auth";
 import { isAllRateLimitedCredentials } from "@/app/api/v1/_shared/rateLimit";
-import { handleImageGeneration } from "@omniroute/open-sse/handlers/imageGeneration.ts";
+import { handleImageGeneration } from "@niyatna/open-sse/handlers/imageGeneration.ts";
 import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
 import * as logger from "@/sse/utils/logger";
 
 /**

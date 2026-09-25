@@ -17,12 +17,12 @@ import {
   parseGlmResetCards,
   redeemGlmResetCard,
   type GlmResetCard,
-} from "@omniroute/open-sse/services/usage/glmResetCards.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
+} from "@niyatna/open-sse/services/usage/glmResetCards.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error.ts";
 import {
   runWithDirectFetchContext,
   runWithProxyContext,
-} from "@omniroute/open-sse/utils/proxyFetch.ts";
+} from "@niyatna/open-sse/utils/proxyFetch.ts";
 
 type JsonRecord = Record<string, unknown>;
 

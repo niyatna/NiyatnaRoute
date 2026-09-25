@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
-import { createDefaultEmbeddingGenerator } from "@omniroute/open-sse/services/cache/embeddingClient.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { createDefaultEmbeddingGenerator } from "@niyatna/open-sse/services/cache/embeddingClient.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { z } from "zod";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveProviderConnectionDetails } from "@/lib/cache/semanticCacheDbBridge";

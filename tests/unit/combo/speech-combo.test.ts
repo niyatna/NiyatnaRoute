@@ -20,7 +20,7 @@ fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
 
 const core = await import("@/lib/db/core.ts");
 const { createCombo } = await import("@/lib/db/combos");
-const { executeSpeechCombo } = await import("@omniroute/open-sse/services/speechCombo");
+const { executeSpeechCombo } = await import("@niyatna/open-sse/services/speechCombo");
 
 async function cleanupTestDataDir() {
   let lastError: unknown;

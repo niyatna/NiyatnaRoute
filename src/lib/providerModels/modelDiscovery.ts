@@ -6,9 +6,9 @@ import {
 } from "@/lib/db/models";
 import type { VertexModelMetadataProvenance } from "@/lib/providerModels/vertexModelMetadata";
 import { CANONICAL_EFFORT_VALUES } from "@/shared/reasoning/effortStandardization";
-import { isObsoleteKiroModelAlias } from "@omniroute/open-sse/services/kiroModels.ts";
-import { filterSelectableModels } from "@omniroute/open-sse/services/modelLifecycle.ts";
-import { getEmbeddingProvider } from "@omniroute/open-sse/config/embeddingRegistry.ts";
+import { isObsoleteKiroModelAlias } from "@niyatna/open-sse/services/kiroModels.ts";
+import { filterSelectableModels } from "@niyatna/open-sse/services/modelLifecycle.ts";
+import { getEmbeddingProvider } from "@niyatna/open-sse/config/embeddingRegistry.ts";
 
 type JsonRecord = Record<string, unknown>;
 

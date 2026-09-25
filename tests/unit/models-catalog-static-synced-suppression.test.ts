@@ -16,7 +16,7 @@ const core = await import("../../src/lib/db/core.ts");
 const providersDb = await import("../../src/lib/db/providers.ts");
 const modelsDb = await import("../../src/lib/db/models.ts");
 const catalog = await import("../../src/app/api/v1/models/catalog.ts");
-const { REGISTRY } = await import("@omniroute/open-sse/config/providerRegistry");
+const { REGISTRY } = await import("@niyatna/open-sse/config/providerRegistry");
 
 const LIVE_MODEL = "google/gemma-4-31b-it";
 

@@ -23,7 +23,7 @@ const defaultExecutorResolverPath = path.join(
 
 test("node instrumentation loads the proxy patch leaf before quota registration", () => {
   const source = fs.readFileSync(instrumentationPath, "utf8");
-  const proxyPatchImport = 'await import("@omniroute/open-sse/utils/proxyFetch.ts")';
+  const proxyPatchImport = 'await import("@niyatna/open-sse/utils/proxyFetch.ts")';
   const proxyPatchIndex = source.indexOf(proxyPatchImport);
   const quotaRegistrationIndex = source.indexOf("await registerQuotaFetchers()");
 

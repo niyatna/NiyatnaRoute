@@ -3,15 +3,15 @@ import {
   resolveVertexOcrAccessToken,
   resolveVertexOcrBaseUrl,
   VERTEX_DEEPSEEK_OCR_PROVIDER_ID,
-} from "@omniroute/open-sse/handlers/ocr.ts";
+} from "@niyatna/open-sse/handlers/ocr.ts";
 import {
   getProviderCredentialsWithQuotaPreflight,
   clearRecoveredProviderState,
 } from "@/sse/services/auth";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
-import { parseOcrModel } from "@omniroute/open-sse/config/ocrRegistry.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { parseOcrModel } from "@niyatna/open-sse/config/ocrRegistry.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { v1OcrSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";

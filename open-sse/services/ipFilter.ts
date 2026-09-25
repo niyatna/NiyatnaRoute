@@ -24,7 +24,7 @@ let _config = {
 // are intentionally NOT persisted — they are ephemeral, TTL-swept runtime state.
 //
 // D2 (#9033): the _loaded one-shot gate was removed so a config persisted by the
-// dashboard settings route (a separate module instance, since @omniroute/open-sse
+// dashboard settings route (a separate module instance, since @niyatna/open-sse
 // is bundled per-entry via transpilePackages) propagates to the proxy runtime
 // without a restart. A DB failure still degrades to the in-memory defaults, and
 // tempBans remain in-memory-only as before.

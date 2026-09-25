@@ -4,10 +4,10 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import type { ExecuteInput } from "@omniroute/open-sse/executors/base";
+import type { ExecuteInput } from "@niyatna/open-sse/executors/base";
 
 const { AuggieExecutor, __resetAuggieModels } = await import(
-  "@omniroute/open-sse/executors/auggie"
+  "@niyatna/open-sse/executors/auggie"
 );
 
 function makeFakeAuggieBin(dir: string, stderrLine: string): string {

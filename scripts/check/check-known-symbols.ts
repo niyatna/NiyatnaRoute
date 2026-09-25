@@ -479,7 +479,7 @@ async function main(): Promise<void> {
   const failures: string[] = [];
 
   // ── (1) Executor conformance ──────────────────────────────────────────────
-  const executorsMod = await import("@omniroute/open-sse/executors/index.ts");
+  const executorsMod = await import("@niyatna/open-sse/executors/index.ts");
   const getExecutor = executorsMod.getExecutor as (alias: string) => Promise<ExecutorLike>;
   const BaseExecutor = executorsMod.BaseExecutor as new (...args: never[]) => unknown;
   const indexSource = readFileSync(resolvePath(REPO_ROOT, "open-sse/executors/index.ts"), "utf8");
@@ -515,7 +515,7 @@ async function main(): Promise<void> {
   // converts it to a registry; enumerating at runtime keeps the gate correct either way.
   // Each entry in HANDLED_COMBO_STRATEGIES must stay in sync with a real dispatch branch.
   const strategyDispatchMod =
-    await import("@omniroute/open-sse/services/combo/strategyDispatch.ts");
+    await import("@niyatna/open-sse/services/combo/strategyDispatch.ts");
   const handled = new Set(strategyDispatchMod.HANDLED_COMBO_STRATEGIES as readonly string[]);
 
   // Stale-enforcement (6A.3): IMPLICIT_DEFAULT_STRATEGIES is a suppression allowlist —
@@ -552,11 +552,11 @@ async function main(): Promise<void> {
   }
 
   // ── (3) Translator pairs ──────────────────────────────────────────────────
-  await import("@omniroute/open-sse/translator/bootstrap.ts").then((m) =>
+  await import("@niyatna/open-sse/translator/bootstrap.ts").then((m) =>
     (m.bootstrapTranslatorRegistry as () => void)()
   );
-  const formatsMod = await import("@omniroute/open-sse/translator/formats.ts");
-  const registryMod = await import("@omniroute/open-sse/translator/registry.ts");
+  const formatsMod = await import("@niyatna/open-sse/translator/formats.ts");
+  const registryMod = await import("@niyatna/open-sse/translator/registry.ts");
   const FORMATS = formatsMod.FORMATS as Record<string, string>;
   const getRequestTranslator = registryMod.getRequestTranslator as (
     from: string,
@@ -587,14 +587,14 @@ async function main(): Promise<void> {
   const newPairs = findNewTranslatorPairs(KNOWN_TRANSLATOR_PAIRS, livePairs);
 
   // ── (4) MCP tools scope + snapshot ───────────────────────────────────────
-  const { MCP_TOOLS } = await import("@omniroute/open-sse/mcp-server/schemas/tools.ts");
-  const { memoryTools } = await import("@omniroute/open-sse/mcp-server/tools/memoryTools.ts");
-  const { skillTools } = await import("@omniroute/open-sse/mcp-server/tools/skillTools.ts");
+  const { MCP_TOOLS } = await import("@niyatna/open-sse/mcp-server/schemas/tools.ts");
+  const { memoryTools } = await import("@niyatna/open-sse/mcp-server/tools/memoryTools.ts");
+  const { skillTools } = await import("@niyatna/open-sse/mcp-server/tools/skillTools.ts");
   const { gamificationTools } =
-    await import("@omniroute/open-sse/mcp-server/tools/gamificationTools.ts");
-  const { pluginTools } = await import("@omniroute/open-sse/mcp-server/tools/pluginTools.ts");
-  const { notionTools } = await import("@omniroute/open-sse/mcp-server/tools/notionTools.ts");
-  const { obsidianTools } = await import("@omniroute/open-sse/mcp-server/tools/obsidianTools.ts");
+    await import("@niyatna/open-sse/mcp-server/tools/gamificationTools.ts");
+  const { pluginTools } = await import("@niyatna/open-sse/mcp-server/tools/pluginTools.ts");
+  const { notionTools } = await import("@niyatna/open-sse/mcp-server/tools/notionTools.ts");
+  const { obsidianTools } = await import("@niyatna/open-sse/mcp-server/tools/obsidianTools.ts");
 
   // Build the full live set of registered tools (deduped by RESERVED_MCP_NAMES logic:
   // agentSkillTools + compressionTools are already in MCP_TOOLS).

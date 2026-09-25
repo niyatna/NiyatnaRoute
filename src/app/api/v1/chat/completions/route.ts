@@ -4,21 +4,21 @@ import { callCloudWithMachineId } from "@/shared/utils/cloud";
 import { handleChat } from "@/sse/handlers/chat";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { resolveIncomingCorrelationId } from "@/shared/utils/correlationPreserve.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
 import {
   handleSelfHostedCompletions,
   isSelfHostedEntryConfigured,
-} from "@omniroute/open-sse/services/selfHostedEntry.ts";
-import { initTranslators } from "@omniroute/open-sse/translator/index.ts";
+} from "@niyatna/open-sse/services/selfHostedEntry.ts";
+import { initTranslators } from "@niyatna/open-sse/translator/index.ts";
 import { createInjectionGuard } from "@/middleware/promptInjectionGuard";
-import { acceptHeaderForcesStream } from "@omniroute/open-sse/utils/aiSdkCompat.ts";
+import { acceptHeaderForcesStream } from "@niyatna/open-sse/utils/aiSdkCompat.ts";
 import {
   OPENAI_CHAT_ERROR_FRAME,
   OPENAI_KEEPALIVE_FRAME,
   OPENAI_STARTUP_FRAME,
   withEarlyStreamKeepalive,
-} from "@omniroute/open-sse/utils/earlyStreamKeepalive";
-import { resolveKeepaliveThreshold } from "@omniroute/open-sse/utils/keepaliveThreshold";
+} from "@niyatna/open-sse/utils/earlyStreamKeepalive";
+import { resolveKeepaliveThreshold } from "@niyatna/open-sse/utils/keepaliveThreshold";
 import {
   admitChatRequest,
   admitChatStructure,

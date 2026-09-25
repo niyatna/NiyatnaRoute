@@ -12,7 +12,7 @@
  */
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { REGISTRY } from "@omniroute/open-sse/config/providerRegistry.ts";
+import { REGISTRY } from "@niyatna/open-sse/config/providerRegistry.ts";
 import {
   getRerankProvider,
   parseRerankModel,

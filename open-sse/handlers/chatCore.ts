@@ -212,7 +212,7 @@ import {
   detectMalformedNonStream,
   describeMalformedNonStream,
 } from "../utils/diagnostics.ts";
-import { checkTokenLimits } from "@omniroute/open-sse/services/tokenLimitCounter.ts";
+import { checkTokenLimits } from "@niyatna/open-sse/services/tokenLimitCounter.ts";
 import {
   COOLDOWN_MS,
   HTTP_STATUS,
@@ -233,7 +233,7 @@ import {
 } from "@/lib/resilience/settings";
 import { classifyProviderError, PROVIDER_ERROR_TYPES } from "../services/errorClassifier.ts";
 import { updateProviderConnection, getProviderConnectionById } from "@/lib/db/providers";
-import { wasRefreshTokenRotated } from "@omniroute/open-sse/services/refreshSerializer.ts";
+import { wasRefreshTokenRotated } from "@niyatna/open-sse/services/refreshSerializer.ts";
 import { connectionHasExtraKeys } from "../services/apiKeyRotator.ts";
 import { recordKeyHealthStatus as recordKeyHealthStatusFor } from "./chatCore/keyHealth.ts";
 import { getSkillsModelIdForFormat } from "./chatCore/skillsFormat.ts";

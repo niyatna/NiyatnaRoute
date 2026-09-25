@@ -17,7 +17,7 @@ import os from "node:os";
 import path from "node:path";
 
 import { makeManagementSessionRequest } from "../../helpers/managementSession.ts";
-import { deriveDefaultPlan } from "@omniroute/open-sse/services/compression/deriveDefaultPlan.ts";
+import { deriveDefaultPlan } from "@niyatna/open-sse/services/compression/deriveDefaultPlan.ts";
 
 // ─── isolated temp DB ─────────────────────────────────────────────────────────
 

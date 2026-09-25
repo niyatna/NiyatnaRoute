@@ -25,7 +25,7 @@ import {
   supportsTokenRefresh,
   isUnrecoverableRefreshError,
   refreshCopilotToken,
-} from "@omniroute/open-sse/services/tokenRefresh.ts";
+} from "@niyatna/open-sse/services/tokenRefresh.ts";
 import { pickMaskedDisplayValue } from "@/shared/utils/maskEmail";
 import { isAutomatedTestProcess } from "@/shared/utils/testProcess";
 import { refreshGithubCopilotSubTokenIfNeeded } from "@/lib/tokenHealthCheckCopilot";

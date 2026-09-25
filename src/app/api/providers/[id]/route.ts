@@ -6,7 +6,7 @@ import {
 } from "@/lib/compliance/providerAudit";
 import { getCachedProviderConnectionById } from "@/lib/db/readCache";
 import { updateProviderConnection } from "@/lib/db/providers";
-import { clearRequestRejectedStreak } from "@omniroute/open-sse/services/requestRejectedStreak.ts";
+import { clearRequestRejectedStreak } from "@niyatna/open-sse/services/requestRejectedStreak.ts";
 import { deleteProviderConnection } from "@/lib/db/providers/deletion";
 import { isCloudEnabled } from "@/lib/db/settings";
 import { getConsistentMachineId } from "@/shared/utils/machineId";
@@ -188,7 +188,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
             finalizeValidatedChatGptWebCodexSecrets,
             decodeChatGptWebCodexSecrets,
             encodeChatGptWebCodexSecrets,
-          } = await import("@omniroute/open-sse/services/chatgptWebCodexAdmin.ts");
+          } = await import("@niyatna/open-sse/services/chatgptWebCodexAdmin.ts");
           const incomingSecrets = decodeChatGptWebCodexSecrets(apiKey);
           const existingSecrets = decodeChatGptWebCodexSecrets(existing.apiKey || "");
           const encoded = encodeChatGptWebCodexSecrets({

@@ -21,7 +21,7 @@ import {
 } from "./../usage.ts";
 import { getCachedProviderConnections } from "@/lib/db/readCache";
 import { providerHasFreeModels } from "@/shared/utils/freeModels";
-import { defaultLogger as log } from "@omniroute/open-sse/utils/logger";
+import { defaultLogger as log } from "@niyatna/open-sse/utils/logger";
 import type { FreeAccessState } from "./strictZeroCostFilter";
 import { isStateStaleForReset } from "./subscriptionLadder";
 

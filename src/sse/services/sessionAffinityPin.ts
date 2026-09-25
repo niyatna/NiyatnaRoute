@@ -40,8 +40,8 @@ import { isAccountQuotaExhausted } from "@/domain/quotaCache";
 import {
   isAccountUnavailable,
   isModelLocked,
-} from "@omniroute/open-sse/services/accountFallback.ts";
-import { isComboPerModelTimeoutAbort } from "@omniroute/open-sse/services/combo/comboAbortReasons.ts";
+} from "@niyatna/open-sse/services/accountFallback.ts";
+import { isComboPerModelTimeoutAbort } from "@niyatna/open-sse/services/combo/comboAbortReasons.ts";
 import * as log from "../utils/logger";
 import { readHeaderValue } from "./headerReader.ts";
 

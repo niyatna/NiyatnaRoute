@@ -14,13 +14,13 @@ import { getComboByName } from "@/lib/db/combos";
 import { isDashboardSessionAuthenticated } from "./apiAuth";
 import { resolveComboForModel } from "@/lib/db/modelComboMappings";
 import { checkBudget } from "@/domain/costRules";
-import { checkTokenLimits } from "@omniroute/open-sse/services/tokenLimitCounter.ts";
+import { checkTokenLimits } from "@niyatna/open-sse/services/tokenLimitCounter.ts";
 import {
   errorResponse,
   buildErrorBody,
   sanitizeErrorMessage,
-} from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+} from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 import * as log from "@/sse/utils/logger";
 import { checkRateLimit, RateLimitRule } from "./rateLimiter";
 import {

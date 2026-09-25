@@ -4,8 +4,8 @@ import {
   markForbidden as sqliteMarkForbidden,
   upsertWarmupState as sqliteUpsertWarmupState,
 } from "@/lib/db/connectionRuntimeState";
-import { logger } from "@omniroute/open-sse/utils/logger";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { logger } from "@niyatna/open-sse/utils/logger";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import type { WarmupResult } from "./core";
 
 const log = logger("WarmupCircuitBreaker");

@@ -4,8 +4,8 @@ import assert from "node:assert/strict";
 import {
   evaluateAutoCandidates,
   resolveAutoStrategyOrder,
-} from "@omniroute/open-sse/services/combo/resolveAutoStrategy.ts";
-import { DEFAULT_WEIGHTS } from "@omniroute/open-sse/services/autoCombo/scoring.ts";
+} from "@niyatna/open-sse/services/combo/resolveAutoStrategy.ts";
+import { DEFAULT_WEIGHTS } from "@niyatna/open-sse/services/autoCombo/scoring.ts";
 import { resetDbInstance } from "@/lib/db/core.ts";
 
 // resolveAutoStrategyOrder loads the LKGP via the DB singleton (dynamic import);

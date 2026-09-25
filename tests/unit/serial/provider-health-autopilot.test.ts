@@ -22,7 +22,7 @@ const actionsRoute =
 const reportRoute = await import("../../../src/app/api/providers/health-autopilot/route.ts");
 const routeGuard = await import("../../../src/server/authz/routeGuard.ts");
 const authzPipeline = await import("../../../src/server/authz/pipeline.ts");
-const accountFallback = await import("@omniroute/open-sse/services/accountFallback");
+const accountFallback = await import("@niyatna/open-sse/services/accountFallback");
 
 const PROVIDER = "autopilot-test-provider";
 

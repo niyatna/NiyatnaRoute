@@ -35,7 +35,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       // Mirrors tsconfig paths, same as the other two vitest configs.
-      "@omniroute/open-sse": path.resolve(__dirname, "./open-sse"),
+      "@niyatna/open-sse": path.resolve(__dirname, "./open-sse"),
     },
   },
 });

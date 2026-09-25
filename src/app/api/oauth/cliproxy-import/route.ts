@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 import { createProviderConnection } from "@/models";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import {
   scanCliProxyAuthDir,
   toConnectionPayload,

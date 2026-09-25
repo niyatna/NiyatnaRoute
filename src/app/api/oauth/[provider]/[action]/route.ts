@@ -31,7 +31,7 @@ import {
 } from "@/lib/oauth/antigravityProjectGate";
 import { syncToCloud } from "@/lib/cloudSync";
 import { startLocalServer } from "@/lib/oauth/utils/server";
-import { runWithProxyContextOrDirect } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContextOrDirect } from "@niyatna/open-sse/utils/proxyFetch.ts";
 import {
   jsonObjectSchema,
   oauthDeviceCompleteSchema,
@@ -41,7 +41,7 @@ import {
 } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { GITLAB_DUO_OAUTH_SETUP_MESSAGE } from "@/shared/constants/gitlabDuoSetupMessage";
 import { keychainImportOnlyGuard } from "./keychainImportOnly";
 import { buildRemoteOAuthHint } from "./remoteOAuthHint";

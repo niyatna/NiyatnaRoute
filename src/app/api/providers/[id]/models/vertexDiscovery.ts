@@ -83,7 +83,7 @@ async function resolveVertexDiscoveryAuth(options: {
   accessToken: unknown;
 }): Promise<{ queryKey: string | null; bearerToken: string | null }> {
   const { parseSAFromApiKey, getAccessToken, looksLikeServiceAccountJson } =
-    await import("@omniroute/open-sse/executors/vertex.ts");
+    await import("@niyatna/open-sse/executors/vertex.ts");
   const credential = (typeof options.apiKey === "string" ? options.apiKey : "").trim();
   if (typeof options.accessToken === "string" && options.accessToken) {
     return { queryKey: null, bearerToken: options.accessToken };
@@ -138,7 +138,7 @@ async function handleVertexApiKeyCatalog(
     await updateProviderConnection(options.connectionId, { projectId });
   }
 
-  const { isVertexExpressModel } = await import("@omniroute/open-sse/config/vertexModels.ts");
+  const { isVertexExpressModel } = await import("@niyatna/open-sse/config/vertexModels.ts");
   if (projectId) {
     const liveGeminiModels = asNamedModels(discovery.models);
     const projectCatalog = mergeLocalCatalogModels(liveGeminiModels, catalog);

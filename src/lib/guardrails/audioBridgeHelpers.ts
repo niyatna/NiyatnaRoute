@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
-import { AUDIO_TRANSCRIPTION_PROVIDERS } from "@omniroute/open-sse/config/audioRegistry.ts";
-import { detectMediaParts } from "@omniroute/open-sse/utils/mediaParts";
+import { AUDIO_TRANSCRIPTION_PROVIDERS } from "@niyatna/open-sse/config/audioRegistry.ts";
+import { detectMediaParts } from "@niyatna/open-sse/utils/mediaParts";
 
 import { getRuntimePorts } from "@/lib/runtime/ports";
 import { fetchRemoteImage } from "@/shared/network/remoteImageFetch";

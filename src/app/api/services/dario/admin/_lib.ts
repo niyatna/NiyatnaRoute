@@ -18,7 +18,7 @@ import { getServiceRow } from "@/lib/db/versionManager";
 import { decrypt } from "@/lib/db/encryption";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
 import { DARIO_DEFAULT_PORT } from "@/lib/services/installers/dario";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 export function darioBaseUrl(): string {
   const host = process.env.DARIO_HOST || "127.0.0.1";

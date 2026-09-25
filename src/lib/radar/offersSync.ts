@@ -3,7 +3,7 @@
  * Every failure preserves the last verified local cache.
  */
 
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
 import { RadarOffersFeedSchema, type RadarOffersFeed } from "./offersFeedSchema";
 import { compareVersions, type RadarSettingsSnapshot } from "./sync";

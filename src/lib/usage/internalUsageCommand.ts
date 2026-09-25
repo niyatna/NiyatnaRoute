@@ -3,7 +3,7 @@ import {
   buildApiKeyUsageLimitPercentText,
   type ApiKeyUsageLimitStatus,
 } from "@/lib/usage/apiKeyUsageLimits";
-import { buildErrorBody } from "@omniroute/open-sse/utils/error";
+import { buildErrorBody } from "@niyatna/open-sse/utils/error";
 
 export const INTERNAL_USAGE_COMMAND = "@@om-usage";
 export const USAGE_COMMAND_DISABLED_MESSAGE = "Usage command is disabled for this API key.";

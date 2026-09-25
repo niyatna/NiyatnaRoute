@@ -45,7 +45,7 @@ test("videoGeneration handler links with a single handleFalVideoGeneration bindi
   // A duplicate import binding is an ESM early SyntaxError, so the import itself is
   // the assertion. The Fal video path must resolve to the provider-neutral module
   // that #9982 added (it also covers the #9969 Grok Imagine routing).
-  const mod = await import("@omniroute/open-sse/handlers/videoGeneration.ts");
+  const mod = await import("@niyatna/open-sse/handlers/videoGeneration.ts");
   assert.equal(typeof mod.handleVideoGeneration, "function");
 
   const source = readFileSync(path.join(repoRoot, "open-sse/handlers/videoGeneration.ts"), "utf8");

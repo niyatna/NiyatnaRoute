@@ -18,12 +18,12 @@ import { reorderConnections } from "./providers/deletion";
 import {
   removeConnectionHealth,
   removeConnectionIndex,
-} from "@omniroute/open-sse/services/apiKeyRotator.ts";
+} from "@niyatna/open-sse/services/apiKeyRotator.ts";
 import { invalidateReasoningRoutingRuleCache } from "./reasoningRoutingRules";
 import { normalizeProviderSpecificData } from "@/lib/providers/requestDefaults";
 import { withDerivedCookieExpiry } from "@/shared/utils/webCookieExpiry";
 import { WEB_COOKIE_PROVIDERS } from "@/shared/constants/providers";
-import { ensureCodexFingerprintSeed } from "@omniroute/open-sse/config/codexIdentity.ts";
+import { ensureCodexFingerprintSeed } from "@niyatna/open-sse/config/codexIdentity.ts";
 import { bumpProxyConfigGeneration, getSettings } from "./settings";
 import {
   getStoredManagementPassword,

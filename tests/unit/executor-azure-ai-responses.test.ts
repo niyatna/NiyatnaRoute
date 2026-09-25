@@ -11,7 +11,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { DefaultExecutor } from "@omniroute/open-sse/executors/default.ts";
+import { DefaultExecutor } from "@niyatna/open-sse/executors/default.ts";
 
 test("DefaultExecutor.transformRequest strips stream_options for openai-responses target (azure-ai)", () => {
   const executor = new DefaultExecutor("azure-ai");

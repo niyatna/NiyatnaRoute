@@ -7,8 +7,8 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import type { RequestPipelinePayloads } from "@omniroute/open-sse/utils/requestLogger.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/errorSanitization.ts";
+import type { RequestPipelinePayloads } from "@niyatna/open-sse/utils/requestLogger.ts";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/errorSanitization.ts";
 import { getDbInstance } from "../db/core";
 import { getRequestDetailLogByCallLogId } from "../db/detailedLogs";
 import { shouldPersistToDisk } from "./migrations";

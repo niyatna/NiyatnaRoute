@@ -32,7 +32,7 @@ process.env.API_KEY_SECRET = process.env.API_KEY_SECRET || "image-combo-empty-20
 const core = await import("@/lib/db/core.ts");
 const providersDb = await import("@/lib/db/providers.ts");
 const { createCombo } = await import("@/lib/db/combos");
-const { executeImageCombo } = await import("@omniroute/open-sse/services/imageCombo");
+const { executeImageCombo } = await import("@niyatna/open-sse/services/imageCombo");
 
 const PNG_B64 = Buffer.from([0x89, 0x50, 0x4e, 0x47]).toString("base64");
 
@@ -272,7 +272,7 @@ test("direct image model request with empty 200 is a retryable 502 (behavior pre
   await resetStorage();
   await seedOpenRouterConnection();
 
-  const { handleImageGeneration } = await import("@omniroute/open-sse/handlers/imageGeneration");
+  const { handleImageGeneration } = await import("@niyatna/open-sse/handlers/imageGeneration");
 
   // Empty 200 → retryable 502 (previously a bogus success)
   stubFetchAlwaysEmpty();

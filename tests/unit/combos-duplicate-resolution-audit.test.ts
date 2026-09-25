@@ -15,9 +15,9 @@ process.env.API_KEY_SECRET = process.env.API_KEY_SECRET ?? "dup-audit-secret";
 const core = await import("../../src/lib/db/core.ts");
 const settingsDb = await import("../../src/lib/db/settings.ts");
 const { AUTO_TEMPLATE_VARIANTS, AUTO_SUFFIX_VARIANTS, AUTO_FAMILY_IDS } =
-  await import("@omniroute/open-sse/services/autoCombo/builtinCatalog");
+  await import("@niyatna/open-sse/services/autoCombo/builtinCatalog");
 const { resolveBuiltinAutoSpec } =
-  await import("@omniroute/open-sse/services/autoCombo/builtinCatalog");
+  await import("@niyatna/open-sse/services/autoCombo/builtinCatalog");
 
 test.after(() => {
   core.resetDbInstance();

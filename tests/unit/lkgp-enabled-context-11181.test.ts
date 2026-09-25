@@ -24,7 +24,7 @@ const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-lkgp-1118
 process.env.DATA_DIR = TEST_DATA_DIR;
 
 const { resolveAutoStrategyOrder } =
-  await import("@omniroute/open-sse/services/combo/resolveAutoStrategy.ts");
+  await import("@niyatna/open-sse/services/combo/resolveAutoStrategy.ts");
 const settingsDb = await import("@/lib/db/settings.ts");
 const { resetDbInstance } = await import("@/lib/db/core.ts");
 

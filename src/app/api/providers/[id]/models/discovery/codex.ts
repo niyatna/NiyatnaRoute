@@ -2,7 +2,7 @@ import {
   CODEX_CLI_RS_ORIGINATOR,
   getCodexClientVersion,
   getCodexDefaultHeaders,
-} from "@omniroute/open-sse/config/codexClient.ts";
+} from "@niyatna/open-sse/config/codexClient.ts";
 import {
   classifyCodexDiscoveryModel,
   isCodexDiscoveryModelExcluded,

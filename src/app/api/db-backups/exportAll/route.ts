@@ -7,7 +7,7 @@ import path from "path";
 import os from "os";
 import { execFileSync } from "node:child_process";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 
 /**
  * GET /api/db-backups/exportAll

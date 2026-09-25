@@ -1,4 +1,4 @@
-import { parseModel } from "@omniroute/open-sse/services/model";
+import { parseModel } from "@niyatna/open-sse/services/model";
 import {
   getCanonicalModelMetadata,
   type CanonicalModelMetadata,

@@ -8,7 +8,7 @@
 
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@niyatna/open-sse/utils/error";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isPrivateHost } from "@/shared/network/outboundUrlGuard";
@@ -16,7 +16,7 @@ import { arePrivateProviderUrlsAllowed } from "@/shared/network/outboundUrlGuard
 import {
   testProxiesAgainstTarget,
   getProxyCandidates,
-} from "@omniroute/open-sse/utils/proxyFallback";
+} from "@niyatna/open-sse/utils/proxyFallback";
 
 const testSchema = z.object({
   targetUrl: z.string().url("Invalid target URL"),

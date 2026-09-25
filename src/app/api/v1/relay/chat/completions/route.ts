@@ -7,7 +7,7 @@
  */
 
 import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
-import { stripSensitiveResponseHeaders } from "@omniroute/open-sse/utils/upstreamResponseHeaders";
+import { stripSensitiveResponseHeaders } from "@niyatna/open-sse/utils/upstreamResponseHeaders";
 import { handleChat } from "@/sse/handlers/chat";
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 import { createInjectionGuard } from "@/middleware/promptInjectionGuard";
@@ -16,7 +16,7 @@ import {
   buildErrorBody,
   parseUpstreamError,
   sanitizeErrorMessage,
-} from "@omniroute/open-sse/utils/error";
+} from "@niyatna/open-sse/utils/error";
 import {
   checkIpRateLimit,
   extractToken,
@@ -32,10 +32,10 @@ import {
   shouldTryBifrostForRequest,
   type BifrostRoutingConfig,
 } from "./routingBackend";
-import { getProviderPluginManifestEntryForModel } from "@omniroute/open-sse/config/providerPluginManifestRegistry.ts";
-import { getProviderPluginManifestHeader } from "@omniroute/open-sse/config/providerPluginManifestUrl.ts";
+import { getProviderPluginManifestEntryForModel } from "@niyatna/open-sse/config/providerPluginManifestRegistry.ts";
+import { getProviderPluginManifestHeader } from "@niyatna/open-sse/config/providerPluginManifestUrl.ts";
 import { finalizeReadableStream } from "./streamFinalizer";
-import { stripStaleEncodingHeaders } from "@omniroute/open-sse/utils/upstreamResponseHeaders.ts";
+import { stripStaleEncodingHeaders } from "@niyatna/open-sse/utils/upstreamResponseHeaders.ts";
 import {
   clearBifrostFailure,
   getActiveBifrostCooldown,

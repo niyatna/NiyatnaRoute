@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 
-import { resolveAntigravityModelId } from "@omniroute/open-sse/config/antigravityModelAliases.ts";
+import { resolveAntigravityModelId } from "@niyatna/open-sse/config/antigravityModelAliases.ts";
 import { resolveModelAlias } from "@/shared/constants/modelSpecs";
 
 /**

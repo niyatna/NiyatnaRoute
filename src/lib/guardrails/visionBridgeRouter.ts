@@ -5,8 +5,8 @@
 
 import { getResolvedModelCapabilities } from "@/lib/modelCapabilities";
 import { getActiveSyncedCatalog } from "@/lib/db/models/activeSyncedCatalog";
-import { PROVIDER_MODELS } from "@omniroute/open-sse/config/providerModels";
-import { getRegisteredProviderEffortBaseModelId } from "@omniroute/open-sse/utils/registeredEffortVariants.ts";
+import { PROVIDER_MODELS } from "@niyatna/open-sse/config/providerModels";
+import { getRegisteredProviderEffortBaseModelId } from "@niyatna/open-sse/utils/registeredEffortVariants.ts";
 import {
   hasUsableCredentialsForModel,
   getUsableConnectionsForModel,
@@ -16,7 +16,7 @@ import { resolveProviderId } from "@/shared/constants/providers";
 import {
   isModelLocked,
   getAllModelLockouts,
-} from "@omniroute/open-sse/services/accountFallback.ts";
+} from "@niyatna/open-sse/services/accountFallback.ts";
 
 export interface VisionModelCandidate {
   modelId: string;

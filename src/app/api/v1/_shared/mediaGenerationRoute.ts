@@ -1,5 +1,5 @@
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+import { errorResponse } from "@niyatna/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@niyatna/open-sse/config/constants.ts";
 
 import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
