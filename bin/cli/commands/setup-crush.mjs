@@ -3,7 +3,7 @@
  *
  * Crush is a terminal AI agent with a file-based config: ~/.config/crush/crush.json
  * (or ./crush.json). It supports a custom `openai-compat` provider. base_url must
- * include /v1; the api_key may reference an env var (`$OMNIROUTE_API_KEY`) so the
+ * include /v1; the api_key may reference an env var (`$NIYATNA_API_KEY`) so the
  * secret stays out of the file. Remote-aware; curated catalog models.
  */
 
@@ -15,7 +15,7 @@ import { resolveActiveContext } from "../contexts.mjs";
 import { categoriseModel } from "./setup-codex.mjs";
 import { guardHostConfigTarget } from "../utils/config-home-guard.mjs";
 
-const API_KEY_REF = "$OMNIROUTE_API_KEY";
+const API_KEY_REF = "$NIYATNA_API_KEY";
 
 function ensureV1(url) {
   const s = String(url || "").replace(/\/+$/, "");
@@ -28,7 +28,7 @@ export function resolveCrushTarget(opts = {}) {
   if (opts.remote) root = String(opts.remote).replace(/\/+$/, "");
   else {
     try {
-      root = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl;
+      root = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl;
     } catch {
       /* none */
     }
@@ -37,13 +37,13 @@ export function resolveCrushTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* none */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { baseUrl: ensureV1(root), apiKey };
 }
 
@@ -144,7 +144,7 @@ export async function runSetupCrushCommand(opts = {}) {
   writeFileSync(configPath, out, "utf8");
   printSuccess(`Wrote ${configPath} (${provider.models.length} models under providers.omniroute)`);
   printInfo(
-    "Provide the key (config references $OMNIROUTE_API_KEY):  export OMNIROUTE_API_KEY=..."
+    "Provide the key (config references $NIYATNA_API_KEY):  export NIYATNA_API_KEY=..."
   );
   printInfo("Then run:  crush");
   return 0;
@@ -156,7 +156,7 @@ export function registerSetupCrush(program) {
     .description("Generate the OmniRoute openai-compat provider in ~/.config/crush/crush.json")
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--only <patterns>", "Comma-separated substrings — keep only matching model IDs")
     .option("--config-path <path>", "crush.json path (default: ~/.config/crush/crush.json)")
     .option("--dry-run", "Print what would be written without touching the filesystem")

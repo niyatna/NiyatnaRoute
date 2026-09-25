@@ -42,11 +42,11 @@ test.before(async () => {
   if (address && typeof address === "object") {
     baseUrl = `http://127.0.0.1:${address.port}`;
   }
-  process.env.OMNIROUTE_BASE_URL = baseUrl;
+  process.env.NIYATNA_BASE_URL = baseUrl;
 });
 
 test.after(async () => {
-  delete process.env.OMNIROUTE_BASE_URL;
+  delete process.env.NIYATNA_BASE_URL;
   await new Promise<void>((resolve) => server.close(() => resolve()));
 });
 

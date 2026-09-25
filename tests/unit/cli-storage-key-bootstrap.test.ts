@@ -19,7 +19,7 @@ function runCli(dataDir: string): { code: number | null; stderr: string } {
   delete cleanEnv.STORAGE_ENCRYPTION_KEY;
   // Isolate from the development repo's .env so local runs match CI where the
   // working tree has no .env at checkout time (gitignored). Without this,
-  // bin/omniroute.mjs picks up STORAGE_ENCRYPTION_KEY from the repo .env and
+  // bin/niyatnaroute.mjs picks up STORAGE_ENCRYPTION_KEY from the repo .env and
   // the bootstrap skips writing DATA_DIR/.env (the behaviour the test exercises).
   const isolatedHome = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-key-home-"));
   try {
@@ -34,7 +34,7 @@ function runCli(dataDir: string): { code: number | null; stderr: string } {
         DATA_DIR: dataDir,
         HOME: isolatedHome,
         NO_UPDATE_NOTIFIER: "1",
-        OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
+        NIYATNA_CLI_SKIP_REPO_ENV: "1",
       },
       timeout: 60_000,
       encoding: "utf-8",

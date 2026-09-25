@@ -67,17 +67,17 @@ export function registerServe(program) {
     .option(
       "--ready-timeout <ms>",
       t("serve.ready_timeout") ||
-        "Readiness probe timeout in ms (also OMNIROUTE_READY_TIMEOUT_MS, default 60000)"
+        "Readiness probe timeout in ms (also NIYATNA_READY_TIMEOUT_MS, default 60000)"
     )
     .option(
       "--tls-cert <path>",
       t("serve.tls_cert") ||
-        "Path to a TLS certificate (PEM) to serve HTTPS (also OMNIROUTE_TLS_CERT)"
+        "Path to a TLS certificate (PEM) to serve HTTPS (also NIYATNA_TLS_CERT)"
     )
     .option(
       "--tls-key <path>",
       t("serve.tls_key") ||
-        "Path to the TLS private key (PEM) to serve HTTPS (also OMNIROUTE_TLS_KEY)"
+        "Path to the TLS private key (PEM) to serve HTTPS (also NIYATNA_TLS_KEY)"
     )
     .action(async (opts) => {
       await runServe(opts);
@@ -119,12 +119,12 @@ export async function runServe(opts = {}) {
 
   if (opts.tray === true && opts.trayWorker !== true) {
     const port = parsePort(opts.port ?? process.env.PORT ?? "9999", 9999);
-    const tlsCert = opts.tlsCert ?? process.env.OMNIROUTE_TLS_CERT;
-    const tlsKey = opts.tlsKey ?? process.env.OMNIROUTE_TLS_KEY;
+    const tlsCert = opts.tlsCert ?? process.env.NIYATNA_TLS_CERT;
+    const tlsKey = opts.tlsKey ?? process.env.NIYATNA_TLS_KEY;
     urlScheme = resolveTlsOptions({
       ...process.env,
-      ...(tlsCert ? { OMNIROUTE_TLS_CERT: tlsCert } : {}),
-      ...(tlsKey ? { OMNIROUTE_TLS_KEY: tlsKey } : {}),
+      ...(tlsCert ? { NIYATNA_TLS_CERT: tlsCert } : {}),
+      ...(tlsKey ? { NIYATNA_TLS_KEY: tlsKey } : {}),
     })
       ? "https"
       : "http";
@@ -140,7 +140,7 @@ export async function runServe(opts = {}) {
     return result;
   }
 
-  // Same prep as bin/omniroute.mjs — keep it here so a direct `runServe()` call
+  // Same prep as bin/niyatnaroute.mjs — keep it here so a direct `runServe()` call
   // (tests / programmatic) still gets a writable Next.js cache dir before spawn.
   ensureAndroidCacheDir({ env: process.env });
 
@@ -255,34 +255,34 @@ export async function runServe(opts = {}) {
 
   // #5172/#5160/#5152: default the V8 heap to ~35% of physical RAM (clamped
   // [512, 4096]) instead of a fixed 512MB, which OOM-crashed boxes with plenty
-  // of RAM under load. An explicit OMNIROUTE_MEMORY_MB still wins.
+  // of RAM under load. An explicit NIYATNA_MEMORY_MB still wins.
   const memoryLimit = resolveMaxOldSpaceMb(
-    process.env.OMNIROUTE_MEMORY_MB,
+    process.env.NIYATNA_MEMORY_MB,
     calibrateHeapFallbackMb(totalmem())
   );
 
   // #5242: opt-in native HTTPS. CLI flags take precedence over env; the child
   // server (server-ws.mjs) reads these and terminates TLS on the same listener.
-  const tlsCert = opts.tlsCert ?? process.env.OMNIROUTE_TLS_CERT;
-  const tlsKey = opts.tlsKey ?? process.env.OMNIROUTE_TLS_KEY;
+  const tlsCert = opts.tlsCert ?? process.env.NIYATNA_TLS_CERT;
+  const tlsKey = opts.tlsKey ?? process.env.NIYATNA_TLS_KEY;
 
   const env = {
     ...process.env,
-    OMNIROUTE_PORT: String(port),
+    NIYATNA_PORT: String(port),
     PORT: String(dashboardPort),
     DASHBOARD_PORT: String(dashboardPort),
     API_PORT: String(apiPort),
     // #10492: HOSTNAME is standard shell state on Unix-like systems, not an
     // OmniRoute bind setting. The resolver only keeps its legacy meaning on
-    // Windows; OMNIROUTE_SERVER_HOST is the cross-platform explicit setting.
+    // Windows; NIYATNA_SERVER_HOST is the cross-platform explicit setting.
     HOSTNAME: resolveServerHost(),
     NODE_ENV: "production",
     // #5238: preserve a user-set NODE_OPTIONS (incl. their own
     // `--max-old-space-size=…`) instead of clobbering it with the calibrated
     // default — mirror the Electron/standalone launchers.
     NODE_OPTIONS: buildServerNodeOptions(process.env, memoryLimit),
-    ...(tlsCert ? { OMNIROUTE_TLS_CERT: tlsCert } : {}),
-    ...(tlsKey ? { OMNIROUTE_TLS_KEY: tlsKey } : {}),
+    ...(tlsCert ? { NIYATNA_TLS_CERT: tlsCert } : {}),
+    ...(tlsKey ? { NIYATNA_TLS_KEY: tlsKey } : {}),
   };
 
   // Validate the TLS pair up front so the operator sees a clear warning in the
@@ -456,7 +456,7 @@ async function runWithSupervisor(
   useTray = false,
   { trayReadyPort, trayReadyToken, readyTimeoutMs = resolveReadyTimeoutMs() } = {}
 ) {
-  if (showLog) process.env.OMNIROUTE_SHOW_LOG = "1";
+  if (showLog) process.env.NIYATNA_SHOW_LOG = "1";
   writePidFile("supervisor", process.pid);
 
   const supervisor = new ServerSupervisor({
@@ -557,7 +557,7 @@ export function reportReadinessTimeout(dashboardPort, supervisor, lastProbeOutco
     );
   }
   console.error(
-    `  Tip:  set OMNIROUTE_READY_TIMEOUT_MS=${readyTimeoutMs * 2} or --ready-timeout ${readyTimeoutMs * 2} for slower cold starts.`
+    `  Tip:  set NIYATNA_READY_TIMEOUT_MS=${readyTimeoutMs * 2} or --ready-timeout ${readyTimeoutMs * 2} for slower cold starts.`
   );
   console.error(`  Try:  curl -I http://localhost:${dashboardPort}/api/monitoring/health`);
   console.error(`  Or:   rerun with \x1b[36m--log\x1b[0m to see live server output.\n`);

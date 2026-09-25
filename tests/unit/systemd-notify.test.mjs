@@ -77,18 +77,18 @@ function waitForLines(child, expected, timeoutMs) {
 
 test("isSystemdNotifyEnabled: false without NOTIFY_SOCKET", () => {
   assert.equal(isSystemdNotifyEnabled({}), false);
-  assert.equal(isSystemdNotifyEnabled({ OMNIROUTE_DISABLE_SD_NOTIFY: "0" }), false);
+  assert.equal(isSystemdNotifyEnabled({ NIYATNA_DISABLE_SD_NOTIFY: "0" }), false);
 });
 
 test("isSystemdNotifyEnabled: true when NOTIFY_SOCKET is set", () => {
   assert.equal(isSystemdNotifyEnabled({ NOTIFY_SOCKET: "/run/systemd/notify" }), true);
 });
 
-test("isSystemdNotifyEnabled: opt-out OMNIROUTE_DISABLE_SD_NOTIFY=1 wins", () => {
+test("isSystemdNotifyEnabled: opt-out NIYATNA_DISABLE_SD_NOTIFY=1 wins", () => {
   assert.equal(
     isSystemdNotifyEnabled({
       NOTIFY_SOCKET: "/run/systemd/notify",
-      OMNIROUTE_DISABLE_SD_NOTIFY: "1",
+      NIYATNA_DISABLE_SD_NOTIFY: "1",
     }),
     false
   );
@@ -97,7 +97,7 @@ test("isSystemdNotifyEnabled: opt-out OMNIROUTE_DISABLE_SD_NOTIFY=1 wins", () =>
 test("notifier honors the opt-out (no spawn, no timer)", async () => {
   const calls = [];
   const notifier = createSystemdNotifier({
-    env: { NOTIFY_SOCKET: "/run/systemd/notify", OMNIROUTE_DISABLE_SD_NOTIFY: "1" },
+    env: { NOTIFY_SOCKET: "/run/systemd/notify", NIYATNA_DISABLE_SD_NOTIFY: "1" },
     spawnFn: fakeSpawn(calls),
   });
   assert.equal(notifier.enabled, false);

@@ -419,8 +419,8 @@ const EXISTING_README_CODES = new Set(["pt-BR", "es", "fr", "it", "ru", "zh-CN",
 const RTL_LOCALES = new Set(["ar", "fa", "he", "ur"]);
 
 const URL_MAX_TEXT_LENGTH = 1800;
-const DELIMITER = "\n__OMNIROUTE_I18N_SEPARATOR__\n";
-const DELIMITER_REGEX = /\n\s*__OMNIROUTE_I18N_SEPARATOR__\s*\n/g;
+const DELIMITER = "\n__NIYATNA_I18N_SEPARATOR__\n";
+const DELIMITER_REGEX = /\n\s*__NIYATNA_I18N_SEPARATOR__\s*\n/g;
 const TRANSLATION_CACHE = new Map();
 const REQUEST_TIMEOUT_MS = 20000;
 

@@ -219,7 +219,7 @@ const db = {
   close: () => real.close(),
 };
 const persisted = () => Number(real.prepare("SELECT value FROM key_value WHERE namespace='walMaintenance' AND key='busyTotal'").get()?.value ?? 0);
-const env = { OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "60" };
+const env = { NIYATNA_WAL_PASSIVE_INTERVAL_MS: "60" };
 const out = {};
 startWalMaintenance(db, file, env);
 out.restoredAtBoot = getWalMaintenanceState().busyTotal;
@@ -319,58 +319,58 @@ test("getWalPassiveIntervalMs parses env: garbage falls back to the 5m default",
   const DEF = 5 * 60 * 1000;
   assert.equal(getWalPassiveIntervalMs({}), DEF, "unset -> default");
   assert.equal(
-    getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "" }),
+    getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "" }),
     DEF,
     "empty -> default"
   );
   assert.equal(
-    getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "  " }),
+    getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "  " }),
     DEF,
     "whitespace -> default"
   );
   assert.equal(
-    getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "abc" }),
+    getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "abc" }),
     DEF,
     "non-numeric -> default"
   );
   assert.equal(
-    getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "-50" }),
+    getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "-50" }),
     DEF,
     "negative -> default"
   );
   assert.equal(
-    getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "Infinity" }),
+    getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "Infinity" }),
     DEF,
     "non-finite -> default"
   );
 });
 
 test("getWalPassiveIntervalMs: '0' disables the scheduler, valid values pass through", () => {
-  assert.equal(getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "0" }), 0);
-  assert.equal(getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: "60000" }), 60000);
-  assert.equal(getWalPassiveIntervalMs({ OMNIROUTE_WAL_PASSIVE_INTERVAL_MS: " 60000 " }), 60000);
+  assert.equal(getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "0" }), 0);
+  assert.equal(getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: "60000" }), 60000);
+  assert.equal(getWalPassiveIntervalMs({ NIYATNA_WAL_PASSIVE_INTERVAL_MS: " 60000 " }), 60000);
 });
 
 test("getWalGuardMaxBytes parses env: garbage falls back to the 256MB default", () => {
   const DEF = 256 * 1024 * 1024;
   assert.equal(getWalGuardMaxBytes({}), DEF, "unset -> default");
   assert.equal(
-    getWalGuardMaxBytes({ OMNIROUTE_WAL_GUARD_MAX_MB: "abc" }),
+    getWalGuardMaxBytes({ NIYATNA_WAL_GUARD_MAX_MB: "abc" }),
     DEF,
     "non-numeric -> default"
   );
   assert.equal(
-    getWalGuardMaxBytes({ OMNIROUTE_WAL_GUARD_MAX_MB: "0" }),
+    getWalGuardMaxBytes({ NIYATNA_WAL_GUARD_MAX_MB: "0" }),
     DEF,
     "below 1MB -> default"
   );
   assert.equal(
-    getWalGuardMaxBytes({ OMNIROUTE_WAL_GUARD_MAX_MB: "0.5" }),
+    getWalGuardMaxBytes({ NIYATNA_WAL_GUARD_MAX_MB: "0.5" }),
     DEF,
     "fractional below 1 -> default"
   );
   assert.equal(
-    getWalGuardMaxBytes({ OMNIROUTE_WAL_GUARD_MAX_MB: "512" }),
+    getWalGuardMaxBytes({ NIYATNA_WAL_GUARD_MAX_MB: "512" }),
     512 * 1024 * 1024,
     "valid MB value -> bytes"
   );

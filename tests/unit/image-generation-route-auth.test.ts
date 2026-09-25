@@ -102,9 +102,9 @@ test("v1 image generation POST requires an API key when REQUIRE_API_KEY is enabl
 });
 
 test("v1 image generation POST rejects an invalid presented API key", async () => {
-  const originalOmniRouteApiKey = process.env.OMNIROUTE_API_KEY;
+  const originalOmniRouteApiKey = process.env.NIYATNA_API_KEY;
   const originalRequireApiKey = process.env.REQUIRE_API_KEY;
-  process.env.OMNIROUTE_API_KEY = "valid-image-route-key";
+  process.env.NIYATNA_API_KEY = "valid-image-route-key";
   process.env.REQUIRE_API_KEY = "true";
 
   try {
@@ -126,9 +126,9 @@ test("v1 image generation POST rejects an invalid presented API key", async () =
     assert.match(await readErrorMessage(response), /Invalid API key/);
   } finally {
     if (originalOmniRouteApiKey === undefined) {
-      delete process.env.OMNIROUTE_API_KEY;
+      delete process.env.NIYATNA_API_KEY;
     } else {
-      process.env.OMNIROUTE_API_KEY = originalOmniRouteApiKey;
+      process.env.NIYATNA_API_KEY = originalOmniRouteApiKey;
     }
     if (originalRequireApiKey === undefined) {
       delete process.env.REQUIRE_API_KEY;
@@ -142,9 +142,9 @@ test("v1 image generation POST rejects an invalid presented API key", async () =
 // anonymous exactly like clientApiPolicy does — the route guard must not be
 // stricter than the middleware that already fronts it.
 test("v1 image generation POST ignores an invalid presented key while REQUIRE_API_KEY is off", async () => {
-  const originalOmniRouteApiKey = process.env.OMNIROUTE_API_KEY;
+  const originalOmniRouteApiKey = process.env.NIYATNA_API_KEY;
   const originalRequireApiKey = process.env.REQUIRE_API_KEY;
-  process.env.OMNIROUTE_API_KEY = "valid-image-route-key";
+  process.env.NIYATNA_API_KEY = "valid-image-route-key";
   process.env.REQUIRE_API_KEY = "false";
 
   globalThis.fetch = async (url) => {
@@ -173,9 +173,9 @@ test("v1 image generation POST ignores an invalid presented key while REQUIRE_AP
     assert.equal(response.status, 200);
   } finally {
     if (originalOmniRouteApiKey === undefined) {
-      delete process.env.OMNIROUTE_API_KEY;
+      delete process.env.NIYATNA_API_KEY;
     } else {
-      process.env.OMNIROUTE_API_KEY = originalOmniRouteApiKey;
+      process.env.NIYATNA_API_KEY = originalOmniRouteApiKey;
     }
     if (originalRequireApiKey === undefined) {
       delete process.env.REQUIRE_API_KEY;

@@ -319,14 +319,14 @@ test.beforeEach(async () => {
   reloadNormalResourcePressure();
   reloadEnforceOversized();
   globalThis.fetch = originalFetch;
-  delete process.env.OMNIROUTE_RELAY_BACKEND;
+  delete process.env.NIYATNA_RELAY_BACKEND;
   delete process.env.RELAY_ROUTING_BACKEND;
 });
 
 test.afterEach(async () => {
   globalThis.fetch = originalFetch;
   resetAdaptiveAdmissionRuntimeForTests();
-  delete process.env.OMNIROUTE_RELAY_BACKEND;
+  delete process.env.NIYATNA_RELAY_BACKEND;
   delete process.env.RELAY_ROUTING_BACKEND;
   await resetStorage();
 });
@@ -355,7 +355,7 @@ test(
 
     const rawRelayToken = `relay_matrix_${createHash("sha256").update("admission").digest("hex").slice(0, 24)}`;
     insertRelayToken(rawRelayToken);
-    process.env.OMNIROUTE_RELAY_BACKEND = "ts";
+    process.env.NIYATNA_RELAY_BACKEND = "ts";
 
     const cases: RouteCase[] = ROUTE_CASES.map((routeCase) => {
       if (routeCase.name !== "relay.chat.completions") return routeCase;

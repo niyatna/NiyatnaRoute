@@ -26,7 +26,7 @@ const issueAgentRunRequestSchema = z.object({
 const ENABLED_VALUES = new Set(["1", "true", "yes", "on"]);
 
 function isIssueAgentEnabled(): boolean {
-  return ENABLED_VALUES.has((process.env.OMNIROUTE_ISSUE_AGENT_ENABLED ?? "").toLowerCase());
+  return ENABLED_VALUES.has((process.env.NIYATNA_ISSUE_AGENT_ENABLED ?? "").toLowerCase());
 }
 
 /**
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       {
         error: "Issue Agent execution is disabled",
         enabled: false,
-        requiredEnv: "OMNIROUTE_ISSUE_AGENT_ENABLED=true",
+        requiredEnv: "NIYATNA_ISSUE_AGENT_ENABLED=true",
       },
       { status: 403 }
     );

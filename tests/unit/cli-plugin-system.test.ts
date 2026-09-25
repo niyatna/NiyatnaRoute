@@ -17,14 +17,14 @@ test("bin/cli/plugins.mjs exporta discoverPlugins, loadPlugins, buildPluginConte
 
 test("discoverPlugins retorna array vazio se nenhum plugin instalado (diretório não existe)", async () => {
   const { discoverPlugins } = await import("../../bin/cli/plugins.mjs");
-  const orig = process.env.OMNIROUTE_PLUGIN_PATH;
-  process.env.OMNIROUTE_PLUGIN_PATH = join(tmpdir(), `no-such-dir-${Date.now()}`);
+  const orig = process.env.NIYATNA_PLUGIN_PATH;
+  process.env.NIYATNA_PLUGIN_PATH = join(tmpdir(), `no-such-dir-${Date.now()}`);
   try {
     const plugins = await discoverPlugins();
     assert.ok(Array.isArray(plugins));
   } finally {
-    if (orig === undefined) delete process.env.OMNIROUTE_PLUGIN_PATH;
-    else process.env.OMNIROUTE_PLUGIN_PATH = orig;
+    if (orig === undefined) delete process.env.NIYATNA_PLUGIN_PATH;
+    else process.env.NIYATNA_PLUGIN_PATH = orig;
   }
 });
 
@@ -44,8 +44,8 @@ test("discoverPlugins descobre plugin com package.json válido", async () => {
   );
   writeFileSync(join(pkgDir, "index.mjs"), `export function register() {}`);
 
-  const orig = process.env.OMNIROUTE_PLUGIN_PATH;
-  process.env.OMNIROUTE_PLUGIN_PATH = pluginDir;
+  const orig = process.env.NIYATNA_PLUGIN_PATH;
+  process.env.NIYATNA_PLUGIN_PATH = pluginDir;
   try {
     const plugins = await discoverPlugins();
     assert.ok(
@@ -53,8 +53,8 @@ test("discoverPlugins descobre plugin com package.json válido", async () => {
       "deve encontrar o plugin"
     );
   } finally {
-    if (orig === undefined) delete process.env.OMNIROUTE_PLUGIN_PATH;
-    else process.env.OMNIROUTE_PLUGIN_PATH = orig;
+    if (orig === undefined) delete process.env.NIYATNA_PLUGIN_PATH;
+    else process.env.NIYATNA_PLUGIN_PATH = orig;
     try {
       rmSync(pluginDir, { recursive: true, maxRetries: 5, retryDelay: 100 });
     } catch {}
@@ -71,8 +71,8 @@ test("discoverPlugins ignora pacotes sem prefixo omniroute-cmd-", async () => {
     JSON.stringify({ name: "some-unrelated-package", version: "1.0.0" })
   );
 
-  const orig = process.env.OMNIROUTE_PLUGIN_PATH;
-  process.env.OMNIROUTE_PLUGIN_PATH = pluginDir;
+  const orig = process.env.NIYATNA_PLUGIN_PATH;
+  process.env.NIYATNA_PLUGIN_PATH = pluginDir;
   try {
     const plugins = await discoverPlugins();
     assert.ok(
@@ -80,8 +80,8 @@ test("discoverPlugins ignora pacotes sem prefixo omniroute-cmd-", async () => {
       "não deve descobrir pacotes sem prefixo"
     );
   } finally {
-    if (orig === undefined) delete process.env.OMNIROUTE_PLUGIN_PATH;
-    else process.env.OMNIROUTE_PLUGIN_PATH = orig;
+    if (orig === undefined) delete process.env.NIYATNA_PLUGIN_PATH;
+    else process.env.NIYATNA_PLUGIN_PATH = orig;
     try {
       rmSync(pluginDir, { recursive: true, maxRetries: 5, retryDelay: 100 });
     } catch {}
@@ -104,16 +104,16 @@ test("loadPlugins não quebra CLI quando plugin tem erro de load (try/catch)", a
   );
   writeFileSync(join(pkgDir, "broken.mjs"), "throw new Error('intentional load error');");
 
-  const orig = process.env.OMNIROUTE_PLUGIN_PATH;
-  process.env.OMNIROUTE_PLUGIN_PATH = pluginDir;
+  const orig = process.env.NIYATNA_PLUGIN_PATH;
+  process.env.NIYATNA_PLUGIN_PATH = pluginDir;
   const { Command } = await import("commander");
   const prog = new Command();
   try {
     // Deve não lançar exceção
     await assert.doesNotReject(async () => loadPlugins(prog));
   } finally {
-    if (orig === undefined) delete process.env.OMNIROUTE_PLUGIN_PATH;
-    else process.env.OMNIROUTE_PLUGIN_PATH = orig;
+    if (orig === undefined) delete process.env.NIYATNA_PLUGIN_PATH;
+    else process.env.NIYATNA_PLUGIN_PATH = orig;
     try {
       rmSync(pluginDir, { recursive: true, maxRetries: 5, retryDelay: 100 });
     } catch {}
@@ -140,8 +140,8 @@ test("loadPlugins carrega plugin válido e chama register()", async () => {
     `export function register(program) { program.command('testcmd-from-plugin'); }`
   );
 
-  const orig = process.env.OMNIROUTE_PLUGIN_PATH;
-  process.env.OMNIROUTE_PLUGIN_PATH = pluginDir;
+  const orig = process.env.NIYATNA_PLUGIN_PATH;
+  process.env.NIYATNA_PLUGIN_PATH = pluginDir;
   const { Command } = await import("commander");
   const prog = new Command();
   try {
@@ -152,8 +152,8 @@ test("loadPlugins carrega plugin válido e chama register()", async () => {
       "comando do plugin deve estar registrado"
     );
   } finally {
-    if (orig === undefined) delete process.env.OMNIROUTE_PLUGIN_PATH;
-    else process.env.OMNIROUTE_PLUGIN_PATH = orig;
+    if (orig === undefined) delete process.env.NIYATNA_PLUGIN_PATH;
+    else process.env.NIYATNA_PLUGIN_PATH = orig;
     try {
       rmSync(pluginDir, { recursive: true, maxRetries: 5, retryDelay: 100 });
     } catch {}

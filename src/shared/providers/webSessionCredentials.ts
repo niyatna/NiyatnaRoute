@@ -298,7 +298,7 @@ export const WEB_SESSION_CREDENTIAL_REQUIREMENTS = {
       "Paste the token below and check the connection. OmniRoute handles the per-request CAPTCHA through its browser transport.",
     ],
     guideNote:
-      "Treat the token like a password. Browser transport is enabled by default; do not set OMNIROUTE_BROWSER_POOL=off for this connection. If Z.ai signs you out or the token expires, repeat these steps with the new value.",
+      "Treat the token like a password. Browser transport is enabled by default; do not set NIYATNA_BROWSER_POOL=off for this connection. If Z.ai signs you out or the token expires, repeat these steps with the new value.",
   },
   lmarena: {
     kind: "cookie",

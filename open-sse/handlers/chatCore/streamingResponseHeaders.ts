@@ -8,7 +8,7 @@
  * optional compression header. Pure builder (returns a fresh map). Behaviour is byte-identical to
  * the previous inline block.
  */
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { buildStreamingResponseHeaders as defaultBuildStreaming } from "./responseHeaders.ts";
 
 export function assembleStreamingResponseHeaders(
@@ -37,7 +37,7 @@ export function assembleStreamingResponseHeaders(
     "x-omniroute-request-id": args.pendingRequestId,
   };
   if (args.compressionResponseMeta) {
-    responseHeaders[OMNIROUTE_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
+    responseHeaders[NIYATNA_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
   }
   return responseHeaders;
 }

@@ -28,7 +28,7 @@ export const CLI_TOKEN_HEADER = "x-omniroute-cli-token";
  * The real TCP peer IP, stamped by the custom Node server BEFORE Next runs
  * (scripts/dev/peer-stamp.mjs), formatted as `<token>|<ip>`. The middleware has
  * no socket, so this is the only trustworthy locality signal — but ONLY when the
- * token matches this process's OMNIROUTE_PEER_STAMP_TOKEN (see
+ * token matches this process's NIYATNA_PEER_STAMP_TOKEN (see
  * policies/management.ts → resolveStampedPeer). Any client-supplied value is
  * deleted by the server before stamping, and this header is stripped from the
  * forwarded request in pipeline.ts so it never reaches route handlers/upstream.

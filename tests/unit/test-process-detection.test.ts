@@ -46,7 +46,7 @@ test("env still wins, as before", () => {
 
 test("a production serve is never a test run", () => {
   assert.equal(
-    isAutomatedTestProcess(["C:\\Program Files\\nodejs\\node.exe", "bin/omniroute.mjs", "serve"], { NODE_ENV: "production" } as NodeJS.ProcessEnv),
+    isAutomatedTestProcess(["C:\\Program Files\\nodejs\\node.exe", "bin/niyatnaroute.mjs", "serve"], { NODE_ENV: "production" } as NodeJS.ProcessEnv),
     false
   );
 });

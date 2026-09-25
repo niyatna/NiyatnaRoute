@@ -44,7 +44,7 @@ import {
  * plain HTTP. This runs server-side, so once the hostname is confirmed loopback
  * (any scheme — Zed's own redirect is always plain http regardless of how the
  * dashboard was reached), use the server's own authoritative listening port
- * (`getRuntimePorts()`, sourced from OMNIROUTE_PORT/PORT/DASHBOARD_PORT) instead
+ * (`getRuntimePorts()`, sourced from NIYATNA_PORT/PORT/DASHBOARD_PORT) instead
  * of re-deriving it from the client-observed scheme/port. Non-loopback redirect
  * URIs (remote/LAN deployments) return null → keep the default port and rely on
  * the manual paste flow.

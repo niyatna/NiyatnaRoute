@@ -69,10 +69,10 @@ test("persistAttemptLogs redacts request.failed delivery/replay but keeps its in
       TMPDIR: process.env.TMPDIR,
       NODE_ENV: "test",
       DATA_DIR: dataDir,
-      OMNIROUTE_PLUGINS_DIR: pluginsDir,
+      NIYATNA_PLUGINS_DIR: pluginsDir,
       API_KEY_SECRET: "test-dashboard-failure-redaction-secret",
       PII_RESPONSE_SANITIZATION: "false",
-      OMNIROUTE_ENABLE_LIVE_WS: "0",
+      NIYATNA_ENABLE_LIVE_WS: "0",
     });
 
     assert.doesNotMatch(stderr, /sk-live-dashboard-secret|\/srv\/omniroute/);

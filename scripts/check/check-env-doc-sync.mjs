@@ -86,7 +86,7 @@ const IGNORE_FROM_CODE = new Set([
   "NEXT_RUNTIME",
   // Set/read by Next.js's own dev server (next-dev-server.js) when the turbopack
   // bundler is active — framework-internal. The OmniRoute-facing knob is
-  // OMNIROUTE_USE_TURBOPACK (scripts/dev/run-next.mjs), which IS documented.
+  // NIYATNA_USE_TURBOPACK (scripts/dev/run-next.mjs), which IS documented.
   "TURBOPACK",
   "NODE_TEST_CONTEXT",
   "VITEST",
@@ -125,7 +125,7 @@ const IGNORE_FROM_CODE = new Set([
   // a CI-only signal, never an OmniRoute runtime config (Phase 7.10).
   "PR_BODY",
   // CLI machine-id token opt-out (server-side flag; not user-configurable via .env).
-  "OMNIROUTE_DISABLE_CLI_TOKEN",
+  "NIYATNA_DISABLE_CLI_TOKEN",
   // Gated combo live-smoke harness (scripts/test/_vpsClient.mjs) — override the VPS HTTP
   // smoke target host/key. Test/CI-only signals with safe defaults
   // ("http://192.168.0.15:20128" / null), never OmniRoute runtime config (#5151).
@@ -145,9 +145,9 @@ const IGNORE_FROM_CODE = new Set([
   "HOMOLOG_CRITICAL_PROVIDERS",
   "HOMOLOG_EXPECT_VERSION",
   // update-notifier opt-out for the CLI binary.
-  "OMNIROUTE_NO_UPDATE_NOTIFIER",
+  "NIYATNA_NO_UPDATE_NOTIFIER",
   // Headless CLI execution flag for Electron.
-  "OMNIROUTE_HEADLESS",
+  "NIYATNA_HEADLESS",
   // Platform / OS detection vars read by CLI environment helper (bin/cli/utils/environment.mjs).
   // These are external signals set by the host OS or cloud provider — not OmniRoute config.
   "CODESPACES",
@@ -185,31 +185,31 @@ const IGNORE_FROM_CODE = new Set([
   "VERIFY_PORT",
   "VERIFY_VERSION",
   // Doctor diagnostic flags (no runtime behavior yet — placeholders).
-  "OMNIROUTE_DOCTOR_HOST",
-  "OMNIROUTE_DOCTOR_LIVENESS_URL",
-  "OMNIROUTE_PROVIDER_CATALOG_PATH",
-  "OMNIROUTE_PROVIDER_TEST_MODEL",
-  // Test-only opt-out: instructs bin/omniroute.mjs to skip auto-loading the
+  "NIYATNA_DOCTOR_HOST",
+  "NIYATNA_DOCTOR_LIVENESS_URL",
+  "NIYATNA_PROVIDER_CATALOG_PATH",
+  "NIYATNA_PROVIDER_TEST_MODEL",
+  // Test-only opt-out: instructs bin/niyatnaroute.mjs to skip auto-loading the
   // repository .env so isolation tests get a deterministic environment.
-  "OMNIROUTE_CLI_SKIP_REPO_ENV",
+  "NIYATNA_CLI_SKIP_REPO_ENV",
   // Eval-harness only: operator-supplied provider credentials JSON read by the
   // opt-in `npm run eval:compression` CLI (scripts/compression-eval/index.ts).
   // A dev/ops measurement tool, never OmniRoute runtime config.
-  "OMNIROUTE_EVAL_CREDENTIALS",
+  "NIYATNA_EVAL_CREDENTIALS",
   // Build-time only: set by `build:release` (git short SHA) and read by
   // write-build-sha.mjs to stamp dist/BUILD_SHA — injected by the build, never
   // configured by users in .env.
-  "OMNIROUTE_BUILD_SHA",
+  "NIYATNA_BUILD_SHA",
   // Listener-owned self-fetch transport signal. The HTTP/HTTPS launchers set
   // this before application imports; it is not user-configurable product env.
-  "OMNIROUTE_INTERNAL_SCHEME",
+  "NIYATNA_INTERNAL_SCHEME",
   // Runner-owned bind-host signal. scripts/dev/run-next.mjs publishes the
   // interface it actually binds so the in-process startup guard can name it
   // (#13695); operators configure HOST / HOSTNAME, never this.
-  "OMNIROUTE_BOUND_HOST",
+  "NIYATNA_BOUND_HOST",
   // Source typo / placeholder.
   "OMNIROUT",
-  // Static config alias path (the canonical var is OMNIROUTE_PAYLOAD_RULES_PATH).
+  // Static config alias path (the canonical var is NIYATNA_PAYLOAD_RULES_PATH).
   "PAYLOAD_RULES_PATH",
   // Node.js module resolution path — OS/Node internal, not an OmniRoute config var.
   // Referenced in resolveSpawnArgs (ninerouter) to pass bundled native modules to subprocess.
@@ -232,7 +232,7 @@ const IGNORE_FROM_CODE = new Set([
   "XDG_DATA_HOME",
   // Test-only override: points setup-open-code.mjs at a fixture plugin dir without
   // requiring the real bundled plugin to be built.
-  "OMNIROUTE_OPENCODE_PLUGIN_DIR",
+  "NIYATNA_OPENCODE_PLUGIN_DIR",
   // Test-only escape hatch: makes getMachineIdRaw() skip the macOS ioreg strategy so
   // machineId tests reach the fallback strategies on darwin (#13539). Not user config.
   "DISABLE_IOREG_STRATEGY",
@@ -279,8 +279,8 @@ const DOC_ONLY_ALLOWLIST = new Set([
   "CHANGEME",
   // Legacy aliases — present in docs as "would be aliases" but read-only
   // through their canonical names today.
-  "OMNIROUTE_CRYPT_KEY",
-  "OMNIROUTE_API_KEY_BASE64",
+  "NIYATNA_CRYPT_KEY",
+  "NIYATNA_API_KEY_BASE64",
   // Future-supported hooks: documented but currently hardcoded constants.
   "MAX_RETRY_INTERVAL_SEC",
   "REQUEST_RETRY",
@@ -305,7 +305,7 @@ const ENV_ONLY_ALLOWLIST = new Set([
   "CODEX_REFRESH_SPACING_MS",
   "DEBUG",
   "HEAP_PRESSURE_THRESHOLD_MB",
-  "OMNIROUTE_TRACE",
+  "NIYATNA_TRACE",
   "PII_TEST_BYPASS_MIN_WINDOW",
   "PII_WINDOW_SIZE",
   "TRAE_STREAM_TIMEOUT_MS",
@@ -320,27 +320,27 @@ const ENV_ONLY_ALLOWLIST = new Set([
   "CLIPROXY_BIND_HOST",
   "COPILOT_INTEGRATION_ID",
   "CURSOR_KV_GRACE_MS",
-  "OMNIROUTE_BATCH_RETENTION_DAYS",
-  "OMNIROUTE_CLOUD_SYNC_ENFORCE_SIGNATURE",
-  "OMNIROUTE_DIRECT_RESPONSE_RETRY_TIMEOUT_MS",
-  "OMNIROUTE_DISABLE_CONVERSATION_TRACKING",
-  "OMNIROUTE_LITE_MAX_TOOL_LENGTH",
-  "OMNIROUTE_PRESSURE_SELF_RESTART",
-  "OMNIROUTE_PRESSURE_SELF_RESTART_AFTER_MS",
-  "OMNIROUTE_READY_TIMEOUT_MS",
-  "OMNIROUTE_REASONING_MIN_BUDGET",
-  "OMNIROUTE_SELF_HOSTED_API_KEY",
-  "OMNIROUTE_SELF_HOSTED_PROVIDERS",
-  "OMNIROUTE_SELF_HOSTED_PROVIDERS_FILE",
-  "OMNIROUTE_SELF_HOSTED_STRATEGY",
-  "OMNIROUTE_SELF_HOSTED_STRATEGY_FILE",
-  "OMNIROUTE_SQLJS_WASM_PATH",
-  "OMNIROUTE_STRIP_SYSTEM_PREAMBLE",
-  "OMNIROUTE_SYNCED_CATALOG_STALE_AFTER_MS",
-  "OMNIROUTE_SYSTEM_INSTRUCTION_APPEND",
-  "OMNIROUTE_VNC_NETWORK",
-  "OMNIROUTE_WAL_GUARD_MAX_MB",
-  "OMNIROUTE_WAL_PASSIVE_INTERVAL_MS",
+  "NIYATNA_BATCH_RETENTION_DAYS",
+  "NIYATNA_CLOUD_SYNC_ENFORCE_SIGNATURE",
+  "NIYATNA_DIRECT_RESPONSE_RETRY_TIMEOUT_MS",
+  "NIYATNA_DISABLE_CONVERSATION_TRACKING",
+  "NIYATNA_LITE_MAX_TOOL_LENGTH",
+  "NIYATNA_PRESSURE_SELF_RESTART",
+  "NIYATNA_PRESSURE_SELF_RESTART_AFTER_MS",
+  "NIYATNA_READY_TIMEOUT_MS",
+  "NIYATNA_REASONING_MIN_BUDGET",
+  "NIYATNA_SELF_HOSTED_API_KEY",
+  "NIYATNA_SELF_HOSTED_PROVIDERS",
+  "NIYATNA_SELF_HOSTED_PROVIDERS_FILE",
+  "NIYATNA_SELF_HOSTED_STRATEGY",
+  "NIYATNA_SELF_HOSTED_STRATEGY_FILE",
+  "NIYATNA_SQLJS_WASM_PATH",
+  "NIYATNA_STRIP_SYSTEM_PREAMBLE",
+  "NIYATNA_SYNCED_CATALOG_STALE_AFTER_MS",
+  "NIYATNA_SYSTEM_INSTRUCTION_APPEND",
+  "NIYATNA_VNC_NETWORK",
+  "NIYATNA_WAL_GUARD_MAX_MB",
+  "NIYATNA_WAL_PASSIVE_INTERVAL_MS",
   "OPENCODE_FREE_TIER_PLACEHOLDER_TOOLS",
   "OPENCODE_FREE_TIER_REQUEST_CONTRACT",
   "OPENCODE_RESPONSES_STALL_ROTATION",

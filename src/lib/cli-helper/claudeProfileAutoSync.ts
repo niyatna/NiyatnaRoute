@@ -20,11 +20,11 @@ type SyncResult =
     };
 
 function isAutoSyncEnabled() {
-  // Opt-in, default OFF. Backed by the OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES feature flag
+  // Opt-in, default OFF. Backed by the NIYATNA_AUTO_SYNC_CLAUDE_PROFILES feature flag
   // (resolver precedence: DB/dashboard-toggle override > env > default "false"), so a
   // provider model sync never silently writes ~/.claude/profiles/<name>/settings.json
   // unless the operator turned it on — via the providers-dashboard toggle or the env var.
-  return isFeatureFlagEnabled("OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES");
+  return isFeatureFlagEnabled("NIYATNA_AUTO_SYNC_CLAUDE_PROFILES");
 }
 
 function forwardAuthHeaders(request: Request): Record<string, string> {

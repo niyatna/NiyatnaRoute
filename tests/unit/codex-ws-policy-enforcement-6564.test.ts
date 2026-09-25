@@ -23,7 +23,7 @@ import path from "node:path";
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-codex-ws-policy-6564-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.API_KEY_SECRET = process.env.API_KEY_SECRET || "issue-6564-api-key-secret";
-process.env.OMNIROUTE_WS_BRIDGE_SECRET = "issue-6564-bridge-secret";
+process.env.NIYATNA_WS_BRIDGE_SECRET = "issue-6564-bridge-secret";
 
 const coreDb = await import("../../src/lib/db/core.ts");
 const apiKeysDb = await import("../../src/lib/db/apiKeys.ts");
@@ -104,7 +104,7 @@ function buildPrepareRequest(apiKey: string, model: string): Request {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-omniroute-ws-bridge-secret": process.env.OMNIROUTE_WS_BRIDGE_SECRET as string,
+      "x-omniroute-ws-bridge-secret": process.env.NIYATNA_WS_BRIDGE_SECRET as string,
     },
     body: JSON.stringify({
       action: "prepare",

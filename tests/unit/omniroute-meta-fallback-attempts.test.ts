@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { OMNIROUTE_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
+import { NIYATNA_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
 import { buildOmniRouteResponseMetaHeaders } from "../../src/domain/omnirouteResponseMeta.ts";
 
 test("headers constant exposes the fallback-attempts key", () => {
   assert.equal(
-    OMNIROUTE_RESPONSE_HEADERS.fallbackAttempts,
+    NIYATNA_RESPONSE_HEADERS.fallbackAttempts,
     "X-OmniRoute-Fallback-Attempts"
   );
 });

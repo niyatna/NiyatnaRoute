@@ -16,7 +16,7 @@ import { printHeading, printInfo, printSuccess, printError } from "../io.mjs";
 import { resolveActiveContext } from "../contexts.mjs";
 import { guardHostConfigTarget } from "../utils/config-home-guard.mjs";
 
-const ENV_KEY_REF = "{env:OMNIROUTE_API_KEY}";
+const ENV_KEY_REF = "{env:NIYATNA_API_KEY}";
 const JSON_FORMATTING_OPTIONS = { insertSpaces: true, tabSize: 2 };
 
 /** Resolve baseUrl + (literal) apiKey from flags → active context → localhost. */
@@ -26,7 +26,7 @@ export function resolveOpencodeTarget(opts = {}) {
     baseUrl = String(opts.remote).replace(/\/+$/, "");
   } else {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       baseUrl = c?.baseUrl;
     } catch {
       /* no context */
@@ -35,7 +35,7 @@ export function resolveOpencodeTarget(opts = {}) {
       baseUrl = `http://localhost:${Number(opts.port ?? process.env.PORT ?? 20128) || 20128}`;
   }
 
-  // Precedence: explicit --api-key flag > OMNIROUTE_API_KEY env var > active
+  // Precedence: explicit --api-key flag > NIYATNA_API_KEY env var > active
   // context's management token. A context's accessToken/apiKey is a CLI
   // management credential (oma_live_...) with no /v1/* inference scope — it
   // must never silently outrank a real inference key the caller supplied
@@ -44,10 +44,10 @@ export function resolveOpencodeTarget(opts = {}) {
   // buildHeaders()). Only fall back to the context token when neither an
   // explicit flag nor the env var is set.
   let apiKey = opts.apiKey ?? opts["api-key"];
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey || "";
     } catch {
       /* no context auth */
@@ -119,7 +119,7 @@ export async function runSetupOpencodeCommand(opts = {}) {
   printInfo(`Connecting to ${baseUrl} …`);
 
   // Deferred import: opencode.ts is TypeScript; tsx is registered by
-  // bin/omniroute.mjs before any command runs, so importing here is safe.
+  // bin/niyatnaroute.mjs before any command runs, so importing here is safe.
   let raw;
   let configPath;
   try {
@@ -164,7 +164,7 @@ export async function runSetupOpencodeCommand(opts = {}) {
   printSuccess(
     `${basename(configPath)} updated at ${configPath} (${modelCount} models under 'omniroute')`
   );
-  printInfo('Use it:  opencode -m omniroute/<model> "..."   (export OMNIROUTE_API_KEY first)');
+  printInfo('Use it:  opencode -m omniroute/<model> "..."   (export NIYATNA_API_KEY first)');
   return 0;
 }
 
@@ -177,7 +177,7 @@ export function registerSetupOpencode(program) {
     )
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "20128")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:20128")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--model <id>", "Set the default top-level model (omniroute/<id>)")
     .option("--only <patterns>", "Comma-separated substrings — keep only matching model IDs")
     .option("--dry-run", "Print what would be written without touching the filesystem")
@@ -187,7 +187,7 @@ export function registerSetupOpencode(program) {
     )
     .action(async (opts, cmd) => {
       // Commander parses the ancestor program's own global --api-key option
-      // (bin/cli/program.mjs, bound to .env("OMNIROUTE_API_KEY")) against any
+      // (bin/cli/program.mjs, bound to .env("NIYATNA_API_KEY")) against any
       // occurrence of the flag in argv, so it wins the value even when the
       // user typed --api-key AFTER `setup-opencode` — this local option's own
       // `opts.apiKey` never sees it. cmd.optsWithGlobals() resolves to the

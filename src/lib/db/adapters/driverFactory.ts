@@ -237,7 +237,7 @@ export function createSyncDriverFactory(load: DriverLoader, betterSqliteProbe?: 
 
     // 2. better-sqlite3: preferred native driver on Node.js. Skipped on Bun and
     // during the Next.js production build. Build workers sometimes lose
-    // NEXT_PHASE from process.env, so OMNIROUTE_BUILDING=1 (set by
+    // NEXT_PHASE from process.env, so NIYATNA_BUILDING=1 (set by
     // build-next-isolated.mjs and inherited by the build workers) is the primary
     // build signal. Deliberately does NOT check isMainThread: at runtime many
     // worker threads (pino thread-stream, compression workers) legitimately use
@@ -295,7 +295,7 @@ const openSyncDriver = createSyncDriverFactory(requireSqliteDriver, createBetter
  * pack-boot-specific flags keeps this from becoming a general operator override.
  */
 export function isPackBootForcedSqlJsSmoke(env: NodeJS.ProcessEnv): boolean {
-  return env.OMNIROUTE_PACK_BOOT_SMOKE === "1" && env.OMNIROUTE_PACK_BOOT_FORCE_SQLJS === "1";
+  return env.NIYATNA_PACK_BOOT_SMOKE === "1" && env.NIYATNA_PACK_BOOT_FORCE_SQLJS === "1";
 }
 
 /** Tenta abrir com better-sqlite3 e node:sqlite sincronamente. Retorna null se ambos falharem. */

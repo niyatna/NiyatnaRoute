@@ -428,7 +428,7 @@ async function processLocale(locale, source, config, opts, backend) {
       logWarn(`${locale}: not present in config/i18n.json — skipping translation`);
     } else {
       const concurrency =
-        opts.concurrency ?? Number(process.env.OMNIROUTE_TRANSLATION_CONCURRENCY || 4);
+        opts.concurrency ?? Number(process.env.NIYATNA_TRANSLATION_CONCURRENCY || 4);
       translateStats = await translatePlaceholders(
         merged,
         localeEntry,
@@ -503,7 +503,7 @@ async function main() {
   if (opts.translateMarkers && !opts.dryRun) {
     backend = backendConfig();
     backend.concurrency =
-      opts.concurrency ?? Number(process.env.OMNIROUTE_TRANSLATION_CONCURRENCY || 4);
+      opts.concurrency ?? Number(process.env.NIYATNA_TRANSLATION_CONCURRENCY || 4);
     const batchInfo = opts.batchSize > 1 ? `, batch=${opts.batchSize}` : "";
     logInfo(
       `backend: ${backend.apiUrl} (model=${backend.model}, concurrency=${backend.concurrency}${batchInfo}, timeout=${backend.timeoutMs}ms)`

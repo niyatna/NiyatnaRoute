@@ -9,7 +9,7 @@ import {
   getOmniRouteTokenCounts,
 } from "../../src/domain/omnirouteResponseMeta.ts";
 import { APP_CONFIG } from "../../src/shared/constants/appConfig.ts";
-import { OMNIROUTE_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
+import { NIYATNA_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
 
 test("getOmniRouteTokenCounts normalizes common usage shapes", () => {
   assert.deepEqual(
@@ -56,7 +56,7 @@ test("buildOmniRouteResponseMetaHeaders keeps ASCII model header values unchange
     model: "gpt-4o-mini",
   });
 
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.model], "gpt-4o-mini");
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.model], "gpt-4o-mini");
 });
 
 test("buildOmniRouteResponseMetaHeaders percent-encodes non-ASCII model header values", () => {
@@ -66,7 +66,7 @@ test("buildOmniRouteResponseMetaHeaders percent-encodes non-ASCII model header v
     model,
   });
 
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.model], encodeURIComponent(model));
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.model], encodeURIComponent(model));
   assert.doesNotThrow(() => new Headers(headers));
 });
 
@@ -77,34 +77,34 @@ test("buildOmniRouteResponseMetaHeaders strips control characters from string he
     requestId: "req-1\nreq-2\rreq-3\u0007",
   });
 
-  assert.doesNotMatch(headers[OMNIROUTE_RESPONSE_HEADERS.model], /[\r\n\u0000-\u001f\u007f]/);
-  assert.doesNotMatch(headers[OMNIROUTE_RESPONSE_HEADERS.requestId], /[\r\n\u0000-\u001f\u007f]/);
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.model], "freeX-Injected: yes-model");
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.requestId], "req-1req-2req-3");
+  assert.doesNotMatch(headers[NIYATNA_RESPONSE_HEADERS.model], /[\r\n\u0000-\u001f\u007f]/);
+  assert.doesNotMatch(headers[NIYATNA_RESPONSE_HEADERS.requestId], /[\r\n\u0000-\u001f\u007f]/);
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.model], "freeX-Injected: yes-model");
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.requestId], "req-1req-2req-3");
   assert.doesNotThrow(() => new Headers(headers));
 });
 
 test("buildOmniRouteResponseMetaHeaders always emits X-OmniRoute-Version", () => {
   const headers = buildOmniRouteResponseMetaHeaders({ provider: "openai", model: "gpt" });
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.version], APP_CONFIG.version);
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.version], APP_CONFIG.version);
 
   // Even with no provider/model at all, the version is still attached.
   const bare = buildOmniRouteResponseMetaHeaders({});
-  assert.equal(bare[OMNIROUTE_RESPONSE_HEADERS.version], APP_CONFIG.version);
+  assert.equal(bare[NIYATNA_RESPONSE_HEADERS.version], APP_CONFIG.version);
 });
 
 test("buildOmniRouteResponseMetaHeaders emits X-OmniRoute-Request-Id only when provided", () => {
   const withId = buildOmniRouteResponseMetaHeaders({ model: "gpt", requestId: "req-123" });
-  assert.equal(withId[OMNIROUTE_RESPONSE_HEADERS.requestId], "req-123");
+  assert.equal(withId[NIYATNA_RESPONSE_HEADERS.requestId], "req-123");
 
   const noId = buildOmniRouteResponseMetaHeaders({ model: "gpt" });
-  assert.equal(noId[OMNIROUTE_RESPONSE_HEADERS.requestId], undefined);
+  assert.equal(noId[NIYATNA_RESPONSE_HEADERS.requestId], undefined);
 
   const nullId = buildOmniRouteResponseMetaHeaders({ model: "gpt", requestId: null });
-  assert.equal(nullId[OMNIROUTE_RESPONSE_HEADERS.requestId], undefined);
+  assert.equal(nullId[NIYATNA_RESPONSE_HEADERS.requestId], undefined);
 
   const blankId = buildOmniRouteResponseMetaHeaders({ model: "gpt", requestId: "   " });
-  assert.equal(blankId[OMNIROUTE_RESPONSE_HEADERS.requestId], undefined);
+  assert.equal(blankId[NIYATNA_RESPONSE_HEADERS.requestId], undefined);
 });
 
 test("attachOmniRouteMetaHeaders mutates a Headers instance in place, preserving existing entries", () => {
@@ -116,9 +116,9 @@ test("attachOmniRouteMetaHeaders mutates a Headers instance in place, preserving
   });
 
   assert.equal(headers.get("Content-Type"), "application/json");
-  assert.equal(headers.get(OMNIROUTE_RESPONSE_HEADERS.version), APP_CONFIG.version);
-  assert.equal(headers.get(OMNIROUTE_RESPONSE_HEADERS.requestId), "req-abc");
-  assert.equal(headers.get(OMNIROUTE_RESPONSE_HEADERS.model), "gpt");
+  assert.equal(headers.get(NIYATNA_RESPONSE_HEADERS.version), APP_CONFIG.version);
+  assert.equal(headers.get(NIYATNA_RESPONSE_HEADERS.requestId), "req-abc");
+  assert.equal(headers.get(NIYATNA_RESPONSE_HEADERS.model), "gpt");
 });
 
 test("attachOmniRouteMetaHeaders mutates a plain record in place, preserving existing entries", () => {
@@ -129,10 +129,10 @@ test("attachOmniRouteMetaHeaders mutates a plain record in place, preserving exi
   });
 
   assert.equal(headers["Content-Type"], "application/json");
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.version], APP_CONFIG.version);
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.model], "gpt");
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.version], APP_CONFIG.version);
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.model], "gpt");
   // No requestId provided → header omitted.
-  assert.equal(headers[OMNIROUTE_RESPONSE_HEADERS.requestId], undefined);
+  assert.equal(headers[NIYATNA_RESPONSE_HEADERS.requestId], undefined);
 });
 
 test("buildOmniRouteSseMetadataComment emits comment lines compatible with SSE", () => {
@@ -165,8 +165,8 @@ test("buildOmniRouteResponseMetaHeaders emits X-OmniRoute-Cost-Saved only when c
     costUsd: 0,
     costSavedUsd: 0.0125,
   });
-  assert.equal(hit[OMNIROUTE_RESPONSE_HEADERS.responseCost], "0.0000000000");
-  assert.equal(hit[OMNIROUTE_RESPONSE_HEADERS.costSaved], "0.0125000000");
+  assert.equal(hit[NIYATNA_RESPONSE_HEADERS.responseCost], "0.0000000000");
+  assert.equal(hit[NIYATNA_RESPONSE_HEADERS.costSaved], "0.0125000000");
 
   // A normal response (no costSavedUsd) omits the Cost-Saved header entirely.
   const miss = buildOmniRouteResponseMetaHeaders({
@@ -174,7 +174,7 @@ test("buildOmniRouteResponseMetaHeaders emits X-OmniRoute-Cost-Saved only when c
     model: "gpt-4o",
     costUsd: 0.0125,
   });
-  assert.equal(miss[OMNIROUTE_RESPONSE_HEADERS.costSaved], undefined);
+  assert.equal(miss[NIYATNA_RESPONSE_HEADERS.costSaved], undefined);
 
   // A free-model HIT still emits Cost-Saved (= 0) — it explicitly passed costSavedUsd.
   const freeHit = buildOmniRouteResponseMetaHeaders({
@@ -182,7 +182,7 @@ test("buildOmniRouteResponseMetaHeaders emits X-OmniRoute-Cost-Saved only when c
     costUsd: 0,
     costSavedUsd: 0,
   });
-  assert.equal(freeHit[OMNIROUTE_RESPONSE_HEADERS.costSaved], "0.0000000000");
+  assert.equal(freeHit[NIYATNA_RESPONSE_HEADERS.costSaved], "0.0000000000");
 });
 
 test("attachOmniRouteMetaHeaders forwards costSavedUsd onto a Headers bag", () => {
@@ -194,6 +194,6 @@ test("attachOmniRouteMetaHeaders forwards costSavedUsd onto a Headers bag", () =
     costUsd: 0,
     costSavedUsd: 0.0125,
   });
-  assert.equal(headers.get(OMNIROUTE_RESPONSE_HEADERS.responseCost), "0.0000000000");
-  assert.equal(headers.get(OMNIROUTE_RESPONSE_HEADERS.costSaved), "0.0125000000");
+  assert.equal(headers.get(NIYATNA_RESPONSE_HEADERS.responseCost), "0.0000000000");
+  assert.equal(headers.get(NIYATNA_RESPONSE_HEADERS.costSaved), "0.0125000000");
 });

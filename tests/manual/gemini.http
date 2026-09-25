@@ -1,7 +1,7 @@
 ###
 # @name OpenAI Response - Test streaming response
 POST {{omniroute-address}}/v1/responses
-Authorization: Bearer {{OMNIROUTE_API_KEY}}
+Authorization: Bearer {{NIYATNA_API_KEY}}
 Content-Type: application/json
 
 {
@@ -64,7 +64,7 @@ Content-Type: application/json
 ###
 # @name OpenAI Response - Test non-streaming response
 POST {{omniroute-address}}/v1/responses
-Authorization: Bearer {{OMNIROUTE_API_KEY}}
+Authorization: Bearer {{NIYATNA_API_KEY}}
 Content-Type: application/json
 
 {
@@ -130,7 +130,7 @@ Content-Type: application/json
 # (no text serialization). The model should respond with either natural language or
 # proper functionCall — never with text labels like [tool_history_call:.
 POST {{omniroute-address}}/v1/chat/completions
-Authorization: Bearer {{OMNIROUTE_API_KEY}}
+Authorization: Bearer {{NIYATNA_API_KEY}}
 Content-Type: application/json
 
 {
@@ -173,7 +173,7 @@ Content-Type: application/json
 ###
 # @name Simple Q&A — no tool calls in history
 POST {{omniroute-address}}/v1/chat/completions
-Authorization: Bearer {{OMNIROUTE_API_KEY}}
+Authorization: Bearer {{NIYATNA_API_KEY}}
 Content-Type: application/json
 
 {
@@ -253,7 +253,7 @@ Content-Type: application/json
 # Same as native test above but with a thinking model (gemini-2.5-flash)
 # that cryptographically validates thoughtSignature on functionCall parts.
 POST {{omniroute-address}}/v1/chat/completions
-Authorization: Bearer {{OMNIROUTE_API_KEY}}
+Authorization: Bearer {{NIYATNA_API_KEY}}
 Content-Type: application/json
 
 {

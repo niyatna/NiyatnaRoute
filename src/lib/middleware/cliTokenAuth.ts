@@ -69,10 +69,10 @@ async function isLocalCliRequest(request: RequestWithPeer): Promise<boolean> {
 
 /**
  * Validates the CLI machine-id token sent by the local omniroute CLI.
- * Only accepted from loopback IPs. Disabled via OMNIROUTE_DISABLE_CLI_TOKEN=true.
+ * Only accepted from loopback IPs. Disabled via NIYATNA_DISABLE_CLI_TOKEN=true.
  */
 export async function isCliTokenAuthValid(request: Request): Promise<boolean> {
-  if (process.env.OMNIROUTE_DISABLE_CLI_TOKEN === "true") return false;
+  if (process.env.NIYATNA_DISABLE_CLI_TOKEN === "true") return false;
 
   const token = await readHeader(request, HEADER_NAME);
   if (!token) return false;

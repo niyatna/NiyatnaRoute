@@ -55,7 +55,7 @@ export function resolveFivediveTarget(opts = {}) {
   else {
     try {
       baseUrl = stripToRoot(
-        resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl
+        resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl
       );
     } catch {
       /* no context configured */
@@ -66,13 +66,13 @@ export function resolveFivediveTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* no context configured */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { baseUrl, apiKey };
 }
 
@@ -213,7 +213,7 @@ export async function runSetup5diveCommand(opts = {}) {
     return 2;
   }
   if (!apiKey) {
-    printError("An OmniRoute API key is required. Pass --api-key, or set OMNIROUTE_API_KEY.");
+    printError("An OmniRoute API key is required. Pass --api-key, or set NIYATNA_API_KEY.");
     return 2;
   }
 

@@ -28,7 +28,7 @@ const testSchema = z.object({
  * caller-supplied proxies. Even behind management auth, never let it probe
  * private / link-local / cloud-metadata hosts (169.254.x, 127/8, 10/8,
  * 192.168/16, 172.16/12, ::1, fc00::/7, .internal, …) unless the operator has
- * explicitly opted in via OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS.
+ * explicitly opted in via NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS.
  */
 function blockedPrivateUrl(rawUrl: string): boolean {
   if (arePrivateProviderUrlsAllowed()) return false;

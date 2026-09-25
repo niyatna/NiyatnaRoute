@@ -34,7 +34,7 @@ test("patchStandaloneBasePath rewrites a root-path standalone tree", () => {
   fs.mkdirSync(path.join(distRoot, "server"), { recursive: true });
   fs.writeFileSync(path.join(distRoot, "routes-manifest.json"), JSON.stringify({ basePath: "" }));
   fs.writeFileSync(path.join(distRoot, "server", "chunk.js"), 'export const config={basePath:""};');
-  fs.writeFileSync(path.join(appRoot, "BUILD_OMNIROUTE_BASE_PATH"), "\n");
+  fs.writeFileSync(path.join(appRoot, "BUILD_NIYATNA_BASE_PATH"), "\n");
 
   const result = patchStandaloneBasePath({
     appRoot,
@@ -81,19 +81,19 @@ test("patchBasePathLiterals rewrites assetPrefix literals (Next 16 SSR asset URL
 
 test("patchBasePathLiterals rewrites the NEXT_PUBLIC env mirror", () => {
   assert.equal(
-    patchBasePathLiterals('{"env":{"NEXT_PUBLIC_OMNIROUTE_BASE_PATH":""}}', "/omniroute"),
-    '{"env":{"NEXT_PUBLIC_OMNIROUTE_BASE_PATH":"/omniroute"}}'
+    patchBasePathLiterals('{"env":{"NEXT_PUBLIC_NIYATNA_BASE_PATH":""}}', "/omniroute"),
+    '{"env":{"NEXT_PUBLIC_NIYATNA_BASE_PATH":"/omniroute"}}'
   );
   assert.equal(
-    patchBasePathLiterals('NEXT_PUBLIC_OMNIROUTE_BASE_PATH:""', "/omniroute"),
-    'NEXT_PUBLIC_OMNIROUTE_BASE_PATH:"/omniroute"'
+    patchBasePathLiterals('NEXT_PUBLIC_NIYATNA_BASE_PATH:""', "/omniroute"),
+    'NEXT_PUBLIC_NIYATNA_BASE_PATH:"/omniroute"'
   );
 });
 
 test("patchProcessEnvShim populates the Turbopack client process env", () => {
   assert.equal(
     patchProcessEnvShim("o.env={},o.argv=[]", "/omniroute"),
-    'o.env={OMNIROUTE_BASE_PATH:"/omniroute",NEXT_PUBLIC_OMNIROUTE_BASE_PATH:"/omniroute"},o.argv=[]'
+    'o.env={NIYATNA_BASE_PATH:"/omniroute",NEXT_PUBLIC_NIYATNA_BASE_PATH:"/omniroute"},o.argv=[]'
   );
   // Non-empty env objects are left untouched (never clobber baked values).
   assert.equal(patchProcessEnvShim("o.env={A:1}", "/omniroute"), "o.env={A:1}");

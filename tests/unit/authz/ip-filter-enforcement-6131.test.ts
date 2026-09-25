@@ -18,13 +18,13 @@ const core = await import("../../../src/lib/db/core.ts");
 const ipFilter = await import("../../../open-sse/services/ipFilter.ts");
 const pipeline = await import("../../../src/server/authz/pipeline.ts");
 
-const ORIGINAL_STAMP_TOKEN = process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+const ORIGINAL_STAMP_TOKEN = process.env.NIYATNA_PEER_STAMP_TOKEN;
 
 test.after(() => {
   core.resetDbInstance();
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
-  if (ORIGINAL_STAMP_TOKEN === undefined) delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
-  else process.env.OMNIROUTE_PEER_STAMP_TOKEN = ORIGINAL_STAMP_TOKEN;
+  if (ORIGINAL_STAMP_TOKEN === undefined) delete process.env.NIYATNA_PEER_STAMP_TOKEN;
+  else process.env.NIYATNA_PEER_STAMP_TOKEN = ORIGINAL_STAMP_TOKEN;
 });
 
 test.beforeEach(() => {
@@ -32,7 +32,7 @@ test.beforeEach(() => {
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
   ipFilter.resetIPFilter();
-  delete process.env.OMNIROUTE_PEER_STAMP_TOKEN;
+  delete process.env.NIYATNA_PEER_STAMP_TOKEN;
 });
 
 const BLOCKED = "203.0.113.9";
@@ -79,7 +79,7 @@ test("#6131 disabled filter never blocks (even a listed IP)", async () => {
 });
 
 test("#6131 loopback is exempt — operator can't lock themselves out locally", async () => {
-  process.env.OMNIROUTE_PEER_STAMP_TOKEN = "stamp-tok";
+  process.env.NIYATNA_PEER_STAMP_TOKEN = "stamp-tok";
   ipFilter.configureIPFilter({ enabled: true, mode: "blacklist" });
   ipFilter.addToBlacklist(BLOCKED);
 

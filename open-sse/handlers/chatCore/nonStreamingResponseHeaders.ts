@@ -8,7 +8,7 @@
  * (returns a fresh map; only mutates the map it owns). Behaviour is byte-identical to the previous
  * inline block, including `latencyMs: now - startTime`.
  */
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { attachOmniRouteMetaHeaders as defaultAttachMeta } from "@/domain/omnirouteResponseMeta";
 
 export function buildNonStreamingResponseHeaders(
@@ -30,7 +30,7 @@ export function buildNonStreamingResponseHeaders(
 ): Record<string, string> {
   const responseHeaders: Record<string, string> = {
     "Content-Type": "application/json",
-    [OMNIROUTE_RESPONSE_HEADERS.cache]: "MISS",
+    [NIYATNA_RESPONSE_HEADERS.cache]: "MISS",
   };
   deps.attachOmniRouteMetaHeaders(responseHeaders, {
     provider: args.provider,
@@ -44,7 +44,7 @@ export function buildNonStreamingResponseHeaders(
     ...(args.fallbackAttempts !== undefined ? { fallbackAttempts: args.fallbackAttempts } : {}),
   });
   if (args.compressionResponseMeta) {
-    responseHeaders[OMNIROUTE_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
+    responseHeaders[NIYATNA_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
   }
   return responseHeaders;
 }

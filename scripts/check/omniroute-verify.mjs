@@ -2,8 +2,8 @@
 
 import { CLI_TOKEN_HEADER, getCliToken } from "../../bin/cli/utils/cliToken.mjs";
 
-const baseUrl = (process.env.OMNIROUTE_BASE_URL || "http://127.0.0.1:9999").replace(/\/$/, "");
-const apiKey = process.env.OMNIROUTE_API_KEY || "";
+const baseUrl = (process.env.NIYATNA_BASE_URL || "http://127.0.0.1:9999").replace(/\/$/, "");
+const apiKey = process.env.NIYATNA_API_KEY || "";
 const timeoutMs = 5000;
 
 async function get(path) {

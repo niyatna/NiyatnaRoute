@@ -37,9 +37,9 @@ function runFixture(testRoot: string): Promise<ChildResult> {
     FORCE_COLOR: "0",
     LANG: "C.UTF-8",
     NODE_ENV: "test",
-    OMNIROUTE_HUGGINGCHAT_TEST_ROOT: testRoot,
-    OMNIROUTE_HUGGINGCHAT_TEST_RUN_ID: basename(testRoot),
-    OMNIROUTE_PLUGINS_DIR: pluginsDir,
+    NIYATNA_HUGGINGCHAT_TEST_ROOT: testRoot,
+    NIYATNA_HUGGINGCHAT_TEST_RUN_ID: basename(testRoot),
+    NIYATNA_PLUGINS_DIR: pluginsDir,
     TZ: "UTC",
     XDG_CONFIG_HOME: xdgConfigDir,
   };

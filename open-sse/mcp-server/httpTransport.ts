@@ -139,7 +139,7 @@ async function isInitializeRequest(request: Request): Promise<boolean> {
  * Resolve the caller's per-key scopes (#7895) and hand the request to the
  * transport with `authInfo` populated, so `extra.authInfo.scopes` reaching
  * tool handlers reflects the real `api_keys.scopes` row instead of the
- * `OMNIROUTE_MCP_SCOPES` env fallback. When no per-key auth can be resolved
+ * `NIYATNA_MCP_SCOPES` env fallback. When no per-key auth can be resolved
  * (no key, invalid key, stdio has no `Request` at all), `authInfo` stays
  * `undefined` and `scopeEnforcement.ts` falls through to its existing
  * meta/env chain unchanged.

@@ -17,7 +17,7 @@ const DEFAULT_INTERVAL_MS = 30 * 1000;
 let timer: NodeJS.Timeout | null = null;
 
 function getIntervalMs() {
-  const raw = process.env.OMNIROUTE_BACKUP_SCHEDULE_JOB_INTERVAL_MS;
+  const raw = process.env.NIYATNA_BACKUP_SCHEDULE_JOB_INTERVAL_MS;
   const parsed = raw ? Number(raw) : Number.NaN;
   // Floor at 5s (not the usual 60s+ floor used by the other jobs in this
   // directory): cron granularity is 1 minute, so the tick must be

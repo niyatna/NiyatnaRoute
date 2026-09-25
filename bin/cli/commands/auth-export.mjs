@@ -153,7 +153,7 @@ function formatAsEnv(rows) {
     for (const { key, envSuffix } of CREDENTIAL_FIELDS) {
       const value = row[key];
       if (!value) continue;
-      lines.push(`OMNIROUTE_${providerSegment}_${envSuffix}=${value}`);
+      lines.push(`NIYATNA_${providerSegment}_${envSuffix}=${value}`);
     }
   }
   return lines.join("\n");

@@ -17,21 +17,21 @@ function makeStandaloneRoot(basePath = "") {
     path.join(distRoot, "server", "chunk.js"),
     `export const config={basePath:"${basePath}"};`
   );
-  fs.writeFileSync(path.join(appRoot, "BUILD_OMNIROUTE_BASE_PATH"), `${basePath}\n`);
+  fs.writeFileSync(path.join(appRoot, "BUILD_NIYATNA_BASE_PATH"), `${basePath}\n`);
   return appRoot;
 }
 
 test("ensureDockerBasePath is a no-op when runtime matches the baked sentinel", () => {
   const appRoot = makeStandaloneRoot("");
-  const result = ensureDockerBasePath({ appRoot, env: { OMNIROUTE_BASE_PATH: "" } });
+  const result = ensureDockerBasePath({ appRoot, env: { NIYATNA_BASE_PATH: "" } });
   assert.equal(result.action, "noop");
 });
 
 test("ensureDockerBasePath patches a root image when a subpath is configured", () => {
   const appRoot = makeStandaloneRoot("");
-  const result = ensureDockerBasePath({ appRoot, env: { OMNIROUTE_BASE_PATH: "/omniroute" } });
+  const result = ensureDockerBasePath({ appRoot, env: { NIYATNA_BASE_PATH: "/omniroute" } });
   assert.equal(result.action, "patched");
-  assert.equal(fs.readFileSync(path.join(appRoot, "BUILD_OMNIROUTE_BASE_PATH"), "utf8"), "/omniroute\n");
+  assert.equal(fs.readFileSync(path.join(appRoot, "BUILD_NIYATNA_BASE_PATH"), "utf8"), "/omniroute\n");
   const manifest = JSON.parse(
     fs.readFileSync(path.join(appRoot, ".build", "next", "routes-manifest.json"), "utf8")
   );

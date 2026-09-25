@@ -25,7 +25,7 @@ const ENV_KEYS = [
   "FREE_PROXY_AUTO_SYNC_ENABLED",
   "FREE_PROXY_AUTO_SYNC_INTERVAL_MS",
   "NEXT_PHASE",
-  "OMNIROUTE_DISABLE_BACKGROUND_SERVICES",
+  "NIYATNA_DISABLE_BACKGROUND_SERVICES",
   "FREE_PROXY_1PROXY_ENABLED",
   "FREE_PROXY_PROXIFLY_ENABLED",
 ] as const;
@@ -130,9 +130,9 @@ test("isBuildProcess() (NEXT_PHASE=phase-production-build) suppresses scheduling
   assert.equal(globalThis.__freeProxyAutoSyncStartupTimer, undefined);
 });
 
-test("OMNIROUTE_DISABLE_BACKGROUND_SERVICES=true suppresses scheduling", () => {
+test("NIYATNA_DISABLE_BACKGROUND_SERVICES=true suppresses scheduling", () => {
   process.env.FREE_PROXY_AUTO_SYNC_ENABLED = "true";
-  process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES = "true";
+  process.env.NIYATNA_DISABLE_BACKGROUND_SERVICES = "true";
 
   scheduler.initFreeProxyAutoSync();
 

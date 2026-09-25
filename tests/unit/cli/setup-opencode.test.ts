@@ -26,7 +26,7 @@ test("postProcessOpencodeConfig replaces the literal API key with an env ref (no
   const { json } = postProcessOpencodeConfig(RAW);
   assert.equal(json.includes("sk-secret-literal"), false);
   const cfg = JSON.parse(json);
-  assert.equal(cfg.provider.omniroute.options.apiKey, "{env:OMNIROUTE_API_KEY}");
+  assert.equal(cfg.provider.omniroute.options.apiKey, "{env:NIYATNA_API_KEY}");
   assert.equal(cfg.provider.omniroute.options.baseURL, "http://vps:20128/v1");
 });
 
@@ -72,7 +72,7 @@ test("postProcessOpencodeConfig preserves JSONC comments outside managed fields"
   assert.match(json, /\/\/ nested provider comment/);
   const config = parse(json);
   assert.equal(config.provider.custom.npm, "@ai-sdk/custom");
-  assert.equal(config.provider.omniroute.options.apiKey, "{env:OMNIROUTE_API_KEY}");
+  assert.equal(config.provider.omniroute.options.apiKey, "{env:NIYATNA_API_KEY}");
   assert.equal(modelCount, 1);
 });
 

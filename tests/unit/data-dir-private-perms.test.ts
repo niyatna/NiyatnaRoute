@@ -2,7 +2,7 @@
 // STORAGE_ENCRYPTION_KEY, the key to every credential in storage.sqlite) without an explicit
 // mode, so under the common umask 002 the directory was 0775 and .env 0664 — any other local
 // user could read the key and the database. These cases pin the private-by-default contract
-// of the helpers bin/omniroute.mjs now uses. POSIX-only: Windows has no mode bits to check.
+// of the helpers bin/niyatnaroute.mjs now uses. POSIX-only: Windows has no mode bits to check.
 
 import test from "node:test";
 import assert from "node:assert/strict";

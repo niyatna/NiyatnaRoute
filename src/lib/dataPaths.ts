@@ -107,7 +107,7 @@ export function isTestContext(): boolean {
  * Such a process has no application entry point from which to establish storage intent,
  * so defaulting it to the operator's durable database is unsafe. A deliberate production
  * inspection can still opt in with an explicit DATA_DIR (preferred) or
- * OMNIROUTE_ALLOW_DEFAULT_DATA_DIR=1.
+ * NIYATNA_ALLOW_DEFAULT_DATA_DIR=1.
  */
 function isEvalProbeContext(): boolean {
   return process.execArgv.some(
@@ -139,11 +139,11 @@ export function resolveWritableDataDir({ isCloud = false }: { isCloud?: boolean 
   // Redirect to a throwaway dir instead of throwing: the documented single-file command
   // (`node --import tsx/esm --test tests/unit/x.test.ts`) does not load the isolation
   // setup, and a hard failure there would only teach people to disable the guard.
-  // `OMNIROUTE_ALLOW_DEFAULT_DATA_DIR=1` opts back in, so the intent is recorded.
+  // `NIYATNA_ALLOW_DEFAULT_DATA_DIR=1` opts back in, so the intent is recorded.
   if (
     !configured &&
     (isTestContext() || isEvalProbeContext()) &&
-    process.env.OMNIROUTE_ALLOW_DEFAULT_DATA_DIR !== "1"
+    process.env.NIYATNA_ALLOW_DEFAULT_DATA_DIR !== "1"
   ) {
     if (!testContextDataDir) {
       testContextDataDir = fs.mkdtempSync(path.join(os.tmpdir(), `${APP_NAME}-testctx-`));

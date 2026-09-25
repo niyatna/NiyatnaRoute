@@ -68,34 +68,34 @@ function envFlag(name: string, fallback: boolean): boolean {
 }
 
 const profileRoot =
-  process.env.OMNIROUTE_VNC_PROFILE_DIR ||
+  process.env.NIYATNA_VNC_PROFILE_DIR ||
   `${process.env.HOME || "/tmp"}/.omniroute/browser-login-profiles`;
 
 export const VNC_CONFIG = {
   /**
    * This feature uses Chromium CDP only. Build docker/vnc-browser/chromium and
-   * tag it with this name, or override OMNIROUTE_VNC_IMAGE.
+   * tag it with this name, or override NIYATNA_VNC_IMAGE.
    */
-  image: process.env.OMNIROUTE_VNC_IMAGE || "omniroute-vnc-chromium:local",
-  containerVncPort: Number(process.env.OMNIROUTE_VNC_CONTAINER_VNC_PORT || 3000),
-  containerCdpPort: Number(process.env.OMNIROUTE_VNC_CONTAINER_CDP_PORT || 9223),
-  containerProfileDir: process.env.OMNIROUTE_VNC_CONTAINER_PROFILE_DIR || "/config",
+  image: process.env.NIYATNA_VNC_IMAGE || "omniroute-vnc-chromium:local",
+  containerVncPort: Number(process.env.NIYATNA_VNC_CONTAINER_VNC_PORT || 3000),
+  containerCdpPort: Number(process.env.NIYATNA_VNC_CONTAINER_CDP_PORT || 9223),
+  containerProfileDir: process.env.NIYATNA_VNC_CONTAINER_PROFILE_DIR || "/config",
   profileDir: profileRoot,
-  persistProfiles: envFlag("OMNIROUTE_VNC_PERSIST_PROFILES", false),
-  idleTimeoutMs: Number(process.env.OMNIROUTE_VNC_IDLE_MS || 10 * 60 * 1000),
-  maxSessionMs: Number(process.env.OMNIROUTE_VNC_MAX_MS || 30 * 60 * 1000),
-  maxSessions: Number(process.env.OMNIROUTE_VNC_MAX_SESSIONS || 4),
-  dockerBin: process.env.OMNIROUTE_DOCKER_BIN || "docker",
+  persistProfiles: envFlag("NIYATNA_VNC_PERSIST_PROFILES", false),
+  idleTimeoutMs: Number(process.env.NIYATNA_VNC_IDLE_MS || 10 * 60 * 1000),
+  maxSessionMs: Number(process.env.NIYATNA_VNC_MAX_MS || 30 * 60 * 1000),
+  maxSessions: Number(process.env.NIYATNA_VNC_MAX_SESSIONS || 4),
+  dockerBin: process.env.NIYATNA_DOCKER_BIN || "docker",
   /**
    * Dedicated bridge network for browser-login containers (#12571): keeps
    * them off Docker's default bridge network so sibling containers can't
    * reach the CDP bridge port over the container-to-container path.
    */
-  network: process.env.OMNIROUTE_VNC_NETWORK || "omniroute-vnc-browser-login",
-  browserReadyTimeoutMs: Number(process.env.OMNIROUTE_VNC_READY_MS || 45_000),
-  harvestTimeoutMs: Number(process.env.OMNIROUTE_VNC_HARVEST_MS || 20_000),
+  network: process.env.NIYATNA_VNC_NETWORK || "omniroute-vnc-browser-login",
+  browserReadyTimeoutMs: Number(process.env.NIYATNA_VNC_READY_MS || 45_000),
+  harvestTimeoutMs: Number(process.env.NIYATNA_VNC_HARVEST_MS || 20_000),
   chromiumArgs:
-    process.env.OMNIROUTE_VNC_CHROMIUM_ARGS ||
+    process.env.NIYATNA_VNC_CHROMIUM_ARGS ||
     "--remote-debugging-port=9222 --no-first-run --no-default-browser-check",
 } as const;
 

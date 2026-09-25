@@ -176,7 +176,7 @@ export function extractUserJwtFromStorageRaw(raw: string): string {
 
 function resolveAdobeFireflyDataRoot(): string {
   const dataRoot =
-    String(process.env.DATA_DIR || process.env.OMNIROUTE_DATA_DIR || "").trim() ||
+    String(process.env.DATA_DIR || process.env.NIYATNA_DATA_DIR || "").trim() ||
     (process.env.LOCALAPPDATA
       ? join(process.env.LOCALAPPDATA, "OmniRoute")
       : join(process.cwd(), ".data"));
@@ -290,7 +290,7 @@ export async function resolveAdobeAccountLabel(
 
 /** Resolve system Chrome/Edge executable. Exported for unit tests. */
 export function resolveSystemBrowserExecutable(): string | null {
-  const configured = process.env.OMNIROUTE_LOGIN_BROWSER_PATH?.trim();
+  const configured = process.env.NIYATNA_LOGIN_BROWSER_PATH?.trim();
   if (configured && existsSync(configured)) return configured;
 
   const pf = process.env.ProgramFiles || "C:\\Program Files";
@@ -1162,7 +1162,7 @@ async function runAdobeFireflyCdpBrowser(opts: {
       success: false,
       error:
         "No Chrome or Edge browser found for Adobe Firefly sign-in. " +
-        "Install Google Chrome or Microsoft Edge, or set OMNIROUTE_LOGIN_BROWSER_PATH, " +
+        "Install Google Chrome or Microsoft Edge, or set NIYATNA_LOGIN_BROWSER_PATH, " +
         "or paste the IMS Bearer JWT from firefly-3p.ff.adobe.io.",
     };
   }

@@ -28,7 +28,7 @@ export function resolveQwenTarget(opts = {}) {
 
   if (!root || !(opts.apiKey ?? opts["api-key"])) {
     try {
-      context = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      context = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
     } catch {
       // An active context is optional for local setup.
     }
@@ -45,7 +45,7 @@ export function resolveQwenTarget(opts = {}) {
     opts["api-key"] ??
     context?.accessToken ??
     context?.apiKey ??
-    process.env.OMNIROUTE_API_KEY ??
+    process.env.NIYATNA_API_KEY ??
     "sk_omniroute";
 
   return { baseUrl: normalizeQwenCodeBaseUrl(root), apiKey };
@@ -140,7 +140,7 @@ export async function runSetupQwenCommand(opts = {}) {
     if (dryRun) {
       console.log(`\n${settingsText}`);
       printInfo(`[dry-run] settings → ${settingsPath}`);
-      printInfo(`[dry-run] credential → ${envPath} (OMNIROUTE_API_KEY)`);
+      printInfo(`[dry-run] credential → ${envPath} (NIYATNA_API_KEY)`);
       return 0;
     }
 
@@ -149,7 +149,7 @@ export async function runSetupQwenCommand(opts = {}) {
     writeAtomic(settingsPath, settingsText);
     writeAtomic(envPath, envText, 0o600);
     printSuccess(`Wrote ${settingsPath}`);
-    printSuccess(`Updated ${envPath} (OMNIROUTE_API_KEY only)`);
+    printSuccess(`Updated ${envPath} (NIYATNA_API_KEY only)`);
     printInfo('Run: qwen   (or headless: qwen -p "reply OK")');
     return 0;
   } catch (error) {

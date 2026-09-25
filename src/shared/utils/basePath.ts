@@ -1,5 +1,5 @@
 /**
- * Client/server helpers for Next.js `basePath` / `OMNIROUTE_BASE_PATH` deploys.
+ * Client/server helpers for Next.js `basePath` / `NIYATNA_BASE_PATH` deploys.
  *
  * Next.js rewrites Link/router automatically, but absolute browser calls like
  * `fetch("/api/...")` and `new EventSource("/api/...")` do not get the prefix.
@@ -16,13 +16,13 @@ export function normalizeBasePath(value?: string | null): string {
 
 /**
  * Deploy basePath as seen by the client bundle.
- * Set via next.config `env.NEXT_PUBLIC_OMNIROUTE_BASE_PATH` from `OMNIROUTE_BASE_PATH`.
+ * Set via next.config `env.NEXT_PUBLIC_NIYATNA_BASE_PATH` from `NIYATNA_BASE_PATH`.
  */
 export function getDeployBasePath(
   env: NodeJS.ProcessEnv = typeof process !== "undefined" ? process.env : ({} as NodeJS.ProcessEnv)
 ): string {
   return normalizeBasePath(
-    env.NEXT_PUBLIC_OMNIROUTE_BASE_PATH || env.OMNIROUTE_BASE_PATH || ""
+    env.NEXT_PUBLIC_NIYATNA_BASE_PATH || env.NIYATNA_BASE_PATH || ""
   );
 }
 

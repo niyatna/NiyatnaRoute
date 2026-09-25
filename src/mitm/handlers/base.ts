@@ -181,7 +181,7 @@ export abstract class MitmHandlerBase {
   ): Promise<Response> {
     const port = process.env.API_PORT || process.env.PORT || 20128;
     const base =
-      process.env.OMNIROUTE_BASE_URL ?? process.env.BASE_URL ?? `http://127.0.0.1:${port}`;
+      process.env.NIYATNA_BASE_URL ?? process.env.BASE_URL ?? `http://127.0.0.1:${port}`;
     const url = `${base.replace(/\/+$/, "")}${path}`;
     const apiKey = process.env.ROUTER_API_KEY ?? "";
 

@@ -1996,7 +1996,7 @@ async function buildUnifiedModelsResponseCore(
         );
       } else if (!keyMeta) {
         // #6406: A valid apiKey without a DB metadata row is an env-var master key
-        // (OMNIROUTE_API_KEY / ROUTER_API_KEY per isValidApiKey). Those keys have no
+        // (NIYATNA_API_KEY / ROUTER_API_KEY per isValidApiKey). Those keys have no
         // per-key allow/deny/quota restrictions — they authenticate the request but
         // do NOT scope the catalog. Skipping the per-model filter matches the intent:
         // auth GATES access; env-var master keys see everything the unauth path sees.

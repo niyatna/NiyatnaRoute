@@ -459,7 +459,7 @@ const MAX_STORED_ID_LENGTH = 128;
 export async function resolveConversationId(
   input: ResolveConversationIdInput
 ): Promise<ResolveConversationIdResult> {
-  if (process.env.OMNIROUTE_DISABLE_CONVERSATION_TRACKING === "1") {
+  if (process.env.NIYATNA_DISABLE_CONVERSATION_TRACKING === "1") {
     return { conversationId: null, isNewConversation: false };
   }
 

@@ -20,7 +20,7 @@ export function resolveSessionId(request: Request): string {
 
 // Lazily generated, held in memory only for the lifetime of this process — never
 // persisted, never logged. Used ONLY as the last-resort self-loop bearer when the
-// operator hasn't set OMNIROUTE_API_KEY/ROUTER_API_KEY (#13679: the previous fallback
+// operator hasn't set NIYATNA_API_KEY/ROUTER_API_KEY (#13679: the previous fallback
 // was the checked-in literal "sk_omniroute", a predictable shared secret anyone reading
 // the source could forge). Both the in-process caller (audioBridgeHelpers /
 // visionBridgeHelpers) and the verifier (isInternalAdmissionBypass) call this same
@@ -36,7 +36,7 @@ function getGeneratedSelfLoopSecret(): string {
 
 export function resolveSelfLoopBearer(): string {
   return (
-    process.env.OMNIROUTE_API_KEY?.trim() ||
+    process.env.NIYATNA_API_KEY?.trim() ||
     process.env.ROUTER_API_KEY?.trim() ||
     getGeneratedSelfLoopSecret()
   );

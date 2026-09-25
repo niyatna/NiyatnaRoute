@@ -392,7 +392,7 @@ function readFallbackHeader(
  * Resolves the action taken when inbound continuation reasoning is incompatible with the selected
  * target's reasoning transport. Combo steps keep their explicit configuration. Single-target
  * requests default to "drop" so replayed summary-only reasoning from agentic clients does not
- * hard-fail every continuation turn; an operator (OMNIROUTE_SINGLE_TARGET_REASONING_FALLBACK=reject)
+ * hard-fail every continuation turn; an operator (NIYATNA_SINGLE_TARGET_REASONING_FALLBACK=reject)
  * or caller (x-omniroute-reasoning-fallback: reject) may explicitly enforce "reject".
  */
 export function resolveIncompatibleReasoningAction(options: {
@@ -410,7 +410,7 @@ export function resolveIncompatibleReasoningAction(options: {
 
   const envRaw = (
     options.env ?? process.env
-  ).OMNIROUTE_SINGLE_TARGET_REASONING_FALLBACK?.trim().toLowerCase();
+  ).NIYATNA_SINGLE_TARGET_REASONING_FALLBACK?.trim().toLowerCase();
   if (envRaw === "reject") return "reject";
   if (envRaw === "drop") return "drop";
 

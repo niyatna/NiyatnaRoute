@@ -134,7 +134,7 @@ test("colocate-standalone bundles the required compression worker", () => {
     writeFileSync(join(root, "server.js"), "module.exports = {};\n");
     execFileSync(process.execPath, ["scripts/build/colocate-standalone.mjs"], {
       cwd: join(import.meta.dirname, "..", "..", ".."),
-      env: { ...process.env, OMNIROUTE_STANDALONE_DIR: root },
+      env: { ...process.env, NIYATNA_STANDALONE_DIR: root },
       stdio: "pipe",
     });
     const workerDir = join(root, "open-sse", "services", "compression");

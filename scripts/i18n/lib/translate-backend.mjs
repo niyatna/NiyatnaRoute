@@ -7,10 +7,10 @@
  * environment only — this module never reads `.env` itself; the calling
  * script is responsible for loading it before `backendConfig()` runs:
  *
- *   OMNIROUTE_TRANSLATION_API_URL     base URL (…/v1) of the chat backend
- *   OMNIROUTE_TRANSLATION_API_KEY     bearer token
- *   OMNIROUTE_TRANSLATION_MODEL       model id
- *   OMNIROUTE_TRANSLATION_TIMEOUT_MS  per-request timeout (default 60000)
+ *   NIYATNA_TRANSLATION_API_URL     base URL (…/v1) of the chat backend
+ *   NIYATNA_TRANSLATION_API_KEY     bearer token
+ *   NIYATNA_TRANSLATION_MODEL       model id
+ *   NIYATNA_TRANSLATION_TIMEOUT_MS  per-request timeout (default 60000)
  *
  * Two translation modes are exposed:
  *   - `translateString(en, localeEntry, backend)` — one request per string.
@@ -41,10 +41,10 @@ export function requireEnv(name) {
 }
 
 export function backendConfig() {
-  const apiUrl = requireEnv("OMNIROUTE_TRANSLATION_API_URL").replace(/\/$/, "");
-  const apiKey = requireEnv("OMNIROUTE_TRANSLATION_API_KEY");
-  const model = requireEnv("OMNIROUTE_TRANSLATION_MODEL");
-  const timeoutMs = Number(process.env.OMNIROUTE_TRANSLATION_TIMEOUT_MS || 60000);
+  const apiUrl = requireEnv("NIYATNA_TRANSLATION_API_URL").replace(/\/$/, "");
+  const apiKey = requireEnv("NIYATNA_TRANSLATION_API_KEY");
+  const model = requireEnv("NIYATNA_TRANSLATION_MODEL");
+  const timeoutMs = Number(process.env.NIYATNA_TRANSLATION_TIMEOUT_MS || 60000);
   return { apiUrl, apiKey, model, timeoutMs };
 }
 

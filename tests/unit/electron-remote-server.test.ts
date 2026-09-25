@@ -46,13 +46,13 @@ describe("resolveRemoteServerUrl precedence", () => {
     });
   });
 
-  it("prefers OMNIROUTE_REMOTE_URL env var over the persisted prefs file", () => {
+  it("prefers NIYATNA_REMOTE_URL env var over the persisted prefs file", () => {
     withTempDir((dir) => {
       const prefsPath = join(dir, "electron-preferences.json");
       writeRemoteServerUrl(prefsPath, "http://from-prefs:20128");
 
       const result = resolveRemoteServerUrl({
-        env: { OMNIROUTE_REMOTE_URL: "http://from-env:20128" },
+        env: { NIYATNA_REMOTE_URL: "http://from-env:20128" },
         prefsPath,
       });
       assert.equal(result, "http://from-env:20128");
@@ -73,7 +73,7 @@ describe("resolveRemoteServerUrl precedence", () => {
     withTempDir((dir) => {
       const prefsPath = join(dir, "electron-preferences.json");
       const result = resolveRemoteServerUrl({
-        env: { OMNIROUTE_REMOTE_URL: "http://localhost:20128/" },
+        env: { NIYATNA_REMOTE_URL: "http://localhost:20128/" },
         prefsPath,
       });
       assert.equal(result, "http://localhost:20128");
@@ -84,7 +84,7 @@ describe("resolveRemoteServerUrl precedence", () => {
     withTempDir((dir) => {
       const prefsPath = join(dir, "electron-preferences.json");
       for (const bad of ["file:///etc/passwd", "javascript:alert(1)", "not a url", ""]) {
-        const result = resolveRemoteServerUrl({ env: { OMNIROUTE_REMOTE_URL: bad }, prefsPath });
+        const result = resolveRemoteServerUrl({ env: { NIYATNA_REMOTE_URL: bad }, prefsPath });
         assert.equal(result, null, `expected null for ${JSON.stringify(bad)}`);
       }
     });

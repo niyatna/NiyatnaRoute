@@ -32,8 +32,8 @@ function jsonRequest(url: string, body: unknown, headers: HeadersInit = {}) {
 }
 
 test.beforeEach(() => {
-  delete process.env.OMNIROUTE_PUBLIC_BASE_URL;
-  delete process.env.OMNIROUTE_BASE_URL;
+  delete process.env.NIYATNA_PUBLIC_BASE_URL;
+  delete process.env.NIYATNA_BASE_URL;
   delete process.env.BASE_URL;
   delete process.env.NEXT_PUBLIC_BASE_URL;
   delete process.env.COMMAND_CODE_CALLBACK_PORT;
@@ -147,7 +147,7 @@ test("Command Code auth assist start/callback/status/apply keeps state hash and 
 });
 
 test("Command Code auth assist keeps auth URL callback on CLI localhost contract", async () => {
-  process.env.OMNIROUTE_PUBLIC_BASE_URL = "https://omniroute.example.com/base-path";
+  process.env.NIYATNA_PUBLIC_BASE_URL = "https://omniroute.example.com/base-path";
 
   const startResponse = await startRoute.POST(
     new Request("http://localhost:20128/api/providers/command-code/auth/start", {

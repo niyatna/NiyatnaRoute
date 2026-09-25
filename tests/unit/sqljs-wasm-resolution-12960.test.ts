@@ -8,11 +8,11 @@ import { resolveSqlJsWasmPath } from "../../src/lib/db/adapters/sqljsAdapter.ts"
 
 describe("sql.js WASM path resolution (#12960)", () => {
   test("resolves an existing sql-wasm.wasm in the current environment", (t) => {
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    delete process.env.NIYATNA_SQLJS_WASM_PATH;
     t.after(() => {
       if (origEnv !== undefined) {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
     });
 
@@ -22,19 +22,19 @@ describe("sql.js WASM path resolution (#12960)", () => {
     assert.ok(wasmPath.endsWith("sql-wasm.wasm"));
   });
 
-  test("honors OMNIROUTE_SQLJS_WASM_PATH when set to a valid file", (t) => {
+  test("honors NIYATNA_SQLJS_WASM_PATH when set to a valid file", (t) => {
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "sqljs-override-"));
     const fakeWasm = path.join(tmpDir, "custom-sql-wasm.wasm");
     fs.writeFileSync(fakeWasm, "mock wasm binary");
 
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = fakeWasm;
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = fakeWasm;
 
     t.after(() => {
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
@@ -43,7 +43,7 @@ describe("sql.js WASM path resolution (#12960)", () => {
     assert.equal(resolved, fakeWasm);
   });
 
-  test("resolves relative OMNIROUTE_SQLJS_WASM_PATH to an absolute path", (t) => {
+  test("resolves relative NIYATNA_SQLJS_WASM_PATH to an absolute path", (t) => {
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "sqljs-rel-override-"));
     const fakeWasm = path.join(tmpDir, "rel-sql-wasm.wasm");
     fs.writeFileSync(fakeWasm, "mock wasm binary");
@@ -51,15 +51,15 @@ describe("sql.js WASM path resolution (#12960)", () => {
     const origCwd = process.cwd();
     process.chdir(tmpDir);
 
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = "./rel-sql-wasm.wasm";
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = "./rel-sql-wasm.wasm";
 
     t.after(() => {
       process.chdir(origCwd);
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
@@ -69,53 +69,53 @@ describe("sql.js WASM path resolution (#12960)", () => {
     assert.equal(fs.realpathSync(resolved), fs.realpathSync(fakeWasm));
   });
 
-  test("throws when OMNIROUTE_SQLJS_WASM_PATH points to non-existent file", (t) => {
+  test("throws when NIYATNA_SQLJS_WASM_PATH points to non-existent file", (t) => {
     const nonExistent = path.join(os.tmpdir(), `non-existent-wasm-${Date.now()}.wasm`);
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = nonExistent;
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = nonExistent;
 
     t.after(() => {
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
     });
 
     assert.throws(
       () => resolveSqlJsWasmPath(),
-      /OMNIROUTE_SQLJS_WASM_PATH is set to .* but the file cannot be accessed/
+      /NIYATNA_SQLJS_WASM_PATH is set to .* but the file cannot be accessed/
     );
   });
 
-  test("throws when OMNIROUTE_SQLJS_WASM_PATH is set to an empty string", (t) => {
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = "   ";
+  test("throws when NIYATNA_SQLJS_WASM_PATH is set to an empty string", (t) => {
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = "   ";
 
     t.after(() => {
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
     });
 
     assert.throws(
       () => resolveSqlJsWasmPath(),
-      /OMNIROUTE_SQLJS_WASM_PATH is set to an empty or whitespace-only string/
+      /NIYATNA_SQLJS_WASM_PATH is set to an empty or whitespace-only string/
     );
   });
 
-  test("throws when OMNIROUTE_SQLJS_WASM_PATH points to a directory", (t) => {
+  test("throws when NIYATNA_SQLJS_WASM_PATH points to a directory", (t) => {
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "sqljs-dir-wasm-"));
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = tmpDir;
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = tmpDir;
 
     t.after(() => {
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
@@ -123,19 +123,19 @@ describe("sql.js WASM path resolution (#12960)", () => {
     assert.throws(() => resolveSqlJsWasmPath(), /points to a directory, not a file/);
   });
 
-  test("throws when OMNIROUTE_SQLJS_WASM_PATH points to an empty (0-byte) file", (t) => {
+  test("throws when NIYATNA_SQLJS_WASM_PATH points to an empty (0-byte) file", (t) => {
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "sqljs-empty-wasm-"));
     const emptyWasm = path.join(tmpDir, "empty.wasm");
     fs.writeFileSync(emptyWasm, "");
 
-    const origEnv = process.env.OMNIROUTE_SQLJS_WASM_PATH;
-    process.env.OMNIROUTE_SQLJS_WASM_PATH = emptyWasm;
+    const origEnv = process.env.NIYATNA_SQLJS_WASM_PATH;
+    process.env.NIYATNA_SQLJS_WASM_PATH = emptyWasm;
 
     t.after(() => {
       if (origEnv === undefined) {
-        delete process.env.OMNIROUTE_SQLJS_WASM_PATH;
+        delete process.env.NIYATNA_SQLJS_WASM_PATH;
       } else {
-        process.env.OMNIROUTE_SQLJS_WASM_PATH = origEnv;
+        process.env.NIYATNA_SQLJS_WASM_PATH = origEnv;
       }
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
@@ -202,7 +202,7 @@ describe("sql.js WASM path resolution (#12960)", () => {
     // Must provide the actionable remedy for global and local installs (#12960)
     assert.match(msg, /npm rebuild better-sqlite3/);
     assert.match(msg, /docs\/guides\/TROUBLESHOOTING\.md/);
-    assert.match(msg, /OMNIROUTE_SQLJS_WASM_PATH/);
+    assert.match(msg, /NIYATNA_SQLJS_WASM_PATH/);
   });
 
   test("rethrows non-MODULE_NOT_FOUND unexpected errors during require resolution", (t) => {

@@ -467,7 +467,7 @@ function clampDiagStr(v: unknown, max = 128): string {
 }
 
 const RECOVERY_ROUTE_PLACEHOLDERS = [
-  ["/dashboard/providers", "OMNIROUTE_SAFE_DASHBOARD_PROVIDERS_ROUTE"],
+  ["/dashboard/providers", "NIYATNA_SAFE_DASHBOARD_PROVIDERS_ROUTE"],
 ] as const;
 
 function clampRecoveryStr(value: unknown, max: number): string {

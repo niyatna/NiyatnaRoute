@@ -192,11 +192,11 @@ test("runNow: env gate blocks when env explicitly disabled", async () => {
   const reg = getJobRegistry();
   let calls = 0;
   reg.register(
-    def("j", async () => ({ success: true }), { envFlag: "OMNIROUTE_TEST_JOB_ENABLED" })
+    def("j", async () => ({ success: true }), { envFlag: "NIYATNA_TEST_JOB_ENABLED" })
   );
-  process.env.OMNIROUTE_TEST_JOB_ENABLED = "0";
+  process.env.NIYATNA_TEST_JOB_ENABLED = "0";
   const res = await reg.runNow("j");
-  delete process.env.OMNIROUTE_TEST_JOB_ENABLED;
+  delete process.env.NIYATNA_TEST_JOB_ENABLED;
   assert.deepEqual(res, { started: false, reason: "env_disabled" });
   assert.equal(calls, 0);
 });
@@ -255,7 +255,7 @@ test("envFlag gate generic: unset env fires (defaultWhenUnset=true)", async () =
         type: "cron",
         cron: "* * * * * *",
         intervalMs: null,
-        envFlag: "OMNIROUTE_GENERIC_JOB_ENABLED", // unset -> default true -> fires
+        envFlag: "NIYATNA_GENERIC_JOB_ENABLED", // unset -> default true -> fires
         config: { timezone: "UTC" },
       }
     )
@@ -274,7 +274,7 @@ test("envFlag gate warmup: unset env does NOT fire (envDefault=false)", async ()
       type: "cron",
       cron: "* * * * * *",
       intervalMs: null,
-      envFlag: "OMNIROUTE_WARMUP_ENABLED",
+      envFlag: "NIYATNA_WARMUP_ENABLED",
       config: { timezone: "UTC", envDefault: false },
     })
   );

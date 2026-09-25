@@ -3,8 +3,8 @@ import test from "node:test";
 
 assert.ok(process.env.DATA_DIR, "the subprocess fixture requires an isolated DATA_DIR");
 assert.ok(
-  process.env.OMNIROUTE_PLUGINS_DIR,
-  "the subprocess fixture requires an isolated OMNIROUTE_PLUGINS_DIR"
+  process.env.NIYATNA_PLUGINS_DIR,
+  "the subprocess fixture requires an isolated NIYATNA_PLUGINS_DIR"
 );
 assert.equal(process.env.HOME, undefined, "the subprocess must not inherit HOME");
 assert.equal(process.env.CODEX_HOME, undefined, "the subprocess must not inherit CODEX_HOME");

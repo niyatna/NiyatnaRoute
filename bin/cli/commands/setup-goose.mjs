@@ -28,7 +28,7 @@ export function resolveGooseTarget(opts = {}) {
   else {
     try {
       root = stripToRoot(
-        resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl
+        resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl
       );
     } catch {
       /* none */
@@ -38,13 +38,13 @@ export function resolveGooseTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* none */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { host: root, apiKey };
 }
 
@@ -62,7 +62,7 @@ export function buildGooseEnvRecipe({ host, model }) {
   return [
     "export GOOSE_PROVIDER=openai",
     `export OPENAI_HOST=${host}`,
-    "export OPENAI_API_KEY=$OMNIROUTE_API_KEY",
+    "export OPENAI_API_KEY=$NIYATNA_API_KEY",
     `export GOOSE_MODEL=${model}`,
   ].join("\n");
 }
@@ -152,7 +152,7 @@ export function registerSetupGoose(program) {
     )
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--model <id>", "Model id for Goose (required unless picked interactively)")
     .option("--config-path <path>", "config.yaml path (default: ~/.config/goose/config.yaml)")
     .option("--yes", "Non-interactive: do not prompt (requires --model)")

@@ -550,7 +550,7 @@ export default function OAuthModal({
         //   localhost for the Google native-app handoff; Google documents that localhost
         //   can run into local firewall/name-resolution edge cases. The authorize route
         //   upgrades this to the public callback when custom Google web credentials plus
-        //   NEXT_PUBLIC_BASE_URL or OMNIROUTE_PUBLIC_BASE_URL are configured.
+        //   NEXT_PUBLIC_BASE_URL or NIYATNA_PUBLIC_BASE_URL are configured.
         // - Other providers on remote: use actual origin (supports PUBLIC_URL env var)
         // - Localhost: use localhost:port
         let redirectUri: string;

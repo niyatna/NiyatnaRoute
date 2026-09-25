@@ -1081,7 +1081,7 @@ export const ensureCliConfigWriteAllowed = (
     return "CLI config writes are disabled (CLI_ALLOW_CONFIG_WRITES=false)";
   }
   if (!targetPath) return null;
-  if (parseBoolean(process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE, false)) return null;
+  if (parseBoolean(process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE, false)) return null;
   if (!describeContainerTarget(targetPath, options.containerDeps).ephemeral) return null;
   return buildContainerWriteRefusal(targetPath, {
     toolLabel: options.toolLabel,

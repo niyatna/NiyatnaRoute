@@ -464,12 +464,12 @@ describe("driverFactory", () => {
 
   test("pack-boot sql.js forcing requires both smoke-only markers", () => {
     assert.equal(isPackBootForcedSqlJsSmoke({}), false);
-    assert.equal(isPackBootForcedSqlJsSmoke({ OMNIROUTE_PACK_BOOT_SMOKE: "1" }), false);
-    assert.equal(isPackBootForcedSqlJsSmoke({ OMNIROUTE_PACK_BOOT_FORCE_SQLJS: "1" }), false);
+    assert.equal(isPackBootForcedSqlJsSmoke({ NIYATNA_PACK_BOOT_SMOKE: "1" }), false);
+    assert.equal(isPackBootForcedSqlJsSmoke({ NIYATNA_PACK_BOOT_FORCE_SQLJS: "1" }), false);
     assert.equal(
       isPackBootForcedSqlJsSmoke({
-        OMNIROUTE_PACK_BOOT_SMOKE: "1",
-        OMNIROUTE_PACK_BOOT_FORCE_SQLJS: "1",
+        NIYATNA_PACK_BOOT_SMOKE: "1",
+        NIYATNA_PACK_BOOT_FORCE_SQLJS: "1",
       }),
       true
     );

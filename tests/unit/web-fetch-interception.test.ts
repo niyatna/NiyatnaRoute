@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
-  OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME,
+  NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME,
   prepareWebFetchFallbackBody,
   supportsNativeWebFetchFallbackBypass,
 } from "../../open-sse/services/webFetchInterception.ts";
@@ -41,12 +41,12 @@ describe("services/webFetchInterception — prepareWebFetchFallbackBody (#7339)"
       interceptFetchOverride: true,
     });
     assert.equal(fallback.enabled, true);
-    assert.equal(fallback.toolName, OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME);
+    assert.equal(fallback.toolName, NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME);
     assert.equal(fallback.convertedToolCount, 1);
     assert.equal(nextBody.tools.length, 1);
     assert.equal(
       (nextBody.tools[0] as { function: { name: string } }).function.name,
-      OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME
+      NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME
     );
   });
 
@@ -59,7 +59,7 @@ describe("services/webFetchInterception — prepareWebFetchFallbackBody (#7339)"
     });
     const tool = nextBody.tools[0] as { type: string; name: string; function?: unknown };
     assert.equal(tool.type, "function");
-    assert.equal(tool.name, OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME);
+    assert.equal(tool.name, NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME);
     assert.equal(tool.function, undefined);
   });
 
@@ -86,7 +86,7 @@ describe("services/webFetchInterception — prepareWebFetchFallbackBody (#7339)"
     const names = (nextBody.tools as Array<{ function?: { name: string } }>).map(
       (tool) => tool.function?.name
     );
-    assert.ok(names.includes(OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME));
+    assert.ok(names.includes(NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME));
     assert.ok(names.includes("get_weather"));
   });
 });

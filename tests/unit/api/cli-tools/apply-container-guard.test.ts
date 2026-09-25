@@ -8,7 +8,7 @@ import path from "node:path";
 /**
  * Container-guard homologation for POST /api/cli-tools/apply.
  *
- * Both runtime modes are exercised by SCOPED `OMNIROUTE_CONTAINER` overrides
+ * Both runtime modes are exercised by SCOPED `NIYATNA_CONTAINER` overrides
  * (set per test, restored in finally). The override is the documented test
  * seam of `isRunningInContainer()`; it is never forced globally — forcing it
  * off for the whole suite would hide a regression in the guard itself.
@@ -66,17 +66,17 @@ function applyRequest(body: Record<string, unknown>): Request {
 }
 
 async function withContainerMode<T>(mode: "1" | "0", run: () => Promise<T>): Promise<T> {
-  const original = process.env.OMNIROUTE_CONTAINER;
-  const originalAllow = process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE;
-  process.env.OMNIROUTE_CONTAINER = mode;
-  delete process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE;
+  const original = process.env.NIYATNA_CONTAINER;
+  const originalAllow = process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE;
+  process.env.NIYATNA_CONTAINER = mode;
+  delete process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE;
   try {
     return await run();
   } finally {
-    if (original === undefined) delete process.env.OMNIROUTE_CONTAINER;
-    else process.env.OMNIROUTE_CONTAINER = original;
+    if (original === undefined) delete process.env.NIYATNA_CONTAINER;
+    else process.env.NIYATNA_CONTAINER = original;
     if (originalAllow !== undefined) {
-      process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE = originalAllow;
+      process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE = originalAllow;
     }
   }
 }

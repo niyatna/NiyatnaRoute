@@ -9,12 +9,12 @@ import path from "node:path";
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-zed-stream-data-"));
 const TEST_PLUGINS_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-zed-stream-plugins-"));
 const originalDataDir = process.env.DATA_DIR;
-const originalPluginsDir = process.env.OMNIROUTE_PLUGINS_DIR;
+const originalPluginsDir = process.env.NIYATNA_PLUGINS_DIR;
 const originalFetch = globalThis.fetch;
 let networkCalls = 0;
 
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_PLUGINS_DIR = TEST_PLUGINS_DIR;
+process.env.NIYATNA_PLUGINS_DIR = TEST_PLUGINS_DIR;
 globalThis.fetch = async () => {
   networkCalls += 1;
   throw new Error("Unexpected network access in Zed stream boundary test");
@@ -155,8 +155,8 @@ test.after(async () => {
   globalThis.fetch = originalFetch;
   if (originalDataDir === undefined) delete process.env.DATA_DIR;
   else process.env.DATA_DIR = originalDataDir;
-  if (originalPluginsDir === undefined) delete process.env.OMNIROUTE_PLUGINS_DIR;
-  else process.env.OMNIROUTE_PLUGINS_DIR = originalPluginsDir;
+  if (originalPluginsDir === undefined) delete process.env.NIYATNA_PLUGINS_DIR;
+  else process.env.NIYATNA_PLUGINS_DIR = originalPluginsDir;
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   fs.rmSync(TEST_PLUGINS_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });

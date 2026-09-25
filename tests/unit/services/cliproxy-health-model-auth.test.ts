@@ -24,7 +24,7 @@ process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.NODE_ENV = "test";
 process.env.DISABLE_SQLITE_AUTO_BACKUP = "true";
 process.env.STORAGE_ENCRYPTION_KEY = "cliproxy-health-model-auth-test-key";
-process.env.OMNIROUTE_ADOPT_EXISTING_SERVICE = "1";
+process.env.NIYATNA_ADOPT_EXISTING_SERVICE = "1";
 
 const seenPaths: string[] = [];
 const modelAuthorizationHeaders: Array<string | null> = [];

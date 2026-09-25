@@ -1,6 +1,6 @@
 import { t } from "../i18n.mjs";
 
-const OMNIROUTE_ENV_VARS = [
+const NIYATNA_ENV_VARS = [
   "PORT",
   "API_PORT",
   "DASHBOARD_PORT",
@@ -10,10 +10,10 @@ const OMNIROUTE_ENV_VARS = [
   "NODE_ENV",
   "REQUEST_TIMEOUT_MS",
   "ENABLE_SOCKS5_PROXY",
-  "OMNIROUTE_API_KEY",
-  "OMNIROUTE_BASE_URL",
-  "OMNIROUTE_HTTP_TIMEOUT_MS",
-  "OMNIROUTE_READY_TIMEOUT_MS",
+  "NIYATNA_API_KEY",
+  "NIYATNA_BASE_URL",
+  "NIYATNA_HTTP_TIMEOUT_MS",
+  "NIYATNA_READY_TIMEOUT_MS",
 ];
 
 const ENV_DEFAULTS = {
@@ -53,7 +53,7 @@ export function registerEnv(program) {
 
 export async function runEnvShowCommand(opts = {}) {
   const current = {};
-  for (const key of OMNIROUTE_ENV_VARS) {
+  for (const key of NIYATNA_ENV_VARS) {
     if (process.env[key] !== undefined) current[key] = process.env[key];
   }
 

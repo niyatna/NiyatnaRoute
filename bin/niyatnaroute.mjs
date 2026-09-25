@@ -152,7 +152,7 @@ function loadEnvFile() {
   addEnvPath(join(process.cwd(), ".env"));
   // Skip the repo-checkout .env when explicitly requested (used by isolation tests
   // that need a deterministic environment without the development repo's defaults).
-  if (process.env.OMNIROUTE_CLI_SKIP_REPO_ENV !== "1") {
+  if (process.env.NIYATNA_CLI_SKIP_REPO_ENV !== "1") {
     addEnvPath(join(ROOT, ".env"));
   }
 
@@ -295,7 +295,7 @@ if (shouldProvisionStorageKey(process.argv)) {
 {
   const langIdx = process.argv.findIndex((a) => a === "--lang");
   const langArg = langIdx >= 0 ? process.argv[langIdx + 1] : null;
-  const langEnv = process.env.OMNIROUTE_LANG;
+  const langEnv = process.env.NIYATNA_LANG;
   const chosen = langArg || langEnv;
   if (chosen) {
     const { setLocale } = await import(pathToFileURL(join(ROOT, "bin", "cli", "i18n.mjs")).href);
@@ -310,7 +310,7 @@ const _notifier = updateNotifier
   : null;
 process.on("exit", () => {
   if (!_notifier || !_notifier.update) return;
-  if (process.env.OMNIROUTE_NO_UPDATE_NOTIFIER) return;
+  if (process.env.NIYATNA_NO_UPDATE_NOTIFIER) return;
   if (process.env.CI) return;
   if (process.argv.includes("--quiet") || process.argv.includes("-q")) return;
   const outputIdx = process.argv.indexOf("--output");

@@ -24,8 +24,8 @@ function getDefaultApiServer() {
  */
 export function getServerCredentials(): ServerCredentials {
   return {
-    server: process.env.OMNIROUTE_SERVER || process.env.SERVER_URL || getDefaultApiServer(),
-    token: process.env.OMNIROUTE_TOKEN || process.env.CLI_TOKEN || "",
-    userId: process.env.OMNIROUTE_USER_ID || process.env.CLI_USER_ID || "cli",
+    server: process.env.NIYATNA_SERVER || process.env.SERVER_URL || getDefaultApiServer(),
+    token: process.env.NIYATNA_TOKEN || process.env.CLI_TOKEN || "",
+    userId: process.env.NIYATNA_USER_ID || process.env.CLI_USER_ID || "cli",
   };
 }

@@ -6,7 +6,7 @@ import {
   MODEL_ROUTING_MAP,
   shouldInterceptToOmniRoute,
   extractModel,
-  OMNIROUTE_BUILTIN_GROUPS,
+  NIYATNA_BUILTIN_GROUPS,
 } from "../../bin/antigravity-bridge.mjs";
 
 test("MODEL_ROUTING_MAP contains mappings for core auto groups", () => {
@@ -99,15 +99,15 @@ test("extractModel resolves models from envelope body and query parameters", () 
   );
 });
 
-test("OMNIROUTE_BUILTIN_GROUPS provides unique IDs and valid display names", () => {
-  const ids = new Set(OMNIROUTE_BUILTIN_GROUPS.map((g) => g.id));
-  assert.equal(ids.size, OMNIROUTE_BUILTIN_GROUPS.length);
+test("NIYATNA_BUILTIN_GROUPS provides unique IDs and valid display names", () => {
+  const ids = new Set(NIYATNA_BUILTIN_GROUPS.map((g) => g.id));
+  assert.equal(ids.size, NIYATNA_BUILTIN_GROUPS.length);
   assert.ok(ids.has("auto/best-fast"));
   assert.ok(ids.has("auto/best-coding"));
   assert.ok(ids.has("auto/best-reasoning"));
   assert.ok(ids.has("auto/best-free"));
 
-  for (const group of OMNIROUTE_BUILTIN_GROUPS) {
+  for (const group of NIYATNA_BUILTIN_GROUPS) {
     assert.ok(group.displayName.length > 0);
     assert.ok(group.descriptionText.length > 0);
   }

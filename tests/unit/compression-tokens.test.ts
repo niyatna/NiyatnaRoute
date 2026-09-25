@@ -18,7 +18,7 @@ async function freshImport(modulePath: string) {
 function setupTempDataDir() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-comp"));
   process.env.DATA_DIR = dir;
-  process.env.OMNIROUTE_MIGRATIONS_DIR = path.join(root, "src/lib/db/migrations");
+  process.env.NIYATNA_MIGRATIONS_DIR = path.join(root, "src/lib/db/migrations");
   process.env.DISABLE_SQLITE_AUTO_BACKUP = "true";
   return dir;
 }

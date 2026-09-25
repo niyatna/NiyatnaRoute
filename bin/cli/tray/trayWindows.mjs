@@ -3,12 +3,12 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { writeFileSync, unlinkSync, existsSync } from "node:fs";
 
-const OMNIROUTE_IPC_PORT_BASE = 29128;
+const NIYATNA_IPC_PORT_BASE = 29128;
 
 export function initWinTray({ port, onQuit, onOpenDashboard, onShowLogs }) {
   if (process.platform !== "win32") return null;
 
-  const ipcPort = OMNIROUTE_IPC_PORT_BASE + (port % 1000);
+  const ipcPort = NIYATNA_IPC_PORT_BASE + (port % 1000);
   const scriptPath = join(tmpdir(), `omniroute-tray-${process.pid}.ps1`);
 
   const ps1 = `

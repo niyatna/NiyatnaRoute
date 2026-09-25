@@ -121,7 +121,7 @@ async function main() {
 
 main()
   .then(() => {
-    // Explicit exit(0) so a caller that imports this module (bin/omniroute.mjs
+    // Explicit exit(0) so a caller that imports this module (bin/niyatnaroute.mjs
     // routes `omniroute reset-password` here) terminates cleanly instead of
     // hanging / exiting with code 13 on an unsettled wrapper await. On POSIX,
     // console.log to a pipe is synchronous, so the success line is already

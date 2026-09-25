@@ -20,7 +20,7 @@ test("writes the upstream V4 bare-array modelProviders contract without a secret
       {
         id: "qwen/qwen3.8-max-preview",
         name: "qwen/qwen3.8-max-preview (OmniRoute)",
-        envKey: "OMNIROUTE_API_KEY",
+        envKey: "NIYATNA_API_KEY",
         baseUrl: "http://localhost:20128/v1",
       },
     ],
@@ -112,7 +112,7 @@ test("replaces only the managed entry and unwraps the reverted V5 provider shape
     {
       id: "new-model",
       name: "new-model (OmniRoute)",
-      envKey: "OMNIROUTE_API_KEY",
+      envKey: "NIYATNA_API_KEY",
       baseUrl: "http://new-host/v1",
     },
   ]);
@@ -126,7 +126,7 @@ test("migrates the removed integration's root-array shape without dropping other
           id: "omniroute",
           name: "OmniRoute",
           authType: "openai",
-          envKey: "OMNIROUTE_API_KEY",
+          envKey: "NIYATNA_API_KEY",
           baseUrl: "http://old/v1",
         },
         {
@@ -152,7 +152,7 @@ test("migrates the removed integration's root-array shape without dropping other
     {
       id: "new-model",
       name: "new-model (OmniRoute)",
-      envKey: "OMNIROUTE_API_KEY",
+      envKey: "NIYATNA_API_KEY",
       baseUrl: "http://new/v1",
     },
   ]);
@@ -210,7 +210,7 @@ test("detection is precise and does not claim arbitrary custom endpoints", () =>
           {
             id: "custom-model",
             name: "custom-model (OmniRoute)",
-            envKey: "OMNIROUTE_API_KEY",
+            envKey: "NIYATNA_API_KEY",
             baseUrl: "https://omni.example/v1",
           },
         ],
@@ -220,14 +220,14 @@ test("detection is precise and does not claim arbitrary custom endpoints", () =>
   );
 });
 
-test("env merge owns only OMNIROUTE_API_KEY and preserves all user keys", () => {
+test("env merge owns only NIYATNA_API_KEY and preserves all user keys", () => {
   const original = [
     "# user credentials",
     "OPENAI_API_KEY=sk-openai",
     "ANTHROPIC_API_KEY=sk-anthropic",
     "GEMINI_API_KEY=sk-gemini",
-    "export OMNIROUTE_API_KEY=old-value",
-    "OMNIROUTE_API_KEY_BACKUP=keep-me",
+    "export NIYATNA_API_KEY=old-value",
+    "NIYATNA_API_KEY_BACKUP=keep-me",
     "",
   ].join("\n");
 
@@ -235,13 +235,13 @@ test("env merge owns only OMNIROUTE_API_KEY and preserves all user keys", () => 
   assert.match(merged, /^OPENAI_API_KEY=sk-openai$/m);
   assert.match(merged, /^ANTHROPIC_API_KEY=sk-anthropic$/m);
   assert.match(merged, /^GEMINI_API_KEY=sk-gemini$/m);
-  assert.match(merged, /^OMNIROUTE_API_KEY_BACKUP=keep-me$/m);
-  assert.match(merged, /^OMNIROUTE_API_KEY="sk-new \\"quoted\\" value"$/m);
-  assert.equal((merged.match(/^OMNIROUTE_API_KEY=/gm) || []).length, 1);
+  assert.match(merged, /^NIYATNA_API_KEY_BACKUP=keep-me$/m);
+  assert.match(merged, /^NIYATNA_API_KEY="sk-new \\"quoted\\" value"$/m);
+  assert.equal((merged.match(/^NIYATNA_API_KEY=/gm) || []).length, 1);
 
   const removed = removeQwenCodeEnv(merged);
-  assert.doesNotMatch(removed, /^OMNIROUTE_API_KEY=/m);
-  assert.match(removed, /^OMNIROUTE_API_KEY_BACKUP=keep-me$/m);
+  assert.doesNotMatch(removed, /^NIYATNA_API_KEY=/m);
+  assert.match(removed, /^NIYATNA_API_KEY_BACKUP=keep-me$/m);
   assert.match(removed, /^OPENAI_API_KEY=sk-openai$/m);
 });
 
@@ -290,7 +290,7 @@ test("reset also removes matching deprecated security.auth credentials", () => {
         {
           id: "managed",
           name: "managed (OmniRoute)",
-          envKey: "OMNIROUTE_API_KEY",
+          envKey: "NIYATNA_API_KEY",
           baseUrl: "http://omni-host/v1",
         },
       ],
@@ -317,7 +317,7 @@ test("reset removes matching deprecated auth when the selected model is unrelate
         {
           id: "managed",
           name: "managed (OmniRoute)",
-          envKey: "OMNIROUTE_API_KEY",
+          envKey: "NIYATNA_API_KEY",
           baseUrl: "http://omni-host/v1",
         },
       ],

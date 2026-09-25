@@ -1,4 +1,4 @@
-export const OMNIROUTE_RESPONSE_HEADERS = {
+export const NIYATNA_RESPONSE_HEADERS = {
   cache: "X-OmniRoute-Cache",
   cacheHit: "X-OmniRoute-Cache-Hit",
   cacheLatency: "X-OmniRoute-Cache-Latency",

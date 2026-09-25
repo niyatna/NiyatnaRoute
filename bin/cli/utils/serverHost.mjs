@@ -18,7 +18,7 @@ export function resolveServerHost(
   runtimePlatform = platform(),
   machineHostname = hostname()
 ) {
-  if (env.OMNIROUTE_SERVER_HOST) return env.OMNIROUTE_SERVER_HOST;
+  if (env.NIYATNA_SERVER_HOST) return env.NIYATNA_SERVER_HOST;
   if (runtimePlatform === "win32" && env.HOSTNAME && env.HOSTNAME !== machineHostname) {
     return env.HOSTNAME;
   }
@@ -52,6 +52,6 @@ export function resolveExposureWarning(env = process.env, host = resolveServerHo
     `plane (/v1/*) is reachable by ANY device that can route to this host, and ` +
     `requests are billed to your configured providers. This local-first default ` +
     `is intentional, but on an untrusted network either set REQUIRE_API_KEY=true ` +
-    `or bind loopback with OMNIROUTE_SERVER_HOST=127.0.0.1.`
+    `or bind loopback with NIYATNA_SERVER_HOST=127.0.0.1.`
   );
 }

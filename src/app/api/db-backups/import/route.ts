@@ -26,13 +26,13 @@ const MAX_UPLOAD_MB_CEILING = 4096;
  *
  * Real databases bloat well past the historical 100 MB cap (#4719 — a 156 MB file that
  * VACUUMs down to 5 MB still can't be re-imported), so the limit is now operator-tunable
- * via `OMNIROUTE_DB_IMPORT_MAX_MB`. Invalid / out-of-range values fall back to the 100 MB
+ * via `NIYATNA_DB_IMPORT_MAX_MB`. Invalid / out-of-range values fall back to the 100 MB
  * default and are clamped to a 4 GB ceiling.
  */
 export function resolveMaxUploadSizeBytes(
   env: NodeJS.ProcessEnv = process.env
 ): number {
-  const raw = env.OMNIROUTE_DB_IMPORT_MAX_MB;
+  const raw = env.NIYATNA_DB_IMPORT_MAX_MB;
   const parsed = raw === undefined ? NaN : Number(raw);
   const mb =
     Number.isFinite(parsed) && parsed >= 1
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
         {
           error:
             `File too large. Maximum allowed size is ${maxUploadSize / (1024 * 1024)} MB. ` +
-            `Set OMNIROUTE_DB_IMPORT_MAX_MB to raise it, or VACUUM the database before exporting.`,
+            `Set NIYATNA_DB_IMPORT_MAX_MB to raise it, or VACUUM the database before exporting.`,
         },
         { status: 400 }
       );

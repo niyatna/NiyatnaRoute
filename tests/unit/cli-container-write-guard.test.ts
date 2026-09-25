@@ -67,11 +67,11 @@ test("--allow-container-write proceeds but warns about the ephemeral write", asy
   assert.match(result.warning!, /lost when the container is recreated/);
 });
 
-test("OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE env has the same effect as the flag", async () => {
+test("NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE env has the same effect as the flag", async () => {
   for (const value of ["1", "true", "yes", "on", "TRUE"]) {
     const result = await assertHostConfigTarget("/home/node/.codex", {
       deps: containerDeps,
-      env: { OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE: value },
+      env: { NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE: value },
     });
     assert.equal(result.ok, true, `expected ${value} to allow the write`);
   }
@@ -81,7 +81,7 @@ test("a falsy env override does not allow the write", async () => {
   for (const value of ["0", "false", "off", ""]) {
     const result = await assertHostConfigTarget("/home/node/.codex", {
       deps: containerDeps,
-      env: { OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE: value },
+      env: { NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE: value },
     });
     assert.equal(result.ok, false, `expected ${value} to keep the refusal`);
   }

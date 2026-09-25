@@ -28,7 +28,7 @@ export function isContainerWriteRefusal(message: string | null | undefined): boo
 
 /** Default override hint for server-side (API) callers. */
 export const SERVER_OVERRIDE_HINT =
-  "Set OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE=true to configure the container's own CLIs anyway.";
+  "Set NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE=true to configure the container's own CLIs anyway.";
 
 /** Default override hint for CLI callers. */
 export const CLI_OVERRIDE_HINT =

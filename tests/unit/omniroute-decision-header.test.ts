@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { OMNIROUTE_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
+import { NIYATNA_RESPONSE_HEADERS } from "../../src/shared/constants/headers.ts";
 import {
   buildOmniRouteDecisionHeaderValue,
   buildOmniRouteResponseMetaHeaders,
@@ -9,7 +9,7 @@ import { assembleStreamingResponseHeaders } from "../../open-sse/handlers/chatCo
 import { buildNonStreamingResponseHeaders } from "../../open-sse/handlers/chatCore/nonStreamingResponseHeaders.ts";
 
 test("headers constant exposes the decision key", () => {
-  assert.equal(OMNIROUTE_RESPONSE_HEADERS.decision, "X-OmniRoute-Decision");
+  assert.equal(NIYATNA_RESPONSE_HEADERS.decision, "X-OmniRoute-Decision");
 });
 
 test("buildOmniRouteResponseMetaHeaders emits X-OmniRoute-Decision for a combo strategy", () => {

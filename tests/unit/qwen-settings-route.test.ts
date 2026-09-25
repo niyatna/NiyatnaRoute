@@ -84,7 +84,7 @@ test("POST writes the shared V4 contract and preserves unrelated credentials", a
   assert.deepEqual(settings.modelProviders.openai[1], {
     id: "qwen/qwen3.8-max-preview",
     name: "qwen/qwen3.8-max-preview (OmniRoute)",
-    envKey: "OMNIROUTE_API_KEY",
+    envKey: "NIYATNA_API_KEY",
     baseUrl: "http://localhost:20128/v1",
   });
   assert.equal(JSON.stringify(settings).includes("sk-route-secret"), false);
@@ -92,7 +92,7 @@ test("POST writes the shared V4 contract and preserves unrelated credentials", a
   const env = await fs.readFile(ENV_PATH, "utf8");
   assert.match(env, /^OPENAI_API_KEY=keep-openai$/m);
   assert.match(env, /^GEMINI_API_KEY=keep-gemini$/m);
-  assert.match(env, /^OMNIROUTE_API_KEY="sk-route-secret"$/m);
+  assert.match(env, /^NIYATNA_API_KEY="sk-route-secret"$/m);
 });
 
 test("DELETE removes only OmniRoute-owned settings and env lines", async () => {
@@ -110,14 +110,14 @@ test("DELETE removes only OmniRoute-owned settings and env lines", async () => {
         {
           id: "managed",
           name: "managed (OmniRoute)",
-          envKey: "OMNIROUTE_API_KEY",
+          envKey: "NIYATNA_API_KEY",
           baseUrl: "http://localhost:20128/v1",
         },
       ],
     },
   };
   await fs.writeFile(SETTINGS_PATH, JSON.stringify(configured));
-  await fs.writeFile(ENV_PATH, "OPENAI_API_KEY=keep\nOMNIROUTE_API_KEY=remove\n");
+  await fs.writeFile(ENV_PATH, "OPENAI_API_KEY=keep\nNIYATNA_API_KEY=remove\n");
 
   const response = await route.DELETE(await request("DELETE"));
   assert.equal(response.status, 200);

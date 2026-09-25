@@ -13,12 +13,12 @@ const nextConfigSource = fs.readFileSync(path.join(process.cwd(), "next.config.m
 const packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"));
 
 test("contributor build profile selects the webpack fallback", () => {
-  assert.match(packageJson.scripts["build:contributor"], /OMNIROUTE_USE_TURBOPACK=0/);
+  assert.match(packageJson.scripts["build:contributor"], /NIYATNA_USE_TURBOPACK=0/);
 });
 
 test("contributor build profile skips standalone packaging", () => {
-  assert.equal(isContributorBuild({ OMNIROUTE_BUILD_PROFILE: "contributor" }), true);
-  assert.equal(isContributorBuild({ OMNIROUTE_BUILD_PROFILE: "backend" }), false);
+  assert.equal(isContributorBuild({ NIYATNA_BUILD_PROFILE: "contributor" }), true);
+  assert.equal(isContributorBuild({ NIYATNA_BUILD_PROFILE: "backend" }), false);
 });
 
 test("contributor instrumentation stubs are reversible", async () => {
@@ -54,13 +54,13 @@ test("contributor instrumentation stubs are reversible", async () => {
 
 test("shouldBuildStandalone disables standalone output for contributor and fast build while default keeps it", () => {
   assert.equal(shouldBuildStandalone({}), true);
-  assert.equal(shouldBuildStandalone({ OMNIROUTE_BUILD_PROFILE: "backend" }), true);
-  assert.equal(shouldBuildStandalone({ OMNIROUTE_BUILD_PROFILE: "minimal" }), true);
-  assert.equal(shouldBuildStandalone({ OMNIROUTE_BUILD_PROFILE: "contributor" }), false);
-  assert.equal(shouldBuildStandalone({ OMNIROUTE_SKIP_STANDALONE: "1" }), false);
-  assert.match(packageJson.scripts["build:fast"], /OMNIROUTE_SKIP_STANDALONE=1/);
+  assert.equal(shouldBuildStandalone({ NIYATNA_BUILD_PROFILE: "backend" }), true);
+  assert.equal(shouldBuildStandalone({ NIYATNA_BUILD_PROFILE: "minimal" }), true);
+  assert.equal(shouldBuildStandalone({ NIYATNA_BUILD_PROFILE: "contributor" }), false);
+  assert.equal(shouldBuildStandalone({ NIYATNA_SKIP_STANDALONE: "1" }), false);
+  assert.match(packageJson.scripts["build:fast"], /NIYATNA_SKIP_STANDALONE=1/);
   assert.match(packageJson.scripts["prebuild:fast"], /check:native-deps/);
-  assert.match(packageJson.scripts["start:fast"], /OMNIROUTE_SKIP_STANDALONE=1/);
+  assert.match(packageJson.scripts["start:fast"], /NIYATNA_SKIP_STANDALONE=1/);
   assert.match(nextConfigSource, /shouldBuildStandalone/);
   assert.match(
     nextConfigSource,

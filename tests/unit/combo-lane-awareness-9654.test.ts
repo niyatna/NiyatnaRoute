@@ -4,7 +4,7 @@
  * Combo and fusion fan-out dispatch N targets without ever consulting the
  * adaptive-admission layer: the parent request holds one lease, but each
  * fan-out target is dispatched unconditionally. With virtual lanes enabled
- * (OMNIROUTE_CHAT_VIRTUAL_LANES=1), a tenant whose lane queue is full
+ * (NIYATNA_CHAT_VIRTUAL_LANES=1), a tenant whose lane queue is full
  * should SKIP additional fan-out targets instead of piling more queued work
  * onto an already-congested lane.
  *

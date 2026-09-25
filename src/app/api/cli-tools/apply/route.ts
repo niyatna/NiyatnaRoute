@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
     const defaultPort = process.env.API_PORT || process.env.PORT || 9999;
     const defaultBaseUrl =
-      process.env.OMNIROUTE_BASE_URL ||
+      process.env.NIYATNA_BASE_URL ||
       process.env.BASE_URL ||
       `http://localhost:${defaultPort}/v1`;
 

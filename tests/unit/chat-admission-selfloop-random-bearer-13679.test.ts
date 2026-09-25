@@ -1,5 +1,5 @@
 // #13679 (PR C): the self-loop admission bypass bearer must never fall back to the
-// predictable literal "sk_omniroute" when OMNIROUTE_API_KEY/ROUTER_API_KEY are unset.
+// predictable literal "sk_omniroute" when NIYATNA_API_KEY/ROUTER_API_KEY are unset.
 //
 // Root cause: `resolveSelfLoopBearer()` in chatAdmissionIdentity.ts returned the checked-in
 // literal `"sk_omniroute"` as its final fallback. Anyone who read the source (or the public
@@ -13,7 +13,7 @@ import assert from "node:assert/strict";
 const { resolveSelfLoopBearer } =
   await import("../../src/shared/middleware/chatAdmissionIdentity.ts");
 
-const SELF_LOOP_ENV_KEYS = ["OMNIROUTE_API_KEY", "ROUTER_API_KEY"] as const;
+const SELF_LOOP_ENV_KEYS = ["NIYATNA_API_KEY", "ROUTER_API_KEY"] as const;
 function withSelfLoopEnv(env: Partial<Record<(typeof SELF_LOOP_ENV_KEYS)[number], string>>) {
   const saved = new Map<string, string | undefined>();
   for (const key of SELF_LOOP_ENV_KEYS) {
@@ -75,8 +75,8 @@ test("resolveSelfLoopBearer's generated fallback has enough entropy to resist gu
   }
 });
 
-test("resolveSelfLoopBearer still prefers OMNIROUTE_API_KEY over the generated fallback", () => {
-  const restore = withSelfLoopEnv({ OMNIROUTE_API_KEY: "omni-key" });
+test("resolveSelfLoopBearer still prefers NIYATNA_API_KEY over the generated fallback", () => {
+  const restore = withSelfLoopEnv({ NIYATNA_API_KEY: "omni-key" });
   try {
     assert.equal(resolveSelfLoopBearer(), "omni-key");
   } finally {

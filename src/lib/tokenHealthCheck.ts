@@ -369,7 +369,7 @@ function isEnvFlagEnabled(name: string): boolean {
 
 export function isHealthCheckDisabled(): boolean {
   return (
-    isEnvFlagEnabled("OMNIROUTE_DISABLE_TOKEN_HEALTHCHECK") ||
+    isEnvFlagEnabled("NIYATNA_DISABLE_TOKEN_HEALTHCHECK") ||
     isBuildProcess() ||
     isAutomatedTestProcess()
   );
@@ -377,12 +377,12 @@ export function isHealthCheckDisabled(): boolean {
 
 /**
  * Providers excluded from the PROACTIVE sweep, comma-separated, case-insensitive
- * (e.g. "codex,openai"). Targeted alternative to OMNIROUTE_DISABLE_TOKEN_HEALTHCHECK:
+ * (e.g. "codex,openai"). Targeted alternative to NIYATNA_DISABLE_TOKEN_HEALTHCHECK:
  * keeps rotating-token cascade providers (Codex/OpenAI share one Auth0 family) on the
  * reactive 401 path WITHOUT starving short-TTL providers (Kimi-coding) sweep-wide.
  */
 function getHealthCheckSkipProviders(): Set<string> {
-  const raw = process.env.OMNIROUTE_HEALTHCHECK_SKIP_PROVIDERS || "";
+  const raw = process.env.NIYATNA_HEALTHCHECK_SKIP_PROVIDERS || "";
   return new Set(
     raw
       .split(",")
@@ -399,7 +399,7 @@ const CACHE_TTL = 30_000; // Cache settings for 30 seconds
 
 export async function shouldHideLogs(): Promise<boolean> {
   if (
-    isEnvFlagEnabled("OMNIROUTE_HIDE_HEALTHCHECK_LOGS") ||
+    isEnvFlagEnabled("NIYATNA_HIDE_HEALTHCHECK_LOGS") ||
     isBuildProcess() ||
     isAutomatedTestProcess()
   ) {

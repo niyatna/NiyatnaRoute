@@ -143,7 +143,7 @@ function buildApiBody(skill: AgentSkill, sources: BuildSources): string {
         const curlMethod = op.method === "GET" ? "" : `-X ${op.method} `;
         const hasJsonBody = ["POST", "PUT", "PATCH"].includes(op.method);
         lines.push(`curl ${curlMethod}https://localhost:20128${op.path} \\`);
-        lines.push(`  -H "Authorization: Bearer $OMNIROUTE_TOKEN"${hasJsonBody ? " \\" : ""}`);
+        lines.push(`  -H "Authorization: Bearer $NIYATNA_TOKEN"${hasJsonBody ? " \\" : ""}`);
         if (hasJsonBody) {
           lines.push('  -H "Content-Type: application/json" \\');
           lines.push("  -d '{}'");

@@ -10,10 +10,10 @@
  * directly from the request header. Existing header values from the inner pipeline
  * (which carry richer `tokens=...; rules: ...` annotations) are never overwritten.
  */
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 
 const COMPRESSION_REQUEST_HEADER = "x-omniroute-compression";
-const COMPRESSION_RESPONSE_HEADER = OMNIROUTE_RESPONSE_HEADERS.compression;
+const COMPRESSION_RESPONSE_HEADER = NIYATNA_RESPONSE_HEADERS.compression;
 
 function normalizeRequestValue(raw: string): string {
   const trimmed = raw.trim();

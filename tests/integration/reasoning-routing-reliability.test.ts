@@ -327,7 +327,7 @@ test("reliable reasoning: native default applies only when client effort is miss
 });
 
 test("reliable reasoning: WebSocket prepare preserves force in the final Codex payload", async () => {
-  process.env.OMNIROUTE_WS_BRIDGE_SECRET = "fixture-bridge-secret";
+  process.env.NIYATNA_WS_BRIDGE_SECRET = "fixture-bridge-secret";
   const { POST } = await import("../../src/app/api/internal/codex-responses-ws/route.ts");
   const key = await h.seedApiKey();
   await forceLow("codex/gpt-5.6-luna", key.id);

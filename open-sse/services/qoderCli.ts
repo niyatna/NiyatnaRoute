@@ -63,7 +63,7 @@ function getString(value: unknown): string {
 
 export function getQoderCliWorkspace(): string {
   const explicit = String(
-    process.env.QODER_CLI_WORKSPACE || process.env.OMNIROUTE_QODER_WORKSPACE || ""
+    process.env.QODER_CLI_WORKSPACE || process.env.NIYATNA_QODER_WORKSPACE || ""
   ).trim();
   if (explicit) return explicit;
   const home = String(process.env.HOME || "").trim();

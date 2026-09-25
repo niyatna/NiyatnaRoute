@@ -120,8 +120,8 @@ test("route-level auth trusts only the central local-CLI subject stamp", async (
 });
 
 test("management policy rejects machine tokens when CLI-token auth is disabled", async () => {
-  const previous = process.env.OMNIROUTE_DISABLE_CLI_TOKEN;
-  process.env.OMNIROUTE_DISABLE_CLI_TOKEN = "true";
+  const previous = process.env.NIYATNA_DISABLE_CLI_TOKEN;
+  process.env.NIYATNA_DISABLE_CLI_TOKEN = "true";
   try {
     const ctx = makeCtx(
       { host: "localhost", [CLI_TOKEN_HEADER]: getMachineTokenSync() },
@@ -130,7 +130,7 @@ test("management policy rejects machine tokens when CLI-token auth is disabled",
     const outcome = await managementPolicy.evaluate(ctx);
     assert.equal(outcome.allow, false);
   } finally {
-    if (previous === undefined) delete process.env.OMNIROUTE_DISABLE_CLI_TOKEN;
-    else process.env.OMNIROUTE_DISABLE_CLI_TOKEN = previous;
+    if (previous === undefined) delete process.env.NIYATNA_DISABLE_CLI_TOKEN;
+    else process.env.NIYATNA_DISABLE_CLI_TOKEN = previous;
   }
 });

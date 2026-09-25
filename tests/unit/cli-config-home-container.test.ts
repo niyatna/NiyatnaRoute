@@ -129,9 +129,9 @@ test("ensureCliConfigWriteAllowed allows any target on a host", async () => {
   );
 });
 
-test("OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE overrides the container refusal", async () => {
+test("NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE overrides the container refusal", async () => {
   const cliRuntime = await importFresh("gate-override");
-  process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE = "true";
+  process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE = "true";
   assert.equal(
     cliRuntime.ensureCliConfigWriteAllowed("/home/node/.codex", { containerDeps }),
     null
@@ -141,7 +141,7 @@ test("OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE overrides the container refusal", a
 test("the write-disabled flag still wins over the container override", async () => {
   const cliRuntime = await importFresh("gate-precedence");
   process.env.CLI_ALLOW_CONFIG_WRITES = "false";
-  process.env.OMNIROUTE_ALLOW_CONTAINER_CONFIG_WRITE = "true";
+  process.env.NIYATNA_ALLOW_CONTAINER_CONFIG_WRITE = "true";
   assert.match(
     cliRuntime.ensureCliConfigWriteAllowed("/home/node/.codex", { containerDeps }),
     /CLI_ALLOW_CONFIG_WRITES=false/

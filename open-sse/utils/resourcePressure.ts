@@ -64,8 +64,8 @@ function envFlagEnabled(raw: string | undefined): boolean {
 function resolveSelfRestartOptions(
   option: ResourcePressureRuntimeOptions["selfRestart"]
 ): ResolvedSelfRestart {
-  const enabled = option?.enabled ?? envFlagEnabled(process.env.OMNIROUTE_PRESSURE_SELF_RESTART);
-  const rawAfter = process.env.OMNIROUTE_PRESSURE_SELF_RESTART_AFTER_MS;
+  const enabled = option?.enabled ?? envFlagEnabled(process.env.NIYATNA_PRESSURE_SELF_RESTART);
+  const rawAfter = process.env.NIYATNA_PRESSURE_SELF_RESTART_AFTER_MS;
   const envAfter =
     rawAfter != null && rawAfter.trim().length > 0 && Number.isFinite(Number(rawAfter))
       ? Number(rawAfter)

@@ -17,7 +17,7 @@ const { skillRegistry } = await import("../../src/lib/skills/registry.ts");
 const { skillExecutor } = await import("../../src/lib/skills/executor.ts");
 const { handleToolCallExecution } = await import("../../src/lib/skills/interception.ts");
 const { builtinSkills } = await import("../../src/lib/skills/builtins.ts");
-const { OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME } =
+const { NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME } =
   await import("../../open-sse/services/webFetchInterception.ts");
 
 const originalWebFetchHandler = builtinSkills.web_fetch;
@@ -47,7 +47,7 @@ const contextWithFetchBuiltin = {
   apiKeyId: "key-a",
   sessionId: "session-1",
   requestId: "request-1",
-  builtinToolNames: [OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME],
+  builtinToolNames: [NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME],
   provider: "openai",
   model: "gpt-5",
 };
@@ -78,7 +78,7 @@ test("handleToolCallExecution routes omniroute_web_fetch to the web_fetch builti
               {
                 id: "call-fetch-1",
                 function: {
-                  name: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME,
+                  name: NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME,
                   arguments: '{"url":"https://example.com"}',
                 },
               },
@@ -119,7 +119,7 @@ test("an unknown tool name is left untouched when builtinToolNames does not incl
             {
               id: "call-fetch-2",
               function: {
-                name: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME,
+                name: NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME,
                 arguments: '{"url":"https://example.com"}',
               },
             },
@@ -155,7 +155,7 @@ test("an error thrown mid-fetch (e.g. an aborted request) is surfaced, not silen
               {
                 id: "call-fetch-abort",
                 function: {
-                  name: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME,
+                  name: NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME,
                   arguments: '{"url":"https://example.com"}',
                 },
               },

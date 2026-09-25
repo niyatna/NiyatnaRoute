@@ -15,7 +15,7 @@
  * timeout and flip the container `unhealthy`, restarting it mid-session and
  * killing active SSE streams. /healthz is a pure in-memory lifecycle check
  * with no DB access. Operators who want the deep monitoring probe can opt
- * back in with OMNIROUTE_HEALTHCHECK_PATH.
+ * back in with NIYATNA_HEALTHCHECK_PATH.
  *
  * #3151 — in some Docker network setups the server binds to a container IP and
  * a probe against `127.0.0.1` is not reachable, while `localhost`/`::1` (or vice
@@ -45,7 +45,7 @@ function normalizeBasePath(value) {
 }
 
 /**
- * Normalize an explicit health-check path override (OMNIROUTE_HEALTHCHECK_PATH).
+ * Normalize an explicit health-check path override (NIYATNA_HEALTHCHECK_PATH).
  * Returns "" when absent/invalid so callers fall back to DEFAULT_HEALTH_PATH.
  * Mirrors normalizeBasePath's safety rules (no query/hash/backslash, no "." /
  * ".." segments, must start with "/").
@@ -62,11 +62,11 @@ function normalizeHealthPath(value) {
 /**
  * Resolve the health route to probe. By default the lightweight /healthz
  * lifecycle endpoint (pure in-memory, no DB reads). An explicit
- * OMNIROUTE_HEALTHCHECK_PATH override opts back into the deep monitoring
+ * NIYATNA_HEALTHCHECK_PATH override opts back into the deep monitoring
  * probe. The configured Next.js basePath is always prefixed.
  *
- * @param {string} [basePathValue] value of OMNIROUTE_BASE_PATH
- * @param {string} [healthPathValue] value of OMNIROUTE_HEALTHCHECK_PATH
+ * @param {string} [basePathValue] value of NIYATNA_BASE_PATH
+ * @param {string} [healthPathValue] value of NIYATNA_HEALTHCHECK_PATH
  */
 export function resolveHealthPath(basePathValue, healthPathValue) {
   const basePath = normalizeBasePath(basePathValue);
@@ -152,8 +152,8 @@ async function main() {
 
   try {
     const healthPath = resolveHealthPath(
-      process.env.OMNIROUTE_BASE_PATH,
-      process.env.OMNIROUTE_HEALTHCHECK_PATH
+      process.env.NIYATNA_BASE_PATH,
+      process.env.NIYATNA_HEALTHCHECK_PATH
     );
     await probeHealth({ port, hosts, healthPath });
     process.exit(0);

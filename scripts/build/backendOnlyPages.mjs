@@ -2,7 +2,7 @@
 /**
  * Backend-only build helper.
  *
- * When `OMNIROUTE_BUILD_BACKEND_ONLY=1` (or `OMNIROUTE_BUILD_PROFILE=backend|contributor`) is set,
+ * When `NIYATNA_BUILD_BACKEND_ONLY=1` (or `NIYATNA_BUILD_PROFILE=backend|contributor`) is set,
  * `build-next-isolated.mjs` calls `stubDashboardPages()` BEFORE `next build` and
  * `restoreDashboardPages()` in a `finally` afterward.
  *
@@ -93,20 +93,20 @@ function stripLeadingUseServer(src) {
 /** True when the current build should skip the dashboard frontend. */
 export function isBackendOnlyBuild(env = process.env) {
   return (
-    env.OMNIROUTE_BUILD_BACKEND_ONLY === "1" ||
-    env.OMNIROUTE_BUILD_PROFILE === "backend" ||
-    env.OMNIROUTE_BUILD_PROFILE === "contributor"
+    env.NIYATNA_BUILD_BACKEND_ONLY === "1" ||
+    env.NIYATNA_BUILD_PROFILE === "backend" ||
+    env.NIYATNA_BUILD_PROFILE === "contributor"
   );
 }
 
 /** True when the build is intended only for contributor feedback, not packaging. */
 export function isContributorBuild(env = process.env) {
-  return env.OMNIROUTE_BUILD_PROFILE === "contributor";
+  return env.NIYATNA_BUILD_PROFILE === "contributor";
 }
 
 /** True when standalone output should be packaged (default true; skipped for contributor or fast build). */
 export function shouldBuildStandalone(env = process.env) {
-  return !isContributorBuild(env) && env.OMNIROUTE_SKIP_STANDALONE !== "1";
+  return !isContributorBuild(env) && env.NIYATNA_SKIP_STANDALONE !== "1";
 }
 
 /** Replace the build-only instrumentation entrypoint to avoid pulling the startup graph. */

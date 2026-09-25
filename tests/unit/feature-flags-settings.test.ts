@@ -31,12 +31,12 @@ const {
   areContextWindowChecksDisabled,
 } = await import("../../src/shared/utils/featureFlags.ts");
 
-// #10889 added OMNIROUTE_OIDC_DISABLE_PASSWORD_LOGIN, bumping the count to 51.
-// The codex-app-server work then added OMNIROUTE_CODEX_APP_SERVER_ENABLED
+// #10889 added NIYATNA_OIDC_DISABLE_PASSWORD_LOGIN, bumping the count to 51.
+// The codex-app-server work then added NIYATNA_CODEX_APP_SERVER_ENABLED
 // (feature flag gating the opt-in Codex app-server WebSocket transport),
 // bumping it from 51 to 52. NO_THINKING_ALIAS_ENABLED (master switch for the
 // no-think/<provider>/<model> gateway aliases) then bumped it from 52 to 53.
-// OMNIROUTE_DISABLE_THINKING_LEVEL_VARIANTS bumped it from 53 to 54;
+// NIYATNA_DISABLE_THINKING_LEVEL_VARIANTS bumped it from 53 to 54;
 // the dead ONEPROXY_ENABLED (readerless since the 1proxy purge, #12091)
 // brought it back to 53. UNIVERSAL_CONTEXT_HANDOFF_ENABLED bumped it to 54.
 // #13641 added SEARCH_STATS_HIDE_DELETED_CONNECTIONS, bumping the count to 56.
@@ -130,8 +130,8 @@ describe("featureFlagDefinitions", () => {
   });
 
   it("defines emergency fallback as a runtime boolean flag enabled by default", () => {
-    const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === "OMNIROUTE_EMERGENCY_FALLBACK");
-    assert.ok(def, "OMNIROUTE_EMERGENCY_FALLBACK should exist");
+    const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === "NIYATNA_EMERGENCY_FALLBACK");
+    assert.ok(def, "NIYATNA_EMERGENCY_FALLBACK should exist");
     assert.strictEqual(def.category, "runtime");
     assert.strictEqual(def.type, "boolean");
     assert.strictEqual(def.defaultValue, "true");
@@ -192,9 +192,9 @@ describe("featureFlagDefinitions", () => {
 
   it("defines control-plane proxy direct fallback as a network boolean flag disabled by default", () => {
     const def = FEATURE_FLAG_DEFINITIONS.find(
-      (d) => d.key === "OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK"
+      (d) => d.key === "NIYATNA_CONTROL_PLANE_PROXY_DIRECT_FALLBACK"
     );
-    assert.ok(def, "OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK should exist");
+    assert.ok(def, "NIYATNA_CONTROL_PLANE_PROXY_DIRECT_FALLBACK should exist");
     assert.strictEqual(def.category, "network");
     assert.strictEqual(def.type, "boolean");
     assert.strictEqual(def.defaultValue, "false");
@@ -331,8 +331,8 @@ describe("featureFlagDefinitions", () => {
 
   it("defines CLI profile auto-sync flags as CLI booleans disabled by default", () => {
     for (const key of [
-      "OMNIROUTE_AUTO_SYNC_CODEX_PROFILES",
-      "OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES",
+      "NIYATNA_AUTO_SYNC_CODEX_PROFILES",
+      "NIYATNA_AUTO_SYNC_CLAUDE_PROFILES",
     ]) {
       const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === key);
       assert.ok(def, `${key} should exist`);
@@ -569,10 +569,10 @@ describe("resolveFeatureFlag", () => {
     it("isControlPlaneProxyDirectFallbackEnabled defaults off and follows DB overrides", () => {
       assert.strictEqual(isControlPlaneProxyDirectFallbackEnabled(), false);
       try {
-        setFeatureFlagOverride("OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK", "true");
+        setFeatureFlagOverride("NIYATNA_CONTROL_PLANE_PROXY_DIRECT_FALLBACK", "true");
         assert.strictEqual(isControlPlaneProxyDirectFallbackEnabled(), true);
       } finally {
-        removeFeatureFlagOverride("OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK");
+        removeFeatureFlagOverride("NIYATNA_CONTROL_PLANE_PROXY_DIRECT_FALLBACK");
       }
     });
 

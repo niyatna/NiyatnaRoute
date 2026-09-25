@@ -9,7 +9,7 @@ import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getComboModelProvider } from "@/lib/combos/steps";
 import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
-const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
+const NIYATNA_BASE_URL = resolveOmniRouteBaseUrl();
 
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);
@@ -18,8 +18,8 @@ export async function GET(request: Request) {
   try {
     // Fetch current health and combos to determine best provider ordering
     const [healthRes, combosRes] = await Promise.allSettled([
-      fetch(`${OMNIROUTE_BASE_URL}/api/monitoring/health`, { signal: AbortSignal.timeout(5000) }),
-      fetch(`${OMNIROUTE_BASE_URL}/api/combos`, { signal: AbortSignal.timeout(5000) }),
+      fetch(`${NIYATNA_BASE_URL}/api/monitoring/health`, { signal: AbortSignal.timeout(5000) }),
+      fetch(`${NIYATNA_BASE_URL}/api/combos`, { signal: AbortSignal.timeout(5000) }),
     ]);
 
     const health = healthRes.status === "fulfilled" ? await healthRes.value.json() : {};

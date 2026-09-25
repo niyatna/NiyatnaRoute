@@ -9,9 +9,9 @@ import {
 } from "../../src/shared/resilience/peerRouting";
 
 const env = {
-  OMNIROUTE_INSTANCE_ID: "gateway-a",
-  OMNIROUTE_PEER_URLS: "http://gateway-b:20128/v1,https://peer.example/api/v1/",
-  OMNIROUTE_PEER_MAX_HOPS: "4",
+  NIYATNA_INSTANCE_ID: "gateway-a",
+  NIYATNA_PEER_URLS: "http://gateway-b:20128/v1,https://peer.example/api/v1/",
+  NIYATNA_PEER_MAX_HOPS: "4",
 };
 
 test("peer routing stays disabled without an instance id", () => {
@@ -19,7 +19,7 @@ test("peer routing stays disabled without an instance id", () => {
   assert.equal(
     applyPeerTraceHeader(headers, null, "http://gateway-b:20128/v1/chat/completions", {
       ...env,
-      OMNIROUTE_INSTANCE_ID: undefined,
+      NIYATNA_INSTANCE_ID: undefined,
     }),
     false
   );
@@ -92,9 +92,9 @@ test("trace parsing drops invalid IDs and oversized untrusted values", () => {
 
 test("BaseExecutor adds the trace only on an allowlisted peer dispatch", async () => {
   const previous = {
-    instanceId: process.env.OMNIROUTE_INSTANCE_ID,
-    peerUrls: process.env.OMNIROUTE_PEER_URLS,
-    maxHops: process.env.OMNIROUTE_PEER_MAX_HOPS,
+    instanceId: process.env.NIYATNA_INSTANCE_ID,
+    peerUrls: process.env.NIYATNA_PEER_URLS,
+    maxHops: process.env.NIYATNA_PEER_MAX_HOPS,
   };
   let capturedTrace: string | undefined;
   const server = createServer((request, response) => {
@@ -107,9 +107,9 @@ test("BaseExecutor adds the trace only on an allowlisted peer dispatch", async (
   assert.ok(address && typeof address === "object");
   const peerBaseUrl = `http://127.0.0.1:${address.port}/v1`;
 
-  process.env.OMNIROUTE_INSTANCE_ID = "gateway-a";
-  process.env.OMNIROUTE_PEER_URLS = peerBaseUrl;
-  process.env.OMNIROUTE_PEER_MAX_HOPS = "4";
+  process.env.NIYATNA_INSTANCE_ID = "gateway-a";
+  process.env.NIYATNA_PEER_URLS = peerBaseUrl;
+  process.env.NIYATNA_PEER_MAX_HOPS = "4";
 
   try {
     const { BaseExecutor } = await import("../../open-sse/executors/base.ts");
@@ -133,18 +133,18 @@ test("BaseExecutor adds the trace only on an allowlisted peer dispatch", async (
     await new Promise<void>((resolve, reject) => {
       server.close((error) => (error ? reject(error) : resolve()));
     });
-    if (previous.instanceId === undefined) delete process.env.OMNIROUTE_INSTANCE_ID;
-    else process.env.OMNIROUTE_INSTANCE_ID = previous.instanceId;
-    if (previous.peerUrls === undefined) delete process.env.OMNIROUTE_PEER_URLS;
-    else process.env.OMNIROUTE_PEER_URLS = previous.peerUrls;
-    if (previous.maxHops === undefined) delete process.env.OMNIROUTE_PEER_MAX_HOPS;
-    else process.env.OMNIROUTE_PEER_MAX_HOPS = previous.maxHops;
+    if (previous.instanceId === undefined) delete process.env.NIYATNA_INSTANCE_ID;
+    else process.env.NIYATNA_INSTANCE_ID = previous.instanceId;
+    if (previous.peerUrls === undefined) delete process.env.NIYATNA_PEER_URLS;
+    else process.env.NIYATNA_PEER_URLS = previous.peerUrls;
+    if (previous.maxHops === undefined) delete process.env.NIYATNA_PEER_MAX_HOPS;
+    else process.env.NIYATNA_PEER_MAX_HOPS = previous.maxHops;
   }
 });
 
 test("handleChat rejects a reciprocal peer loop before provider routing", async () => {
-  const previous = process.env.OMNIROUTE_INSTANCE_ID;
-  process.env.OMNIROUTE_INSTANCE_ID = "gateway-a";
+  const previous = process.env.NIYATNA_INSTANCE_ID;
+  process.env.NIYATNA_INSTANCE_ID = "gateway-a";
   try {
     const { handleChat } = await import("../../src/sse/handlers/chat.ts");
     const response = await handleChat(
@@ -164,7 +164,7 @@ test("handleChat rejects a reciprocal peer loop before provider routing", async 
     assert.equal(response.status, 508);
     assert.match(await response.text(), /peer routing loop detected/i);
   } finally {
-    if (previous === undefined) delete process.env.OMNIROUTE_INSTANCE_ID;
-    else process.env.OMNIROUTE_INSTANCE_ID = previous;
+    if (previous === undefined) delete process.env.NIYATNA_INSTANCE_ID;
+    else process.env.NIYATNA_INSTANCE_ID = previous;
   }
 });

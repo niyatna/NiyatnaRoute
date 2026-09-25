@@ -16,8 +16,8 @@ import path from "node:path";
 import Database from "better-sqlite3";
 
 const migrationsDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-ccr-migration-"));
-const originalMigrationsDir = process.env.OMNIROUTE_MIGRATIONS_DIR;
-process.env.OMNIROUTE_MIGRATIONS_DIR = migrationsDir;
+const originalMigrationsDir = process.env.NIYATNA_MIGRATIONS_DIR;
+process.env.NIYATNA_MIGRATIONS_DIR = migrationsDir;
 
 fs.writeFileSync(
   path.join(migrationsDir, "134_proxy_logs_egress_ip.sql"),
@@ -50,8 +50,8 @@ function createLegacyDb(appliedName: string) {
 
 test.after(() => {
   fs.rmSync(migrationsDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
-  if (originalMigrationsDir === undefined) delete process.env.OMNIROUTE_MIGRATIONS_DIR;
-  else process.env.OMNIROUTE_MIGRATIONS_DIR = originalMigrationsDir;
+  if (originalMigrationsDir === undefined) delete process.env.NIYATNA_MIGRATIONS_DIR;
+  else process.env.NIYATNA_MIGRATIONS_DIR = originalMigrationsDir;
 });
 
 test("renumbered CCR migration frees 134 for proxy_logs on existing databases", () => {

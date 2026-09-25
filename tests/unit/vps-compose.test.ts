@@ -31,7 +31,7 @@ test("VPS compose publishes only the OmniRoute dashboard on loopback by default"
 
   assert.deepEqual(services.redis?.ports, undefined, "Redis must not publish a host port");
   assert.deepEqual(services.omniroute?.ports, [
-    "${OMNIROUTE_BIND_HOST:-127.0.0.1}:${OMNIROUTE_PORT:-20128}:20128",
+    "${NIYATNA_BIND_HOST:-127.0.0.1}:${NIYATNA_PORT:-20128}:20128",
   ]);
 });
 
@@ -41,7 +41,7 @@ test("VPS compose requires an explicitly pinned image and production secrets", (
 
   assert.equal(
     omniroute?.image,
-    "${OMNIROUTE_IMAGE:?Set OMNIROUTE_IMAGE to a versioned tag or digest}"
+    "${NIYATNA_IMAGE:?Set NIYATNA_IMAGE to a versioned tag or digest}"
   );
   assert.equal(omniroute?.environment?.REQUIRE_API_KEY, "${REQUIRE_API_KEY:-true}");
   assert.match(raw, /JWT_SECRET: \$\{JWT_SECRET:\?Set JWT_SECRET in \.env\}/);
@@ -49,14 +49,14 @@ test("VPS compose requires an explicitly pinned image and production secrets", (
   assert.match(raw, /INITIAL_PASSWORD: \$\{INITIAL_PASSWORD:\?Set INITIAL_PASSWORD in \.env\}/);
   assert.match(
     raw,
-    /OMNIROUTE_WS_BRIDGE_SECRET: \$\{OMNIROUTE_WS_BRIDGE_SECRET:\?Set OMNIROUTE_WS_BRIDGE_SECRET in \.env\}/
+    /NIYATNA_WS_BRIDGE_SECRET: \$\{NIYATNA_WS_BRIDGE_SECRET:\?Set NIYATNA_WS_BRIDGE_SECRET in \.env\}/
   );
 });
 
 test("VPS environment example uses a versioned image rather than a floating channel", () => {
   const env = fs.readFileSync(ENV_EXAMPLE_PATH, "utf8");
 
-  assert.match(env, /^OMNIROUTE_IMAGE=[^\s:]+:\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/m);
-  assert.doesNotMatch(env, /^OMNIROUTE_IMAGE=.*:(?:latest|next)$/m);
+  assert.match(env, /^NIYATNA_IMAGE=[^\s:]+:\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/m);
+  assert.doesNotMatch(env, /^NIYATNA_IMAGE=.*:(?:latest|next)$/m);
   assert.match(env, /^REQUIRE_API_KEY=true$/m);
 });

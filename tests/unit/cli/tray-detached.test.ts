@@ -46,13 +46,13 @@ test("buildTrayLaunch detaches Windows and Linux workers from the terminal", () 
     const launch = buildTrayLaunch({
       platform,
       execPath: "/usr/bin/node",
-      cliPath: "/opt/omniroute/bin/omniroute.mjs",
+      cliPath: "/opt/omniroute/bin/niyatnaroute.mjs",
       workerArgs: ["serve", "--tray-worker"],
       label: "com.omniroute.tray.123",
     });
 
     assert.equal(launch.command, "/usr/bin/node");
-    assert.deepEqual(launch.args, ["/opt/omniroute/bin/omniroute.mjs", "serve", "--tray-worker"]);
+    assert.deepEqual(launch.args, ["/opt/omniroute/bin/niyatnaroute.mjs", "serve", "--tray-worker"]);
     assert.deepEqual(launch.options, {
       detached: true,
       stdio: "ignore",
@@ -65,7 +65,7 @@ test("buildTrayLaunch submits a macOS launchd job", () => {
   const launch = buildTrayLaunch({
     platform: "darwin",
     execPath: "/usr/bin/node",
-    cliPath: "/opt/omniroute/bin/omniroute.mjs",
+    cliPath: "/opt/omniroute/bin/niyatnaroute.mjs",
     workerArgs: ["serve", "--tray-worker"],
     label: "com.omniroute.tray.123",
   });
@@ -77,7 +77,7 @@ test("buildTrayLaunch submits a macOS launchd job", () => {
     "com.omniroute.tray.123",
     "--",
     "/usr/bin/node",
-    "/opt/omniroute/bin/omniroute.mjs",
+    "/opt/omniroute/bin/niyatnaroute.mjs",
     "serve",
     "--tray-worker",
   ]);

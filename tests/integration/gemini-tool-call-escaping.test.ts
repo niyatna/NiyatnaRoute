@@ -9,8 +9,8 @@
  * OmniRoute's translator must escape these into valid JSON \n sequences.
  *
  * Environment:
- *   OMNIROUTE_API_KEY  — required (else tests skip)
- *   OMNIROUTE_URL      — defaults to http://localhost:3000
+ *   NIYATNA_API_KEY  — required (else tests skip)
+ *   NIYATNA_URL      — defaults to http://localhost:3000
  *   TEST_DELAY_MS      — delay between tests, defaults to 5000
  */
 import test from "node:test";

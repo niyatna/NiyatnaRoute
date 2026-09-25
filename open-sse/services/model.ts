@@ -366,7 +366,7 @@ async function getPreferClaudeCodeForUnprefixedClaudeModels() {
     // Standalone open-sse usage may not have the app DB layer available.
   }
 
-  return isTruthyEnv(process.env.OMNIROUTE_PREFER_CLAUDE_CODE_FOR_UNPREFIXED_CLAUDE_MODELS);
+  return isTruthyEnv(process.env.NIYATNA_PREFER_CLAUDE_CODE_FOR_UNPREFIXED_CLAUDE_MODELS);
 }
 
 function shouldPreferClaudeCodeForUnprefixedClaudeModel(

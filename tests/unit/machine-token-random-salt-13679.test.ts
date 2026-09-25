@@ -6,17 +6,17 @@ import path from "node:path";
 
 // #13679 PR B — src/lib/machineToken.ts::getActiveSalt() (mirrored in
 // bin/cli/utils/cliToken.mjs) used to fall back to the checked-in literal default
-// salt "omniroute-cli-auth-v1" whenever OMNIROUTE_CLI_SALT was unset. Since the CLI
+// salt "omniroute-cli-auth-v1" whenever NIYATNA_CLI_SALT was unset. Since the CLI
 // bearer token is HMAC-SHA256(raw machine-id, salt) and /etc/machine-id is commonly
-// world-readable, every install that never set OMNIROUTE_CLI_SALT derived the SAME
+// world-readable, every install that never set NIYATNA_CLI_SALT derived the SAME
 // token from the same machine-id — any local user on that machine could compute it.
 // The fix generates a random per-install salt on first use and persists it under
 // DATA_DIR, so two installs on the same host (same underlying machine-id) diverge.
 
 test("issue #13679 PR B: two fresh installs derive different CLI tokens from the same machine-id", async () => {
-  const previousCliSalt = process.env.OMNIROUTE_CLI_SALT;
+  const previousCliSalt = process.env.NIYATNA_CLI_SALT;
   const previousDataDir = process.env.DATA_DIR;
-  delete process.env.OMNIROUTE_CLI_SALT; // exercise the default-salt path, not the explicit override
+  delete process.env.NIYATNA_CLI_SALT; // exercise the default-salt path, not the explicit override
 
   const dataDirA = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-fresh-install-a-"));
   const dataDirB = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-fresh-install-b-"));
@@ -60,8 +60,8 @@ test("issue #13679 PR B: two fresh installs derive different CLI tokens from the
     assert.notEqual(saltA, saltB, "each install must generate its own random salt");
     assert.notEqual(saltA, "omniroute-cli-auth-v1", "must not persist the checked-in literal");
   } finally {
-    if (previousCliSalt === undefined) delete process.env.OMNIROUTE_CLI_SALT;
-    else process.env.OMNIROUTE_CLI_SALT = previousCliSalt;
+    if (previousCliSalt === undefined) delete process.env.NIYATNA_CLI_SALT;
+    else process.env.NIYATNA_CLI_SALT = previousCliSalt;
     if (previousDataDir === undefined) delete process.env.DATA_DIR;
     else process.env.DATA_DIR = previousDataDir;
     fs.rmSync(dataDirA, { recursive: true, force: true });
@@ -70,9 +70,9 @@ test("issue #13679 PR B: two fresh installs derive different CLI tokens from the
 });
 
 test("issue #13679 PR B: a second process on the same install reads back the persisted salt (byte-compatible)", async () => {
-  const previousCliSalt = process.env.OMNIROUTE_CLI_SALT;
+  const previousCliSalt = process.env.NIYATNA_CLI_SALT;
   const previousDataDir = process.env.DATA_DIR;
-  delete process.env.OMNIROUTE_CLI_SALT;
+  delete process.env.NIYATNA_CLI_SALT;
 
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-same-install-"));
   process.env.DATA_DIR = dataDir;
@@ -99,8 +99,8 @@ test("issue #13679 PR B: a second process on the same install reads back the per
       "two processes reading the same persisted DATA_DIR salt must derive the same token"
     );
   } finally {
-    if (previousCliSalt === undefined) delete process.env.OMNIROUTE_CLI_SALT;
-    else process.env.OMNIROUTE_CLI_SALT = previousCliSalt;
+    if (previousCliSalt === undefined) delete process.env.NIYATNA_CLI_SALT;
+    else process.env.NIYATNA_CLI_SALT = previousCliSalt;
     if (previousDataDir === undefined) delete process.env.DATA_DIR;
     else process.env.DATA_DIR = previousDataDir;
     fs.rmSync(dataDir, { recursive: true, force: true });

@@ -12,7 +12,7 @@ import path from "node:path";
 
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-egress-line-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES = "true";
+process.env.NIYATNA_DISABLE_BACKGROUND_SERVICES = "true";
 delete process.env.PROXY_LOG_INCLUDE_IPS;
 
 const core = await import("../../src/lib/db/core.ts");

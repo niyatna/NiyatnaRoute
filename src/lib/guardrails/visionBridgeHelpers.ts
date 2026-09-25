@@ -136,7 +136,7 @@ export function resolveVisionBridgeBaseUrl(model?: string): string {
   // When the model has a non-standard provider prefix (not openai/ or
   // anthropic/), it can only be resolved through OmniRoute's own router,
   // not through a direct OpenAI/Anthropic endpoint. Use the operator-configured
-  // port via OMNIROUTE_PORT / PORT env vars, falling back to the default 20128.
+  // port via NIYATNA_PORT / PORT env vars, falling back to the default 20128.
   if (model && model.includes("/")) {
     const provider = model.split("/")[0].toLowerCase();
     if (provider !== "openai" && provider !== "anthropic") {

@@ -2,8 +2,8 @@ import { projectSkillOutputForBoundary, skillExecutor } from "./executor";
 import { skillRegistry } from "./registry";
 import { builtinSkills } from "./builtins";
 import { detectProvider, decodeSkillToolName } from "./injection";
-import { OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME } from "@omniroute/open-sse/services/webSearchFallback.ts";
-import { OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME } from "@omniroute/open-sse/services/webFetchInterception.ts";
+import { NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME } from "@omniroute/open-sse/services/webSearchFallback.ts";
+import { NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME } from "@omniroute/open-sse/services/webFetchInterception.ts";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/errorSanitization.ts";
 import { runWithServerToolFence } from "./toolExecutionFence";
 import type { ExecutedToolResult, ToolCall, ExecutionContext } from "./toolLoopTypes";
@@ -45,8 +45,8 @@ function projectSkillResultForPublicResponse(result: unknown): unknown {
 // ToolCall and ExecutionContext types are imported from ./toolLoopTypes.ts
 
 const BUILTIN_TOOL_ALIASES: Record<string, string> = {
-  [OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME]: "web_search",
-  [OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME]: "web_fetch",
+  [NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME]: "web_search",
+  [NIYATNA_WEB_FETCH_FALLBACK_TOOL_NAME]: "web_fetch",
 };
 
 function resolveBuiltinHandlerName(
@@ -284,7 +284,7 @@ export function buildWebSearchCallItem(
   call: ToolCall,
   result: unknown
 ): Record<string, unknown> | null {
-  if (call.name !== OMNIROUTE_WEB_SEARCH_FALLBACK_TOOL_NAME) return null;
+  if (call.name !== NIYATNA_WEB_SEARCH_FALLBACK_TOOL_NAME) return null;
   const record = result && typeof result === "object" ? (result as Record<string, unknown>) : null;
   if (!record || record.success !== true) return null;
 

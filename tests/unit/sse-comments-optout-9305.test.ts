@@ -60,12 +60,12 @@ async function runFinalizationCase({
   envValue: string | undefined;
   upstreamDone: boolean;
 }) {
-  const previousComments = process.env.OMNIROUTE_SSE_COMMENTS;
+  const previousComments = process.env.NIYATNA_SSE_COMMENTS;
   usageHistory.clearPendingRequests();
 
   try {
-    if (envValue === undefined) delete process.env.OMNIROUTE_SSE_COMMENTS;
-    else process.env.OMNIROUTE_SSE_COMMENTS = envValue;
+    if (envValue === undefined) delete process.env.NIYATNA_SSE_COMMENTS;
+    else process.env.NIYATNA_SSE_COMMENTS = envValue;
 
     const provider = "test-provider";
     const model = "test-model";
@@ -118,8 +118,8 @@ async function runFinalizationCase({
     };
   } finally {
     usageHistory.clearPendingRequests();
-    if (previousComments === undefined) delete process.env.OMNIROUTE_SSE_COMMENTS;
-    else process.env.OMNIROUTE_SSE_COMMENTS = previousComments;
+    if (previousComments === undefined) delete process.env.NIYATNA_SSE_COMMENTS;
+    else process.env.NIYATNA_SSE_COMMENTS = previousComments;
   }
 }
 
@@ -127,7 +127,7 @@ for (const upstreamDone of [true, false]) {
   const finalization = upstreamDone ? "upstream [DONE]" : "natural EOF";
 
   for (const [label, envValue, commentsExpected] of [
-    // #10524: OMNIROUTE_SSE_COMMENTS now defaults to disabled — strict SSE
+    // #10524: NIYATNA_SSE_COMMENTS now defaults to disabled — strict SSE
     // clients (WorkBuddy, etc.) crash on `: x-omniroute-*` comment lines.
     ["default", undefined, false],
     ["explicitly enabled", "yes", true],

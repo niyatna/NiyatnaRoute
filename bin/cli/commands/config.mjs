@@ -99,7 +99,7 @@ async function runConfigSetCommand(toolId, opts = {}) {
   const model = opts.model;
 
   if (!apiKey) {
-    printError("API key required. Use --api-key or set OMNIROUTE_API_KEY.");
+    printError("API key required. Use --api-key or set NIYATNA_API_KEY.");
     return 1;
   }
 
@@ -246,7 +246,7 @@ export async function runConfigLangSetCommand(code, opts = {}) {
     return 0;
   }
   const envPath = getCliEnvPath();
-  upsertEnvLine(envPath, "OMNIROUTE_LANG", code);
+  upsertEnvLine(envPath, "NIYATNA_LANG", code);
   setLocale(code);
   console.log(t("config.lang.saved", { code, name: entry.english }));
   console.log(t("config.lang.envHint", { code }));
@@ -315,8 +315,8 @@ export function registerConfig(program) {
       const globalOpts = cmd.parent.optsWithGlobals();
       const exitCode = await runConfigSetCommand(tool, {
         ...opts,
-        apiKey: opts.apiKey || globalOpts.apiKey || process.env.OMNIROUTE_API_KEY,
-        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.OMNIROUTE_BASE_URL,
+        apiKey: opts.apiKey || globalOpts.apiKey || process.env.NIYATNA_API_KEY,
+        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.NIYATNA_BASE_URL,
         output: globalOpts.output,
       });
       if (exitCode !== 0) process.exit(exitCode);
@@ -331,8 +331,8 @@ export function registerConfig(program) {
       const globalOpts = cmd.parent.optsWithGlobals();
       const exitCode = await runConfigValidateCommand(tool, {
         ...opts,
-        apiKey: opts.apiKey || globalOpts.apiKey || process.env.OMNIROUTE_API_KEY,
-        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.OMNIROUTE_BASE_URL,
+        apiKey: opts.apiKey || globalOpts.apiKey || process.env.NIYATNA_API_KEY,
+        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.NIYATNA_BASE_URL,
         output: globalOpts.output,
       });
       if (exitCode !== 0) process.exit(exitCode);
@@ -354,8 +354,8 @@ export function registerConfig(program) {
       const globalOpts = cmd.parent.optsWithGlobals();
       const exitCode = await runConfigSetCommand("opencode", {
         ...opts,
-        apiKey: opts.apiKey || globalOpts.apiKey || process.env.OMNIROUTE_API_KEY,
-        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.OMNIROUTE_BASE_URL,
+        apiKey: opts.apiKey || globalOpts.apiKey || process.env.NIYATNA_API_KEY,
+        baseUrl: opts.baseUrl || globalOpts.baseUrl || process.env.NIYATNA_BASE_URL,
         output: globalOpts.output,
       });
       if (exitCode !== 0) process.exit(exitCode);

@@ -33,15 +33,15 @@ function configuredString(value: string | undefined, envName: string): string | 
 }
 
 function resolveModel(input: RecordedTriageExecutionInput): string {
-  const model = configuredString(input.model, "OMNIROUTE_ISSUE_AGENT_MODEL") ?? DEFAULT_MODEL;
-  const provider = configuredString(input.provider, "OMNIROUTE_ISSUE_AGENT_PROVIDER");
+  const model = configuredString(input.model, "NIYATNA_ISSUE_AGENT_MODEL") ?? DEFAULT_MODEL;
+  const provider = configuredString(input.provider, "NIYATNA_ISSUE_AGENT_PROVIDER");
 
   if (!provider || model.includes("/")) return model;
   return `${provider}/${model}`;
 }
 
 function resolveTimeoutMs(input: RecordedTriageExecutionInput): number {
-  const configured = input.timeoutMs ?? Number(process.env.OMNIROUTE_ISSUE_AGENT_TIMEOUT_MS);
+  const configured = input.timeoutMs ?? Number(process.env.NIYATNA_ISSUE_AGENT_TIMEOUT_MS);
   if (!Number.isFinite(configured) || configured <= 0) return DEFAULT_TIMEOUT_MS;
   return Math.min(Math.floor(configured), MAX_TIMEOUT_MS);
 }
@@ -80,7 +80,7 @@ export async function executeRecordedTriageChatCompletion(
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   const routingPolicy = configuredString(
     input.routingPolicy,
-    "OMNIROUTE_ISSUE_AGENT_ROUTING_POLICY"
+    "NIYATNA_ISSUE_AGENT_ROUTING_POLICY"
   );
 
   try {

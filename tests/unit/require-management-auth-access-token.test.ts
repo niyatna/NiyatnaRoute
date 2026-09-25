@@ -34,11 +34,11 @@ test.after(() => {
     fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   } catch {}
   delete process.env.INITIAL_PASSWORD;
-  delete process.env.OMNIROUTE_INTERNAL_SERVICE_TOKEN;
+  delete process.env.NIYATNA_INTERNAL_SERVICE_TOKEN;
 });
 
 test("internal service token requires the trusted loopback locality marker", async () => {
-  process.env.OMNIROUTE_INTERNAL_SERVICE_TOKEN = "internal-service-token-0123456789";
+  process.env.NIYATNA_INTERNAL_SERVICE_TOKEN = "internal-service-token-0123456789";
   const tokenHeader = "x-omniroute-internal-service-token";
   const local = new Request(`${BASE}/api/combos`, {
     headers: {

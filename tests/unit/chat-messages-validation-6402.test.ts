@@ -177,7 +177,7 @@ for (const model of ANTIGRAVITY_GEMINI_MODELS) {
     // It used to read `assert.match(body, /ok/)`, aimed at the mocked upstream's
     // "ok" text — but that text never reached this layer. The match only ever
     // succeeded on the "ok" inside `: x-omniroute-tokens-in=0`, an SSE *comment*
-    // trailer. When #10539 flipped OMNIROUTE_SSE_COMMENTS to off-by-default the
+    // trailer. When #10539 flipped NIYATNA_SSE_COMMENTS to off-by-default the
     // trailers stopped being emitted, the body went empty, and the coincidence —
     // not the behavior — broke. Content relay for this provider is covered for
     // real, at the executor level, by antigravity-streaming-passthrough.test.ts.

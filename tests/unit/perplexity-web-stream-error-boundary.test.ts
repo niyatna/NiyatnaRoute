@@ -33,7 +33,7 @@ function runIsolatedFixture(testRoot: string): Promise<FixtureResult> {
     APP_LOG_TO_FILE: "false",
     API_KEY_SECRET: "perplexity-stream-boundary-test-secret-00000000000000000000000000000000",
     DATA_DIR: dataDir,
-    OMNIROUTE_PLUGINS_DIR: pluginsDir,
+    NIYATNA_PLUGINS_DIR: pluginsDir,
   };
   delete childEnv.NODE_TEST_CONTEXT;
 
@@ -60,7 +60,7 @@ function runIsolatedFixture(testRoot: string): Promise<FixtureResult> {
 test("Perplexity stream failures preserve protocol semantics in an isolated full pipeline", async () => {
   const testRoot = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-pplx-boundary-parent-"));
   const originalDataDir = process.env.DATA_DIR;
-  const originalPluginsDir = process.env.OMNIROUTE_PLUGINS_DIR;
+  const originalPluginsDir = process.env.NIYATNA_PLUGINS_DIR;
   const eventBusOwner = globalThis as { __omnirouteEventBus?: unknown };
   const originalEventBus = eventBusOwner.__omnirouteEventBus;
 
@@ -78,7 +78,7 @@ test("Perplexity stream failures preserve protocol semantics in an isolated full
     assert.match(result.stdout, /ℹ fail 0/);
 
     assert.equal(process.env.DATA_DIR, originalDataDir);
-    assert.equal(process.env.OMNIROUTE_PLUGINS_DIR, originalPluginsDir);
+    assert.equal(process.env.NIYATNA_PLUGINS_DIR, originalPluginsDir);
     assert.equal(
       eventBusOwner.__omnirouteEventBus,
       originalEventBus,

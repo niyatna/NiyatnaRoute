@@ -117,12 +117,12 @@ test("validateApiKey returns false for null / undefined / empty", async () => {
 
 test("validateApiKey returns true for env key", async () => {
   await resetStorage();
-  const prev = process.env.OMNIROUTE_API_KEY;
-  process.env.OMNIROUTE_API_KEY = "env-key-test-abc123";
+  const prev = process.env.NIYATNA_API_KEY;
+  process.env.NIYATNA_API_KEY = "env-key-test-abc123";
   try {
     assert.equal(await apiKeys.validateApiKey("env-key-test-abc123"), true);
   } finally {
-    process.env.OMNIROUTE_API_KEY = prev;
+    process.env.NIYATNA_API_KEY = prev;
   }
 });
 
@@ -183,8 +183,8 @@ test("getApiKeyMetadata returns null for null / undefined / empty", async () => 
 
 test("getApiKeyMetadata returns env-key record for env key", async () => {
   await resetStorage();
-  const prev = process.env.OMNIROUTE_API_KEY;
-  process.env.OMNIROUTE_API_KEY = "env-key-meta-001";
+  const prev = process.env.NIYATNA_API_KEY;
+  process.env.NIYATNA_API_KEY = "env-key-meta-001";
   try {
     const meta = await apiKeys.getApiKeyMetadata("env-key-meta-001");
     assert.ok(meta !== null);
@@ -193,7 +193,7 @@ test("getApiKeyMetadata returns env-key record for env key", async () => {
     assert.ok(meta!.scopes.includes("manage"));
     assert.equal(meta!.isActive, true);
   } finally {
-    process.env.OMNIROUTE_API_KEY = prev;
+    process.env.NIYATNA_API_KEY = prev;
   }
 });
 

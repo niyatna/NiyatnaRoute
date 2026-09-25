@@ -1022,7 +1022,7 @@ test("model sync route falls back to in-process discovery when internal self-fet
   // contains 3 self-fetch URLs followed by 1 upstream URL.
   // Route forces IPv4 origin (http://127.0.0.1:PORT) — never "localhost" — to avoid
   // ::1 (IPv6) resolution issues in containers. PORT defaults to 20128 when env unset.
-  const expectedPort = process.env.OMNIROUTE_PORT || process.env.PORT || "20128";
+  const expectedPort = process.env.NIYATNA_PORT || process.env.PORT || "20128";
   const selfFetchUrl = `http://127.0.0.1:${expectedPort}/api/providers/${connection.id}/models?refresh=true&excludeCustom=true`;
   assert.equal(
     fetchCalls.slice(0, 3).every((u) => u === selfFetchUrl),

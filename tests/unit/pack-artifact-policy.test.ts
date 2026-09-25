@@ -231,7 +231,7 @@ test("dist/tls-options.mjs is a required tarball path (regression guard for #545
   );
 });
 
-test("setupPolyfill.ts is allowed in the tarball (bin/omniroute.mjs imports it at startup)", () => {
+test("setupPolyfill.ts is allowed in the tarball (bin/niyatnaroute.mjs imports it at startup)", () => {
   const unexpectedPaths = findUnexpectedArtifactPaths(["open-sse/utils/setupPolyfill.ts"], {
     exactPaths: PACK_ARTIFACT_ALLOWED_EXACT_PATHS,
     prefixPaths: PACK_ARTIFACT_ALLOWED_PATH_PREFIXES,
@@ -241,7 +241,7 @@ test("setupPolyfill.ts is allowed in the tarball (bin/omniroute.mjs imports it a
 });
 
 test("config/i18n.json ships in the tarball: allowed, required, and in package.json files[]", () => {
-  // Locale source of truth read at runtime by bin/cli/i18n.mjs (OMNIROUTE_LANG alias
+  // Locale source of truth read at runtime by bin/cli/i18n.mjs (NIYATNA_LANG alias
   // resolution, e.g. uk → uk-UA / fil → phi) and bin/cli/commands/config.mjs
   // (`config lang list`). package.json "files" never shipped config/, so the published
   // CLI silently fell back to en for every alias — pin all three layers so the file can
@@ -269,7 +269,7 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
   const missingPaths = findMissingArtifactPaths(
     [
       "dist/server.js",
-      "bin/omniroute.mjs",
+      "bin/niyatnaroute.mjs",
       "package.json",
       "scripts/build/postinstall.mjs",
       "scripts/build/postinstallSupport.mjs",
@@ -279,7 +279,7 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
 
   // findMissingArtifactPaths returns the missing required paths sorted
   // alphabetically (bin/ < dist/ < scripts/ < src/), minus the paths present
-  // above (dist/server.js, bin/omniroute.mjs, package.json, the postinstall scripts).
+  // above (dist/server.js, bin/niyatnaroute.mjs, package.json, the postinstall scripts).
   assert.deepEqual(missingPaths, [
     "bin/aliasResolver.mjs",
     "bin/aliasResolverHook.mjs",

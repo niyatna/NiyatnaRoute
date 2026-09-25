@@ -46,18 +46,18 @@ export const SETUP_MODULES = {
  * Materialize the active server before delegating to a setup recipe.
  *
  * `apiFetch` knows how to prefer a named context over an ambient
- * `OMNIROUTE_API_KEY`, but the older setup modules receive plain options and
+ * `NIYATNA_API_KEY`, but the older setup modules receive plain options and
  * resolve those themselves. Passing the resolved URL/key here keeps the
  * picker and the delegated recipe on the same local/remote target, including
  * Claude Code which predates context-aware setup resolution.
  */
 export function resolveConfigureTargetOptions(opts = {}) {
   const resolved = { ...opts };
-  const ambientKey = process.env.OMNIROUTE_API_KEY || "";
+  const ambientKey = process.env.NIYATNA_API_KEY || "";
   const explicitRemote = opts.remote || opts.baseUrl;
   let context;
   try {
-    context = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+    context = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
   } catch {
     // A missing/corrupt context file should retain the normal local fallback.
   }
@@ -88,8 +88,8 @@ export function listConfigureTargets() {
 export { getModelPreferenceState, rankPreferredModels };
 
 function preferenceContextName(opts = {}) {
-  if (opts.context || process.env.OMNIROUTE_CONTEXT) {
-    return String(opts.context || process.env.OMNIROUTE_CONTEXT);
+  if (opts.context || process.env.NIYATNA_CONTEXT) {
+    return String(opts.context || process.env.NIYATNA_CONTEXT);
   }
   try {
     return String(loadContexts().currentContext || "default");

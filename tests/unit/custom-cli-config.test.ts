@@ -17,8 +17,8 @@ test("normalizeOpenAiBaseUrl appends /v1 only when needed", () => {
 });
 
 test("buildAliasEnvVar sanitizes aliases for env variable export", () => {
-  assert.equal(buildAliasEnvVar("review"), "OMNIROUTE_MODEL_REVIEW");
-  assert.equal(buildAliasEnvVar("plan mode"), "OMNIROUTE_MODEL_PLAN_MODE");
+  assert.equal(buildAliasEnvVar("review"), "NIYATNA_MODEL_REVIEW");
+  assert.equal(buildAliasEnvVar("plan mode"), "NIYATNA_MODEL_PLAN_MODE");
   assert.equal(buildAliasEnvVar(""), null);
 });
 
@@ -36,7 +36,7 @@ test("custom CLI generators include default model and alias mappings", () => {
 
   assert.match(envScript, /export OPENAI_BASE_URL="http:\/\/localhost:20128\/v1"/);
   assert.match(envScript, /export OPENAI_MODEL="omniroute\/fast"/);
-  assert.match(envScript, /export OMNIROUTE_MODEL_REVIEW="cc\/claude-sonnet-4-5-20250929"/);
+  assert.match(envScript, /export NIYATNA_MODEL_REVIEW="cc\/claude-sonnet-4-5-20250929"/);
   assert.match(envScript, /# http:\/\/localhost:20128\/v1\/chat\/completions/);
   assert.match(envScript, /my-team-cli --base-url "\$OPENAI_BASE_URL"/);
 

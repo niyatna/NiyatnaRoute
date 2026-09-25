@@ -401,7 +401,7 @@ test("AntigravityExecutor.transformRequest treats whitespace-only project values
 test("AntigravityExecutor.transformRequest allows body project overrides when the env flag is enabled", async () => {
   const executor = new AntigravityExecutor();
 
-  await withEnv("OMNIROUTE_ALLOW_BODY_PROJECT_OVERRIDE", "1", async () => {
+  await withEnv("NIYATNA_ALLOW_BODY_PROJECT_OVERRIDE", "1", async () => {
     const result = await executor.transformRequest(
       "antigravity/gemini-2.5-pro",
       {

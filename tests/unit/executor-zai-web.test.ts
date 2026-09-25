@@ -121,7 +121,7 @@ describe("ZaiWebExecutor", () => {
   it("reproduces the live frontend HMAC signature algorithm", () => {
     assert.equal(
       mod.buildZaiSignature({
-        prompt: "Reply with exactly: OMNIROUTE_ZAI_WEB_TEST",
+        prompt: "Reply with exactly: NIYATNA_ZAI_WEB_TEST",
         requestId: "3b907de9-793c-41d1-8b8e-6ed6a714ee08",
         timestamp: 1784855934807,
         userId: "user-123",

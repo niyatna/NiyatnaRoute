@@ -46,7 +46,7 @@ const PACKAGE_ROOT = resolve(__dirname, "..", "..", "..");
 // (see root package.json `files`: ["@omniroute/", ...]). The env override
 // exists so tests can point at a fixture without building the real plugin.
 const BUNDLED_PLUGIN_DIR =
-  process.env.OMNIROUTE_OPENCODE_PLUGIN_DIR || join(PACKAGE_ROOT, "@omniroute", "opencode-plugin");
+  process.env.NIYATNA_OPENCODE_PLUGIN_DIR || join(PACKAGE_ROOT, "@omniroute", "opencode-plugin");
 
 /**
  * Resolve the OpenCode config directory. Honours XDG_CONFIG_HOME and the
@@ -298,7 +298,7 @@ export async function runSetupOpenCodeCommand(opts = {}) {
   let baseURL = opts.remote || opts.baseURL || opts.baseUrl;
   if (!baseURL) {
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       baseURL = ctx?.baseUrl;
     } catch {
       /* no context */

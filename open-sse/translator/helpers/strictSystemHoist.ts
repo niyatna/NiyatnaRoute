@@ -7,7 +7,7 @@ export function systemMessageMustBeFirst(
   if (!provider) return false;
   const p = provider.toLowerCase();
   if (STRICT_SYSTEM_PROVIDERS.has(p)) return true;
-  const extra = env.OMNIROUTE_STRICT_SYSTEM_PROVIDERS;
+  const extra = env.NIYATNA_STRICT_SYSTEM_PROVIDERS;
   if (extra) {
     const list = extra.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
     if (list.includes(p)) return true;

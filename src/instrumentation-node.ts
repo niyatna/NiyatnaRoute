@@ -103,7 +103,7 @@ export async function ensureDbReadyForBoot(
 }
 
 function isBackgroundServicesDisabled(): boolean {
-  const raw = process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES;
+  const raw = process.env.NIYATNA_DISABLE_BACKGROUND_SERVICES;
   if (!raw) return false;
   return new Set(["1", "true", "yes", "on"]).has(raw.trim().toLowerCase());
 }
@@ -236,7 +236,7 @@ export async function scanComboModelNameCollisionsAtBoot(): Promise<void> {
 /**
  * #9654 U7: fold a dashboard DB toggle for the adaptive virtual-lanes flag into
  * the process-global admission runtime's env at boot. Env-wins: no-op when the
- * operator's OMNIROUTE_CHAT_VIRTUAL_LANES env var is set (the lazy runtime
+ * operator's NIYATNA_CHAT_VIRTUAL_LANES env var is set (the lazy runtime
  * already reads process.env correctly). The runtime reads env only at
  * construction, so this must run before the first request touches it — hence
  * awaited here, after ensureDbReadyForBoot(). Non-fatal.
@@ -543,7 +543,7 @@ export async function registerNodejs(): Promise<void> {
   // connections (cookies that expired overnight) get re-probed and recovered on
   // startup — instead of staying red until the first real request lazily imports
   // the on-demand credentialGate. Idempotent; self-disables via
-  // OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK and its cadence is tunable via
+  // NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK and its cadence is tunable via
   // CREDENTIAL_HEALTH_CHECK_INTERVAL. NOTE: this MUST live here (the real Next.js
   // instrumentation startup), NOT in the unused src/server-init.ts.
   try {
@@ -729,7 +729,7 @@ export async function registerNodejs(): Promise<void> {
 
       // Real-time dashboard WebSocket daemon (port 20132): powers Combo Studio Live,
       // the Home live-pulse, and Live Compression. Side-effect import triggers the
-      // flag-gated auto-start (OMNIROUTE_ENABLE_LIVE_WS, default ON).
+      // flag-gated auto-start (NIYATNA_ENABLE_LIVE_WS, default ON).
       import("@/server/ws/liveServer")
         .then(() => {
           console.log("[STARTUP] Live dashboard WebSocket daemon bootstrap invoked");

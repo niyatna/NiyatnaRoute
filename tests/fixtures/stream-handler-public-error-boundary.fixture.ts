@@ -7,14 +7,14 @@ import path from "node:path";
 import test from "node:test";
 
 const originalDataDir = process.env.DATA_DIR;
-const originalPluginsDir = process.env.OMNIROUTE_PLUGINS_DIR;
+const originalPluginsDir = process.env.NIYATNA_PLUGINS_DIR;
 const testRoot = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-stream-public-error-"));
 const TEST_DATA_DIR = path.join(testRoot, "data");
 const TEST_PLUGINS_DIR = path.join(testRoot, "plugins");
 fs.mkdirSync(TEST_DATA_DIR, { recursive: true });
 fs.mkdirSync(TEST_PLUGINS_DIR, { recursive: true });
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.OMNIROUTE_PLUGINS_DIR = TEST_PLUGINS_DIR;
+process.env.NIYATNA_PLUGINS_DIR = TEST_PLUGINS_DIR;
 
 const [core, callLogs, artifactWriter, loggerResource, streamHandler, { FORMATS }] =
   await Promise.all([
@@ -42,8 +42,8 @@ test.after(async () => {
 
   if (originalDataDir === undefined) delete process.env.DATA_DIR;
   else process.env.DATA_DIR = originalDataDir;
-  if (originalPluginsDir === undefined) delete process.env.OMNIROUTE_PLUGINS_DIR;
-  else process.env.OMNIROUTE_PLUGINS_DIR = originalPluginsDir;
+  if (originalPluginsDir === undefined) delete process.env.NIYATNA_PLUGINS_DIR;
+  else process.env.NIYATNA_PLUGINS_DIR = originalPluginsDir;
 
   fs.rmSync(testRoot, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
 });
@@ -52,7 +52,7 @@ test("fixture binds all persistent state to its process-owned directories", () =
   assert.equal(core.DATA_DIR, TEST_DATA_DIR);
   assert.equal(core.SQLITE_FILE, path.join(TEST_DATA_DIR, "storage.sqlite"));
   assert.equal(process.env.DATA_DIR, TEST_DATA_DIR);
-  assert.equal(process.env.OMNIROUTE_PLUGINS_DIR, TEST_PLUGINS_DIR);
+  assert.equal(process.env.NIYATNA_PLUGINS_DIR, TEST_PLUGINS_DIR);
   assert.equal(fs.existsSync(TEST_DATA_DIR), true);
   assert.equal(fs.existsSync(TEST_PLUGINS_DIR), true);
 });

@@ -247,7 +247,7 @@ describe("aliasResolver end-to-end (#7791 regression)", () => {
         ...process.env,
         // Force a clean DATA_DIR so loadEnvFile() does not pick up dev .env
         DATA_DIR: mkdtempSync(join(tmpdir(), "alias-resolver-e2e-")),
-        OMNIROUTE_CLI_SKIP_REPO_ENV: "1",
+        NIYATNA_CLI_SKIP_REPO_ENV: "1",
       },
       encoding: "utf8",
     });
@@ -263,7 +263,7 @@ describe("aliasResolver end-to-end (#7791 regression)", () => {
     // loaded module's transitive relative imports (e.g. `./core` without an
     // extension) need tsx to resolve, and tsx must be installed in the loader
     // before any dynamic import() of a .ts file. This mirrors what
-    // bin/omniroute.mjs does (await import("tsx/esm") first, then register).
+    // bin/niyatnaroute.mjs does (await import("tsx/esm") first, then register).
     const script = `
       await import("tsx/esm");
       import { join } from "node:path";

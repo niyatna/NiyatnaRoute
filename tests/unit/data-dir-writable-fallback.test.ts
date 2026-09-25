@@ -90,7 +90,7 @@ test("resolveWritableDataDir returns the default dir (no probe) when DATA_DIR is
     // DATA_DIR-less test process to a temp dir (so a test can never open the operator's
     // real DB), opt back in explicitly here — otherwise this test would be asserting the
     // guard's behavior instead of the server's.
-    process.env.OMNIROUTE_ALLOW_DEFAULT_DATA_DIR = "1";
+    process.env.NIYATNA_ALLOW_DEFAULT_DATA_DIR = "1";
     const resolved = resolveWritableDataDir();
     assert.equal(resolved, getDefaultDataDir());
     // Matches the pure resolver when no override is present.

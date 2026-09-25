@@ -61,7 +61,7 @@ function packageRootFor(prefix) {
  * "clean: health reports version undefined, expected 3.8.50" for exactly that reason.
  *
  * The gate spawns the server itself, so it can mint the credential instead of guessing one:
- * `OMNIROUTE_INTERNAL_SERVICE_TOKEN` + the `x-omniroute-internal-service-token` header is
+ * `NIYATNA_INTERNAL_SERVICE_TOKEN` + the `x-omniroute-internal-service-token` header is
  * accepted by requireManagementAuth() via isTrustedLoopbackInternalServiceRequest(), and the
  * probe is loopback by construction. Unlike the machine token `check:pack-boot` derives, this
  * does not depend on a readable machine-id, and an older PREVIOUS version that never gated
@@ -189,8 +189,8 @@ async function bootAndProbe({ prefix, dataDir, port, expectVersion, label }) {
       JWT_SECRET: "install-upgrade-gate-secret-with-sufficient-length",
       API_KEY_SECRET: "install-upgrade-gate-api-key-secret-long",
       DISABLE_SQLITE_AUTO_BACKUP: "true",
-      OMNIROUTE_SKIP_SYSTEM_TRUST: "1",
-      OMNIROUTE_INTERNAL_SERVICE_TOKEN: INTERNAL_SERVICE_TOKEN,
+      NIYATNA_SKIP_SYSTEM_TRUST: "1",
+      NIYATNA_INTERNAL_SERVICE_TOKEN: INTERNAL_SERVICE_TOKEN,
     },
     stdio: ["ignore", "pipe", "pipe"],
     detached: true,
@@ -359,7 +359,7 @@ async function main() {
   // previous code could only report as a crash. Freeing disk did not help because the disk
   // was never the constraint. Work on real disk beside the repo instead.
   const workRoot =
-    process.env.OMNIROUTE_INSTALL_UPGRADE_WORKDIR || path.join(ROOT, ".install-upgrade");
+    process.env.NIYATNA_INSTALL_UPGRADE_WORKDIR || path.join(ROOT, ".install-upgrade");
   fs.mkdirSync(workRoot, { recursive: true });
   const tmp = fs.mkdtempSync(path.join(workRoot, "omniroute-install-upgrade-"));
   workDirForMessages = tmp;

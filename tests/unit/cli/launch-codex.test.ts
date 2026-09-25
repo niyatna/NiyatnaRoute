@@ -21,13 +21,13 @@ test("buildCodexEnv strips stale OpenAI/Codex creds from the child env (defense-
   assert.equal(env.OPENAI_BASE_URL, undefined);
   assert.equal(env.OPENAI_ORG_ID, undefined);
   assert.equal(env.CODEX_API_KEY, undefined);
-  assert.equal(env.OMNIROUTE_API_KEY, "oma_live_x");
+  assert.equal(env.NIYATNA_API_KEY, "oma_live_x");
   assert.equal(env.PATH, "/bin", "unrelated vars preserved");
 });
 
 test("buildCodexEnv uses a no-auth sentinel when no token is given", () => {
   const env = buildCodexEnv({ PATH: "/bin" }, undefined);
-  assert.equal(env.OMNIROUTE_API_KEY, "omniroute-no-auth");
+  assert.equal(env.NIYATNA_API_KEY, "omniroute-no-auth");
 });
 
 test("buildCodexEnv does not mutate the input env", () => {
@@ -41,7 +41,7 @@ test("buildCodexProviderArgs defines the omniroute provider inline (works withou
   const joined = args.join(" ");
   assert.ok(joined.includes('model_provider="omniroute"'));
   assert.ok(joined.includes('model_providers.omniroute.base_url="http://vps:20128/v1"'));
-  assert.ok(joined.includes('model_providers.omniroute.env_key="OMNIROUTE_API_KEY"'));
+  assert.ok(joined.includes('model_providers.omniroute.env_key="NIYATNA_API_KEY"'));
   assert.ok(joined.includes('model_providers.omniroute.wire_api="responses"'));
   assert.ok(joined.includes("model_providers.omniroute.requires_openai_auth=false"));
   // each assignment is preceded by a -c flag

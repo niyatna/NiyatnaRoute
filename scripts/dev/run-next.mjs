@@ -75,16 +75,16 @@ for (const [key, value] of Object.entries(mergedEnv)) {
 // (401s everywhere). An existing empty var is falsy to every consumer AND wins over
 // dotenv's no-override load, mirroring run-next-playwright.mjs's open-mode overrides.
 // Gated on the test-only env var so production boots are untouched.
-if (process.env.OMNIROUTE_E2E_BOOTSTRAP_MODE === "open") {
+if (process.env.NIYATNA_E2E_BOOTSTRAP_MODE === "open") {
   process.env.INITIAL_PASSWORD = "";
-  process.env.OMNIROUTE_E2E_PASSWORD = "";
-  process.env.OMNIROUTE_API_KEY = "";
+  process.env.NIYATNA_E2E_PASSWORD = "";
+  process.env.NIYATNA_API_KEY = "";
 }
 
 // systemd sd_notify (Type=notify / WatchdogSec=): this process owns the
 // watchdog pings — if its event loop blocks (freeze), the pings stop and
 // systemd kills the service. No-op outside systemd (no NOTIFY_SOCKET).
-// Created AFTER .env is merged so the OMNIROUTE_DISABLE_SD_NOTIFY opt-out
+// Created AFTER .env is merged so the NIYATNA_DISABLE_SD_NOTIFY opt-out
 // documented in .env is honored on this path too.
 const systemdNotifier = createSystemdNotifier();
 
@@ -97,7 +97,7 @@ const systemdNotifier = createSystemdNotifier();
 // '@'` on the `@import "tailwindcss"` line. Force NODE_ENV to track the run
 // mode, exactly like the `next` CLI does.
 process.env.NODE_ENV = dev ? "development" : "production";
-process.env.OMNIROUTE_INTERNAL_SCHEME = "http";
+process.env.NIYATNA_INTERNAL_SCHEME = "http";
 
 const { dashboardPort } = runtimePorts;
 const hostname = process.env.HOST || "0.0.0.0";
@@ -106,14 +106,14 @@ const hostname = process.env.HOST || "0.0.0.0";
 // anonymous /v1 without re-deriving it. The standalone/Docker entrypoint
 // (scripts/dev/run-standalone.mjs -> Next's own server.js) uses HOSTNAME
 // instead, which the guard falls back to. #13695
-process.env.OMNIROUTE_BOUND_HOST = hostname;
+process.env.NIYATNA_BOUND_HOST = hostname;
 // Turbopack by default in dev (matches the Next 16 CLI default and the production
-// build default in build-next-isolated.mjs); OMNIROUTE_USE_TURBOPACK=0 is the
+// build default in build-next-isolated.mjs); NIYATNA_USE_TURBOPACK=0 is the
 // webpack escape hatch. Under Bun, Turbopack native V8 bindings are unavailable,
 // so Bun automatically disables Turbopack and uses Webpack.
 const isBun = Boolean(process.versions.bun);
-const useTurbopack = dev && mergedEnv.OMNIROUTE_USE_TURBOPACK !== "0" && !isBun;
-process.env.OMNIROUTE_WS_BRIDGE_SECRET ||= randomUUID();
+const useTurbopack = dev && mergedEnv.NIYATNA_USE_TURBOPACK !== "0" && !isBun;
+process.env.NIYATNA_WS_BRIDGE_SECRET ||= randomUUID();
 // Per-process secret used to prove the trusted peer-IP stamp came from this
 // server (read by the authz middleware in the same process). See peer-stamp.mjs.
 ensurePeerStampToken();
@@ -187,7 +187,7 @@ async function start() {
   const upgradeHandler = nextApp.getUpgradeHandler();
   const responsesWsProxy = createResponsesWsProxy({
     baseUrl: `http://127.0.0.1:${dashboardPort}`,
-    bridgeSecret: process.env.OMNIROUTE_WS_BRIDGE_SECRET,
+    bridgeSecret: process.env.NIYATNA_WS_BRIDGE_SECRET,
   });
   const wsBridge = createOmnirouteWsBridge({
     baseUrl: `http://127.0.0.1:${dashboardPort}`,

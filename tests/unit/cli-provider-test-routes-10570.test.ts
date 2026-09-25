@@ -17,7 +17,7 @@ import Database from "better-sqlite3";
 
 const ORIGINAL_DATA_DIR = process.env.DATA_DIR;
 const ORIGINAL_FETCH = globalThis.fetch;
-const ORIGINAL_API_KEY = process.env.OMNIROUTE_API_KEY;
+const ORIGINAL_API_KEY = process.env.NIYATNA_API_KEY;
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -29,7 +29,7 @@ function jsonResponse(body: unknown, status = 200) {
 async function withCliEnv(fn: (dataDir: string) => Promise<void>) {
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-cli-routes-10570-"));
   process.env.DATA_DIR = dataDir;
-  process.env.OMNIROUTE_API_KEY = "test-management-key";
+  process.env.NIYATNA_API_KEY = "test-management-key";
   delete process.env.STORAGE_ENCRYPTION_KEY;
   try {
     await fn(dataDir);
@@ -38,8 +38,8 @@ async function withCliEnv(fn: (dataDir: string) => Promise<void>) {
     fs.rmSync(dataDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
     if (ORIGINAL_DATA_DIR === undefined) delete process.env.DATA_DIR;
     else process.env.DATA_DIR = ORIGINAL_DATA_DIR;
-    if (ORIGINAL_API_KEY === undefined) delete process.env.OMNIROUTE_API_KEY;
-    else process.env.OMNIROUTE_API_KEY = ORIGINAL_API_KEY;
+    if (ORIGINAL_API_KEY === undefined) delete process.env.NIYATNA_API_KEY;
+    else process.env.NIYATNA_API_KEY = ORIGINAL_API_KEY;
   }
 }
 

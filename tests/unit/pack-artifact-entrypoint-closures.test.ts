@@ -119,8 +119,8 @@ test("dynamic import() closure is covered (server-ws boots dist/server.js)", () 
   );
 });
 
-test("every bin/omniroute.mjs local import is enforced by check:pack-artifact", () => {
-  // The CLI boot path (bin/omniroute.mjs → bin/cli/*) is covered by allowlist PREFIXES,
+test("every bin/niyatnaroute.mjs local import is enforced by check:pack-artifact", () => {
+  // The CLI boot path (bin/niyatnaroute.mjs → bin/cli/*) is covered by allowlist PREFIXES,
   // so a file vanishing from the tarball never fails the unexpected-paths check — only
   // PACK_ARTIFACT_REQUIRED_PATHS makes its absence loud. Derive the requirement from
   // the entrypoint's own imports.

@@ -7,7 +7,7 @@
  *
  * Fix: `calibrateHeapFallbackMb(totalmemBytes)` derives a sane default heap from
  * the host's physical RAM (~35%, clamped to [512, 4096]) so the out-of-the-box
- * ceiling scales with the machine. An explicit `OMNIROUTE_MEMORY_MB` still wins
+ * ceiling scales with the machine. An explicit `NIYATNA_MEMORY_MB` still wins
  * (resolveMaxOldSpaceMb), and the existing #2939 contract is unchanged.
  */
 import test from "node:test";
@@ -41,7 +41,7 @@ test("#5172 falls back to 512 for missing/invalid totalmem", () => {
   assert.equal(calibrateHeapFallbackMb(-1), 512);
 });
 
-test("#5172 an explicit OMNIROUTE_MEMORY_MB still wins over the calibrated default", () => {
+test("#5172 an explicit NIYATNA_MEMORY_MB still wins over the calibrated default", () => {
   const calibrated = calibrateHeapFallbackMb(16 * GB); // 4096
   // explicit override (in-range) is honored verbatim, not the calibrated default
   assert.equal(resolveMaxOldSpaceMb("1536", calibrated), 1536);

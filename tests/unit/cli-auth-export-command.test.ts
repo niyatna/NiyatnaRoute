@@ -228,7 +228,7 @@ test("auth export tolerates malformed ciphertext in one field via a boolean flag
   });
 });
 
-test("auth export --format env emits OMNIROUTE_<PROVIDER>_<FIELD>=<value> lines", async () => {
+test("auth export --format env emits NIYATNA_<PROVIDER>_<FIELD>=<value> lines", async () => {
   await withAuthExportEnv(async (_dataDir, dbPath) => {
     process.env.STORAGE_ENCRYPTION_KEY = TEST_KEY;
     const { encryptCredential } = await import("../../bin/cli/encryption.mjs");
@@ -241,7 +241,7 @@ test("auth export --format env emits OMNIROUTE_<PROVIDER>_<FIELD>=<value> lines"
 
     assert.equal(result, 0);
     const output = captured.logs.join("\n");
-    assert.match(output, new RegExp(`OMNIROUTE_OPENAI_API_KEY=${PLAINTEXT_API_KEY}`));
+    assert.match(output, new RegExp(`NIYATNA_OPENAI_API_KEY=${PLAINTEXT_API_KEY}`));
   });
 });
 

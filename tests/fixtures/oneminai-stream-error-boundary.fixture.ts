@@ -3,8 +3,8 @@ import test from "node:test";
 
 assert.ok(process.env.DATA_DIR, "the parent harness must provide an isolated DATA_DIR");
 assert.ok(
-  process.env.OMNIROUTE_PLUGINS_DIR,
-  "the parent harness must provide an isolated OMNIROUTE_PLUGINS_DIR"
+  process.env.NIYATNA_PLUGINS_DIR,
+  "the parent harness must provide an isolated NIYATNA_PLUGINS_DIR"
 );
 
 const [

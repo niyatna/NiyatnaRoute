@@ -82,7 +82,7 @@ export function resolveBrowserOAuthRedirectUri(
   }
 
   const publicBaseUrl =
-    normalizeBaseUrl(env?.NEXT_PUBLIC_BASE_URL) || normalizeBaseUrl(env?.OMNIROUTE_PUBLIC_BASE_URL);
+    normalizeBaseUrl(env?.NEXT_PUBLIC_BASE_URL) || normalizeBaseUrl(env?.NIYATNA_PUBLIC_BASE_URL);
 
   if (!publicBaseUrl) {
     return redirectUri;

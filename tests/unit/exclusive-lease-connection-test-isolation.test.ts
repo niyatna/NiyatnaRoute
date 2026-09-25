@@ -7,7 +7,7 @@ import test from "node:test";
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-lease-test-isolation-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.DISABLE_SQLITE_AUTO_BACKUP = "true";
-process.env.OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK = "true";
+process.env.NIYATNA_DISABLE_CREDENTIAL_HEALTH_CHECK = "true";
 
 let externalCalls = 0;
 const originalFetch = globalThis.fetch;

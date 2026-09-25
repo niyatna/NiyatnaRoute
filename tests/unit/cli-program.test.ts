@@ -55,14 +55,14 @@ test("program has --api-key option bound to env", () => {
   const program = createProgram();
   const opt = program.options.find((o) => o.long === "--api-key");
   assert.ok(opt, "--api-key option exists");
-  assert.equal(opt.envVar, "OMNIROUTE_API_KEY");
+  assert.equal(opt.envVar, "NIYATNA_API_KEY");
 });
 
 test("program has --base-url option bound to env", () => {
   const program = createProgram();
   const opt = program.options.find((o) => o.long === "--base-url");
   assert.ok(opt, "--base-url option exists");
-  assert.equal(opt.envVar, "OMNIROUTE_BASE_URL");
+  assert.equal(opt.envVar, "NIYATNA_BASE_URL");
 });
 
 // ─── registered commands ──────────────────────────────────────────────────────
@@ -172,7 +172,7 @@ test("nodes endpoint commands keep the global server target separate from payloa
     },
   ];
   const originalFetch = globalThis.fetch;
-  const originalBaseUrl = process.env.OMNIROUTE_BASE_URL;
+  const originalBaseUrl = process.env.NIYATNA_BASE_URL;
 
   try {
     for (const { command, args, expectedUrl, expectedMethod } of cases) {
@@ -207,7 +207,7 @@ test("nodes endpoint commands keep the global server target separate from payloa
       assert.equal(capturedBody.baseUrl, "https://provider.example/v1");
     }
 
-    process.env.OMNIROUTE_BASE_URL = "https://env-server.example";
+    process.env.NIYATNA_BASE_URL = "https://env-server.example";
     let envCapturedUrl = "";
     let envCapturedBody: Record<string, unknown> = {};
     globalThis.fetch = (async (url, init) => {
@@ -235,8 +235,8 @@ test("nodes endpoint commands keep the global server target separate from payloa
     assert.equal(envCapturedBody.baseUrl, "https://provider.example/v1");
   } finally {
     globalThis.fetch = originalFetch;
-    if (originalBaseUrl === undefined) delete process.env.OMNIROUTE_BASE_URL;
-    else process.env.OMNIROUTE_BASE_URL = originalBaseUrl;
+    if (originalBaseUrl === undefined) delete process.env.NIYATNA_BASE_URL;
+    else process.env.NIYATNA_BASE_URL = originalBaseUrl;
   }
 });
 

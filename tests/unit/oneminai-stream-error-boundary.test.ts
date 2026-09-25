@@ -22,7 +22,7 @@ test(
   { timeout: 180_000 },
   async () => {
     const originalDataDir = process.env.DATA_DIR;
-    const originalPluginsDir = process.env.OMNIROUTE_PLUGINS_DIR;
+    const originalPluginsDir = process.env.NIYATNA_PLUGINS_DIR;
     const originalFetch = globalThis.fetch;
     const testRoot = mkdtempSync(join(tmpdir(), "omniroute-onemin-stream-error-child-"));
     const testDataDir = join(testRoot, "data");
@@ -35,7 +35,7 @@ test(
       DATA_DIR: testDataDir,
       DISABLE_SQLITE_AUTO_BACKUP: "true",
       NODE_ENV: "test",
-      OMNIROUTE_PLUGINS_DIR: testPluginsDir,
+      NIYATNA_PLUGINS_DIR: testPluginsDir,
     };
     for (const name of ["PATH", "NODE_PATH", "LANG", "LC_ALL", "TZ", "TMPDIR"] as const) {
       const value = process.env[name];
@@ -85,7 +85,7 @@ test(
     }
 
     assert.equal(process.env.DATA_DIR, originalDataDir);
-    assert.equal(process.env.OMNIROUTE_PLUGINS_DIR, originalPluginsDir);
+    assert.equal(process.env.NIYATNA_PLUGINS_DIR, originalPluginsDir);
     assert.equal(globalThis.fetch, originalFetch);
   }
 );

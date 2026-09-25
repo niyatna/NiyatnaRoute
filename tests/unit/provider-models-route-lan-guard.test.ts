@@ -22,20 +22,20 @@ const outboundUrlGuard = await import("../../src/shared/network/outboundUrlGuard
 const outboundUrlGuardPolicy = await import("../../src/shared/network/outboundUrlGuardPolicy.ts");
 
 const originalFetch = globalThis.fetch;
-const originalAllowPrivateProviderUrls = process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
-const originalAllowLocalProviderUrls = process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
+const originalAllowPrivateProviderUrls = process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
+const originalAllowLocalProviderUrls = process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
 
 async function resetStorage() {
   globalThis.fetch = originalFetch;
   if (originalAllowPrivateProviderUrls === undefined) {
-    delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
   } else {
-    process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS = originalAllowPrivateProviderUrls;
+    process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS = originalAllowPrivateProviderUrls;
   }
   if (originalAllowLocalProviderUrls === undefined) {
-    delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
+    delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
   } else {
-    process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS = originalAllowLocalProviderUrls;
+    process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS = originalAllowLocalProviderUrls;
   }
   core.resetDbInstance();
   fs.rmSync(TEST_DATA_DIR, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
@@ -73,10 +73,10 @@ test.after(async () => {
 });
 
 test("#6939: getProviderOutboundGuard() and getProviderValidationGuard() agree for LAN hosts under the default local-first setting", () => {
-  // Default settings: OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS unset (ON by default),
-  // OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS unset (OFF by default).
-  delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
-  delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
+  // Default settings: NIYATNA_ALLOW_LOCAL_PROVIDER_URLS unset (ON by default),
+  // NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS unset (OFF by default).
+  delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
+  delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
 
   const validationGuard = outboundUrlGuardPolicy.getProviderValidationGuard();
   assert.equal(validationGuard, "block-metadata");
@@ -91,8 +91,8 @@ test("#6939: getProviderOutboundGuard() and getProviderValidationGuard() agree f
 });
 
 test("#6939: LM Studio (LAN host, local OpenAI-compatible provider) model-list fetch is not SSRF-blocked under default settings", async () => {
-  delete process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS;
-  delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
+  delete process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS;
+  delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
 
   const connection = await seedConnection("lm-studio", {
     providerSpecificData: { baseUrl: "http://192.168.1.50:1234/v1", autoFetchModels: true },
@@ -122,8 +122,8 @@ test("#6939: LM Studio (LAN host, local OpenAI-compatible provider) model-list f
 });
 
 test("#6939: LAN model-list fetch is still blocked when the local-first default is explicitly disabled", async () => {
-  delete process.env.OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS;
-  process.env.OMNIROUTE_ALLOW_LOCAL_PROVIDER_URLS = "false";
+  delete process.env.NIYATNA_ALLOW_PRIVATE_PROVIDER_URLS;
+  process.env.NIYATNA_ALLOW_LOCAL_PROVIDER_URLS = "false";
 
   const connection = await seedConnection("lm-studio", {
     providerSpecificData: { baseUrl: "http://192.168.1.50:1234/v1", autoFetchModels: true },

@@ -118,7 +118,7 @@ test("Codex helper functions isolate rate-limit scopes and parse quota headers",
   assert.ok(getCodexResetTime(quota) >= new Date(quota.resetAt7d).getTime());
 });
 
-test("isCodexResponsesWebSocketRequired: OMNIROUTE_CODEX_WS_ENABLED=false forces HTTP even with codexTransport=websocket", () => {
+test("isCodexResponsesWebSocketRequired: NIYATNA_CODEX_WS_ENABLED=false forces HTTP even with codexTransport=websocket", () => {
   // Transport available + per-connection opt-in would normally enable WS…
   __setCodexWebSocketTransportForTesting(
     () =>
@@ -131,8 +131,8 @@ test("isCodexResponsesWebSocketRequired: OMNIROUTE_CODEX_WS_ENABLED=false forces
         onclose: null,
       }) as unknown as ReturnType<typeof Object>
   );
-  const prev = process.env.OMNIROUTE_CODEX_WS_ENABLED;
-  process.env.OMNIROUTE_CODEX_WS_ENABLED = "false";
+  const prev = process.env.NIYATNA_CODEX_WS_ENABLED;
+  process.env.NIYATNA_CODEX_WS_ENABLED = "false";
   try {
     // …but the global kill-switch (default ON) overrides it to false.
     assert.equal(
@@ -142,8 +142,8 @@ test("isCodexResponsesWebSocketRequired: OMNIROUTE_CODEX_WS_ENABLED=false forces
       false
     );
   } finally {
-    if (prev === undefined) delete process.env.OMNIROUTE_CODEX_WS_ENABLED;
-    else process.env.OMNIROUTE_CODEX_WS_ENABLED = prev;
+    if (prev === undefined) delete process.env.NIYATNA_CODEX_WS_ENABLED;
+    else process.env.NIYATNA_CODEX_WS_ENABLED = prev;
     __setCodexWebSocketTransportForTesting(undefined);
   }
 });
@@ -1597,7 +1597,7 @@ test("Codex internal websocket bridge secret comparison handles mismatched lengt
 });
 
 test("Codex internal websocket bridge rejects non-object JSON payloads", async () => {
-  await withEnv({ OMNIROUTE_WS_BRIDGE_SECRET: "bridge-secret" }, async () => {
+  await withEnv({ NIYATNA_WS_BRIDGE_SECRET: "bridge-secret" }, async () => {
     const { POST } = await import("../../src/app/api/internal/codex-responses-ws/route.ts");
 
     const response = await POST(

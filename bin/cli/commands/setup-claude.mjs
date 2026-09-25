@@ -140,7 +140,7 @@ export async function runSetupClaudeCommand(opts = {}) {
   const baseUrl = (opts.remote ?? `http://localhost:${port}`)
     .replace(/\/+$/, "")
     .replace(/\/v1$/, "");
-  const apiKey = opts.apiKey ?? opts["api-key"] ?? process.env.OMNIROUTE_API_KEY ?? "";
+  const apiKey = opts.apiKey ?? opts["api-key"] ?? process.env.NIYATNA_API_KEY ?? "";
   const claudeHome = opts.claudeHome ?? opts["claude-home"] ?? join(os.homedir(), ".claude");
   const profilesRoot = join(claudeHome, "profiles");
   const dryRun = Boolean(opts.dryRun ?? opts["dry-run"]);
@@ -223,7 +223,7 @@ export function registerSetupClaude(program) {
     )
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--claude-home <dir>", "Claude home dir (default: ~/.claude)")
     .option(
       "--only <patterns>",

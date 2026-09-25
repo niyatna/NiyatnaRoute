@@ -53,7 +53,7 @@ describe("config-generator codex (TOML)", () => {
     assert.strictEqual(parsed.model, "glm/glm-5.2");
     assert.strictEqual(parsed.model_provider, "omniroute");
     assert.strictEqual(parsed.model_providers.omniroute.base_url, "http://localhost:20128/v1");
-    assert.strictEqual(parsed.model_providers.omniroute.env_key, "OMNIROUTE_API_KEY");
+    assert.strictEqual(parsed.model_providers.omniroute.env_key, "NIYATNA_API_KEY");
     assert.strictEqual(parsed.model_providers.omniroute.requires_openai_auth, false);
   });
 

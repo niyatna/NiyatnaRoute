@@ -30,7 +30,7 @@ export function resolveClineTarget(opts = {}) {
   else {
     try {
       baseUrl = stripToRoot(
-        resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT)?.baseUrl
+        resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT)?.baseUrl
       );
     } catch {
       /* none */
@@ -41,13 +41,13 @@ export function resolveClineTarget(opts = {}) {
   let apiKey = opts.apiKey ?? opts["api-key"];
   if (!apiKey) {
     try {
-      const c = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const c = resolveActiveContext(opts.context ?? process.env.NIYATNA_CONTEXT);
       apiKey = c?.accessToken || c?.apiKey;
     } catch {
       /* none */
     }
   }
-  if (!apiKey) apiKey = process.env.OMNIROUTE_API_KEY || "";
+  if (!apiKey) apiKey = process.env.NIYATNA_API_KEY || "";
   return { baseUrl, apiKey };
 }
 
@@ -160,7 +160,7 @@ export async function runSetupClineCommand(opts = {}) {
     "\nFor the Cline VS Code extension, set these in its Settings → API (OpenAI Compatible):"
   );
   printInfo(`  Base URL:  ${baseUrl}        (NOT /v1 — Cline appends it)`);
-  printInfo(`  API Key:   <your OMNIROUTE_API_KEY>`);
+  printInfo(`  API Key:   <your NIYATNA_API_KEY>`);
   printInfo(`  Model:     ${model}`);
   return 0;
 }
@@ -173,7 +173,7 @@ export function registerSetupCline(program) {
     )
     .option("--port <port>", "Local OmniRoute port (ignored when --remote is set)", "9999")
     .option("--remote <url>", "Remote OmniRoute URL, e.g. http://192.168.0.15:9999")
-    .option("--api-key <key>", "OmniRoute API key (defaults to OMNIROUTE_API_KEY env var)")
+    .option("--api-key <key>", "OmniRoute API key (defaults to NIYATNA_API_KEY env var)")
     .option("--model <id>", "Model id for Cline (required unless picked interactively)")
     .option("--cline-dir <dir>", "Cline data dir (default: ~/.cline/data)")
     .option("--yes", "Non-interactive: do not prompt (requires --model)")

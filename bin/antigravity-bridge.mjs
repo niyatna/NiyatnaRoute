@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 const PORT = parseInt(process.env.BRIDGE_PORT || "20129", 10);
 const ROUTER_URL = process.env.ROUTER_URL || "http://127.0.0.1:20128/v1/antigravity";
 const ROUTER_API_KEY =
-  process.env.ROUTER_API_KEY || process.env.OMNIROUTE_API_KEY || "sk-omniroute-bridge-local";
+  process.env.ROUTER_API_KEY || process.env.NIYATNA_API_KEY || "sk-omniroute-bridge-local";
 
 // Connection pool agents with TCP keep-alive
 const httpAgent = new http.Agent({
@@ -164,7 +164,7 @@ function resolveTargetModel(model) {
   return clean;
 }
 
-const OMNIROUTE_BUILTIN_GROUPS = [
+const NIYATNA_BUILTIN_GROUPS = [
   {
     id: "auto/best-coding",
     displayName: "Auto: Best Coding (OmniRoute)",
@@ -280,8 +280,8 @@ const OMNIROUTE_BUILTIN_GROUPS = [
   },
 ];
 
-const OMNIROUTE_CUSTOM_MODELS = new Set([
-  ...OMNIROUTE_BUILTIN_GROUPS.map((g) => g.id),
+const NIYATNA_CUSTOM_MODELS = new Set([
+  ...NIYATNA_BUILTIN_GROUPS.map((g) => g.id),
   ...Object.keys(MODEL_ROUTING_MAP),
 ]);
 
@@ -315,8 +315,8 @@ function shouldInterceptToOmniRoute(model, url) {
     clean.startsWith("auto/") ||
     clean.toLowerCase().includes("omniroute") ||
     clean.includes("/") ||
-    OMNIROUTE_CUSTOM_MODELS.has(model) ||
-    OMNIROUTE_CUSTOM_MODELS.has(clean) ||
+    NIYATNA_CUSTOM_MODELS.has(model) ||
+    NIYATNA_CUSTOM_MODELS.has(clean) ||
     Boolean(MODEL_ROUTING_MAP[model]) ||
     Boolean(MODEL_ROUTING_MAP[clean])
   ) {
@@ -442,7 +442,7 @@ const internalApp = http.createServer(async (req, res) => {
                 {};
 
               const injectedIds = [];
-              for (const group of OMNIROUTE_BUILTIN_GROUPS) {
+              for (const group of NIYATNA_BUILTIN_GROUPS) {
                 data.models[group.id] = {
                   ...baseTemplate,
                   id: group.id,
@@ -566,7 +566,7 @@ export {
   MODEL_ROUTING_MAP,
   shouldInterceptToOmniRoute,
   extractModel,
-  OMNIROUTE_BUILTIN_GROUPS,
+  NIYATNA_BUILTIN_GROUPS,
   proxyServer,
   internalApp,
 };
