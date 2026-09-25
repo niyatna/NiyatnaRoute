@@ -31,7 +31,7 @@ const getDeepseekTuiDir = () => path.dirname(getDeepseekTuiConfigPath());
  */
 function renderDeepseekTuiConfig(baseUrl: string, apiKey: string, model: string): string {
   return [
-    "# DeepSeek TUI config — managed by OmniRoute (plan 14)",
+    "# DeepSeek TUI config — managed by NiyatnaRoute (plan 14)",
     "",
     "[openai]",
     `base_url = "${baseUrl}"`,
@@ -46,7 +46,7 @@ function renderDeepseekTuiConfig(baseUrl: string, apiKey: string, model: string)
  */
 const hasNiyatnaRouteConfig = (content: string | null): boolean => {
   if (!content) return false;
-  return content.includes("managed by OmniRoute");
+  return content.includes("managed by NiyatnaRoute");
 };
 
 // Read current config.toml

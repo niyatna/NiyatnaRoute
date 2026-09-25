@@ -16,6 +16,6 @@ export async function GET(request: Request): Promise<Response> {
       ...(await buildNiyatnaRouteStatus()),
     });
   } catch {
-    return NextResponse.json({ error: "Failed to build OmniRoute status" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to build NiyatnaRoute status" }, { status: 500 });
   }
 }

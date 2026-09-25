@@ -163,7 +163,7 @@ export async function POST(request: Request) {
       type: "openai-compat",
       base_url: normalizedBaseUrl,
       api_key: apiKey,
-      models: [{ id: model, name: `OmniRoute: ${model}`, context_window: DEFAULT_CONTEXT_WINDOW }],
+      models: [{ id: model, name: `NiyatnaRoute: ${model}`, context_window: DEFAULT_CONTEXT_WINDOW }],
     };
 
     const updated: Record<string, unknown> = {
@@ -245,7 +245,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "Crush OmniRoute settings removed" });
+    return NextResponse.json({ success: true, message: "Crush NiyatnaRoute settings removed" });
   } catch (err) {
     return NextResponse.json({ error: { message: sanitizeErrorMessage(err) } }, { status: 500 });
   }

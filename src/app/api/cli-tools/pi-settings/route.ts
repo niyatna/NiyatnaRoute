@@ -219,7 +219,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "Pi OmniRoute settings removed" });
+    return NextResponse.json({ success: true, message: "Pi NiyatnaRoute settings removed" });
   } catch (err) {
     return NextResponse.json(
       { error: { message: sanitizeErrorMessage(err) } },

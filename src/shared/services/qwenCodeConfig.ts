@@ -27,7 +27,7 @@ export const isManagedQwenCodeModel = (value: unknown): boolean => {
 
   return (
     typeof value.name === "string" &&
-    value.name.endsWith(" (OmniRoute)") &&
+    value.name.endsWith(" (NiyatnaRoute)") &&
     typeof value.envKey === "string" &&
     LEGACY_ENV_KEYS.has(value.envKey)
   );
@@ -90,7 +90,7 @@ export const buildQwenCodeModel = ({
 
   return {
     id: normalizedModel,
-    name: `${String(modelName || normalizedModel).trim()} (OmniRoute)`,
+    name: `${String(modelName || normalizedModel).trim()} (NiyatnaRoute)`,
     envKey: QWEN_CODE_ENV_KEY,
     baseUrl: normalizedBaseUrl,
   };

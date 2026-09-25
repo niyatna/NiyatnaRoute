@@ -47,7 +47,7 @@ export function resolveGrokBuildConfigPath(env: NodeJS.ProcessEnv, configHome: s
 
 const UNSET_SENTINEL = "__omniroute_unset__";
 const MANAGED_MARKER = '# omniroute-managed = "true"';
-const LEGACY_DESCRIPTION = "Routed via OmniRoute gateway";
+const LEGACY_DESCRIPTION = "Routed via NiyatnaRoute gateway";
 const MODELS_SECTION = "models";
 const SUBAGENT_MODELS_SECTION = "subagents.models";
 
@@ -217,7 +217,7 @@ const isLegacyOwnedMainSection = (toml: string): boolean => {
     keys.every((key) => allowed.has(key)) &&
     section.model !== null &&
     section.base_url !== null &&
-    section.name === "OmniRoute" &&
+    section.name === "NiyatnaRoute" &&
     section.api_backend === "chat_completions" &&
     getSectionString(toml, `model.${GROK_MAIN_MODEL_SLOT}`, "description") === LEGACY_DESCRIPTION
   );
@@ -265,7 +265,7 @@ export function applyGrokBuildConfig(toml: string, options: GrokBuildApplyOption
     baseUrl: options.baseUrl,
     apiKey: options.apiKey,
     contextWindow: options.contextWindow,
-    name: "OmniRoute",
+    name: "NiyatnaRoute",
   });
   next = setSectionString(next, MODELS_SECTION, "default", GROK_MAIN_MODEL_SLOT);
 
@@ -281,7 +281,7 @@ export function applyGrokBuildConfig(toml: string, options: GrokBuildApplyOption
           baseUrl: options.baseUrl,
           apiKey: options.apiKey,
           contextWindow: selected.contextWindow,
-          name: `OmniRoute ${type}`,
+          name: `NiyatnaRoute ${type}`,
         });
         next = setSectionString(next, SUBAGENT_MODELS_SECTION, type, slot);
       } else {

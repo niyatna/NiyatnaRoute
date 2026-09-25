@@ -24,7 +24,7 @@ export async function generateMetadata() {
   return {
     title: `${instanceName} — AI Gateway for Multi-Provider LLMs`,
     description:
-      "OmniRoute is an AI gateway for multi-provider LLMs. One endpoint for all your AI providers.",
+      "NiyatnaRoute is an AI gateway for multi-provider LLMs. One endpoint for all your AI providers.",
     manifest: "/manifest.webmanifest",
     applicationName: instanceName,
     appleWebApp: {

@@ -28,8 +28,8 @@ const TOOL_ID = "jcode";
  * The OmniRoute-managed profile is kept inside a marker-delimited block so
  * apply/reset round-trips without disturbing the rest of the user's config.
  */
-const MANAGED_BEGIN = "# >>> managed by OmniRoute (jcode provider profile) >>>";
-const MANAGED_END = "# <<< managed by OmniRoute <<<";
+const MANAGED_BEGIN = "# >>> managed by NiyatnaRoute (jcode provider profile) >>>";
+const MANAGED_END = "# <<< managed by NiyatnaRoute <<<";
 
 const getJcodeConfigPath = (): string =>
   getCliPrimaryConfigPath(TOOL_ID) ?? path.join(process.env.HOME ?? "~", ".jcode", "config.toml");
@@ -191,7 +191,7 @@ export async function POST(request: Request) {
         {
           error: {
             message:
-              "existing ~/.jcode/config.toml is not valid TOML; fix it before applying OmniRoute settings",
+              "existing ~/.jcode/config.toml is not valid TOML; fix it before applying NiyatnaRoute settings",
           },
         },
         { status: 409 }
@@ -263,7 +263,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "jcode OmniRoute settings removed" });
+    return NextResponse.json({ success: true, message: "jcode NiyatnaRoute settings removed" });
   } catch (err) {
     return NextResponse.json({ error: { message: sanitizeErrorMessage(err) } }, { status: 500 });
   }
