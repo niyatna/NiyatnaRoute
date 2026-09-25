@@ -6,12 +6,13 @@
 import { addDNSEntry, addDNSEntries, isSudoAvailable } from "./dnsConfig.ts";
 import { isRoot } from "../systemCommands.ts";
 import { ALL_TARGETS } from "../targets/index.ts";
-import { getAllAgentBridgeStates } from "@/lib/db/agentBridgeState.ts";
-import { listCustomHosts } from "@/lib/db/inspectorCustomHosts.ts";
 import { getGheCopilotHosts } from "@/lib/db/providers.ts";
 import { createLogger } from "@/shared/utils/logger.ts";
 
 const defaultLog = createLogger("mitm-dns-provision");
+
+const getAllAgentBridgeStates = (): Array<{ agent_id: string; dns_enabled: boolean }> => [];
+const listCustomHosts = (_opts?: { enabledOnly?: boolean }): Array<{ host: string }> => [];
 
 /** Minimal logger shape used by {@link provisionDnsEntries} (injectable for tests). */
 interface DnsProvisionLogger {

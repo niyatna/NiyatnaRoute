@@ -39,9 +39,9 @@ jobs:
       - name: Build Next.js & CLI
         env:
           NODE_OPTIONS: "--max-old-space-size=12288"
-          OMNIROUTE_USE_TURBOPACK: "0"
+          NIYATNA_USE_TURBOPACK: "0"
           NEXT_TELEMETRY_DISABLED: "1"
-          OMNIROUTE_SKIP_NATIVE_DEP_CHECK: "1"
+          NIYATNA_SKIP_NATIVE_DEP_CHECK: "1"
         run: |
           npm run build
           npm run build:cli

@@ -68,12 +68,7 @@ async function loadAgentBridgeHook(): Promise<{
   ) => void;
   recordRequestError?: (intercepted: InterceptedRequest, err: unknown) => void;
 } | null> {
-  try {
-    const mod = await import("../inspector/agentBridgeHook");
-    return mod;
-  } catch {
-    return null;
-  }
+  return null;
 }
 
 /**
