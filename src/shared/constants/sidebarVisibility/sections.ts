@@ -376,8 +376,6 @@ const OTHER_FEATURES_ITEMS: readonly SidebarItemDefinition[] = [
   },
 ];
 
-
-
 const CONFIGURATION_ITEMS: readonly SidebarItemDefinition[] = [
   {
     id: "settings-general",
@@ -468,14 +466,6 @@ const CONFIGURATION_ITEMS: readonly SidebarItemDefinition[] = [
 
 const HELP_ITEMS: readonly SidebarItemDefinition[] = [
   {
-    id: "docs",
-    href: "/docs",
-    i18nKey: "docs",
-    subtitleKey: "docsSubtitle",
-    icon: "menu_book",
-    external: true,
-  },
-  {
     id: "issues",
     href: "https://github.com/diegosouzapw/NiyatnaRoute/issues",
     i18nKey: "issues",
@@ -499,11 +489,7 @@ export const SIDEBAR_SECTIONS: readonly SidebarSectionDefinition[] = [
     id: "omni-proxy",
     titleKey: "omniProxySection",
     titleFallback: "OmniProxy",
-    children: [
-      ...OMNI_PROXY_ITEMS,
-      COMPRESSION_CONTEXT_GROUP,
-      WEBHOOKS_ITEM,
-    ],
+    children: [...OMNI_PROXY_ITEMS, COMPRESSION_CONTEXT_GROUP, WEBHOOKS_ITEM],
   },
   {
     id: "analytics",

@@ -34,7 +34,7 @@ export default function NotFound() {
           {tc("goToDashboard")}
         </Link>
         <Link
-          href="/status"
+          href="/dashboard/health"
           className="px-8 py-3 rounded-xl text-sm font-medium no-underline border border-border hover:bg-bg-alt transition-colors duration-200 motion-reduce:transition-none focus:outline-2 focus:outline-offset-2 focus:outline-primary"
           aria-label={t("notFound.statusAriaLabel")}
         >

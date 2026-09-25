@@ -33,12 +33,7 @@ test("next config exposes standalone build settings and canonical rewrites", asy
   // #67 / #11783: React Compiler is an explicit Next 16 opt-in (peer babel plugin).
   assert.equal(nextConfig.reactCompiler, true);
   assert.equal(nextConfig.images.unoptimized, true);
-  assert.deepEqual(nextConfig.transpilePackages, [
-    "@niyatna/open-sse",
-    "@lobehub/icons",
-    "fumadocs-ui",
-    "fumadocs-core",
-  ]);
+  assert.deepEqual(nextConfig.transpilePackages, ["@niyatna/open-sse", "@lobehub/icons"]);
   // #6062: `ws` and its native masking helpers must stay external so the
   // copilot-m365-web executor keeps a working WebSocket masking path at runtime
   // (bundling ws breaks `bufferutil` → `TypeError: b.mask is not a function`).
@@ -320,12 +315,6 @@ test("next-intl webpack hook preserves caller config and filters known extractor
   assert.equal(
     config.ignoreWarnings[0]({ message: "Critical dependency: request is expression" }),
     false
-  );
-  config.infrastructureLogging.console.warn(
-    "[webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of " +
-      "/repo/node_modules/fumadocs-mdx/dist/load-from-file-test.js for build dependencies " +
-      "failed at 'import(url.href)'.\nBuild dependencies behind this expression are ignored " +
-      "and might cause incorrect cache invalidation."
   );
   config.infrastructureLogging.console.warn(
     "[webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of " +

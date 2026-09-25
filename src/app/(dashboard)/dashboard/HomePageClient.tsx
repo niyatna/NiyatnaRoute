@@ -1054,10 +1054,15 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                 <h2 className="text-lg font-semibold">{t("quickStart")}</h2>
                 <p className="text-sm text-text-muted">{t("quickStartDesc")}</p>
               </div>
-              <Link href="/docs" prefetch={false} className={DOCS_LINK}>
+              <a
+                href="https://github.com/diegosouzapw/NiyatnaRoute"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={DOCS_LINK}
+              >
                 <span className="material-symbols-outlined text-[14px]">menu_book</span>
                 {t("fullDocs")}
-              </Link>
+              </a>
             </div>
 
             <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
