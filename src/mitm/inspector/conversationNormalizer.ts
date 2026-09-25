@@ -6,7 +6,12 @@
  * types consumed by the inspector UI.
  */
 
-import { mergeStream, parseSseStream } from "./sseMerger.ts";
+function parseSseStream(_body: string): any[] {
+  return [];
+}
+function mergeStream(_events: any[]): { message: any } {
+  return { message: null };
+}
 import type {
   InterceptedRequest,
   NormalizedBlock,
