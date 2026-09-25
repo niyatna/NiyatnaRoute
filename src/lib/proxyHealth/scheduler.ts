@@ -173,7 +173,7 @@ async function testOneProxy(proxy: {
       method,
       signal: controller.signal,
       dispatcher,
-      headers: { "User-Agent": "OmniRoute/1.0" },
+      headers: { "User-Agent": "NiyatnaRoute/1.0" },
     });
     return classifyProbeStatus(resp.status);
   } catch {

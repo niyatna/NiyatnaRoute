@@ -41,7 +41,7 @@ async function testFetch(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "User-Agent": "OmniRoute-Webhook/1.0",
+            "User-Agent": "NiyatnaRoute-Webhook/1.0",
             ...headers,
           },
           body: JSON.stringify(body),

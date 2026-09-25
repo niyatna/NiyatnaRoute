@@ -190,7 +190,7 @@ export async function POST(request) {
 
       // Set custom provider config for the extension
       vscodeSettings["kilocode.customProvider"] = {
-        name: "OmniRoute",
+        name: "NiyatnaRoute",
         baseURL: normalizedBaseUrl,
         apiKey: apiKey || "sk_omniroute",
       };

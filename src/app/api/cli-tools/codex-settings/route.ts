@@ -256,7 +256,7 @@ export async function POST(request: Request) {
     // Always create a custom provider to reliably pass wire_api and use NIYATNA_API_KEY
     parsed._root.model_provider = "omniroute";
     parsed._sections["model_providers.omniroute"] = {
-      name: "OmniRoute",
+      name: "NiyatnaRoute",
       base_url: normalizedBaseUrl,
       wire_api: effectiveWireApi,
       env_key: "OPENAI_API_KEY",
