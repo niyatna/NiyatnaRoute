@@ -12,7 +12,7 @@ import { getApiKeyById } from "@/lib/db/apiKeys";
 import { deleteCliToolLastConfigured, saveCliToolLastConfigured } from "@/lib/db/cliToolState";
 import { createMultiBackup } from "@/shared/services/backupService";
 import {
-  hasOmniRouteQwenCodeConfig,
+  hasNiyatnaRouteQwenCodeConfig,
   mergeQwenCodeEnv,
   mergeQwenCodeSettings,
   removeQwenCodeEnv,
@@ -89,7 +89,7 @@ export async function GET(request: Request): Promise<Response> {
     return NextResponse.json({
       ...runtime,
       settings,
-      hasOmniRoute: hasOmniRouteQwenCodeConfig(settings),
+      hasNiyatnaRoute: hasNiyatnaRouteQwenCodeConfig(settings),
       settingsPath: configPaths.settings,
       envPath: configPaths.env,
     });

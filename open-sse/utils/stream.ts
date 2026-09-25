@@ -29,7 +29,7 @@ import {
 import { rejectEmptyChoicesStream, buildEmptyChoicesStreamError } from "./streamEmptyChoices.ts";
 import { shouldAbortEmptyClaudeStream } from "./streamClaudeEmptyBody.ts";
 import { calculateCost } from "@/lib/usage/costCalculator";
-import { buildOmniRouteSseMetadataComment } from "@/domain/omnirouteResponseMeta";
+import { buildNiyatnaRouteSseMetadataComment } from "@/domain/niyatnarouteResponseMeta";
 import { sseCommentsEnabled } from "./sseHeartbeat.ts";
 import { createStructuredSSECollector } from "./streamPayloadCollector.ts";
 import { STREAM_IDLE_TIMEOUT_MS, FETCH_BODY_TIMEOUT_MS, HTTP_STATUS } from "../config/constants.ts";
@@ -1204,7 +1204,7 @@ export function createSSEStream(options: StreamOptions = {}) {
     const costUsd = finalUsage
       ? await calculateCost(provider, model, normalizeTokenUsage(finalUsage))
       : 0;
-    const comment = buildOmniRouteSseMetadataComment({
+    const comment = buildNiyatnaRouteSseMetadataComment({
       provider,
       model,
       cacheHit: false,

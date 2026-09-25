@@ -13,7 +13,7 @@ import {
 } from "../config/ocrRegistry.ts";
 import { errorResponse, sanitizeErrorMessage } from "../utils/error.ts";
 import { buildSanitizedUpstreamErrorResponse } from "../utils/upstreamErrorResponse.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import {
   getAccessToken,
@@ -172,7 +172,7 @@ export async function handleOcr({
 
     const parsed = transformation.parseResponse(data);
     const headers = new Headers({ ...CORS_HEADERS, "Content-Type": "application/json" });
-    attachOmniRouteMetaHeaders(headers, {
+    attachNiyatnaRouteMetaHeaders(headers, {
       provider: providerId,
       model: modelId,
       costUsd: 0,

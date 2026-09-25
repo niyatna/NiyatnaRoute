@@ -19,7 +19,7 @@ import { v1ImageUpscaleSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveProxyForConnection } from "@/lib/db/settings";
 import { runWithProxyContext } from "@niyatna/open-sse/utils/proxyFetch.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 
@@ -248,7 +248,7 @@ async function postHandler(request: Request) {
     await clearRecoveredProviderState(credentialsResult);
     const costUsd = await calculateModalCost("image", provider, `${provider}/${model}`, { n: 1 });
     const headers = new Headers({ "Content-Type": "application/json" });
-    attachOmniRouteMetaHeaders(headers, {
+    attachNiyatnaRouteMetaHeaders(headers, {
       provider,
       model: `${provider}/${model}`,
       costUsd,

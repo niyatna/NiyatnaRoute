@@ -28,7 +28,7 @@ import {
 import { verifyInitData, parseInitData } from "@/lib/telegram/initData";
 import { proxyChat } from "@/lib/telegram/chatProxy";
 import { formatTelegramGatewayError } from "@/lib/telegram/errorMessage";
-import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
+import { resolveNiyatnaRouteBaseUrl } from "@/shared/utils/resolveNiyatnaRouteBaseUrl";
 
 /**
  * Telegram update bodies are open-ended (many update types, evolving schema),
@@ -66,7 +66,7 @@ function extractInitDataUserId(initData: string): number {
 }
 
 function buildMiniAppLink(botUsername?: string): string {
-  const base = resolveOmniRouteBaseUrl();
+  const base = resolveNiyatnaRouteBaseUrl();
   // Deep link: t.me/<bot>?startapp= opens the Mini App with start_param.
   const bot = botUsername || "YOUR_BOT";
   return `https://t.me/${bot}?startapp=miniapp`;

@@ -56,7 +56,7 @@ function renderManagedBlock(baseUrl: string, apiKey: string, model: string): str
   return lines.join("\n");
 }
 
-const hasOmniRouteConfig = (content: string | null): boolean =>
+const hasNiyatnaRouteConfig = (content: string | null): boolean =>
   Boolean(content && content.includes(MANAGED_BEGIN));
 
 /** Strip the managed block (including surrounding blank padding) from config text. */
@@ -114,7 +114,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasOmniRoute: hasOmniRouteConfig(config),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(config),
       configPath: getJcodeConfigPath(),
     });
   } catch (err) {

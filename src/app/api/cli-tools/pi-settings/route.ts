@@ -26,7 +26,7 @@ const getPiDir = () => path.dirname(getPiConfigPath());
 /**
  * Check if the config file contains OmniRoute settings.
  */
-const hasOmniRouteConfig = (settings: Record<string, unknown> | null): boolean => {
+const hasNiyatnaRouteConfig = (settings: Record<string, unknown> | null): boolean => {
   if (!settings) return false;
   return (
     typeof settings.baseUrl === "string" &&
@@ -80,7 +80,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasOmniRoute: hasOmniRouteConfig(config),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(config),
       configPath: getPiConfigPath(),
     });
   } catch (err) {

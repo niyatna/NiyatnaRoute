@@ -17,7 +17,7 @@ import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { readJsoncConfig } from "../_lib/jsoncConfig";
 import {
   buildDroidCustomModels,
-  isOmniRouteCustomModel,
+  isNiyatnaRouteCustomModel,
   normalizeDroidModelList,
 } from "@/shared/services/droidCustomModels";
 
@@ -33,9 +33,9 @@ const readSettings = async () => readJsoncConfig(getDroidSettingsPath());
 // Check if settings has OmniRoute customModels.
 // Multi-model entries are stored as `custom:OmniRoute-0`, `custom:OmniRoute-1`, …
 // (Ported from upstream PR decolua/9router#618.)
-const hasOmniRouteConfig = (settings: any) => {
+const hasNiyatnaRouteConfig = (settings: any) => {
   if (!settings || !settings.customModels) return false;
-  return settings.customModels.some(isOmniRouteCustomModel);
+  return settings.customModels.some(isNiyatnaRouteCustomModel);
 };
 
 // GET - Check droid CLI and read current settings
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings,
-      hasOmniRoute: hasOmniRouteConfig(settings),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(settings),
       settingsPath: getDroidSettingsPath(),
     });
   } catch (error) {
@@ -158,7 +158,7 @@ export async function POST(request: Request) {
     }
 
     // Remove every existing OmniRoute config (multi-model: index 0..N)
-    settings.customModels = settings.customModels.filter((m) => !isOmniRouteCustomModel(m));
+    settings.customModels = settings.customModels.filter((m) => !isNiyatnaRouteCustomModel(m));
 
     // Normalize baseUrl to ensure /v1 suffix
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
@@ -225,7 +225,7 @@ export async function DELETE(request: Request) {
 
     // Remove OmniRoute customModels (every index, multi-model)
     if (settings.customModels) {
-      settings.customModels = settings.customModels.filter((m) => !isOmniRouteCustomModel(m));
+      settings.customModels = settings.customModels.filter((m) => !isNiyatnaRouteCustomModel(m));
 
       // Remove customModels array if empty
       if (settings.customModels.length === 0) {

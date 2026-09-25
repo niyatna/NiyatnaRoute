@@ -162,7 +162,7 @@ export const findOmniRouteQwenCodeModel = (settings: unknown): JsonRecord | unde
   return undefined;
 };
 
-export const hasOmniRouteQwenCodeConfig = (settings: unknown): boolean =>
+export const hasNiyatnaRouteQwenCodeConfig = (settings: unknown): boolean =>
   findOmniRouteQwenCodeModel(settings) !== undefined;
 
 /** Remove only OmniRoute-owned Qwen Code entries and selection state. */

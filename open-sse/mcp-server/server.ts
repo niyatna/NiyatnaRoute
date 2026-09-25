@@ -87,7 +87,7 @@ import {
 } from "../services/compression/engines/mcpAccessibility/constants.ts";
 import { getDbInstance, ensureDbInitialized } from "../../src/lib/db/core.ts";
 import { normalizeQuotaResponse } from "../../src/shared/contracts/quota.ts";
-import { resolveOmniRouteBaseUrl } from "../../src/shared/utils/resolveOmniRouteBaseUrl.ts";
+import { resolveNiyatnaRouteBaseUrl } from "../../src/shared/utils/resolveNiyatnaRouteBaseUrl.ts";
 import { toSafeMcpErrorMessage } from "./errorMessage.ts";
 import { mcpFetchTimeoutSignal } from "./fetchTimeout.ts";
 import { getMcpModelsCatalog } from "./catalog.ts";
@@ -95,7 +95,7 @@ import { registerRadarCatalogTool } from "./radarCatalog.ts";
 import type { TextToolResult } from "./toolResult.ts";
 export { getMcpModelsCatalog } from "./catalog.ts";
 
-const NIYATNA_BASE_URL = resolveOmniRouteBaseUrl();
+const NIYATNA_BASE_URL = resolveNiyatnaRouteBaseUrl();
 const MCP_ENFORCE_SCOPES = process.env.NIYATNA_MCP_ENFORCE_SCOPES === "true";
 const MCP_ALLOWED_SCOPES = new Set(
   (process.env.NIYATNA_MCP_SCOPES || "")
@@ -187,13 +187,13 @@ function normalizeComboModels(
   });
 }
 
-function getOmniRouteApiKey(): string {
+function getNiyatnaRouteApiKey(): string {
   return process.env.NIYATNA_API_KEY || "";
 }
 
 export async function omniRouteFetch(path: string, options: RequestInit = {}): Promise<unknown> {
   const url = `${NIYATNA_BASE_URL}${path}`;
-  const apiKey = getOmniRouteApiKey();
+  const apiKey = getNiyatnaRouteApiKey();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     // Static env key is only a fallback; the per-caller MCP identity forwarded via

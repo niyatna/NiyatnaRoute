@@ -2,7 +2,7 @@
 
 import fs from "fs/promises";
 import { getCliConfigHome, getCliPrimaryConfigPath } from "@/shared/services/cliRuntime";
-import { hasOmniRouteQwenCodeConfig } from "@/shared/services/qwenCodeConfig";
+import { hasNiyatnaRouteQwenCodeConfig } from "@/shared/services/qwenCodeConfig";
 import {
   parseGrokBuildConfig,
   resolveGrokBuildConfigPath,
@@ -46,11 +46,11 @@ export async function checkToolConfigStatus(
     // Codex uses TOML config — parse as raw text, not JSON
     if (toolId === "codex") {
       const lower = content.toLowerCase();
-      const hasOmniRoute =
+      const hasNiyatnaRoute =
         lower.includes("omniroute") ||
         lower.includes(`localhost:${apiPort}`) ||
         lower.includes(`127.0.0.1:${apiPort}`);
-      if (!hasOmniRoute) return "not_configured";
+      if (!hasNiyatnaRoute) return "not_configured";
 
       // Also verify auth.json has an API key (not masked/empty)
       try {
@@ -70,11 +70,11 @@ export async function checkToolConfigStatus(
 
     if (toolId === "hermes") {
       const lower = content.toLowerCase();
-      const hasOmniRoute =
+      const hasNiyatnaRoute =
         lower.includes("omniroute") ||
         lower.includes(`localhost:${apiPort}`) ||
         lower.includes(`127.0.0.1:${apiPort}`);
-      return hasOmniRoute ? "configured" : "not_configured";
+      return hasNiyatnaRoute ? "configured" : "not_configured";
     }
 
     const config = JSON.parse(content) as Record<string, unknown>;
@@ -86,7 +86,7 @@ export async function checkToolConfigStatus(
           ? "configured"
           : "not_configured";
       case "qwen":
-        return hasOmniRouteQwenCodeConfig(config) ? "configured" : "not_configured";
+        return hasNiyatnaRouteQwenCodeConfig(config) ? "configured" : "not_configured";
       case "droid":
       case "openclaw":
       case "cline":

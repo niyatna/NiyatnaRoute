@@ -20,7 +20,7 @@ import {
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
 import { saveCallLog } from "@/lib/usageDb";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { CORS_HEADERS } from "@niyatna/open-sse/utils/cors.ts";
 import { deriveRerankProviderForChatProvider } from "@niyatna/open-sse/config/rerankRegistry.ts";
@@ -280,7 +280,7 @@ async function postHandler(request, context) {
         }).catch(() => {});
 
         const headers = new Headers({ ...CORS_HEADERS, "Content-Type": "application/json" });
-        attachOmniRouteMetaHeaders(headers, {
+        attachNiyatnaRouteMetaHeaders(headers, {
           provider: prefix,
           model: localModel,
           costUsd: 0,

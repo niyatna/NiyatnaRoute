@@ -1,7 +1,7 @@
 import {
-  attachOmniRouteMetaHeaders,
-  buildOmniRouteResponseMetaHeaders,
-} from "@/domain/omnirouteResponseMeta";
+  attachNiyatnaRouteMetaHeaders,
+  buildNiyatnaRouteResponseMetaHeaders,
+} from "@/domain/niyatnarouteResponseMeta";
 import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
 import { defaultLogger } from "@niyatna/open-sse/utils/logger";
 
@@ -106,7 +106,7 @@ function responseHeaderWireBytes(name: string, value: string): number {
   return responseHeaderEncoder.encode(`${name}: ${value}\r\n`).byteLength;
 }
 
-function isOmniRouteInternalHeader(headerName: string): boolean {
+function isNiyatnaRouteInternalHeader(headerName: string): boolean {
   return headerName.toLowerCase().startsWith("x-omniroute-");
 }
 
@@ -197,7 +197,7 @@ export function stripNextMiddlewareControlHeaders(headers: Headers): void {
 
 export function buildStreamingResponseHeaders(
   providerHeaders: Headers,
-  meta: Parameters<typeof buildOmniRouteResponseMetaHeaders>[0],
+  meta: Parameters<typeof buildNiyatnaRouteResponseMetaHeaders>[0],
   log: ResponseHeaderLogger = defaultLogger
 ): Record<string, string> {
   const connectionScopedHeaders = new Set(
@@ -221,7 +221,7 @@ export function buildStreamingResponseHeaders(
       STREAMING_RESPONSE_HEADER_DENYLIST.has(normalized) ||
       connectionScopedHeaders.has(normalized) ||
       isNextMiddlewareControlHeader(normalized) ||
-      isOmniRouteInternalHeader(normalized) ||
+      isNiyatnaRouteInternalHeader(normalized) ||
       // Forwarded separately below, outside the byte budget.
       normalized === CODEX_TURN_STATE_RESPONSE_HEADER
     ) {
@@ -295,7 +295,7 @@ export function buildStreamingResponseHeaders(
   if (codexTurnState) {
     responseHeaders[CODEX_TURN_STATE_RESPONSE_HEADER] = codexTurnState;
   }
-  attachOmniRouteMetaHeaders(responseHeaders, meta);
+  attachNiyatnaRouteMetaHeaders(responseHeaders, meta);
   return responseHeaders;
 }
 

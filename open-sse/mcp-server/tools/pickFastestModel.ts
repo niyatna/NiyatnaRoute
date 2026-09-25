@@ -1,7 +1,7 @@
 import { logToolCall } from "../audit.ts";
 import { getMcpHttpAuthHeadersForInternalFetch } from "../httpAuthContext.ts";
 import { normalizeQuotaResponse } from "../../../src/shared/contracts/quota.ts";
-import { resolveOmniRouteBaseUrl } from "../../../src/shared/utils/resolveOmniRouteBaseUrl.ts";
+import { resolveNiyatnaRouteBaseUrl } from "../../../src/shared/utils/resolveNiyatnaRouteBaseUrl.ts";
 import {
   getComboModelProvider,
   getComboModelString,
@@ -11,7 +11,7 @@ import type { AutoRoutingStrategyValue } from "../../../src/shared/constants/rou
 import { rankBySpeed, DEFAULT_SPEED_WEIGHTS } from "../../services/autoCombo/speedRanking.ts";
 import type { SpeedCandidate } from "../../services/autoCombo/speedRanking.ts";
 
-const NIYATNA_BASE_URL = resolveOmniRouteBaseUrl();
+const NIYATNA_BASE_URL = resolveNiyatnaRouteBaseUrl();
 const NIYATNA_API_KEY = process.env.NIYATNA_API_KEY || "";
 
 async function apiFetch(path: string, options: RequestInit = {}): Promise<unknown> {

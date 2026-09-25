@@ -9,7 +9,7 @@
  * inline block, including `latencyMs: now - startTime`.
  */
 import { NIYATNA_RESPONSE_HEADERS } from "@/shared/constants/headers";
-import { attachOmniRouteMetaHeaders as defaultAttachMeta } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaHeaders as defaultAttachMeta } from "@/domain/niyatnarouteResponseMeta";
 
 export function buildNonStreamingResponseHeaders(
   args: {
@@ -23,8 +23,8 @@ export function buildNonStreamingResponseHeaders(
     comboStrategy?: string | null | undefined;
     fallbackAttempts?: number;
   },
-  deps: { attachOmniRouteMetaHeaders: typeof defaultAttachMeta; now: () => number } = {
-    attachOmniRouteMetaHeaders: defaultAttachMeta,
+  deps: { attachNiyatnaRouteMetaHeaders: typeof defaultAttachMeta; now: () => number } = {
+    attachNiyatnaRouteMetaHeaders: defaultAttachMeta,
     now: Date.now,
   }
 ): Record<string, string> {
@@ -32,7 +32,7 @@ export function buildNonStreamingResponseHeaders(
     "Content-Type": "application/json",
     [NIYATNA_RESPONSE_HEADERS.cache]: "MISS",
   };
-  deps.attachOmniRouteMetaHeaders(responseHeaders, {
+  deps.attachNiyatnaRouteMetaHeaders(responseHeaders, {
     provider: args.provider,
     model: args.model,
     cacheHit: false,

@@ -7,9 +7,9 @@
 import { NextResponse } from "next/server";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getComboModelProvider } from "@/lib/combos/steps";
-import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
+import { resolveNiyatnaRouteBaseUrl } from "@/shared/utils/resolveNiyatnaRouteBaseUrl";
 
-const NIYATNA_BASE_URL = resolveOmniRouteBaseUrl();
+const NIYATNA_BASE_URL = resolveNiyatnaRouteBaseUrl();
 
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);

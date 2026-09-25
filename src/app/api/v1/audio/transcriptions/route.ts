@@ -22,7 +22,7 @@ import {
   isAllRateLimitedCredentials,
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
-import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
+import { attachNiyatnaRouteMetaToResponse } from "@/domain/niyatnarouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { getComboByName, getCombos } from "@/lib/db/combos";
 import { getDatabaseSettings } from "@/lib/db/databaseSettings";
@@ -175,7 +175,7 @@ async function transcribeWithModel(
     // No per-second pricing rule exists yet for transcription duration → cost 0
     // (ADD-only headers, body intact). The upstream usage is still persisted on
     // the call_logs row below so it is auditable ahead of that pricing rule.
-    response = attachOmniRouteMetaToResponse(response, {
+    response = attachNiyatnaRouteMetaToResponse(response, {
       provider,
       model: resolvedModel,
       costUsd: 0,

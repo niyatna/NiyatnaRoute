@@ -26,7 +26,7 @@ const getOpenClawDir = () => path.dirname(getOpenClawSettingsPath());
 const readSettings = async () => readJsoncConfig(getOpenClawSettingsPath());
 
 // Check if settings has OmniRoute config
-const hasOmniRouteConfig = (settings: any) => {
+const hasNiyatnaRouteConfig = (settings: any) => {
   if (!settings || !settings.models || !settings.models.providers) return false;
   return !!settings.models.providers["omniroute"];
 };
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings,
-      hasOmniRoute: hasOmniRouteConfig(settings),
+      hasNiyatnaRoute: hasNiyatnaRouteConfig(settings),
       settingsPath: getOpenClawSettingsPath(),
     });
   } catch (error) {

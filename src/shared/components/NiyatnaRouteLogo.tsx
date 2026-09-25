@@ -2,12 +2,12 @@
  * OmniRoute logo SVG — network hub icon with connected nodes.
  * Matches the favicon and app icon design.
  */
-type OmniRouteLogoProps = {
+type NiyatnaRouteLogoProps = {
   size?: number;
   className?: string;
 };
 
-export default function OmniRouteLogo({ size = 20, className = "" }: OmniRouteLogoProps) {
+export default function NiyatnaRouteLogo({ size = 20, className = "" }: NiyatnaRouteLogoProps) {
   return (
     <svg
       width={size}

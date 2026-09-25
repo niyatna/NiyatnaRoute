@@ -63,7 +63,7 @@ function formatCodeGraphResult(result: CodeGraphQueryResult): string {
 
 // ── Helper: check if omniroute CLI is available ──────────────────────────────
 
-function getOmniRouteCliPath(): string | null {
+function getNiyatnaRouteCliPath(): string | null {
   try {
     const result = execSync("which omniroute 2>/dev/null || command -v omniroute 2>/dev/null", {
       encoding: "utf-8",
@@ -362,7 +362,7 @@ export const COPILOT_TOOLS: CopilotTool[] = [
 
   // ── CLI Execution Tool ──
   {
-    name: "runOmniRouteCli",
+    name: "runNiyatnaRouteCli",
     description:
       "Execute an 'omniroute' CLI command to configure or query the OmniRoute app. Gives complete control over the app — use for advanced operations not covered by other tools. Common commands: omniroute list-keys, omniroute switch-combo [id], omniroute set-budget 10, omniroute set-strategy [id] priority, omniroute health, omniroute mcp (starts MCP server), omniroute db-health, omniroute reset-password.",
     parameters: [
@@ -378,7 +378,7 @@ export const COPILOT_TOOLS: CopilotTool[] = [
       const cmd = args.command as string;
       if (!cmd) return "Please provide a command to execute.";
 
-      const cliPath = getOmniRouteCliPath();
+      const cliPath = getNiyatnaRouteCliPath();
       if (!cliPath) return "omniroute CLI not found in PATH. Install OmniRoute first.";
 
       try {
