@@ -1,7 +1,7 @@
 {
   "name": "niyatnaroute",
   "version": "3.8.51",
-  "description": "NiyatnaRoute \u2014 unified AI proxy/router. One endpoint, many providers, auto-fallback.",
+  "description": "NiyatnaRoute \u2014 unified AI proxy/router with 360 providers, auto-fallback, and multi-model routing.",
   "type": "module",
   "bin": {
     "niyatnaroute": "bin/niyatnaroute.mjs",

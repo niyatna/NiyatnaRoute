@@ -694,7 +694,7 @@ export default function Sidebar({
             prefetch={false}
             className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5")}
           >
-            <div className="flex items-center justify-center size-8 rounded bg-linear-to-br from-[#E54D5E] to-[#C93D4E] shrink-0">
+            <div className="flex items-center justify-center size-8 rounded-lg overflow-hidden shrink-0 shadow-sm">
               {customLogo ? (
                 <img
                   src={customLogo}
@@ -702,7 +702,7 @@ export default function Sidebar({
                   className="size-5 object-contain"
                 />
               ) : (
-                <NiyatnaRouteLogo size={18} className="text-white" />
+                <NiyatnaRouteLogo size={32} className="size-full object-cover rounded-lg" />
               )}
             </div>
             {!collapsed && (

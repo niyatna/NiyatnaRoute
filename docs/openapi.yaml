@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
-  title: OmniRoute API
+  title: NiyatnaRoute API
   version: 3.8.51
   description: |
-    OmniRoute is a local-first AI API proxy router. It provides an OpenAI-compatible
+    NiyatnaRoute is a local-first AI API proxy router. It provides an OpenAI-compatible
     endpoint that routes requests to multiple AI providers with load balancing,
     failover, and usage tracking.
 
@@ -14,7 +14,7 @@ info:
     All proxy endpoints require a Bearer token (API key managed via the dashboard).
     Management endpoints are protected when `requireLogin` is enabled.
   contact:
-    name: OmniRoute
+    name: NiyatnaRoute
   license:
     name: MIT
 
@@ -7659,7 +7659,7 @@ paths:
                   type: string
                   minLength: 1
                   pattern: "^/(?:api/|v1/|v1beta/|a2a|\\.well-known/agent\\.json)"
-                  description: Same-origin OmniRoute API path, optionally including a query string.
+                  description: Same-origin NiyatnaRoute API path, optionally including a query string.
                 headers:
                   type: object
                   default: {}
@@ -13515,12 +13515,12 @@ components:
           type: string
           format: uri
           description: GitHub raw URL of the SKILL.md file
-          example: "https://raw.githubusercontent.com/diegosouzapw/OmniRoute/refs/heads/main/skills/omni-providers/SKILL.md"
+          example: "https://raw.githubusercontent.com/diegosouzapw/NiyatnaRoute/refs/heads/main/skills/omni-providers/SKILL.md"
         githubUrl:
           type: string
           format: uri
           description: GitHub blob URL for viewing the SKILL.md in the browser
-          example: "https://github.com/diegosouzapw/OmniRoute/blob/main/skills/omni-providers/SKILL.md"
+          example: "https://github.com/diegosouzapw/NiyatnaRoute/blob/main/skills/omni-providers/SKILL.md"
 
     SkillCoverage:
       type: object
