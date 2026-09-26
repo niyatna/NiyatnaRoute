@@ -532,8 +532,6 @@ const SVG_DIAGRAM_FILES = [
   "docs/diagrams/comparison-table.svg",
   "docs/diagrams/cli-terminal.svg",
   "docs/diagrams/tier-cascade.svg",
-  "public/images/tier-flow-dark.svg",
-  "public/images/tier-flow-light.svg",
 ];
 
 export function buildChecks() {
