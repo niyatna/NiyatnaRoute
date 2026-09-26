@@ -1,8 +1,7 @@
 "use client";
 
 import { NextIntlClientProvider, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import { DEFAULT_LOCALE, LOCALES, LOCALE_COOKIE } from "@/i18n/config";
+import { DEFAULT_LOCALE } from "@/i18n/config";
 import enMessages from "@/i18n/messages/en.json";
 
 /**
@@ -16,15 +15,6 @@ import enMessages from "@/i18n/messages/en.json";
 interface GlobalErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
-}
-
-function getCookieLocale() {
-  const cookie = document.cookie
-    .split(";")
-    .map((entry) => entry.trim())
-    .find((entry) => entry.startsWith(`${LOCALE_COOKIE}=`));
-  const locale = cookie?.slice(`${LOCALE_COOKIE}=`.length) || DEFAULT_LOCALE;
-  return LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
 }
 
 function buildGlobalErrorMessages(localeMessages: Record<string, unknown>) {
@@ -93,25 +83,8 @@ function GlobalErrorContent({ error, reset }: GlobalErrorProps) {
 }
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
-  const [locale, setLocale] = useState<string>(DEFAULT_LOCALE);
-  const [messages, setMessages] = useState<Record<string, unknown>>(() =>
-    buildGlobalErrorMessages(enMessages)
-  );
-
-  useEffect(() => {
-    void (async () => {
-      await Promise.resolve();
-      const nextLocale = getCookieLocale();
-      setLocale(nextLocale);
-      if (nextLocale === DEFAULT_LOCALE) return;
-      try {
-        const mod = await import(`../i18n/messages/${nextLocale}.json`);
-        setMessages(buildGlobalErrorMessages(mod.default as Record<string, unknown>));
-      } catch {
-        setMessages(buildGlobalErrorMessages(enMessages));
-      }
-    })();
-  }, []);
+  const locale = DEFAULT_LOCALE;
+  const messages = buildGlobalErrorMessages(enMessages);
 
   return (
     <html lang={locale}>
