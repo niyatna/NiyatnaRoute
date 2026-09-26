@@ -228,16 +228,6 @@
   "src/app/api/system/version/route.ts": {
     "TS2769": 1
   },
-  "src/app/api/tools/agent-bridge/agents/[id]/detected-models/route.ts": {
-    "TS2769": 1
-  },
-  "src/app/api/tools/traffic-inspector/internal/ingest/route.ts": {
-    "TS1117": 2,
-    "TS2345": 1
-  },
-  "src/app/api/tools/traffic-inspector/ws/route.ts": {
-    "TS2578": 1
-  },
   "src/app/api/translator/send/route.ts": {
     "TS2345": 1,
     "TS2322": 1,
@@ -324,7 +314,7 @@
   "src/lib/monitoring/providerHealthAutopilot.ts": {
     "TS2352": 4
   },
-  "src/lib/omnirouteStatus.ts": {
+  "src/lib/niyatnarouteStatus.ts": {
     "TS2322": 1,
     "TS2558": 1
   },
@@ -365,8 +355,11 @@
   "src/mitm/detection/index.ts": {
     "TS2741": 1
   },
-  "src/mitm/inspector/httpProxyServer.ts": {
-    "TS2769": 1
+  "src/mitm/manager.ts": {
+    "TS2307": 1
+  },
+  "src/mitm/repair.ts": {
+    "TS2307": 2
   },
   "src/shared/schemas/cliCatalog.ts": {
     "TS2554": 2
