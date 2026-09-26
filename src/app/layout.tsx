@@ -1,13 +1,11 @@
 import "./globals.css";
 import { ThemeProvider } from "@/shared/components/ThemeProvider";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getLocale, getTranslations } from "next-intl/server";
-import { RTL_LOCALES } from "@/i18n/config";
+import { getMessages, getTranslations } from "next-intl/server";
 import { normalizeComplianceEventTypes } from "@/i18n/request";
 import { getRootLayoutSettings } from "@/lib/db/rootLayoutSettings";
 import type { Viewport } from "next";
 import { PwaRegister } from "@/shared/components/PwaRegister";
-import { LocaleAutoDetect } from "@/shared/components/LocaleAutoDetect";
 import { BasePathNetworkProvider } from "@/shared/components/BasePathNetworkProvider";
 import { GlassFilter } from "@/components/ui/liquid-glass";
 
@@ -49,13 +47,12 @@ export async function generateMetadata() {
 }
 
 export default async function RootLayout({ children }) {
-  const locale = await getLocale();
+  const locale = "en";
   const t = await getTranslations("sidebar");
   const messages = normalizeComplianceEventTypes((await getMessages()) as Record<string, unknown>);
-  const isRtl = RTL_LOCALES.includes(locale as (typeof RTL_LOCALES)[number]);
 
   return (
-    <html lang={locale} dir={isRtl ? "rtl" : "ltr"} suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <head>
         {/* Pre-hydration cleanup: browser extensions (Bitdefender's
             bis_skin_checked, Grammarly's data-gr-ext-installed, LanguageTool's
@@ -140,7 +137,6 @@ export default async function RootLayout({ children }) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <BasePathNetworkProvider>
             <PwaRegister />
-            <LocaleAutoDetect />
             <ThemeProvider>{children}</ThemeProvider>
             <GlassFilter />
           </BasePathNetworkProvider>
