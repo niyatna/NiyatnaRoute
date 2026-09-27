@@ -298,3 +298,6 @@ docker-compose.yml.bak
 
 # check:install-upgrade work trees (~12 GB, disposable)
 /.install-upgrade/
+
+# i18n state cache — 5.6MB, rebuilt by tooling; never commit
+.i18n-state.json
